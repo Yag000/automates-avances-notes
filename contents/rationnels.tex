@@ -1,0 +1,523 @@
+
+\section{Langages Rationnels}
+
+
+\digraph[scale=0.5]{langage}{
+	rankdir=TB;
+
+	Node0 [shape=ellipse, style=filled, color=lightblue, label=<Langages<br/>rationnels>];
+	Node1 [shape=ellipse, style=filled, color=lightgreen, label=<Automates finis<br/>déterministes>];
+	Node2 [shape=ellipse, style=filled, color=lightgreen, label=<Automates finis<br/>non déterministes<br/>+ epsilon-transitions>];
+	Node3 [shape=ellipse, style=filled, color=lightgreen, label=<Expressions<br/>rationnelles>];
+	Node4 [shape=ellipse, style=filled, color=lightgreen, label=<Logique monadique<br/>du second ordre>];
+	Node5 [shape=ellipse, style=filled, color=lightgreen, label=<Théorie<br/>des monoïdes>];
+
+	Node0 -> Node1;
+	Node0 -> Node2;
+	Node0 -> Node3;
+	Node0 -> Node4;
+	Node0 -> Node5;
+}
+
+\subsection{Définitions de base}
+
+\begin{definition}[alphabet]
+	Un \textbf{alphabet} est un ensemble fini de lettres ou de symboles.
+\end{definition}
+
+\begin{definition}[mot]
+	Un \textbf{mot} sur un alphabet $\Sigma$ est une séquence de lettres de $\Sigma$.
+	On écrit $\motDecomp w n$ où $w_i \in \Sigma, \forall i \in \{1, \ldots, n\}$.
+	La longueur d'un mot $w$ est notée $\len w = n$, pour $\motDecomp w n$.
+\end{definition}
+
+\begin{notation}
+	On note $\motvide$ le mot vide et $\mots$ l'ensemble des mots sur $\alphabet$.
+\end{notation}
+
+\begin{definition}[concaténation]
+	La \textbf{concaténation} de deux mots $w$ et $v$ est notée $wv$.
+	Si $\motDecomp w n$ et $\motDecomp v m$, alors $wv = \decomp w n \decomp v m$.
+\end{definition}
+
+\begin{definition}[langage]
+	Un langage sur un alphabet $\alphabet$ est un sous-ensemble de $\mots$.
+\end{definition}
+
+\begin{definition}[concaténation de langages]
+	Soient $L_1, L_2$ deux langages sur $\alphabet$m leur \textbf{concaténation} est le langage
+	\[
+		L_1L_2 = \setdef {w_1w_2} {w_1 \in L_1, w_2 \in L_2}
+	\]
+\end{definition}
+
+\begin{exemple}
+	$$ \Sigma = \set{a, b}, \quad L = \set{\red a, \red {ab}, \red{bb}}, \quad K = \set{\blue b, \blue {ab}} $$
+	$$ LK = \set{\red a \blue b, \red {ab} \blue b, \red {bb} \blue b, \red a \blue{ab}, \red {ab} \blue {ab}, \red {bb} \blue {ab}} $$
+\end{exemple}
+
+
+\begin{definition}[étoile de Kleene]
+	Soit $L$ un langage sur $\alphabet$, son \textbf{étoile de Kleene} est le langage
+	$$
+		\kleene L = \bigcup_{n \in \N} L^n
+	$$
+	où $L^0 = \set\motvide$ et $L^{n+1} = LL^n$.
+\end{definition}
+
+\begin{remarque}
+	Est-ce que $\kleene L = \setdef {w^n} {w \in L, n \in \N}$ ?
+
+	Non, on peut trouver un contre-exemple avec $L = \set{a, b}$.
+
+	On a bien que $ab \in \kleene L$, mais $ab \neq \setdef {w^n} {w \in L, n \in \N} = \setdef {a^n} {n \in \N} \cup \setdef {b^n} {n \in \N}$.
+\end{remarque}
+
+\begin{remarque}
+	Est-ce que $L(M \cap N) = LM \cap LN$ ?
+
+	Non, on peut trouver un contre-exemple avec $L = \set{a, ab}$, $M = \set{b}$ et $N = \set{\motvide}$.
+
+	On a que $M \cap N = \emptyset$, donc $L(M \cap N) = \emptyset$.
+
+	Mais $LM = \set{ab, abb}$ et $LN = \set{a, ab}$, donc $LM \cap LN = \set{ab} \neq \emptyset$.
+\end{remarque}
+
+\begin{exercice}
+	Montrer que la concaténation de langages est distributive par rapport à l'union, \ie que $L(M \cup N) = LM \cup LN, \forall L, M, N$ langages.
+\end{exercice}
+
+\subsection{Langages rationnels : définitions}
+
+\begin{definition}[langage rationnel]
+	Soit $\alphabet$ un alphabet fini, L'ensemble \eratsym \ des expressions rationnelles sur $\alphabet$ est définit comme suit :
+	\begin{itemize}
+		\item $\motvide \in \eratsym$
+		\item $\emptyset \in \eratsym$
+		\item $\forall a \in \alphabet, a \in \eratsym$
+		\item $\forall E, F \in \eratsym, E + F \in \eratsym$
+		\item $\forall E, F \in \eratsym, EF \in \eratsym$
+		\item $\forall E \in \eratsym, \kleene E \in \eratsym$
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[sémantique des expressions rationnelles]
+	Soit $r \in \erat$, on définit le langage $\lang r$ associé à $r$ par induction sur la structure de $r$ :
+	\begin{itemize}
+		\item $\lang \motvide = \set\motvide$
+		\item $\lang \emptyset = \emptyset$
+		\item $\lang a = \set a$
+		\item $\lang {E + F} = \lang E \cup \lang F$
+		\item $\lang {EF} = \lang E \lang F$
+		\item $\lang {\kleene E} = \kleene {\lang E}$
+	\end{itemize}
+\end{definition}
+
+\begin{exemple}
+	$ \alphabet = \set{a, b}, \quad r = \kleene {(a + b)} a \in \erat $ alors
+	$ \lang r = \setdef {wa} {w \in \mots} $
+\end{exemple}
+
+
+\begin{definition}[langage rationnel]
+	Un langage $L$ sur un alphabet $\alphabet$ est dit \textbf{rationnel} s'il existe une \exprat $r \in \erat$ \tlq $L = \lang r$.
+
+\end{definition}
+
+\begin{exemple}
+	$\setdef {a^n} {n \in \N}$ est un langage rationnel engendré par l'expression rationnelle $\kleene a$.
+
+	Cependant, $\setdef {a^n b^n} {n \in \N}$ n'est pas un langage rationnel.
+\end{exemple}
+
+
+\subsection{Automates finis}
+
+\subsubsection{Automates finis déterministes}
+
+\begin{definition}[automate fini déterministe]
+	Soit $\alphabet$ un alphabet, un \textbf{automate fini déterministe} (AFD) est un tuple $\AFD$ où
+	\begin{itemize}
+		\item $Q$ est un ensemble fini d'états
+		\item $q_0 \in Q$ est appelé l'état initial
+		\item $F \subseteq Q$ est l'ensemble des états finaux / acceptants
+		\item $\delta : Q \times \Sigma \to Q$ est la fonction de transition
+	\end{itemize}
+\end{definition}
+
+
+\begin{exemple} Un automate fini déterministe :
+
+	\vspace{0.5cm}
+	\begin{minipage}{0.5\textwidth}
+		\begin{itemize}
+			\item $\alphabet = \set{a, b}$
+			\item $Q = \set{q_0, q_1}$
+			\item $q_0$ est l'état initial
+			\item $F = \set{q_0, q_1}$
+			\item $\delta :
+				      \left\{
+				      \begin{array}{cc}
+					      (q_0, a) & \mapsto q_0 \\
+					      (q_0, b) & \mapsto q_1 \\
+					      (q_1, a) & \mapsto q_0 \\
+					      (q_1, b) & \mapsto q_1 \\
+				      \end{array}
+				      \right.$
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}{0.5\textwidth}
+		\digraph[scale=0.75]{automateDet}{
+			rankdir=LR;
+
+			node [shape=circle, style=filled, color=lightblue];
+			q0 [label="q_0"];
+			q1 [label="q_1"];
+
+			start [shape=point];
+			start -> q0;
+
+			q0 -> q0 [label="a"];
+			q0 -> q1 [label="b"];
+			q1 -> q1 [label="b"];
+			q1 -> q0 [label="a"];
+
+			q0 [shape=doublecircle];
+			q1 [shape=doublecircle];
+		}
+	\end{minipage}
+\end{exemple}
+
+\begin{definition}[lecture d'un mot par un AFD]
+	Soit $A = \AFD$ un AFD qui a pour alphabet $\alphabet$. On définit la fonction $\kleene \delta$ par induction sur la longueur du mot $w$ :
+	$$ \begin{array}{rcl}
+			\kleene \delta : Q \times \mots & \to     & Q                               \\
+			(q, \motvide)                   & \mapsto & q                               \\
+			(q, wa)                         & \mapsto & \delta(\kleene \delta(q, w), a)
+		\end{array} $$
+	On a alors que $\kleene \delta(q, w)$ est l'état atteint par $A$ après avoir lu le mot $w$ depuis l'état $q$.
+\end{definition}
+
+\begin{definition}[langage reconnu par un AFD]
+	Le langage reconnu / accepté par un AFD $A = \AFD$ est le langage
+	$$ \lang A = \setdef w {w \in \mots, \kleene \delta(q_0, w) \in F} $$
+\end{definition}
+
+\begin{exemple}
+	Pour l'automate $A$ suivant, avec $\alphabet = \set {a,b}$, le langage reconnu est $\lang A = \lang {\kleene {(a + b)} b} = \lang {\kleene {(a + b)} b \kleene b} = \setdef {wb} {w \in \mots}$.
+
+	\begin{center}
+		\digraph[scale=0.75]{automateDet2}{
+			rankdir=LR;
+
+			node [shape=circle, style=filled, color=lightblue];
+			q0 [label="q_0"];
+			q1 [label="q_1"];
+
+			start [shape=point];
+			start -> q0;
+
+			q0 -> q0 [label="a"];
+			q0 -> q1 [label="b"];
+			q1 -> q1 [label="b"];
+			q1 -> q0 [label="a"];
+
+			q1 [shape=doublecircle];
+		}
+	\end{center}
+\end{exemple}
+
+\subsubsection{Automates finis non déterministes \darkgreen{+ $\motvide$-transitions}}
+
+\begin{definition}[automate fini non déterministe \darkgreen{+ $\motvide$-transitions}]
+	Soit $\alphabet$ un alphabet, un \textbf{automate fini non déterministe} (AFN) est un tuple $\AFN$ où
+	\begin{itemize}
+		\item $Q$ est un ensemble fini d'états
+		\item $I \subseteq Q$ est l'ensemble des états initiaux
+		\item $F \subseteq Q$ est l'ensemble des états finaux / acceptants
+		\item $\delta : Q \times (\Sigma \darkgreen {\ \cup \set\motvide}) \to \mathcal{P}(Q)$ est la fonction de transition
+	\end{itemize}
+\end{definition}
+
+
+\begin{exemple}
+	Un automate fini non déterministe avec $\alphabet = \set{a, b}$ :
+	\begin{center}
+		\digraph[scale=0.65]{automateNonDet}{
+			rankdir=LR;
+
+			node [shape=circle, style=filled, color=lightblue];
+			q0 [label="q_0"];
+			q1 [label="q_1"];
+			q2 [label="q_2"];
+
+			start [shape=point];
+			start -> q0;
+
+			q0 -> q0 [label="b"];
+			q0 -> q1 [label="a"];
+			q1 -> q1 [label="b"];
+			q1 -> q0 [label="b"];
+			q0 -> q2 [label="a"];
+			q2 -> q2 [label="b"];
+
+			q1 [shape=doublecircle];
+			q2 [shape=doublecircle];
+		}
+	\end{center}
+\end{exemple}
+
+
+\begin{definition}[lecture d'un mot par un AFN]
+	Soit $A = \AFN$ un AFN qui a pour alphabet $\alphabet$. On définit la fonction $\kleene \delta$ par induction sur la longueur du mot $w$ :
+	$$ \begin{array}{rcl}
+			\kleene \delta : P(Q) \times \mots & \to     & \parts Q                                                  \\
+			(q, \motvide)                      & \mapsto & \set q                                                    \\
+			(q, wa)                            & \mapsto & \bigcup\limits_{p \in \kleene \delta (q, w)} \delta(p, a)
+		\end{array} $$
+\end{definition}
+
+
+\begin{definition}[langage reconnu par un AFN]
+	Le langage reconnu / accepté par un AFN $A = \AFN$ est le langage
+	$$ \lang A = \setdef {w \in \mots} {\exists q_0 \in I, \kleene \delta(q_0, w) \cap F \neq \emptyset} $$
+
+\end{definition}
+
+\subsection{Déterminisation d'un AFN}
+
+Soit $A = \AFN$ un AFN, on considère l'AFD $A' = \antuple{\parts Q, I, F', \delta'}$ où
+\begin{itemize}
+	\item $F' = \setdef {q \in \parts Q} {q \cap F \neq \emptyset}$
+	      \vspace{0.25cm}
+	\item $ \begin{array}{rcl}
+			      \delta' : \parts Q \times \alphabet & \to     & \parts Q                              \\
+			      (Q, a)                              & \mapsto & \bigcup\limits_{p \in Q} \delta(p, a)
+		      \end{array} $
+\end{itemize}
+
+\vspace{0.25cm}
+
+Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de transformer un AFN en un AFD équivalent.
+
+\begin{exemple}
+	Déterminisation d'un automate non déterministe :
+
+	\begin{minipage}{0.4\textwidth}
+		\begin{center}
+			Automate non déterministe :
+			\digraph[scale=0.65]{automateNonDet2}{
+				rankdir=LR;
+
+				node [shape=circle, style=filled, color=lightblue];
+				q0 [label="q_0"];
+				q1 [label="q_1"];
+
+				start [shape=point];
+				start -> q0;
+
+				q0 -> q0 [label="a"];
+				q0 -> q1 [label="a,b"];
+				q1 -> q1 [label="a,b"];
+
+				q1 [shape=doublecircle];
+			}
+		\end{center}
+	\end{minipage}
+	$\longrightarrow$
+	\begin{minipage}{0.6\textwidth}
+		\begin{center}
+			Automate déterminisé :
+			\digraph[scale=0.5]{automateDet3}{
+			rankdir=LR;
+
+			node [shape=circle, style=filled, color=lightblue];
+			q0 [label="{q_0}"];
+			q0q1 [label="{q_0, q_1}"];
+			q1 [label="{q_1}"];
+
+			start [shape=point];
+			start -> q0;
+
+			q0 -> q0q1 [label="a"];
+			q0q1 -> q0q1 [label="q"];
+			q0q1 -> q1 [label="b"];
+			q0 -> q1 [label="b"];
+			q1 -> q1 [label="a,b"];
+
+			q0q1 [shape=doublecircle];
+			q1 [shape=doublecircle];
+			}
+		\end{center}
+	\end{minipage}
+\end{exemple}
+
+
+\begin{theorem}
+	Soit $A$ un automate fini non déterministe avec des $\motvide$-transitions, alors il existe un automate fini non déterministe $A'$, \tq $\lang A = \lang {A'}$.
+\end{theorem}
+
+\subsection{Équivalence entre expressions rationnelles et automates finis}
+
+\begin{theorem}[Injection des expressions rationnelles vers les automates finis]
+	Soit $r \in \erat$, alors il existe un automate fini déterministe $N(r)$ \tq $\lang A = \lang r$.
+\end{theorem}
+
+\begin{proof}
+	Nous allons construire un tel automate par induction sur la structure de $r$ cependant la preuve est laissée en exercice. Cette construction est appelée \textbf{construction de Thompson}.
+
+	\begin{twoautomata}
+		\digraph[scale=0.5]{thompson1}{
+			rankdir=LR;
+			node [shape=circle, style=filled, color=lightblue];
+			q0 [label=" "];
+			q1 [label=" "];
+			start [shape=point];
+			start -> q0; q0 -> q1 [label="ε"];
+			q1 [shape=doublecircle];
+		}
+		\caption*{$N(\motvide)$}
+	\end{twoautomata}
+	\begin{twoautomata}
+		\digraph[scale=0.5]{thompson2}{
+			rankdir=LR;
+			node [shape=circle, style=filled, color=lightblue];
+
+			start [shape=point];
+			q0 [label=" "];
+			q1 [label=" ", shape=doublecircle];
+
+			start -> q0;
+			q0 -> q1 [style=invis];
+		}
+		\caption*{$N(\emptyset)$}
+	\end{twoautomata}
+
+	\begin{twoautomata}
+		\digraph[scale=0.5]{thompson3}{
+			rankdir=LR;
+			node [shape=circle, style=filled, color=lightblue];
+			q0 [label=" "];
+			q1 [label=" "];
+			start [shape=point];
+			start -> q0; q0 -> q1 [label="a"];
+			q1 [shape=doublecircle];
+		}
+		\caption*{$N(a), a \in \alphabet$}
+	\end{twoautomata}
+	\begin{twoautomata}
+		\digraph[scale=0.5]{thompson4}{
+		rankdir=LR;
+
+		node [shape=circle, style=filled, color=lightblue];
+
+		subgraph cluster_r {
+		style=rounded;
+		label="N(r)";
+		color=lightcoral;
+
+		nrin [label=" "];
+		nrout [label=" "];
+		nrin -> nrout [style=invis];
+		}
+
+
+		subgraph cluster_s {
+		style=rounded;
+		label="N(s)";
+		color=lightgreen;
+
+		nsin [label=" "];
+		nsout [label=" "];
+		nsin -> nsout [style=invis];
+		}
+
+
+		q0 [label=" "];
+		q1 [label=" "];
+		start [shape=point];
+
+		start -> q0;
+		q0 -> nrin [label="ε"];
+		q0 -> nsin [label="ε"];
+
+		nrout -> q1 [label="ε"];
+		nsout -> q1 [label="ε"];
+
+		q1 [shape=doublecircle];
+		}
+
+		\caption*{$N(r + s)$}
+	\end{twoautomata}
+
+	\begin{twoautomata}
+		\digraph[scale=0.5]{thompson5}{
+		rankdir=LR;
+
+		node [shape=circle, style=filled, color=lightblue];
+
+		subgraph cluster_r {
+		style=rounded;
+		label="N(r)";
+		color=lightcoral;
+
+		nrin [label=" "];
+		nrout [label=" "];
+		nrin -> nrout [style=invis];
+		}
+
+		subgraph cluster_s {
+		style=rounded;
+		label="N(s)";
+		color=lightgreen;
+
+		nsin  [label=" "];
+		nsout [label=" "];
+		nsin -> nsout [style=invis];
+		}
+
+		start [shape=point];
+
+		start -> nrin;
+		nrout -> nsin [label="ε"];
+		nsout [shape=doublecircle];
+		}
+		\caption*{$N(rs)$}
+	\end{twoautomata}
+	\begin{twoautomata}
+		\digraph[scale=0.5]{thompson6}{
+		rankdir=LR;
+
+		node [shape=circle, style=filled, color=lightblue];
+
+		subgraph cluster_r {
+		style=rounded;
+		label="N(r)";
+		color=lightcoral;
+
+		nrin [label=" "];
+		nrout [label=" "];
+		nrin -> nrout [style=invis];
+		}
+
+		start [shape=point];
+
+		q0 [label=" "];
+		q1 [label=" "];
+		start [shape=point];
+		start -> q0;
+		q0 -> q1 [label="ε"];
+		q0 -> nrin [label="ε"];
+		nrout -> nrin [label="ε"];
+		nrout -> q1 [label="ε"];
+
+		q1 [shape=doublecircle];
+		}
+
+		\caption*{$N(\kleene r)$}
+	\end{twoautomata}
+
+	En combinant ces constructions, on peut construire un automate fini non déterministe pour n'importe quelle expression rationnelle.
+
+\end{proof}
+
