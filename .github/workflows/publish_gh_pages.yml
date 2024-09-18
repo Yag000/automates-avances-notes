@@ -11,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - uses: xu-cheng/latex-action@v3
+        continue-on-error: true
         with:
           root_file: automates.tex
 
