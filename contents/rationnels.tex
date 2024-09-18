@@ -7,7 +7,7 @@
 
 	Node0 [shape=ellipse, style=filled, color=lightblue, label=<Langages<br/>rationnels>];
 	Node1 [shape=ellipse, style=filled, color=lightgreen, label=<Automates finis<br/>déterministes>];
-	Node2 [shape=ellipse, style=filled, color=lightgreen, label=<Automates finis<br/>non déterministes<br/>+ epsilon-transitions>];
+	Node2 [shape=ellipse, style=filled, color=lightgreen, label=<Automates finis<br/>non déterministes<br/>+ ε-transitions>];
 	Node3 [shape=ellipse, style=filled, color=lightgreen, label=<Expressions<br/>rationnelles>];
 	Node4 [shape=ellipse, style=filled, color=lightgreen, label=<Logique monadique<br/>du second ordre>];
 	Node5 [shape=ellipse, style=filled, color=lightgreen, label=<Théorie<br/>des monoïdes>];
@@ -357,14 +357,15 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 	Soit $A$ un automate fini non déterministe avec des $\motvide$-transitions, alors il existe un automate fini non déterministe $A'$, \tq $\lang A = \lang {A'}$.
 \end{theorem}
 
-\subsection{Équivalence entre expressions rationnelles et automates finis}
+\subsection{Équivalence entre expressions rationnelles et automates finis déterministes}
 
-\begin{theorem}[Injection des expressions rationnelles vers les automates finis]
+\begin{theorem}[Injection des expressions rationnelles vers les automates finis déterministes]
 	Soit $r \in \erat$, alors il existe un automate fini déterministe $N(r)$ \tq $\lang A = \lang r$.
 \end{theorem}
 
 \begin{proof}
-	Nous allons construire un tel automate par induction sur la structure de $r$ cependant la preuve est laissée en exercice. Cette construction est appelée \textbf{construction de Thompson}.
+	Nous allons construire un tel automate par induction sur la structure de $r$ cependant la preuve du fait que cet automate reconnaît le langage associé à $r$ est omise.
+    Cette construction est appelée \textbf{construction de Thompson}.
 
 	\begin{twoautomata}
 		\digraph[scale=0.5]{thompson1}{
@@ -517,7 +518,8 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 		\caption*{$N(\kleene r)$}
 	\end{twoautomata}
 
-	En combinant ces constructions, on peut construire un automate fini non déterministe pour n'importe quelle expression rationnelle.
+	En combinant ces constructions, on peut construire un automate fini non déterministe pour n'importe quelle
+    expression rationnelle qui peut être determinisé pour obtenir un automate fini déterministe.
 
 \end{proof}
 
