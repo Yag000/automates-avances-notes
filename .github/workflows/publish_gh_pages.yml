@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@main
       - uses: xu-cheng/latex-action@v3
         with:
-          root_file: automate.tex
+          root_file: automates.tex
 
       # From here it is copied from : https://github.com/jonhue/pubtex-action
       # with a few modifications
