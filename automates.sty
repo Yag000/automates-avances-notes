@@ -38,6 +38,9 @@
 
 \newcommand{\id}{\text{id}}
 
+
+\newcommand{\abs}[1]{\left|#1\right|}
+
 %% Polynomials
 
 \newcommand{\QX}{\mathbb{Q}[X]}
@@ -100,6 +103,9 @@
 \newcommand{\lang}[1]{\mathcal{L}\left(#1\right)}
 \newcommand{\langstar}{\kleene{\lang}}
 
+
+\newcommand{\quot}[1]{#1^{-1}}
+
 %%%% Regex
 
 \newcommand{\eratsym}{ERat}
@@ -110,6 +116,13 @@
 \newcommand{\antuple}[1]{\langle #1 \rangle}
 \newcommand{\AFD}{\antuple{Q, q_0, F, \delta}}
 \newcommand{\AFN}{\antuple{Q, I, F, \delta}}
+
+
+\newcommand{\reach}[1]{\text{reach}\left(#1\right)}
+
+
+
+\newcommand{\deltaS}[2]{\kleene \delta \left(#1,#2\right)}
 
 %% Abbreviations
 
@@ -144,4 +157,4 @@
 
 
 \newenvironment{twoautomata} { \begin{minipage}{0.5\textwidth} \begin{figure}[H] }
-				{ \end{figure}  \end{minipage} }
+			{ \end{figure}  \end{minipage} }

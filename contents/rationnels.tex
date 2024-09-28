@@ -271,9 +271,9 @@
 \begin{definition}[lecture d'un mot par un AFN]
 	Soit $A = \AFN$ un AFN qui a pour alphabet $\alphabet$. On définit la fonction $\kleene \delta$ par induction sur la longueur du mot $w$ :
 	$$ \begin{array}{rcl}
-			\kleene \delta : P(Q) \times \mots & \to     & \parts Q                                                  \\
-			(q, \motvide)                      & \mapsto & \set q                                                    \\
-			(q, wa)                            & \mapsto & \bigcup\limits_{p \in \kleene \delta (q, w)} \delta(p, a)
+			\kleene \delta : Q \times \mots & \to     & \parts Q                                                  \\
+			(q, \motvide)                   & \mapsto & \set q                                                    \\
+			(q, wa)                         & \mapsto & \bigcup\limits_{p \in \kleene \delta (q, w)} \delta(p, a)
 		\end{array} $$
 \end{definition}
 
@@ -365,7 +365,7 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 
 \begin{proof}
 	Nous allons construire un tel automate par induction sur la structure de $r$ cependant la preuve du fait que cet automate reconnaît le langage associé à $r$ est omise.
-    Cette construction est appelée \textbf{construction de Thompson}.
+	Cette construction est appelée \textbf{construction de Thompson}.
 
 	\begin{twoautomata}
 		\digraph[scale=0.5]{thompson1}{
@@ -519,7 +519,157 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 	\end{twoautomata}
 
 	En combinant ces constructions, on peut construire un automate fini non déterministe pour n'importe quelle
-    expression rationnelle qui peut être determinisé pour obtenir un automate fini déterministe.
+	expression rationnelle qui peut être determinisé pour obtenir un automate fini déterministe.
 
 \end{proof}
 
+\subsection{Morphismes d'automates}
+
+\begin{definition}[Morphisme d'automates]
+	Soit $A = \antuple{Q, q_0, F, \delta}$ et $ A' = \antuple{Q', q_0', F', \delta'} $ sur un alphabet $\alphabet$.
+	Alors un morphisme d'automates $\phi: A \to A'$ est une fonction $\phi: Q \to Q'$ \tlq
+	\begin{enumerate}
+		\item $\phi (q_0) = q_0'$ \label{morph:1}
+		\item $\forall q \in Q,\quad  \phi (q) \in Q' \iff q \in F$ \label{morph:2}
+		\item $\forall q \in Q, \forall a \in \alphabet,\quad \delta'(\phi (q), a) = \phi (\delta(q,a))$ \ie $\phi \circ \delta_a = \delta_a '\circ \phi$ \label{morph:3}
+	\end{enumerate}
+
+	% https://tex.stackexchange.com/questions/218274/how-can-i-draw-commutative-diagrams-in-latex
+	\[
+		\begin{tikzcd}
+			Q \arrow{r}{\delta_a} \arrow[swap]{d}{\phi} & Q \arrow{d}{\phi} \\
+			Q' \arrow{r}{\delta_a} & Q'
+		\end{tikzcd}
+	\]
+
+\end{definition}
+
+
+\begin{exercice}
+	Soit $\phi : A \to A'$ un morphisme d'automates déterministes, alors $\lang A = \lang {A'}$
+\end{exercice}
+
+\begin{proof}
+	\begin{eqnarray*}
+		w \in \lang A &\iff& \kleene \delta (q_0, w) \in F \\
+		&\iff& \phi (\kleene \delta (q_0, w)) \in F' \quad \text{par } \ref{morph:1} \\
+		&\iff& \kleene \delta( \phi (q_0), w) \in F' \quad \text{par } \ref{morph:3} \\
+		&\iff& \kleene \delta( q_0', w) \in F' \quad \text{par } \ref{morph:2} \\
+		&\iff& w \in \lang {A'}
+	\end{eqnarray*}
+\end{proof}
+
+
+\begin{definition}[Quotient d'un automate]
+	Soit $L \subseteq \mots$ et $w \in \mots$. Le quotient $\quot w L$ est défini par
+	$$ \quot w L = \setdef {u \in \mots} {wu \in L} $$
+\end{definition}
+
+\begin{definition}
+	Soit $\AFD$ sur l'alphabet $\alphabet$ et $q \in Q$ alors on définit
+	$$ L_q = \setdef {w \in \mots} {\kleene \delta (q,w) \in F} $$
+\end{definition}
+
+
+\begin{lemma}
+	Soit $\AFD$ un automate fini déterministe, $q \in Q$ et $w \in \mots$. Si $\deltaS {q_0} w = q$ alors
+	$L_q = \quot w \lang A$
+\end{lemma}
+
+\begin{proof}
+	\begin{eqnarray*}
+		w \in L_q &\iff& \deltaS q u \in F \\
+		&\iff& \deltaS {\deltaS {q_0} w} u \in F \\
+		&\iff& \deltaS {q_0} {wu} \in F \\
+		&\iff& wu \in \lang A \\
+		&\iff& u \in \quot w \lang A
+	\end{eqnarray*}
+\end{proof}
+
+\begin{coro}
+	Si $L \subseteq \mots$ est un langage régulier alors l'ensemble $\setdef {\quot w L} {w \in \mots}$ est fini.
+\end{coro}
+
+\begin{proof}
+	Si $L = \lang A$, avec $\AFD$, alors $\abs {\setdef {\quot w L} {w \in \mots}} \leq \abs Q$. Car $\forall w \in \mots,$ $\quot w L$ est
+	le langage accepté par $A$ à partir de l'état $\deltaS {q_0} w$.
+\end{proof}
+
+\begin{coro} \label{coro:2}
+	Si $\AFN$ accepte un langage $L$ alors $\abs Q \geq $ \# quotients de $L$
+\end{coro}
+
+\begin{definition} [Automate des quotients]
+
+	Soit $L \subseteq \mots$ un langage régulier, soir $Q = \setdef {\quot w L} {w \in \mots}$ et $\AFD$. Alors l'automate des quotients de $L$
+	est définit par
+
+	\begin{itemize}
+		\item L'état initial est $L = \quot {\varepsilon}$
+		\item $F = \setdef {\quot w L} {w \in L}$
+		\item $\delta (\quot w L, a) = \quot {(wa)} L$
+	\end{itemize}
+\end{definition}
+
+\begin{remarque}
+	Si $\quot w L = \quot {(w')} L$, alors $\quot {(wa)}L = \quot {(w'a)} L$.
+
+	Soit $w,w' \in \mots$ \tq $\quot w L = \quot {(w')} L$. Soit $a \in \alphabet$ et $u \in \mots$,
+	\begin{eqnarray*}
+		u \in \quot ({(wa)}L &\iff& wau \in L \\
+		&\iff& au \in \quot w L \\
+		&\iff& au \in \quot {w'} L \\
+		&\iff& w'au \in L \\
+		&\iff& (w'a)u \in L \\
+		&\iff& u \in \quot {(w'a)}L
+	\end{eqnarray*}
+	Donc la fonction de transitan $\delta$ de l'automate des quotient est bien définie.
+\end{remarque}
+
+\begin{prop}
+	Étant donné un automate $A$ qui accepte le langage $L$. Alros l-automate des quotients accepte aussi $L$ et il est minimal parmi les automates acceptant $L$.
+\end{prop}
+
+\begin{proof}
+	$\deltaS L w = \quot w L$ et donc $\underbrace{\deltaS L w \in F}_{w \in \lang A} \iff w \in L$
+
+	Et ainsi, par le corolaire \ref{coro:2}, l'automate des quotients est minimal.
+\end{proof}
+
+\begin{lemma}
+	Soit $L \subseteq \mots$ un langage régulier. Soit $A_L$ l-automate des quotients de $L$ et soit $B$ un autre automate acceptant $L$.
+	Soit $\reach B$ un sous-automate accessible de $B$. Alors on a un morphisme surjectif (un quotient) d'automates $\reach B \twoheadrightarrow A_L$.
+
+	\begin{tikzcd}[row sep=large]
+		&\reach B \arrow[dr, hook] \arrow[dl, twoheadrightarrow] \\
+		A_L & & B
+	\end{tikzcd}
+
+	Si $B = <T,t_0,F,\delta>$ alors $\reach B =  <T',t_0,F',\delta'>$ où
+	\begin{itemize}
+		\item $T' = \setdef {t \in T} {\exists w \in \mots, \deltaS {t_0} w = t}$
+		\item $F' = F \cap T'$
+		\item $\delta ' = \delta \cap (T' \times \alphabet \times T')$
+	\end{itemize}
+\end{lemma}
+
+
+\begin{exercice}
+	On défini $\phi : \reach B \to A$.
+
+	Si $t \in T', \exists w \in \mots$ \tq $ t = \deltaS {t_0} w$
+	On défini $\phi (t) = \quot w L$
+
+	Montrer que $\phi$ est bien définie, \ie, $t = \quot {w'} L \implies \quot w L = \quot {w'} L$.
+
+	Vérifions $\phi$ surjective. Si $w \in \mots$ et $\quot w L$ est un état de $A_L$ alors $\phi (\deltaS {t_0} w) = \quot w L$
+
+	Si $\abs B = \abs {A_L}$, alors $B$ est un automate accesible
+	(Sinon $\abs A \leq \abs {\reach B} < \abs B \text {qui est absurde})$.
+
+	Donc $B = \reach B$
+
+	De plus, le morphisme $\phi$ est une bijection et $\quot {\phi}$ estr un morphisme d'automates.
+	Donc $B \cong A_L$.
+
+\end{exercice}
