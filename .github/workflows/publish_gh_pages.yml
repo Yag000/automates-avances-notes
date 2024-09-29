@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@main
         with:
           submodules: 'true'
-     - uses: xu-cheng/latex-action@v3
+      - uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: automates.tex
