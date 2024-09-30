@@ -45,7 +45,7 @@
 \end{definition}
 
 \begin{definition}[concaténation de langages]
-	Soient $L_1, L_2$ deux langages sur $\alphabet$m leur \textbf{concaténation} est le langage
+	Soient $L_1, L_2$ deux langages sur $\alphabet$, leur \textbf{concaténation} est le langage
 	\[
 		L_1L_2 = \setdef {w_1w_2} {w_1 \in L_1, w_2 \in L_2}
 	\]
@@ -70,7 +70,7 @@
 
 	Non, on peut trouver un contre-exemple avec $L = \set{a, b}$.
 
-	On a bien que $ab \in \kleene L$, mais $ab \neq \setdef {w^n} {w \in L, n \in \N} = \setdef {a^n} {n \in \N} \cup \setdef {b^n} {n \in \N}$.
+	On a bien que $ab \in \kleene L$, mais $ab \notin \setdef {w^n} {w \in L, n \in \N} = \setdef {a^n} {n \in \N} \cup \setdef {b^n} {n \in \N}$.
 \end{remarque}
 
 \begin{remarque}
@@ -90,7 +90,7 @@
 \subsection{Langages rationnels : définitions}
 
 \begin{definition}[langage rationnel]
-	Soit $\alphabet$ un alphabet fini, L'ensemble \eratsym \ des expressions rationnelles sur $\alphabet$ est définit comme suit :
+	Soit $\alphabet$ un alphabet fini, l'ensemble \eratsym \ des expressions rationnelles sur $\alphabet$ est défini comme suit :
 	\begin{itemize}
 		\item $\motvide \in \eratsym$
 		\item $\emptyset \in \eratsym$
@@ -114,7 +114,7 @@
 \end{definition}
 
 \begin{exemple}
-	$ \alphabet = \set{a, b}, \quad r = \kleene {(a + b)} a \in \erat $ alors
+	$ \alphabet = \set{a, b}, \quad r = \kleene {(a + b)} a \in \erat $, alors
 	$ \lang r = \setdef {wa} {w \in \mots} $
 \end{exemple}
 
