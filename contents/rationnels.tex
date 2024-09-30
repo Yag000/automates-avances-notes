@@ -529,7 +529,7 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 	Alors un morphisme d'automates $\phi: A \to A'$ est une fonction $\phi: Q \to Q'$ \tlq
 	\begin{enumerate}
 		\item $\phi (q_0) = q_0'$ \label{morph:1}
-		\item $\forall q \in Q,\quad  \phi (q) \in Q' \iff q \in F$ \label{morph:2}
+		\item $\forall q \in Q,\quad  \phi (q) \in F' \iff q \in F$ \label{morph:2}
 		\item $\forall q \in Q, \forall a \in \alphabet,\quad \delta'(\phi (q), a) = \phi (\delta(q,a))$ \ie $\phi \circ \delta_a = \delta_a '\circ \phi$ \label{morph:3}
 	\end{enumerate}
 
@@ -571,7 +571,7 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 
 
 \begin{lemma}
-	Soit $\AFD$ un automate fini déterministe, $q \in Q$ et $w \in \mots$. Si $\deltaS {q_0} w = q$ alors
+	Soit A = $\AFD$ un automate fini déterministe, $q \in Q$ et $w \in \mots$. Si $\deltaS {q_0} w = q$ alors
 	$L_q = \quot w \lang A$
 \end{lemma}
 
@@ -590,7 +590,7 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 \end{coro}
 
 \begin{proof}
-	Si $L = \lang A$, avec $\AFD$, alors $\abs {\setdef {\quot w L} {w \in \mots}} \leq \abs Q$. Car $\forall w \in \mots,$ $\quot w L$ est
+	Si $L = \lang A$, avec A = $\AFD$, alors $\abs {\setdef {\quot w L} {w \in \mots}} \leq \abs Q$. Car $\forall w \in \mots,$ $\quot w L$ est
 	le langage accepté par $A$ à partir de l'état $\deltaS {q_0} w$.
 \end{proof}
 
@@ -600,11 +600,11 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 
 \begin{definition} [Automate des quotients]
 
-	Soit $L \subseteq \mots$ un langage régulier, soir $Q = \setdef {\quot w L} {w \in \mots}$ et $\AFD$. Alors l'automate des quotients de $L$
-	est définit par
+	Soit $L \subseteq \mots$ un langage régulier, soit $Q = \setdef {\quot w L} {w \in \mots}$ et $\AFD$. Alors l'automate des quotients de $L$
+	est défini par
 
 	\begin{itemize}
-		\item L'état initial est $L = \quot {\varepsilon}$
+		\item L'état initial est $\quot {\varepsilon} L$
 		\item $F = \setdef {\quot w L} {w \in L}$
 		\item $\delta (\quot w L, a) = \quot {(wa)} L$
 	\end{itemize}
@@ -615,28 +615,28 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 
 	Soit $w,w' \in \mots$ \tq $\quot w L = \quot {(w')} L$. Soit $a \in \alphabet$ et $u \in \mots$,
 	\begin{eqnarray*}
-		u \in \quot ({(wa)}L &\iff& wau \in L \\
+		u \in \quot {(wa)}L &\iff& wau \in L \\
 		&\iff& au \in \quot w L \\
 		&\iff& au \in \quot {w'} L \\
 		&\iff& w'au \in L \\
 		&\iff& (w'a)u \in L \\
 		&\iff& u \in \quot {(w'a)}L
 	\end{eqnarray*}
-	Donc la fonction de transitan $\delta$ de l'automate des quotient est bien définie.
+	Donc la fonction de transition $\delta$ de l'automate des quotients est bien définie.
 \end{remarque}
 
 \begin{prop}
-	Étant donné un automate $A$ qui accepte le langage $L$. Alros l-automate des quotients accepte aussi $L$ et il est minimal parmi les automates acceptant $L$.
+	Étant donné un automate $A$ qui accepte le langage $L$, l'automate des quotients accepte aussi $L$ et il est minimal parmi les automates acceptant $L$.
 \end{prop}
 
 \begin{proof}
 	$\deltaS L w = \quot w L$ et donc $\underbrace{\deltaS L w \in F}_{w \in \lang A} \iff w \in L$
 
-	Et ainsi, par le corolaire \ref{coro:2}, l'automate des quotients est minimal.
+	Et ainsi, par le corollaire \ref{coro:2}, l'automate des quotients est minimal.
 \end{proof}
 
 \begin{lemma}
-	Soit $L \subseteq \mots$ un langage régulier. Soit $A_L$ l-automate des quotients de $L$ et soit $B$ un autre automate acceptant $L$.
+	Soit $L \subseteq \mots$ un langage régulier. Soit $A_L$ l'automate des quotients de $L$ et soit $B$ un autre automate acceptant $L$.
 	Soit $\reach B$ un sous-automate accessible de $B$. Alors on a un morphisme surjectif (un quotient) d'automates $\reach B \twoheadrightarrow A_L$.
 
 	\begin{tikzcd}[row sep=large]
@@ -654,12 +654,12 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 
 
 \begin{exercice}
-	On défini $\phi : \reach B \to A$.
+	On définit $\phi : \reach B \to A$.
 
 	Si $t \in T', \exists w \in \mots$ \tq $ t = \deltaS {t_0} w$
-	On défini $\phi (t) = \quot w L$
+	On définit $\phi (t) = \quot w L$
 
-	Montrer que $\phi$ est bien définie, \ie, $t = \quot {w'} L \implies \quot w L = \quot {w'} L$.
+	Montrer que $\phi$ est bien définie, \ie, $\phi t = \quot {w'} L \implies \quot w L = \quot {w'} L$.
 
 	Vérifions $\phi$ surjective. Si $w \in \mots$ et $\quot w L$ est un état de $A_L$ alors $\phi (\deltaS {t_0} w) = \quot w L$
 
@@ -668,7 +668,7 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 
 	Donc $B = \reach B$
 
-	De plus, le morphisme $\phi$ est une bijection et $\quot {\phi}$ estr un morphisme d'automates.
+	De plus, le morphisme $\phi$ est une bijection et $\quot {\phi}$ est un morphisme d'automates.
 	Donc $B \cong A_L$.
 
 \end{exercice}
