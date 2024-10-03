@@ -672,3 +672,170 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 	Donc $B \cong A_L$.
 
 \end{exercice}
+
+
+\subsection{Minimisation d'automates}
+
+\begin{rappel}
+	Pour tout lanfafe rationel $L$, il existe un unique (à isomorphisme près) automate déterministe minimal
+	(avec le plus petit nombre possible d'états) qui reconnait $L$.
+\end{rappel}
+
+\begin{remarque}
+	C'est n'est pas vrai vrai pour les non déterministes.
+
+	EXEMPLE 3.10.1
+\end{remarque}
+
+L'automate des résiduels déterministe est l'automate minimal reconnaisant.
+
+
+Algotirhmes de minimisation
+\begin{itemize}
+	\item Algorithme de Brzozowski
+	\item Algo de Noore
+	\item algo de Hopcroft
+\end{itemize}
+
+
+\subsubsection{Algorithme de Brzozowski}
+
+\begin{prop}
+	Si $A$ est un automate déternibiste et accesible, \ie, $\forall q \in Q, \exists \text{ un chemin } q_0 \ to q$,
+	et  $\mirror A = \text {det } (\text {mir} (A)) $ est l'automate obtenu en determinisant l'automate mirroir de $A$. Alors
+	$\mirror A$ est l'automate minimal qui reconnait $\mirror {\lang A}$.
+\end{prop}
+
+
+\begin{proof}
+	Soit $A = (Q, q_0, T)$, $L = \lang A$. $\text{mirr } (A) = (Q, T, q_0), M = \lang {\text{mirr } (A)} = \mirror L$.
+
+	Nous allons montrer que $\mirror A$ est l'automate minimal pour $M$. Pour cela il suffit de montrer que $\mirror A$
+	est isomorphe a l'automate des résiduels de $M$.
+
+	Pour cela il faut \mq si $u$ et $V$ sont deux mots quelconques \tq $\quot u M = \quot v M$ alors $T u =  T v$ dans $\mirror A$.
+
+	Soit $p$ un état de $T u$. Puisque $A$ est accesible, il existe un chemin de $q_0 \to q$ dans $A$, donc il existe un chemin $p \to q_o$ dans $\text{mirr } A$.
+	Soit $w$ l'étiquette de ce chemin, Alors le mot $uw$ est l'étiquette d'un chemin réussi de $\text{mirr }(A)$  en conséquence $uw \in M$,
+	Mais $uw\in M \iff w \in \quot u M \iff w\in \quot v M \iff vw \in M$.
+
+	Donc $vw$ est l'étiquette d'un chemin réussi $\Gamma$ dans $\text {mirr }(A)$.Étant donné que $A$ est déterministe, tout chemin aboutissant dans $q_0$
+	et dont l'étiquette a $w$ comme suffixe doit passer par $p$.
+
+	On en  déduit que $p \in Tv$.
+\end{proof}
+
+
+\begin{coro}
+	Soit $A$ un automate, alors l'automate $\text {det} (\text{mirr} (\text{det}(\text{mirr} (A))))$ est l'automate minimal pour $\mirror {\lang A}$.
+\end{coro}
+
+\begin{proof}
+	En effet
+
+	$\text {det} (\text{mirr} (\text{det}(\text{mirr} (A))))$  TODO
+\end{proof}
+
+
+
+La complexité de l'algorithme est en $O(2^n)$. En effet, la dernière determination exécuté, travaille sur un automate de taille au plus $2^n$
+et produuit un automate de taille $2^n$, sa complexité reste aussi en $O(2^n)$.
+
+
+\begin{remarque}
+	Alors que d'autres algorithmes, \tq Moore, ont une complexité polynomiale, Brzozowski à différence des autres, ne nécessite pas
+	que l'automate donné soit déterministe.
+\end{remarque}
+
+\subsubsection{Algorithme de Moore}
+
+
+\begin{definition}[Congruence d'automates]
+
+	Soit $A = (Q,q_0,T,S)$ un automate déterministe et soit $\sim$ un relation d'équivalence définie sur l'ensemble $Q$. On dit que
+	$\sim$ est une congruence si $\sim$ satisfait les conditions suivantes.
+	\begin{enumerate}
+		\item Compatibilité aves les transitions: Si $q \sim q'$ alors $\forall a \in \Sigma, \delta (q,a) \sim \delta (q',a)$
+		\item Saturation de $A$: Si $q \sim q'$ alors $q \in T \iff q' \in T$
+	\end{enumerate}
+\end{definition}
+
+
+Si $A = \AFD$ est un AFD et $\sim$ une congruence définie dur $Q$. On définit l'automate quotient :
+$$ A/\sim = (Q',q_0',T',\sigma') $$
+
+avec \begin{itemize}
+	\item $Q' = \setdef {[q]} {q\in Q}$
+	\item $q_0' = [q_0]$
+	\item $T' =\setdef  {[q]} {q \in T}$
+	\item $\delta'([q], a) = [p]$ \ssi $q\in [qa]$
+\end{itemize}
+
+\begin{prop}
+	Si $A$ esy un automate déterministe et $\sim$ une congrunce sur $A$m alors $\lang A = \lang {A/\sim}$
+\end{prop}
+
+
+\begin{definition}[Congruence de Nerode]
+
+	Si $A = (Q, \set {q_0}, T . S)$ un AFD. $\forall q, q' \in Q$ on définit $q \cong q' \iff L_q = L_{q'}$.
+\end{definition}
+
+\begin{rappel}
+	$L_q = \setdef w {\deltaS q w \in T}$.
+
+	Donc
+	\begin{eqnarray*}
+		q \cong q' \iff L_q = L_{q'} &\iff& \forall w \in L_q \mssi w \in L_q \\
+		&\iff& \forall w, \deltaS q w \in T \mssi  \deltaS {q'} w \in T
+	\end{eqnarray*}
+\end{rappel}
+
+
+TODO
+
+
+
+Pour calculer la congruence de Nerode on introduit une famille de congruences :
+
+$$ \cong_i, i  \in \N, q \cong_i q' \iff \forall w, \abs w \leq \implies \deltaS q w \in T \iff  \deltaS {q'} w$$
+
+
+\begin{definition}
+	Définition alternative
+
+	\begin{itemize}
+		\item $q \cong_0 q' \mssi q\in T \iff q' \in T$
+		\item $q \cong_{i+1} q' \mssi q \cong_{i} q' \text{ et }  \forall a \in \Sigma, \delta (q,a) \cong_i \delta (q', a)$
+	\end{itemize}
+\end{definition}
+
+\begin{remarque}
+	Par définitions
+	$\cong_{i+1}$ induit une partition de $Q$ au moins aussi fine que celle induite que celle induite par $\cong_i$.
+
+	Les classes de $\cong_{i+1}$ sont obtenues en partitionnant des classes de $\cong_i$
+\end{remarque}
+
+\begin{remarque}
+	Puisque $Q$ est fini, le processus de partitionnement doit se stabiliser. Autrement dit,
+
+	$$\exists k \in \N^*, \text{\tq} \cong_{k+j} \forall j \in \N$$
+\end{remarque}
+
+
+\begin{prop}
+	Si $k \in \N$ \tq $ \cong_k = \cong_{k+j} \forall j \in \N$, alors $\cong_k = \cong$
+\end{prop}
+
+\begin{proof}
+	Soit $q,q' \in Q$, $q \cong_k q'$ \mq $L_q = L_{q'}$. Exercice.
+\end{proof}
+
+Complexité.
+
+L'algorithme effectue $n$ étapes  et  chaque étape dépense $O(n)$m donc sa complexité est en $O(n^2)$.a
+
+En fait, en moyenne $O(n \log n)$ (David, 2010) et meme $O(n \log \log n)$.
+
+TODO: Add exemple
