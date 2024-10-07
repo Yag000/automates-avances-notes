@@ -758,7 +758,7 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 	Soit $p$ un état de $T u$. Puisque $A$ est accesible, il existe un chemin de $q_0 \to p$ dans $A$, donc il existe un chemin $p \to q_o$ dans $\mirr(A)$.
 	Soit $w$ l'étiquette de ce chemin, alors le mot $uw$ est l'étiquette d'un chemin réussi de $\text{mirr }(A)$. En conséquence, $uw \in M$.
-	
+
 	Mais $uw\in M \iff w \in \quot u M \iff w\in \quot v M \iff vw \in M$.
 
 	Donc $vw$ est l'étiquette d'un chemin réussi $\Gamma$ dans $\mirr (A)$. Étant donné que $A$ est déterministe, tout chemin aboutissant dans $q_0$
@@ -838,7 +838,7 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 	On en déduit que
 	\begin{equation}\label{eq:congnot}
-		q \not\cong q' \iff \exists w, \deltaS q w \in T \et \deltaS {q'} w \notin T  
+		q \not\cong q' \iff \exists w, \deltaS q w \in T \et \deltaS {q'} w \notin T
 	\end{equation}
 	où $\deltaS q w \notin T$ et $\deltaS q' w \in T$ sont deux états non équivalents, dits \emph{séparables}.
 \end{rappel}
@@ -848,7 +848,7 @@ Si $q$ et $q'$ sont séparables et $w$ est un mot qui satisfait \ref{eq:congnot}
 
 Pour calculer la congruence de Nérode on introduit une famille de congruences :
 
-\begin{equation}\label{eq:congnot}
+\begin{equation}
 	\cong_i, i  \in \N, q \cong_i q' \iff \forall w, \abs w \leq i \implies \deltaS q w \in T \iff  \deltaS {q'} w \in T
 \end{equation}
 
@@ -871,7 +871,7 @@ Pour calculer la congruence de Nérode on introduit une famille de congruences :
 \begin{remarque}
 	Puisque $Q$ est fini, le processus de partitionnement doit se stabiliser. Autrement dit,
 
-	$$\exists k \in \N^*, \text{\tq} \cong_{k} = \cong_{k+j} \forall j \in \N* $$
+	$$\exists k \in \N^*, \text{\tq} \cong_{k} = \cong_{k+j} \forall j \in \N^* $$
 \end{remarque}
 
 
