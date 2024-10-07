@@ -44,14 +44,21 @@
 \newcommand{\antuple}[1]{\langle #1 \rangle}
 \newcommand{\AFD}{\antuple{Q, q_0, F, \delta}}
 \newcommand{\AFN}{\antuple{Q, I, F, \delta}}
-\newcommand{\mirror}[1]{#1^{\sim}}
+\newcommand{\mirror}[1]{\widetilde{#1}}
 
 
 \newcommand{\reach}[1]{\text{reach}\left(#1\right)}
 
 \newcommand{\deltaS}[2]{\kleene \delta \left(#1,#2\right)}
 
+\newcommand{\detA}{\text{det}}
+\newcommand{\mirr}{\text{mirr}}
+
 %% Environments
 
 \newenvironment{twoautomata} { \begin{minipage}{0.5\textwidth} \begin{figure}[H] }
 			{ \end{figure}  \end{minipage} }
+
+
+\theoremstyle{plain}
+\newtheorem*{complexite}{Complexité}
