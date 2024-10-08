@@ -902,7 +902,7 @@ Pour calculer la congruence de Nérode on introduit une famille de congruences :
 \subsection{Monoïdes}
 
 \begin{definition}[Monoïde]
-	Un monoide est un tuple $(Mm \times, 1)$ où $M$ est un ensemble, $\times : M \times M \to M$ est une operation binaire sur $M$,
+	Un monoïde est un tuple $(M, \times, 1)$ où $M$ est un ensemble, $\times : M \times M \to M$ est une operation binaire sur $M$,
 	$1\in M$ \tq
 	\begin{enumerate}
 		\item $\times$ est une opération  associative ($\forall x,y,z \in M , x \times (y \times z) = (x \times y) \times z$)
@@ -914,24 +914,24 @@ Pour calculer la congruence de Nérode on introduit une famille de congruences :
 	\begin{itemize}
 		\item $(\N, +, 0)$
 		\item $(\mots, \cdot, \motvide)$
-		\item $(\Z, +, 0)$ est un monoïde, mais aussi un groupe car tout element possède un symétrique.
+		\item $(\Z, +, 0)$ est un monoïde, mais aussi un groupe car tout élément possède un symétrique.
 		\item Si $Q$ est un ensemble, alors $(Q ^ Q, \circ, \text{id})$
 	\end{itemize}
 \end{exemple}
 
 
 \begin{definition}[Morphisme de monoïdes]
-	Soit $(M,\times_M, 1_M)$ et $(N,\times_N, 1_N)$ son des monoïdes. Une fonction $h :  M \to N$ est appelé un morphisme de monoïdes \ssi
+	Soit $(M,\times_M, 1_M)$ et $(N,\times_N, 1_N)$ des monoïdes. Une fonction $h :  M \to N$ est appelée un morphisme de monoïdes \ssi
 	\begin{enumerate}
-		\item $h(1_M) = 1_M \reason{$h$ preserve l'élément neutre}$
-		\item $\forall x, y \in M, h (x \times_M y) = h(x) \times_N h(y) \reason{$h$ preserve la multiplication}$
+		\item $h(1_M) = 1_N \reason{$h$ préserve l'élément neutre}$
+		\item $\forall x, y \in M, h (x \times_M y) = h(x) \times_N h(y) \reason{$h$ préserve la multiplication}$
 	\end{enumerate}
 \end{definition}
 
 
 \begin{prop}
 	Soit $\alphabet$ un ensemble et $(M,\cdot, 1)$ un monoïde. Soit $f : \alphabet \to M$ une fonction. Il existe
-	un unique morphisme de monoïdes $\bar f : \mots \to M$ \tq $\bar f (a) =  f (a) \forall a \in \alphabet$.
+	un unique morphisme de monoïdes $\bar f : \mots \to M$ \tq $\bar f (a) =  f (a),  \forall a \in \alphabet$.
 
 	TODO: diagrame commutatif.
 \end{prop}
@@ -941,26 +941,28 @@ Pour calculer la congruence de Nérode on introduit une famille de congruences :
 	\begin{itemize}
 		\item Existence:
 
-		      Soit $w\in \mots$ de la forme $\motDecomp w n$ où $a_i \in \alphabet$.
+		      Soit $w\in \mots$ de la forme $\motDecomp w n$ où $w_i \in \alphabet$.
 
 		      Soit $\bar f (w) =^{def} f(w_1) \cdot \cdots \cdot f(w_n)$ et $\bar f (\motvide) = 1_M$. Alors pour $a\in \alphabet, \bar f (a) = f (a)$.
-		      Si $\motDecomp w n$ et $\motDecomp v m \in \mots$.
+		      
+			  Si $\motDecomp w n$ et $\motDecomp v m \in \mots$.
 		      \begin{eqnarray*}
-			      \bar (wv) = \bar f(\decomp w n \decomp w m) &=& f(w_1) \cdot \cdots \cdot f(w_n) \cdot f(v_1) \cdot \cdots \cdot f(v_m) \\
+			      \bar f(wv) = \bar f(\decomp w n \decomp v m) &=& f(w_1) \cdot \cdots \cdot f(w_n) \cdot f(v_1) \cdot \cdots \cdot f(v_m) \\
 			      &=& \left( f(w_1) \cdot \cdots \cdot f(w_n)\right)\left( \cdot f(v_1) \cdot \cdots \cdot f(v_m) \right)\\
-			      &=& \bar f(\decomp w n) \bar f (\decomp w m) \\
-			      &=& \bar f(w) \bar f (w)
+			      &=& \bar f(\decomp w n) \bar f (\decomp v m) \\
+			      &=& \bar f(w) \bar f (v)
 		      \end{eqnarray*}
 
-		      Donc $\forall w, v \in \mots, \bar f (wv) = \bar f (w)\bar f(w) \et \bar f (\motvide) = 1_M$ et ainsi, $\bar f$ est un morphisme de monoïdes.
+		      Donc $\forall w, v \in \mots, \bar f (wv) = \bar f (w)\bar f(v) \et \bar f (\motvide) = 1_M$ et ainsi, $\bar f$ est un morphisme de monoïdes.
 
 
 		\item Unicité:
 
-		      Si $h : \mots \to M$ est un morphisme de monoïdes \tq $h(a) = f(a) \forall a \in \mots$. Alors $h(\motvide) = 1_M$.
+		      Si $h : \mots \to M$ est un morphisme de monoïdes \tq $h(a) = f(a), \forall a \in \mots$. Alors $h(\motvide) = 1_M$.
 
-		      Comme $h$ preserve la multiplication on a
-		      $h (\decomp a n) = h(a_1) \cdots h(a_n) = f(a_1) \cdots f(a_n) = \bar f (\decomp a n)$
+		      Comme $h$ préserve la multiplication, on a
+		      $h (\decomp a n) = h(a_1) \cdots h(a_n) = f(a_1) \cdots f(a_n) = \bar f (\decomp a n)$.
+
 		      Et donc $h = \bar f$
 	\end{itemize}
 \end{proof}
@@ -968,8 +970,8 @@ Pour calculer la congruence de Nérode on introduit une famille de congruences :
 On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 
 \begin{definition}[Librement engendré]
-	$H$ et librement engendré par sur $\alphabet$ si
-	$$\forall f : \alphabet \to M \text{ où } M  \text { est un monoïde }, \exists ! \bar f : H \to M \et i : \alphabet \to H, \bar f \circ i   = f $$
+	$H$ est librement engendré sur $\alphabet$ si
+	$$\forall f : \alphabet \to M \text{ où } M  \text { est un monoïde}, \exists ! \bar f : H \to M \et i : \alphabet \to H, \bar f \circ i   = f $$
 
 	$ H \cong \mots$
 \end{definition}
@@ -978,9 +980,13 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 	TODO: Exemple
 \end{exemple}
 
+\begin{remarque}
+	$\N \cong \set{1}^*$
+\end{remarque}
+
 \begin{definition}[Reconnaissance par monoïdes]
-	Soit $\alphabet$ un alphabet finit. Soit $L \subseteq \mots$ un langage et soit $\phi : \mots \to M$ un morphisme de monoïdes où $(M, \circ, 1_M)$ est un monoïde fini. On dit que
-	$\phi$ reconnait $L$ \ssi il existe $P \subseteq N$ \tq $L = \quot {\phi} (P)$, \cad $L = \setdef {w \in \mots} (\phi (w) \in P)$.
+	Soit $\alphabet$ un alphabet fini. Soit $L \subseteq \mots$ un langage et soit $\phi : \mots \to M$ un morphisme de monoïdes où $(M, \circ, 1_M)$ est un monoïde fini. On dit que
+	$\phi$ reconnait $L$ \ssi il existe $P \subseteq M$ \tq $L = \quot {\phi} (P)$, \cad $L = \setdef {w \in \mots (\phi (w) \in P)}$.
 \end{definition}
 
 \begin{exercice}
@@ -1013,30 +1019,35 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 				      (1_M, w)                   & \mapsto & \phi (w)
 			      \end{array} $$
 
-		      $A$ accepte le mot $w$ \ssi $\deltaS {1_M} w \in P$ \ssi $\phi (w) \in P$ \ssi $w \in \quot {\phi} = L$.
+		       \ssi \ssi \ssi
+
+			  \begin{eqnarray*}
+			  	$A$ accepte le mot $w$ &=& $\deltaS {1_M} w \in P$  &=& $\phi (w) \in P$ \\
+			  	&=&  $w \in \quot {\phi}(P)$ &=& $w \in L$.
+			  \end{eqnarray*}
 
 		      Donc $A$ accepte le langage $L$
 
 
 		\item $\Leftarrow$
 
-		      Soit $\AFD$ un automate déterministe complet qui accept $L$.
+		      Soit $A = \AFD$ un automate déterministe complet qui accepte $L$.
 		      Soit
 
 		      $$ \begin{array}{rcl}
-				      \phi : \mots & \to     & Q^Q        \reason{$(Q^Q, \circ,\text{id}_Q $ est bien un monoïde} \\
+				      \phi : \mots & \to     & Q^Q        \reason{$(Q^Q, \circ,\text{id}_Q) $ est bien un monoïde} \\
 				      \phi (w)(q)  & \mapsto & \deltaS q w
 			      \end{array} $$
 
 		      On a bien :
 		      \begin{itemize}
 			      \item $Q^Q$ est un monoïde fini.
-			      \item $\phi (\motvide) (q) = \deltaS q {\motvide}$, donc $\begin{array}{rcl}
+			      \item $\phi (\motvide) (q) = \deltaS q {\motvide} = q$, donc $\begin{array}{rcl}
 					            \phi (\motvide) : Q & \to     & Q \\
 					            q                   & \mapsto & q
 				            \end{array}
 			            $%TODO: improve this
-			            est la fonction identité sur $Q$ et donc $\phi$ preserve l'identité.
+			            est la fonction identité sur $Q$ et donc $\phi$ preserve l'identité (élément neutre).
 			      \item $\phi (w) \circ \phi (w') = \phi (ww'), \ \forall w, w' \in \mots$ car
 			            $\deltaS {\deltaS q w} {w'} = \deltaS q {ww'}$.
 
@@ -1057,20 +1068,20 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 
 
 \begin{definition}
-	On va appeler $\phi (\mots)\subseteq Q^Q$ le \textbf{monoïde de transition de l'automate} $A$
+	On va appeler $\phi (\mots)\subseteq Q^Q$ le \textbf{monoïde de transition de l'automate} $A$.
 \end{definition}
 
 
 \begin{definition}[Congruence]
-	Soit $(M, \cdot, 1_M)$ un monoïde. Une congruence sir $M$ est une relation d'équivalent $\sim \subseteq M \times M$ \tlq
-	$$\forall m,m', \ m \sim m' \iff \forall, n,r \in M, n\cdot m \cdot r \sim n \cdot m' \cdot r$$
+	Soit $(M, \cdot, 1_M)$ un monoïde. Une congruence sur $M$ est une relation d'équivalence $\sim$ $\subseteq M \times M$ \tlq
+	$$\forall m,m'\in M, \ m \sim m' \iff \forall n,r \in M, n\cdot m \cdot r \sim n \cdot m' \cdot r$$
 \end{definition}
 
 
 
 \begin{definition}[Congruence syntaxique d'un langage]
-	Soit $L \subseteq \mots$ un langage, Soit $\sim_L \subseteq \mots \times \mots$ la relation d'équivalence défini par :
-	$$ w \sim_L w' \mssi \forall u,v \mots, uwv \in L \iff u w' v \in L$$
+	Soit $L \subseteq \mots$ un langage. Soit $\sim_L \subseteq \mots \times \mots$ la relation d'équivalence définie par :
+	$$ w \sim_L w' \mssi \forall u,v \in \mots, uwv \in L \iff u w' v \in L$$
 \end{definition}
 
 \begin{prop}
@@ -1083,11 +1094,10 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 
 
 \begin{prop}
-	Soit $\monoide$ un monoïde et $\sim \subseteq M \times M$ est une congruence sur $M$, alors $M/\sim = \setdef {[m]} {m \in M}$.
-	Où $[m]$ note la classe d'équivalence de $m$ par rapport à $\sim$.
+	Si $\monoide$ est un monoïde et $\sim$ $\subseteq M \times M$ est une congruence sur $M$, alors $M_{/\sim} = \setdef {[m]} {m \in M}$, où $[m]$ note la classe d'équivalence de $m$ par rapport à $\sim$.
 
 	$M/\sim$ est un monoïde et $ \begin{array}{rcl}
-			h : M & \to     & M   \\
+			h : M & \to     & M/\sim   \\
 			m     & \mapsto & [m]
 		\end{array} $ est un morphisme de monoïdes.
 \end{prop}
@@ -1095,7 +1105,7 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 \begin{proof}
 	$(M/\sim, \cdot, [1_M])$ est un monoïde où $[m][m'] = [mm']$.
 
-	À montrer que cette multiplication est bin définie,\cad si $m_2 \sim m \et m_2' \sim m'$ alors $m_2 m_2' \sim m m'$ :
+	À montrer que cette multiplication est bien définie, \cad si $m_2 \sim m \et m_2' \sim m'$ alors $m_2 m_2' \sim m m'$ :
 	\begin{eqnarray*}
 		m_2 &\sim& m \\
 		m_2' &\sim& m' \\
@@ -1105,7 +1115,7 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 		\implies m_2 \cdot m_2' &\sim& m \cdot m'
 	\end{eqnarray*}
 
-	Donc la multiplication sur $M/\sim$ est bine define.
+	Donc la multiplication sur $M/\sim$ est bien définie.
 
 
 	$[1_M]$ est un élément neutre car $[m]\cdot [1_M] = [m \cdot 1_M] = [m]$ et pareil pour $[1_M]\cdot [m] = [m]$.
@@ -1128,18 +1138,18 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 \end{definition}
 
 \begin{prop}
-	Ales les notations ci-dessus, $L$ est reconnu par le morphisme
+	Avec les notations ci-dessus, $L$ est reconnu par le morphisme
 	$ \begin{array}{rcl}
-			\phi : \mots & \to     & \;ots \\
+			\phi : \mots & \to     & \mots/\sim_L \\
 			w            & \mapsto & [w]
 		\end{array} $.
 \end{prop}
 
 
-
 \begin{remarque}\label{rem:quot_mono}
-	Si $w \in L$ et $w' \sim_L w$ alors $w' \in L$ Parce que  $w' \sim_L w$.
-	Comme $\motvide w \motvide \in L$ et donc  $\motvide w' \motvide \iff w' \in L$.
+	Si $w \in L$ et $w' \sim_L w$ alors $w' \in L$, parce que  $w' \sim_L w$.
+
+	Comme $\motvide w \motvide \in L$ , $\motvide w' \motvide$ donc $w' \in L$.
 
 \end{remarque}
 
@@ -1173,7 +1183,7 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 
 
 \begin{lemma}
-	Si $N$ divise $M$ et $N$ reconnait un langage $L$ alors $M$ reconnait $L$ :
+	Si $N$ divise $M$ et $N$ reconnait un langage $L$ alors $M$ reconnait $L$.
 
 \end{lemma}
 
@@ -1203,13 +1213,16 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 		\item $\Rightarrow$
 
 		      Supposons que $M$ reconnait $L$. Donc on a $\phi : \mots \to M$ et $P \subseteq M$ avec $\quot {\phi} (P) = L$.
+
 		      Soit $N = \phi (\mots)$ l'image directe de $\mots$ par $\phi$.
 
-		      Alors $M \hookrightarrow N$ est un sous-monoide de $M$.
+		      Alors $N \hookrightarrow M$ est un sous-monoïde de $M$.
 
-		      Je voudrais avoir un quotient $N \twoheadrightarrow \mots/\sim$.
+		      Je voudrais avoir un quotient $\h : N \twoheadrightarrow \mots/\sim$.
 
-		      Si $n \in N$ alors $\exists w \in \mots$ \tq $\phi(w) = n$. On défini $h(n) = [w]$. Il faut \mq
+		      Si $n \in N$ alors $\exists w \in \mots$ \tq $\h(w) = n$. On définit $h(n) = [w]$. 
+			  
+			  Il faut \mq
 		      \begin{enumerate}
 			      \item $h$ est bien défini (si $\phi (w') = \phi (w) \implies [w] = [w']$). \label{prop:recon1}
 			      \item $h$ est un morphisme de monoïdes.
@@ -1220,7 +1233,7 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 		      \begin{itemize}
 			      \item \ref{prop:recon1}: Supposons que $\phi(w) = \phi (w')$.
 
-			            On veut \mq $[w]=[w']$m \cad $w \sim_L w'$, \cad $\forall u,v \in \mots uwv \in L \iff uw'v \in L$.
+			            On veut \mq $[w]=[w']$ \cad $w \sim_L w'$, \cad $\forall u,v \in \mots, uwv \in L \iff uw'v \in L$.
 
 			            Soient $u,v \in \mots$.
 			            \begin{eqnarray*}
@@ -1233,6 +1246,7 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 
 			            Donc $w \sim_L w'$.
 		      \end{itemize}
+			  Exercice : finir la preuve.
 	\end{itemize}
 \end{proof}
 
