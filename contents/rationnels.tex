@@ -743,21 +743,23 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 \begin{prop}
 	Si $A$ est un automate déterministe et accesible, \ie, $\forall q \in Q, \exists \text{ un chemin } q_0 \to q$,
-	et  $\mirror A = \detA (\mirr(A)) $ est l'automate obtenu en déterminisant l'automate miroir de $A$. Alors
-	$\mirror A$ est l'automate minimal qui reconnait $\mirror {\lang A}$.
+	et  $A^ {\sim} = \detA (\mirr(A)) $ est l'automate obtenu en déterminisant l'automate miroir de $A$. Alors
+	$A^{\sim}$ est l'automate minimal qui reconnait $\mirror {\lang A}$.
 \end{prop}
 
 
 \begin{proof}
 	Soit $A = (Q, q_0, T)$, $L = \lang A$. $\mirr (A) = (Q, T, q_0), M = \lang {\mirr (A)} = \mirror L$.
 
-	Nous allons montrer que $\mirror A$ est l'automate minimal pour $M$. Pour cela, il suffit de montrer que $\mirror A$
+	On note $X \cdot u$ et $\delta (X,u)$, $X$ étant un ensemble d'états et $u$ un mot, l'ensemble $\bigcup\limits_{q \in X} \delta (q,a)$.
+
+	Nous allons montrer que $A^{\sim}$ est l'automate minimal pour $M$. Pour cela, il suffit de montrer que $A^{\sim}$
 	est isomorphe à l'automate des résiduels de $M$.
 
-	Pour cela, il faut \mq si $u$ et $v$ sont deux mots quelconques \tq $\quot u M = \quot v M$, alors $T u =  T v$ dans $\mirror A$.
+	Pour cela, il faut \mq si $u$ et $v$ sont deux mots quelconques \tq $\quot u M = \quot v M$, alors $T \cdot u =  T \cdot v$ dans $A^{\sim}$.
 
-	Soit $p$ un état de $T u$. Puisque $A$ est accesible, il existe un chemin de $q_0 \to p$ dans $A$, donc il existe un chemin $p \to q_o$ dans $\mirr(A)$.
-	Soit $w$ l'étiquette de ce chemin, alors le mot $uw$ est l'étiquette d'un chemin réussi de $\text{mirr }(A)$. En conséquence, $uw \in M$.
+	Soit $p$ un état de $T \cdot u$. Puisque $A$ est accesible, il existe un chemin de $q_0 \to p$ dans $A$, et donc il existe un chemin $p \to q_0$ dans $\mirr(A)$.
+	Soit $w$ l'étiquette de ce chemin, alors le mot $uw$ est l'étiquette d'un chemin réussi de $\mirr (A)$. En conséquence, $uw \in M$.
 
 	Mais $uw\in M \iff w \in \quot u M \iff w\in \quot v M \iff vw \in M$.
 
