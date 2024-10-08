@@ -1,0 +1,354 @@
+\section{Monoïdes}
+
+\begin{definition}[Monoïde]
+	Un monoïde est un tuple $(M, \times, 1)$ où $M$ est un ensemble, $\times : M \times M \to M$ est une operation binaire sur $M$,
+	$1\in M$ \tq
+	\begin{enumerate}
+		\item $\times$ est une opération  associative ($\forall x,y,z \in M , x \times (y \times z) = (x \times y) \times z$)
+		\item $1$ est un élément neutre pout $\times$, \cad, $\forall x \in M, 1 \times x = x \times 1 = x$
+	\end{enumerate}
+\end{definition}
+
+\begin{exemple}
+	\begin{itemize}
+		\item $(\N, +, 0)$
+		\item $(\mots, \cdot, \motvide)$
+		\item $(\Z, +, 0)$ est un monoïde, mais aussi un groupe car tout élément possède un symétrique.
+		\item Si $Q$ est un ensemble, alors $(Q ^ Q, \circ, \text{id})$
+	\end{itemize}
+\end{exemple}
+
+
+\begin{definition}[Morphisme de monoïdes]
+	Soit $(M,\times_M, 1_M)$ et $(N,\times_N, 1_N)$ des monoïdes. Une fonction $h :  M \to N$ est appelée un morphisme de monoïdes \ssi
+	\begin{enumerate}
+		\item $h(1_M) = 1_N \reason{$h$ préserve l'élément neutre}$
+		\item $\forall x, y \in M, h (x \times_M y) = h(x) \times_N h(y) \reason{$h$ préserve la multiplication}$
+	\end{enumerate}
+\end{definition}
+
+
+\begin{prop}
+	Soit $\alphabet$ un ensemble et $(M,\cdot, 1)$ un monoïde. Soit $f : \alphabet \to M$ une fonction. Il existe
+	un unique morphisme de monoïdes $\bar f : \mots \to M$ \tq $\bar f (a) =  f (a),  \forall a \in \alphabet$.
+
+	\begin{tikzcd}
+		\alphabet \arrow[r, hook]
+		\arrow[d, "f", name=A]
+		& \mots \arrow[dl, dashrightarrow, "\exists ! \bar f", name=B] \\
+		M
+	\end{tikzcd}
+	%TODO: Add circular arrow
+\end{prop}
+
+
+\begin{proof}
+	\begin{itemize}
+		\item Existence:
+
+		      Soit $w\in \mots$ de la forme $\motDecomp w n$ où $w_i \in \alphabet$.
+
+		      Soit $\bar f (w) =^{def} f(w_1) \cdot \cdots \cdot f(w_n)$ et $\bar f (\motvide) = 1_M$. Alors pour $a\in \alphabet, \bar f (a) = f (a)$.
+
+		      Si $\motDecomp w n$ et $\motDecomp v m \in \mots$.
+		      \begin{eqnarray*}
+			      \bar f(wv) = \bar f(\decomp w n \decomp v m) &=& f(w_1) \cdot \cdots \cdot f(w_n) \cdot f(v_1) \cdot \cdots \cdot f(v_m) \\
+			      &=& \left( f(w_1) \cdot \cdots \cdot f(w_n)\right)\left( \cdot f(v_1) \cdot \cdots \cdot f(v_m) \right)\\
+			      &=& \bar f(\decomp w n) \bar f (\decomp v m) \\
+			      &=& \bar f(w) \bar f (v)
+		      \end{eqnarray*}
+
+		      Donc $\forall w, v \in \mots, \bar f (wv) = \bar f (w)\bar f(v) \et \bar f (\motvide) = 1_M$ et ainsi, $\bar f$ est un morphisme de monoïdes.
+
+
+		\item Unicité:
+
+		      Si $h : \mots \to M$ est un morphisme de monoïdes \tq $h(a) = f(a), \forall a \in \mots$. Alors $h(\motvide) = 1_M$.
+
+		      Comme $h$ préserve la multiplication, on a
+		      $h (\decomp a n) = h(a_1) \cdots h(a_n) = f(a_1) \cdots f(a_n) = \bar f (\decomp a n)$.
+
+		      Et donc $h = \bar f$
+	\end{itemize}
+\end{proof}
+
+On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
+
+\begin{definition}[Librement engendré]
+	$H$ est librement engendré sur $\alphabet$ si
+	$$\forall f : \alphabet \to M \text{ où } M  \text { est un monoïde}, \exists ! \bar f : H \to M \et i : \alphabet \to H, \bar f \circ i   = f $$
+
+	$ H \cong \mots$
+\end{definition}
+
+\begin{exemple}
+	TODO: Exemple
+\end{exemple}
+
+\begin{remarque}
+	$\N \cong \set{1}^*$
+\end{remarque}
+
+\begin{definition}[Reconnaissance par monoïdes]
+	Soit $\alphabet$ un alphabet fini. Soit $L \subseteq \mots$ un langage et soit $\phi : \mots \to M$ un morphisme de monoïdes où $(M, \circ, 1_M)$ est un monoïde fini. On dit que
+	$\phi$ reconnait $L$ \ssi il existe $P \subseteq M$ \tq $L = \quot {\phi} (P)$, \cad $L = \setdef {w \in \mots} {\phi (w) \in P}$.
+\end{definition}
+
+\begin{exercice}
+	$\phi$ reconnaît $L$ \ssi $L = \quot {\phi} (\phi (L))$.
+\end{exercice}
+
+\begin{prop}
+	Soit $L \subseteq \mots$ un langage sur l'alphabet $\alphabet$. Alors $L$ est reconnaissable \ssi $L$ est reconnu par un morphisme de monoïdes $\phi : \mots \to M$ où $M$ est fini.
+\end{prop}
+
+
+\begin{proof}
+	\begin{itemize}
+		\item $\Rightarrow$
+
+		      Soit $\phi : \mots \to M$ un morphisme de monoïdes avec $M$ fini qui reconnait le langage $L$.
+		      $\exists P \subseteq M, L = \quot {\phi} (P)$.
+
+		      Soit $A$ l'automate suivant : $\antuple {M, 1_M, P, \delta}$ où
+
+		      $$ \begin{array}{rcl}
+				      \delta : M \times \alphabet & \to     & M                \\
+				      (m,a)                       & \mapsto & m \cdot \phi (a)
+			      \end{array} $$
+
+		      On peut montrer par induction sur la longueur du mot que
+
+		      $$ \begin{array}{rcl}
+				      \delta ^* : M \times \mots & \to     & M        \\
+				      (1_M, w)                   & \mapsto & \phi (w)
+			      \end{array} $$
+
+		      \ssi
+		      \begin{eqnarray*}
+			      A \text{ accepte le mot } w &\iff&  \deltaS {1_M} w \in P \iff \phi (w) \in P \\
+			      &\iff&  w \in \quot {\phi}(P) \iff w \in L.
+		      \end{eqnarray*}
+
+		      Donc $A$ accepte le langage $L$
+
+
+		\item $\Leftarrow$
+
+		      Soit $A = \AFD$ un automate déterministe complet qui accepte $L$.
+		      Soit
+
+		      $$ \begin{array}{rcl}
+				      \phi : \mots & \to     & Q^Q        \reason{$(Q^Q, \circ,\text{id}_Q) $ est bien un monoïde} \\
+				      \phi (w)(q)  & \mapsto & \deltaS q w
+			      \end{array} $$
+
+		      On a bien :
+		      \begin{itemize}
+			      \item $Q^Q$ est un monoïde fini.
+			      \item $\phi (\motvide) (q) = \deltaS q {\motvide} = q$, donc $\begin{array}{rcl}
+					            \phi (\motvide) : Q & \to     & Q \\
+					            q                   & \mapsto & q
+				            \end{array} $
+			            est la fonction identité sur $Q$ et donc $\phi$ preserve l'identité (élément neutre).
+			      \item $\phi (w) \circ \phi (w') = \phi (ww'), \ \forall w, w' \in \mots$ car
+			            $\deltaS {\deltaS q w} {w'} = \deltaS q {ww'}$.
+
+			            Soit $P \subseteq Q^Q$ défini par $P \setdef {f : Q \to Q} {f(q_0)\in F}$.
+
+			            \begin{eqnarray*}
+				            \quot {\phi} (P) &=& \setdef {w \in \mots} {\phi (w) \in P} \\
+				            &=& \setdef {w \in \mots} {\phi (w) (q_0)\in F} \\
+				            &=& \setdef {w \in \mots} {\deltaS {q_0} w \in F}\\
+				            &=& \setdef {w \in \mots} {w \text { est accepté par } A}\\
+				            &=& L
+			            \end{eqnarray*}
+		      \end{itemize}
+
+		      Donc $L$ est reconnu par $\phi$.
+	\end{itemize}
+\end{proof}
+
+
+\begin{definition}
+	On va appeler $\phi (\mots)\subseteq Q^Q$ le \textbf{monoïde de transition de l'automate} $A$.
+\end{definition}
+
+
+\begin{definition}[Congruence]
+	Soit $(M, \cdot, 1_M)$ un monoïde. Une congruence sur $M$ est une relation d'équivalence $\sim$ $\subseteq M \times M$ \tlq
+	$$\forall m,m'\in M, \ m \sim m' \iff \forall n,r \in M, n\cdot m \cdot r \sim n \cdot m' \cdot r$$
+\end{definition}
+
+
+
+\begin{definition}[Congruence syntaxique d'un langage]
+	Soit $L \subseteq \mots$ un langage. Soit $\sim_L \subseteq \mots \times \mots$ la relation d'équivalence définie par :
+	$$ w \sim_L w' \mssi \forall u,v \in \mots, uwv \in L \iff u w' v \in L$$
+\end{definition}
+
+\begin{prop}
+	$\sim_L$ est une congruence sur $\mots$.
+\end{prop}
+
+\begin{proof}
+	Exercice.
+\end{proof}
+
+
+\begin{prop}
+	Si $\monoide$ est un monoïde et $\sim$ $\subseteq M \times M$ est une congruence sur $M$, alors $M_{/\sim} = \setdef {[m]} {m \in M}$, où $[m]$ note la classe d'équivalence de $m$ par rapport à $\sim$.
+
+	$M/\sim$ est un monoïde et $ \begin{array}{rcl}
+			h : M & \to     & M/\sim \\
+			m     & \mapsto & [m]
+		\end{array} $ est un morphisme de monoïdes.
+\end{prop}
+
+\begin{proof}
+	$(M/\sim, \cdot, [1_M])$ est un monoïde où $[m][m'] = [mm']$.
+
+	À montrer que cette multiplication est bien définie, \cad si $m_2 \sim m \et m_2' \sim m'$ alors $m_2 m_2' \sim m m'$ :
+	\begin{eqnarray*}
+		m_2 &\sim& m \\
+		m_2' &\sim& m' \\
+		1_M \cdot  m_2 \cdot m_2' &\sim& 1_M \cdot m \cdot m_2' \reason{car $\sim$ est une congruence} \\
+		m_2 \cdot m_2' &\sim&  m \cdot m_2' \\
+		\text{Mais } m \cdot m_2' &\sim& m \cdot m' \reason{car $\sim$ est une congruence} \\
+		\implies m_2 \cdot m_2' &\sim& m \cdot m'
+	\end{eqnarray*}
+
+	Donc la multiplication sur $M/\sim$ est bien définie.
+
+
+	$[1_M]$ est un élément neutre car $[m]\cdot [1_M] = [m \cdot 1_M] = [m]$ et pareil pour $[1_M]\cdot [m] = [m]$.
+
+	$h$ est donc un morphisme de monoïdes:
+
+	\begin{itemize}
+		\item  $h(1_M) = [1_M]$
+		\item  $h(m\cdot n) = [m \cdot n] = [m] \cdot [n] = h(m) \cdot h(n)$
+	\end{itemize}
+\end{proof}
+
+\begin{remarque}
+	$h$ est un \textbf{morphisme surjectif} (aussi appelé un quotient).
+\end{remarque}
+
+\begin{definition}
+	Soit $L \subseteq \mots$ un langage et soit $\sim_L$ la congruence syntaxique sur $\mots$.
+	Le monoïde quotient $\mots / \sim_L$ est appelé le monoïde syntaxique de $L$.
+\end{definition}
+
+\begin{prop}
+	Avec les notations ci-dessus, $L$ est reconnu par le morphisme
+	$ \begin{array}{rcl}
+			\phi : \mots & \to     & \mots/\sim_L \\
+			w            & \mapsto & [w]
+		\end{array} $.
+\end{prop}
+
+
+\begin{remarque}\label{rem:quot_mono}
+	Si $w \in L$ et $w' \sim_L w$ alors $w' \in L$, parce que  $w' \sim_L w$.
+
+	Comme $\motvide w \motvide \in L$ , $\motvide w' \motvide$ donc $w' \in L$.
+
+\end{remarque}
+
+\begin{proof}
+	Soit $P \subseteq \mots / \sim_L$ donné par $P = \setdef {[w]} {w \in L}$.
+
+	On doit \mq $L = \quot {\phi} (P)$, \cad, $L = \setdef {w \in \mots} {\phi (w) \in P}$
+
+	En utilisant la remarque \ref{rem:quot_mono} on a que si $ w\in L$ alors $[w ] \subseteq L$.
+
+	On en conclut que
+	$$ L = \bigcup_{w \in L} [w]    \iff L = \quot {\phi} (P) $$
+\end{proof}
+
+
+\begin{prop}
+	Le monoïde syntaxique a une propriété similaire à \ref{lem:reach}:
+	$\forall \monoide$ monoïde qui reconnait un langage $L$, on a le diagramme suivant:
+
+	\begin{tikzcd}[row sep=large]
+		&(N, \cdot , 1_N) \arrow[dr, hook] \arrow[dl, twoheadrightarrow] \\
+		(\mots / \sim_L, \cdot,  [\motvide]) & & (M, \cdot, 1_M)
+	\end{tikzcd}
+\end{prop}
+
+\begin{terminologie}
+	On dit que le monoïde syntaxique de $L$ divise tout monoïde qui accepte $L$.
+\end{terminologie}
+
+
+
+
+\begin{lemma}
+	Si $N$ divise $M$ et $N$ reconnait un langage $L$ alors $M$ reconnait $L$.
+
+\end{lemma}
+
+\begin{proof}
+
+	\begin{tikzcd}[row sep=large]
+		&T \arrow[dr, hook] \arrow[dl, twoheadrightarrow] \\
+		N & & M
+	\end{tikzcd}
+	$\phi : \mots \to N $ et $P \subseteq N$ \tq $L = \quot {\phi} (P)$
+
+	Exercice : \mq on peut construire $\phi'' : \mots \to M$ qui reconnait $L$.
+\end{proof}
+
+
+\begin{prop}
+	Un monoïde  $M$ reconnait  un langage $L$ \ssi le monoïde syntaxique $\mots / \sim_L$ divise $M$.
+\end{prop}
+
+\begin{proof}
+
+	\begin{itemize}
+		\item $\Leftarrow$
+
+		      $\mots / \sim_L$ reconnait $L$. Par le lemme, si $\mots / \sim_L$ divise $M$, alors $M$ reconnait $L$.
+
+		\item $\Rightarrow$
+
+		      Supposons que $M$ reconnait $L$. Donc on a $\phi : \mots \to M$ et $P \subseteq M$ avec $\quot {\phi} (P) = L$.
+
+		      Soit $N = \phi (\mots)$ l'image directe de $\mots$ par $\phi$.
+
+		      Alors $N \hookrightarrow M$ est un sous-monoïde de $M$.
+
+		      Je voudrais avoir un quotient $h : N \twoheadrightarrow \mots/\sim$.
+
+		      Si $n \in N$ alors $\exists w \in \mots$ \tq $h(w) = n$. On définit $h(n) = [w]$.
+
+		      Il faut \mq
+		      \begin{enumerate}
+			      \item $h$ est bien défini (si $\phi (w') = \phi (w) \implies [w] = [w']$). \label{prop:recon1}
+			      \item $h$ est un morphisme de monoïdes.
+			      \item $h$ est surjectif.
+		      \end{enumerate}
+
+		      Montrons cela:
+		      \begin{itemize}
+			      \item \ref{prop:recon1}: Supposons que $\phi(w) = \phi (w')$.
+
+			            On veut \mq $[w]=[w']$ \cad $w \sim_L w'$, \cad $\forall u,v \in \mots, uwv \in L \iff uw'v \in L$.
+
+			            Soient $u,v \in \mots$.
+			            \begin{eqnarray*}
+				            uwv \in L &\iff& \phi (uwv) \in P\\
+				            &\iff& \phi (u)\phi(w) \phi(v) \in P \reason{car $\phi$ est un morphisme} \\
+				            &\iff& \phi (u)\phi(w') \phi(v) \in P \reason{car $\phi (w) = \phi (w')$ } \\
+				            &\iff& \phi (uw'v) \in P\\
+				            &\iff& uw'v \in L
+			            \end{eqnarray*}
+
+			            Donc $w \sim_L w'$.
+		      \end{itemize}
+		      Exercice : finir la preuve.
+	\end{itemize}
+\end{proof}
