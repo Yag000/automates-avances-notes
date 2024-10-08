@@ -933,7 +933,13 @@ Pour calculer la congruence de Nérode on introduit une famille de congruences :
 	Soit $\alphabet$ un ensemble et $(M,\cdot, 1)$ un monoïde. Soit $f : \alphabet \to M$ une fonction. Il existe
 	un unique morphisme de monoïdes $\bar f : \mots \to M$ \tq $\bar f (a) =  f (a),  \forall a \in \alphabet$.
 
-	TODO: diagrame commutatif.
+	\begin{tikzcd}
+		\alphabet \arrow[r, hook]
+		\arrow[d, "f", name=A]
+		& \mots \arrow[dl, dashrightarrow, "\exists ! \bar f", name=B] \\
+		M
+	\end{tikzcd}
+	%TODO: Add circular arrow
 \end{prop}
 
 
@@ -944,8 +950,8 @@ Pour calculer la congruence de Nérode on introduit une famille de congruences :
 		      Soit $w\in \mots$ de la forme $\motDecomp w n$ où $w_i \in \alphabet$.
 
 		      Soit $\bar f (w) =^{def} f(w_1) \cdot \cdots \cdot f(w_n)$ et $\bar f (\motvide) = 1_M$. Alors pour $a\in \alphabet, \bar f (a) = f (a)$.
-		      
-			  Si $\motDecomp w n$ et $\motDecomp v m \in \mots$.
+
+		      Si $\motDecomp w n$ et $\motDecomp v m \in \mots$.
 		      \begin{eqnarray*}
 			      \bar f(wv) = \bar f(\decomp w n \decomp v m) &=& f(w_1) \cdot \cdots \cdot f(w_n) \cdot f(v_1) \cdot \cdots \cdot f(v_m) \\
 			      &=& \left( f(w_1) \cdot \cdots \cdot f(w_n)\right)\left( \cdot f(v_1) \cdot \cdots \cdot f(v_m) \right)\\
@@ -986,7 +992,7 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 
 \begin{definition}[Reconnaissance par monoïdes]
 	Soit $\alphabet$ un alphabet fini. Soit $L \subseteq \mots$ un langage et soit $\phi : \mots \to M$ un morphisme de monoïdes où $(M, \circ, 1_M)$ est un monoïde fini. On dit que
-	$\phi$ reconnait $L$ \ssi il existe $P \subseteq M$ \tq $L = \quot {\phi} (P)$, \cad $L = \setdef {w \in \mots (\phi (w) \in P)}$.
+	$\phi$ reconnait $L$ \ssi il existe $P \subseteq M$ \tq $L = \quot {\phi} (P)$, \cad $L = \setdef {w \in \mots} {\phi (w) \in P}$.
 \end{definition}
 
 \begin{exercice}
@@ -1019,12 +1025,11 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 				      (1_M, w)                   & \mapsto & \phi (w)
 			      \end{array} $$
 
-		       \ssi \ssi \ssi
-
-			  \begin{eqnarray*}
-			  	$A$ accepte le mot $w$ &=& $\deltaS {1_M} w \in P$  &=& $\phi (w) \in P$ \\
-			  	&=&  $w \in \quot {\phi}(P)$ &=& $w \in L$.
-			  \end{eqnarray*}
+		      \ssi
+		      \begin{eqnarray*}
+			      A \text{ accepte le mot } w &\iff&  \deltaS {1_M} w \in P \iff \phi (w) \in P \\
+			      &\iff&  w \in \quot {\phi}(P) \iff w \in L.
+		      \end{eqnarray*}
 
 		      Donc $A$ accepte le langage $L$
 
@@ -1045,8 +1050,7 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 			      \item $\phi (\motvide) (q) = \deltaS q {\motvide} = q$, donc $\begin{array}{rcl}
 					            \phi (\motvide) : Q & \to     & Q \\
 					            q                   & \mapsto & q
-				            \end{array}
-			            $%TODO: improve this
+				            \end{array} $
 			            est la fonction identité sur $Q$ et donc $\phi$ preserve l'identité (élément neutre).
 			      \item $\phi (w) \circ \phi (w') = \phi (ww'), \ \forall w, w' \in \mots$ car
 			            $\deltaS {\deltaS q w} {w'} = \deltaS q {ww'}$.
@@ -1097,7 +1101,7 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 	Si $\monoide$ est un monoïde et $\sim$ $\subseteq M \times M$ est une congruence sur $M$, alors $M_{/\sim} = \setdef {[m]} {m \in M}$, où $[m]$ note la classe d'équivalence de $m$ par rapport à $\sim$.
 
 	$M/\sim$ est un monoïde et $ \begin{array}{rcl}
-			h : M & \to     & M/\sim   \\
+			h : M & \to     & M/\sim \\
 			m     & \mapsto & [m]
 		\end{array} $ est un morphisme de monoïdes.
 \end{prop}
@@ -1218,11 +1222,11 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 
 		      Alors $N \hookrightarrow M$ est un sous-monoïde de $M$.
 
-		      Je voudrais avoir un quotient $\h : N \twoheadrightarrow \mots/\sim$.
+		      Je voudrais avoir un quotient $h : N \twoheadrightarrow \mots/\sim$.
 
-		      Si $n \in N$ alors $\exists w \in \mots$ \tq $\h(w) = n$. On définit $h(n) = [w]$. 
-			  
-			  Il faut \mq
+		      Si $n \in N$ alors $\exists w \in \mots$ \tq $h(w) = n$. On définit $h(n) = [w]$.
+
+		      Il faut \mq
 		      \begin{enumerate}
 			      \item $h$ est bien défini (si $\phi (w') = \phi (w) \implies [w] = [w']$). \label{prop:recon1}
 			      \item $h$ est un morphisme de monoïdes.
@@ -1246,7 +1250,7 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 
 			            Donc $w \sim_L w'$.
 		      \end{itemize}
-			  Exercice : finir la preuve.
+		      Exercice : finir la preuve.
 	\end{itemize}
 \end{proof}
 
