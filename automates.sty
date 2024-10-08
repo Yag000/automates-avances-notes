@@ -56,9 +56,22 @@
 
 %% Environments
 
+\newcommand{\reason}[1]{\quad\left(\textit{#1}\right)}
+
+
 \newenvironment{twoautomata} { \begin{minipage}{0.5\textwidth} \begin{figure}[H] }
 			{ \end{figure}  \end{minipage} }
 
 
 \theoremstyle{plain}
 \newtheorem*{complexite}{Complexité}
+
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\monoide}{(M, \cdot, 1_M)}
+
+
+
+\newtheorem{terminologie}{Terminologie}[section]
