@@ -53,9 +53,9 @@
 		      Si $\motDecomp w n$ et $\motDecomp v m \in \mots$.
 		      \begin{eqnarray*}
 			      \bar f(wv) = \bar f(\decomp w n \decomp v m) &=& f(w_1) \cdot \cdots \cdot f(w_n) \cdot f(v_1) \cdot \cdots \cdot f(v_m) \\
-			      &=& \left( f(w_1) \cdot \cdots \cdot f(w_n)\right)\left( \cdot f(v_1) \cdot \cdots \cdot f(v_m) \right)\\
-			      &=& \bar f(\decomp w n) \bar f (\decomp v m) \\
-			      &=& \bar f(w) \bar f (v)
+			      &=& \left( f(w_1) \cdot \cdots \cdot f(w_n)\right)\cdot\left(f(v_1) \cdot \cdots \cdot f(v_m) \right)\\
+			      &=& \bar f(\decomp w n) \cdot \bar f (\decomp v m) \\
+			      &=& \bar f(w) \cdot \bar f (v)
 		      \end{eqnarray*}
 
 		      Donc $\forall w, v \in \mots, \bar f (wv) = \bar f (w)\bar f(v) \et \bar f (\motvide) = 1_M$ et ainsi, $\bar f$ est un morphisme de monoïdes.
@@ -323,7 +323,7 @@ On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
 
 		      Je voudrais avoir un quotient $h : N \twoheadrightarrow \mots/\sim$.
 
-		      Si $n \in N$ alors $\exists w \in \mots$ \tq $h(w) = n$. On définit $h(n) = [w]$.
+		      Si $n \in N$ alors $\exists w \in \mots$ \tq $\phi(w) = n$. On définit $h(n) = [w]$.
 
 		      Il faut \mq
 		      \begin{enumerate}
