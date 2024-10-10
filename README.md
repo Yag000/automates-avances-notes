@@ -1,6 +1,6 @@
 # Automates Avancés et Applications
 
-Ensemble de notes pour le cours Automates Avancés et Applications a l'université Paris Cité.
+Ensemble de notes pour le cours Automates Avancés et Applications à l'université Paris Cité.
 
 Le pdf est disponible [ici](https://yag000.github.io/automates-avances-notes/automates.pdf).
 
