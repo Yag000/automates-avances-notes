@@ -98,14 +98,16 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 		(M,\cdot, 1_A)
 	\end{tikzcd}
 
-	Alors on a que $f(1) = m \in M$ et donc $f(n) =  f(\underbrace{1+\ldots+1}_{n \text{f ois}}) = f(1)\cdot \ldots \cdot f(1) = m\cdot \ldots \cdot m = m^n$
-    Donc, si on pose $i: \set 1 \to (\N, + 0)$ \tq $f(1) = 1$, alors quelque soit le choix de $m$, \ie, quelque soit la fonction $f$ choisie (car elle dépend juste de $m$), alors 
+	Alors on a que $f(1) = m \in M$ et donc $f(n) =  f(\underbrace{1+\ldots+1}_{n \text{ fois}}) = f(1)\cdot \ldots \cdot f(1) = m\cdot \ldots \cdot m = m^n$
+    Donc, si on pose $i: \set 1 \to (\N, + 0)$ \tq $f(1) = 1$, alors quelque soit le choix de $m$, \ie, quelque soit la fonction $f$ choisie (car elle dépend juste du choix $m$), alors 
     on peut toujours poser $\bar f (\N, +, 0)$ avec $f(0) = 1_M$ et $f(1) = m$ qui vérifie bien que $\bar f \circ i = f$. Ainsi, $(\N, +, 0)$ est librement engendré sur $\set 1$
 \end{exemple}
 
 \begin{remarque}
 	$\N \cong \set{1}^*$
 \end{remarque}
+
+\subsection{Reconnaissance par monoïdes}
 
 \begin{definition}[Reconnaissance par monoïdes]
 	Soit $\alphabet$ un alphabet fini. Soit $L \subseteq \mots$ un langage et soit $\phi : \mots \to M$ un morphisme de monoïdes où $(M, \circ, 1_M)$ est un monoïde fini. On dit que
@@ -115,6 +117,19 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 \begin{exercice}
 	$\phi$ reconnaît $L$ \ssi $L = \quot {\phi} (\phi (L))$.
 \end{exercice}
+
+\begin{proof}
+    \begin{itemize}
+        \item $\Leftarrow$
+
+            Soit $P = \phi(L) \subseteq M$, alors on a que $\quot {\phi} (P) = \quot {\phi} (\phi (L)) = L$ et donc $\phi$ reconnait $L$.
+
+        \item $\Rightarrow$
+
+            On sait qu'il existe $P$ \tq $L = \setdef {w} {w \in \mots, \phi(w) \in P}$. Regardons qu'est que c'est $\phi (L)$.
+            On a que $\phi (L) = \setdef {w} {w \in \mots, \phi(w) \in P} = P$. Et donc on a bien $\quot {\phi} (\phi (L)) = \quot {\phi} (P) = L$.
+    \end{itemize}
+\end{proof}
 
 \begin{prop}
 	Soit $L \subseteq \mots$ un langage sur l'alphabet $\alphabet$. Alors $L$ est reconnaissable \ssi $L$ est reconnu par un morphisme de monoïdes $\phi : \mots \to M$ où $M$ est fini.
@@ -187,7 +202,6 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 	\end{itemize}
 \end{proof}
 
-
 \begin{definition}
 	On va appeler $\phi (\mots)\subseteq Q^Q$ le \textbf{monoïde de transition de l'automate} $A$.
 \end{definition}
@@ -197,8 +211,6 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 	Soit $(M, \cdot, 1_M)$ un monoïde. Une congruence sur $M$ est une relation d'équivalence $\sim$ $\subseteq M \times M$ \tlq
 	$$\forall m,m'\in M, \ m \sim m' \iff \forall n,r \in M, n\cdot m \cdot r \sim n \cdot m' \cdot r$$
 \end{definition}
-
-
 
 \begin{definition}[Congruence syntaxique d'un langage]
 	Soit $L \subseteq \mots$ un langage. Soit $\sim_L \subseteq \mots \times \mots$ la relation d'équivalence définie par :
