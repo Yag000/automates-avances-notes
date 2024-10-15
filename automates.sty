@@ -26,9 +26,14 @@
 
 %%%% Languages
 
-\newcommand{\lang}[1]{\mathcal{L}\left(#1\right)}
+\newcommand{\La}{\mathcal{L}}
+\newcommand{\lang}[1]{\La\left(#1\right)}
 \newcommand{\langstar}{\kleene{\lang}}
 
+
+
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\PP}{\mathcal{P}}
 
 \newcommand{\quot}[1]{#1^{-1}}
 
@@ -75,3 +80,21 @@
 
 
 \newtheorem{terminologie}{Terminologie}[section]
+
+
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lra}{\leftrightarrow}
+
+
+\newcommand{\interpret}[1]{\llbracket #1 \rrbracket}
+
+%% Syntax
+
+
+\newcommand{\syntaxHeader}[3]{#1 &::=& #2 &\quad\text{#3}\\}
+\newcommand{\syntaxExtension}[1]{\syntaxHeader{#1}{\cdots}{}}
+\newcommand{\syntax}[2]{&|&#1&\quad\text{#2}\\}
+
+\newenvironment{syntaxdef} {\begin{mathpar} \begin{array}{lcll}} {\end{array} \end{mathpar}}
+
+
