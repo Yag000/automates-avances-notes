@@ -72,7 +72,7 @@
 	\end{itemize}
 \end{proof}
 
-On dit que $\mots$ est le monoïde librement engendré sur $\alphabet$
+On dit que $\mots$ est librement engendré sur $\alphabet$.
 
 \begin{definition}[Librement engendré]
 	$H$ est librement engendré sur $\alphabet$ si
@@ -95,12 +95,12 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 		\set 1 \arrow[r, hook]
 		\arrow[d, "f"]
 		&  (\N, +, 0) \arrow[dl, dashrightarrow, "\exists ! \bar f"] \\
-		(M,\cdot, 1_A)
+		(M,\cdot, 1_M)
 	\end{tikzcd}
 
 	Alors on a que $f(1) = m \in M$ et donc $f(n) =  f(\underbrace{1+\ldots+1}_{n \text{ fois}}) = f(1)\cdot \ldots \cdot f(1) = m\cdot \ldots \cdot m = m^n$
     Donc, si on pose $i: \set 1 \to (\N, + 0)$ \tq $f(1) = 1$, alors quelque soit le choix de $m$, \ie, quelque soit la fonction $f$ choisie (car elle dépend juste du choix $m$), alors 
-    on peut toujours poser $\bar f (\N, +, 0)$ avec $f(0) = 1_M$ et $f(1) = m$ qui vérifie bien que $\bar f \circ i = f$. Ainsi, $(\N, +, 0)$ est librement engendré sur $\set 1$
+    on peut toujours poser $\bar f (\N, +, 0)$ avec $f(0) = 1_M$ et $f(1) = m$ qui vérifie bien que $\bar f \circ i = f$. Ainsi, $(\N, +, 0)$ est librement engendré sur $\set 1$.
 \end{exemple}
 
 \begin{remarque}
@@ -126,7 +126,7 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 
         \item $\Rightarrow$
 
-            On sait qu'il existe $P$ \tq $L = \setdef {w} {w \in \mots, \phi(w) \in P}$. Regardons qu'est que c'est $\phi (L)$.
+            On sait qu'il existe $P$ \tq $L = \setdef {w \in \mots} {\phi(w) \in P}$. Regardons ce qu'est $\phi (L)$.
             On a que $\phi (L) = \setdef {\phi (w)} {w \in \mots, \phi(w) \in P} = P$. Et donc on a bien $\quot {\phi} (\phi (L)) = \quot {\phi} (P) = L$.
     \end{itemize}
 \end{proof}
@@ -157,13 +157,13 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 				      (1_M, w)                   & \mapsto & \phi (w)
 			      \end{array} $$
 
-		      \ssi
+		      
 		      \begin{eqnarray*}
 			      A \text{ accepte le mot } w &\iff&  \deltaS {1_M} w \in P \iff \phi (w) \in P \\
 			      &\iff&  w \in \quot {\phi}(P) \iff w \in L.
 		      \end{eqnarray*}
 
-		      Donc $A$ accepte le langage $L$
+		      Donc $A$ accepte le langage $L$.
 
 
 		\item $\Rightarrow$
@@ -173,7 +173,7 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 
 		      $$ \begin{array}{rcl}
 				      \phi : \mots & \to     & Q^Q        \reason{$(Q^Q, \circ,\text{id}_Q) $ est bien un monoïde} \\
-				      \phi (w)(q)  & \mapsto & \deltaS q w
+				      w  & \mapsto & ( q \mapsto \deltaS q w )
 			      \end{array} $$
 
 		      On a bien :
@@ -183,9 +183,11 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 					            \phi (\motvide) : Q & \to     & Q \\
 					            q                   & \mapsto & q
 				            \end{array} $
-			            est la fonction identité sur $Q$ et donc $\phi$ preserve l'identité (élément neutre).
+			            est la fonction identité sur $Q$ et donc $\phi$ préserve l'identité (élément neutre).
 			      \item $\phi (w) \circ \phi (w') = \phi (ww'), \ \forall w, w' \in \mots$ car
 			            $\deltaS {\deltaS q w} {w'} = \deltaS q {ww'}$.
+						Donc $\phi$ préserve la multiplication.
+
 
 			            Soit $P \subseteq Q^Q$ défini par $P \setdef {f : Q \to Q} {f(q_0)\in F}$.
 
@@ -222,14 +224,17 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 \end{prop}
 
 \begin{proof}
-	Exercice.
+	Soit $m, m' \in \mots$ tels que $m \sim_L m'$, \cad $\forall u,v \in \mots, umv \in L \iff um'v \in L$.
+	Soit $n \in \mots$, montrons que $nmr \sim_L nm'r$ \cad $\forall u, v \in \mots, u(nmr)v \in L \iff u(nm'r)v \in L$.
+	Soit $u,v \in \mots$, posons $u' = un, v' = rv$, alors, on veut montrer que $u'mv' \in L \iff u'm'v' \in L$, 
+	ce qui est vrai car $m \sim_L m'$.
 \end{proof}
 
 
 \begin{prop}
-	Si $\monoide$ est un monoïde et $\sim$ $\subseteq M \times M$ est une congruence sur $M$. On note $M/\sim = \setdef {[m]} {m \in M}$, où $[m]$ note la classe d'équivalence de $m$ par rapport à $\sim$.
+	Si $\monoide$ est un monoïde et $\sim$ $\subseteq M \times M$ est une congruence sur $M$, alors $M/\sim = \setdef {[m]} {m \in M}$, où $[m]$ note la classe d'équivalence de $m$ par rapport à $\sim$.
 
-	Alors $r/\sim$ est un monoïde et $ \begin{array}{rcl}
+	$M/\sim$ est un monoïde et $ \begin{array}{rcl}
 			h : M & \to     & M/\sim \\
 			m     & \mapsto & [m]
 		\end{array} $ est un morphisme de monoïdes.
@@ -238,14 +243,14 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 \begin{proof}
 	$(M/\sim, \cdot, [1_M])$ est un monoïde où $[m][m'] = [mm']$.
 
-	À montrer que cette multiplication est bien définie, \cad si $m_2 \sim m \et m_2' \sim m'$ alors $m_2 m_2' \sim m m'$ :
+	À montrer que cette multiplication est bien définie, \cad si $m_1 \sim m2 \et m_1' \sim m_2'$ alors $m_1 m_1' \sim m_2 m_2'$ :
 	\begin{eqnarray*}
-		m_2 &\sim& m \\
-		m_2' &\sim& m' \\
-		1_M \cdot  m_2 \cdot m_2' &\sim& 1_M \cdot m \cdot m_2' \reason{car $\sim$ est une congruence} \\
-		m_2 \cdot m_2' &\sim&  m \cdot m_2' \\
-		\text{Mais } m \cdot m_2' &\sim& m \cdot m' \reason{car $\sim$ est une congruence} \\
-		\implies m_2 \cdot m_2' &\sim& m \cdot m'
+		m_1 &\sim& m_2 \\
+		m_1' &\sim& m_2' \\
+		1_M \cdot  m_1 \cdot m_1' &\sim& 1_M \cdot m_2 \cdot m_1' \reason{car $\sim$ est une congruence} \\
+		m_1 \cdot m_1' &\sim&  m_2 \cdot m_1' \\
+		\text{Mais } m_2 \cdot m_1' &\sim& m_2 \cdot m_2' \reason{car $\sim$ est une congruence} \\
+		\implies m_1 \cdot m_1' &\sim& m_2 \cdot m_2'
 	\end{eqnarray*}
 
 	Donc la multiplication sur $M/\sim$ est bien définie.
@@ -253,7 +258,7 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 
 	$[1_M]$ est un élément neutre car $[m]\cdot [1_M] = [m \cdot 1_M] = [m]$ et pareil pour $[1_M]\cdot [m] = [m]$.
 
-	$h$ est donc un morphisme de monoïdes:
+	$h$ est un morphisme de monoïdes:
 
 	\begin{itemize}
 		\item  $h(1_M) = [1_M]$
@@ -280,9 +285,7 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 
 
 \begin{remarque}\label{rem:quot_mono}
-	Si $w \in L$ et $w' \sim_L w$ alors $w' \in L$, parce que  $w' \sim_L w$.
-
-	Comme $\motvide w \motvide \in L$ , $\motvide w' \motvide$ donc $w' \in L$.
+	Si $w \in L$ et $w' \sim_L w$ alors $w' \in L$, parce que  $w' \sim_L w$, donc $\motvide w \motvide \in L \implies \motvide w' \motvide \implies w' \in L$.
 
 \end{remarque}
 
@@ -291,7 +294,7 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 
 	On doit \mq $L = \quot {\phi} (P)$, \cad, $L = \setdef {w \in \mots} {\phi (w) \in P}$
 
-	En utilisant la remarque \ref{rem:quot_mono} on a que si $ w\in L$ alors $[w ] \subseteq L$.
+	En utilisant la remarque \ref{rem:quot_mono}, on a que si $ w\in L$ alors $[w] \subseteq L$.
 
 	On en conclut que
 	$$ L = \bigcup_{w \in L} [w]    \iff L = \quot {\phi} (P) $$
@@ -355,7 +358,7 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 
 		      Si $n \in N$ alors $\exists w \in \mots$ \tq $\phi(w) = n$. On définit $h(n) = [w]$.
 
-		      Il faut \mq
+		      Il faut \mq : 
 		      \begin{enumerate}
 			      \item $h$ est bien défini (si $\phi (w') = \phi (w) \implies [w] = [w']$). \label{prop:recon1}
 			      \item $h$ est un morphisme de monoïdes.
