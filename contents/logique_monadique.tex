@@ -41,18 +41,37 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 		%TODO, make cool V
 		\item $V$ un ensemble de variables : $\set {x,y,z,x_1,y_1,z_1, \ldots}$
 		\item \underline{Prédicats numériques} :  $\PP = \set {R_i^j, i > 0, j \geq o}$
-		\item \underline{Formules atomiques} : $\alpha ::= Q_a x | R_i^j(x_1, \ldots, x_j)$
-		\item \underline{Formules du premier ordre} : $\phi ::= \alpha | \phi \land \phi | \lnot \phi | \exists x \phi$
+		\item \underline{Formules atomiques} :
+		      \begin{syntaxdef}
+			      \syntaxHeader {\alpha} {Q_a x} {TODO}
+			      \syntax {R_i^j(x_1, \ldots, x_j)} {Prédicats numériques}
+		      \end{syntaxdef}
+		\item \underline{Formules du premier ordre} :
+		      \begin{syntaxdef}
+			      \syntaxHeader {\phi} {\alpha} {Formules atomiques}
+			      \syntax {\phi \land \phi} {Conjonction}
+			      \syntax {\lnot \phi} {Négation}
+			      \syntax {\exists x \phi} {Quantificateur existentiel}
+		      \end{syntaxdef}
 	\end{itemize}
 \end{definition}
 
 
 \begin{definition} [La logique du second ordre]
+   C'est une extension de la logique du premier ordre :
 	\begin{itemize}
 		%TODO: Improve grammar
 		\item un ensemble de variables du second ordre : $X,Y,Z,X_1,Y_1,Z_1 \cdots$
-		\item \underline{Formules atomiques} : les mêmes que celles de la logique du premier ordre, ainsi que $X(x)$
-		\item \underline{Formules du second ordre} : $\phi ::= \alpha | \phi \land \phi | \lnot \phi | \exists x \phi | \exists X \phi$
+		\item \underline{Formules atomiques} :
+		      \begin{syntaxdef}
+			      \syntaxExtension{\alpha}
+			      \syntax {X(x)} {Appartenance a $X$}
+		      \end{syntaxdef}
+		\item \underline{Formules du second ordre} :
+		      \begin{syntaxdef}
+			      \syntaxExtension{\phi}
+			      \syntax {\exists X \phi} {Quantificateur existentiel sur des ensembles}
+		      \end{syntaxdef}
 	\end{itemize}
 \end{definition}
 
