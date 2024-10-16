@@ -11,10 +11,10 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 
 \begin{exemple}
 	$\Sigma = \set{a,b}$
-	$\phi_2 = \exists x \exists y (\forall z (z \geq x) \land Q_a x \land \forall z (z \leq y) \land Q_b y)$ 
+	$\phi_2 = \exists x \exists y (\forall z (z \geq x) \land Q_a x \land \forall z (z \leq y) \land Q_b y)$
 	où $\leq, \geq$ sont interpretés comme les relations habituelles sur $N$.
 	$Q_a x$ signifie qu'en position $x$, on retrouve la lettre $a$.
-	$La_{\phi_2} = \setdef {w \in \kleene \set {a,b}} {w \models \phi_2} = a(a+b)*b$
+	$La_{\phi_2} = \setdef {w \in \kleene{\set {a,b}}} {w \models \phi_2} = a(a+b)*b$
 \end{exemple}
 
 
@@ -100,7 +100,7 @@ Pour une interprétation $\interpret {R_i^j}_{{i,j}}$ de prédicats numériques,
 	\item si $w = (a_1, U_1) \ldots (a_n, U_n)$ est une $\V$-structure.
 	      $w \models \exists \phi$ ssi $\exists i \in \set {1, \ldots, n}$
 	      $(a_1, U_1) \ldots  (a_i, U_i \cup \set x)  \ldots (a_n, U_n) \models \phi$
-		  (il s'agit d'une $\V \cup {x}$-structure.)
+	      (il s'agit d'une $\V \cup {x}$-structure.)
 \end{itemize}
 
 \begin{exemple}
@@ -118,9 +118,9 @@ Pour une interprétation $\interpret {R_i^j}_{{i,j}}$ de prédicats numériques,
 
 Soit $\phi$ et $\psi$ deux formules, $\phi \iff \psi$ \ssi $\La_{\phi} = \La_{\psi}$.
 
-\begin{Abbréviation}
+\begin{abbreviation}
 	$\forall x \phi = \neg \exists x (\neg \phi)$
-\end{Abbréviation}
+\end{abbreviation}
 
 \begin{exemple}
 	TODO: add it (important)
@@ -151,8 +151,8 @@ $V_2$ les variables du second ordre
 	plus $w \models X(x)$ et $w \models \exists X \phi$
 \end{definition}
 
+L'induction est la même que pour le premier ordre, avec ces cas en plus :
 \begin{itemize}
-	L'induction est la même que pour le premier ordre, avec ces cas en plus : 
 	\item $w \models X (x)$ ssi $w$ contient une lettre $(a,S,T)$ où $x \in S$ et $X \in T$
 	\item $w \models \exists X \phi$ ssi $\exists J$ un ensemble de positions dans $w$ avec la proprieté:
 	      la $(\V_1, \V2)$-structure $w'$ obtenue en remplaçant $(a_i, S_i,T_i)$ pour $i \in J$ par $(a_i, S_i, T_i \cup \set X)$ satisfait $\phi$.
