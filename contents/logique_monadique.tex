@@ -1,27 +1,37 @@
 \section{Logique monadique du second ordre (MSO)}
 
-$ a \neg {\models} \exists x \exists y (x < y)$
+Est-ce qu'il existe $w \in \mots$ \tq $w {\models} \exists x \exists y (x < y)$ soit vraie ?
+($x,y$ sont interpretés comme des positions dans le mot $w$.)
+Par exemple, $a {\nvDash} \exists x \exists y (x < y)$
+Ici, cette proposition est satisfaite par $w \in \mots$ \ssi $\abs w \geq 2$.
 
-Cette position est satisfaite par $w \in \mots$ \ssi $\abs w \geq 2$.
 
-Pour une proposition $\phi$ on a un langage $\La_\phi = \setdef {w \in \mots} {w \models \phi}$.
+Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {w \models \phi}$.
 
 
-TODO: exemple
+\begin{exemple}
+	$\Sigma = \set{a,b}$
+	$\phi_2 = \exists x \exists y (\forall z (z \geq x) \land Q_a x \land \forall z (z \leq y) \land Q_b y)$
+	où $\leq, \geq$ sont interpretés comme les relations habituelles sur $N$.
+	$Q_a x$ signifie qu'en position $x$, on retrouve la lettre $a$.
+	$La_{\phi_2} = \setdef {w \in \kleene{\set {a,b}}} {w \models \phi_2} = a(a+b)*b$
+\end{exemple}
 
 
 %TODO: Comment and add line breaks
-$$\phi_3 = \exists X (\forall x (\forall z (z \geq x) \ra X(x))) \land \forall x (\forall z (z \leq x) \ra \lnot X(x)) \land
-	\forall x \forall y (((x < y) \land \forall z(z > x) \ra (z \geq y)) \ra (X (x) \lra \lnot X(y)))$$
+\begin{exemple}
+	$$\phi_3 = \exists X (\forall x (\forall z (z \geq x) \ra X(x))) \land \forall x (\forall z (z \leq x) \ra \lnot X(x)) \land
+		\forall x \forall y (((x < y) \land \forall z(z > x) \ra (z \geq y)) \ra (X (x) \lra \lnot X(y)))$$
 
 
-$X \rightsquigarrow $ un ensemble de position dans un mot
+	$X \rightsquigarrow $ un ensemble de positions dans un mot
 
 
-$X (x)\rightsquigarrow$ vrai \ssi la position $x$ est dans $X$
+	$X (x)\rightsquigarrow$ vrai \ssi $x \in X$
 
 
-$\La_{\phi_3} = \setdef {w \in \mots} {\abs w \equiv 0 (\text {mod} 2)}$
+	$\La_{\phi_3} = \setdef {w \in \mots} {\abs w \equiv 0 (\text { mod} 2)}$
+\end{exemple}
 
 \subsection{Syntaxe}
 
@@ -31,18 +41,37 @@ $\La_{\phi_3} = \setdef {w \in \mots} {\abs w \equiv 0 (\text {mod} 2)}$
 		%TODO, make cool V
 		\item $V$ un ensemble de variables : $\set {x,y,z,x_1,y_1,z_1, \ldots}$
 		\item \underline{Prédicats numériques} :  $\PP = \set {R_i^j, i > 0, j \geq o}$
-		\item \underline{Formules atomiques} : $\alpha ::= Q_0 x | R_i^j(x_1, \ldots, x_j)$
-		\item \underline{Formules de premier ordre} : $\phi ::= \alpha | \phi \land \phi | \lnot \phi | \exists x \phi$
+		\item \underline{Formules atomiques} :
+		      \begin{syntaxdef}
+			      \syntaxHeader {\alpha} {Q_a x} {TODO}
+			      \syntax {R_i^j(x_1, \ldots, x_j)} {Prédicats numériques}
+		      \end{syntaxdef}
+		\item \underline{Formules du premier ordre} :
+		      \begin{syntaxdef}
+			      \syntaxHeader {\phi} {\alpha} {Formules atomiques}
+			      \syntax {\phi \land \phi} {Conjonction}
+			      \syntax {\lnot \phi} {Négation}
+			      \syntax {\exists x \phi} {Quantificateur existentiel}
+		      \end{syntaxdef}
 	\end{itemize}
 \end{definition}
 
 
 \begin{definition} [La logique du second ordre]
-	%TODO: Add X(x) pour les formules atomiques du second ordre
+   C'est une extension de la logique du premier ordre :
 	\begin{itemize}
 		%TODO: Improve grammar
-		\item un ensemble de variables de second ordre : $X,Y,Z,X_1,Y_1,Z_1 \cdots$
-		\item \underline{Formules } : $\phi ::= \alpha | \phi \land \phi | \lnot \phi | \exists x \phi | \exists X \phi$
+		\item un ensemble de variables du second ordre : $X,Y,Z,X_1,Y_1,Z_1 \cdots$
+		\item \underline{Formules atomiques} :
+		      \begin{syntaxdef}
+			      \syntaxExtension{\alpha}
+			      \syntax {X(x)} {Appartenance a $X$}
+		      \end{syntaxdef}
+		\item \underline{Formules du second ordre} :
+		      \begin{syntaxdef}
+			      \syntaxExtension{\phi}
+			      \syntax {\exists X \phi} {Quantificateur existentiel sur des ensembles}
+		      \end{syntaxdef}
 	\end{itemize}
 \end{definition}
 
@@ -51,7 +80,7 @@ $\La_{\phi_3} = \setdef {w \in \mots} {\abs w \equiv 0 (\text {mod} 2)}$
 
 \subsubsection{Sémantique de la logique monadique du premier ordre}
 
-Pour $x \in \N$, $x$ est interpreté comme un élément de $\set {1, \cdots, n}$
+Pour $n \in \N$ la longueur d'un mot, $x$ est interpreté comme un élément de $\set {1, \cdots, n}$
 
 $$ \interpret {R_i^j}_n \subseteq \set {1, \cdots, n}^j$$
 est une interpretation de chaque prédicat $R_i^j$ pour tout $n \geq 1$.
@@ -59,11 +88,11 @@ $$ \interpret {<}_n \subseteq \set {1, \cdots, n} \times \set {1, \cdots, n} = \
 
 
 \begin{definition}
-	Une $\V$-structure, pour $\V \subseteq V$ es un mot de la forme $(a_1, U_1) \ldots (a_n, U_n)$ où $a_1, \ldots, a_b \in \alphabet$ et
+	Une $\V$-structure, pour $\V \subseteq V$ est un mot de la forme $(a_1, U_1) \ldots (a_n, U_n)$ où $a_1, \ldots, a_n \in \alphabet$ et
 	$U_1, \ldots, U_n \subseteq V$ tels que
 
 	\begin{enumerate}
-		\item $U_i \cap U_j = \emptyset, i \neq j$
+		\item $U_i \cap U_j = \emptyset, \forall i,j i \neq j$
 		\item  $\bigcup_{i=1}^n U_i = \V$
 	\end{enumerate}
 \end{definition}
@@ -71,26 +100,26 @@ $$ \interpret {<}_n \subseteq \set {1, \cdots, n} \times \set {1, \cdots, n} = \
 \begin{definition}[relation de satisfaction]
 	On définit la relation de satisfaction $w \models \phi$ où $w$ est une $\V-structure$ et $\phi$ une formule de premier ordre \tq
 	\begin{enumerate}
-		\item $\forall x \in free(\phi) \implies x \in \V$ (free = variables libres)
-		\item Les quantificateurs distincts dans $\phi$ lient des variables distincts
+		\item $\forall x \in FV(\phi) \implies x \in \V$ (FV = variables libres)
+		\item Les quantificateurs distincts dans $\phi$ lient des variables distinctes
 	\end{enumerate}
 \end{definition}
 
-Si $\phi$ est un proposition, \cad, $free(\phi) \neq \emptyset$ alors on a $\La_{\phi} = \setdef {w \text { les } \emptyset-\text{structures}} {w \models \phi} \subseteq \mots$.
+Si $\phi$ est un proposition, \cad, $FV(\phi) = \emptyset$ alors on a $\La_{\phi} = \setdef {w \text { les } \emptyset-\text{structures}} {w \models \phi} \subseteq \mots$.
 
 
-Pour une interpretation $\interpret {R_i}){(i,j)}$ de prédicats numérique on défini la relation $w \models \phi$ par induction su la structure de la formule $\phi$.
+Pour une interprétation $\interpret {R_i^j}_{{i,j}}$ de prédicats numériques, on définit la relation $w \models \phi$ par induction sur la structure de la formule $\phi$.
 
 \begin{itemize}
-	\item $w \models Q_a x$ \ssi $w$ contient une lettre $(a,U_i)$ avec $x \in U_i$
-	\item $w \models R_i^j(x_1, \ldots, x_j)$ \ssi $\interpret {R_i}){\abs w}(k_1, \ldots, k_j)$ es vrai où les $k1, \ldots, k_j$ sont les positions dean $w$ où les variables
+	\item $w \models Q_a x$ ssi $w$ contient une lettre $(a,U_i)$ avec $x \in U_i$
+	\item $w \models R_i^j(x_1, \ldots, x_j)$ ssi $\interpret {R_i}_{\abs w}(k_1, \ldots, k_j)$ est vrai où les $k1, \ldots, k_j$ sont les positions dans $w$ où les variables
 	      $x_1, \cdots x_j$ apparaissent.
-	\item $w \models \phi_1 \land \phi_2$ \ssi $w \models \phi_1$ et $w \models \phi_2$
-	\item $w \models \lnot \phi$ \ssi $w \neg \models \phi$
-	\item $w = (a_1, U_1) \ldots (a_n, U_n)$ est une $\V$-structure.
-	      $w \models \exists \phi$ \ssi $\exists i \in \set {1, \ldots, n}$
+	\item $w \models \phi_1 \land \phi_2$ ssi $w \models \phi_1$ et $w \models \phi_2$
+	\item $w \models \lnot \phi$ ssi $w \nvDash \phi$
+	\item si $w = (a_1, U_1) \ldots (a_n, U_n)$ est une $\V$-structure.
+	      $w \models \exists \phi$ ssi $\exists i \in \set {1, \ldots, n}$
 	      $(a_1, U_1) \ldots  (a_i, U_i \cup \set x)  \ldots (a_n, U_n) \models \phi$
-	      %TODO: say what kind of structure it is, V \cup \set x
+	      (il s'agit d'une $\V \cup {x}$-structure.)
 \end{itemize}
 
 \begin{exemple}
@@ -98,13 +127,19 @@ Pour une interpretation $\interpret {R_i}){(i,j)}$ de prédicats numérique on d
 
 	$(a, \set x)(b, \emptyset)(c, \emptyset) \models_? \exists y (x \leq y)$ est une $\set x $-structure
 
-	$(a, \set x)(b, \set y)(c, \emptyset) \models_? \exists y (x < y) \iff (1,2) \in \interpret {<}_3 \iff 1 < 2$
+	$(a, \set x)(b, \set y)(c, \emptyset) \models_? (x < y) \iff (1,2) \in \interpret {<}_3 \iff 1 < 2$
 
 	Version 2
 
 	%TODO: petit dessin Photo
 \end{exemple}
 
+
+Soit $\phi$ et $\psi$ deux formules, $\phi \iff \psi$ \ssi $\La_{\phi} = \La_{\psi}$.
+
+\begin{abbreviation}
+	$\forall x \phi = \neg \exists x (\neg \phi)$
+\end{abbreviation}
 
 \begin{exemple}
 	TODO: add it (important)
@@ -123,35 +158,29 @@ $V_2$ les variables du second ordre
 	Une $(\V_1,\V_2)$-structure est un mot sur $\alphabet \times 2^{\V_1} \times  2^{\V_2}$, \cad un mot de la forme
 	$(a_1,U_1,U_1) \cdots (a_n,U_n,V_n)$ où
 	\begin{itemize}
-		\item Les $U_i$ sont des endebles de variables du premier ordre.
-		\item Les $V_i$ sont des endebles de variables du second ordre.
-		\item Et
-		      $(a_1,U_1) \cdots (a_n,U_n)$ est une $\V_1$-structure.
+		\item Les $U_i$ sont des ensembles de variables du premier ordre.
+		\item Les $V_i$ sont des ensembles de variables du second ordre.
+		\item $(a_1,U_1) \cdots (a_n,U_n)$ est une $\V_1$-structure.
 	\end{itemize}
 \end{definition}
 
 \begin{definition}
 	On définit la relation de satisfaction $w \models \phi$ où $w$ est une $(\V_1, \V_2)-structure$ et $\phi$ une formule de
 	MSO avec les memes contraintes sur les variables que pour la logique du premier ordre %TODO: Add reference
-	et de plus $w \models X(x)$ et $w \models \exists X \phi$
+	plus $w \models X(x)$ et $w \models \exists X \phi$
 \end{definition}
 
-
-
-
+L'induction est la même que pour le premier ordre, avec ces cas en plus :
 \begin{itemize}
-	\item $w \models X (x)$ \ssi $w$ contient une lettre $(a,S,T)$ où $x \in S$ et $X \in T$
-	\item $w \models \exists X \phi$ \ssi $\exists J$ un ensemble de positions dans $w$ avec la propreté:
-	      la $(\V_1, \V2)$-structure $w'$ obtenue en remplaçant $(a_i, S_i,T_i)$ pour $i \in J$ par $(a_i, S_i, T_i \cup \set x)$ satisfait $\phi$.
+	\item $w \models X (x)$ ssi $w$ contient une lettre $(a,S,T)$ où $x \in S$ et $X \in T$
+	\item $w \models \exists X \phi$ ssi $\exists J$ un ensemble de positions dans $w$ avec la proprieté:
+	      la $(\V_1, \V2)$-structure $w'$ obtenue en remplaçant $(a_i, S_i,T_i)$ pour $i \in J$ par $(a_i, S_i, T_i \cup \set X)$ satisfait $\phi$.
 \end{itemize}
 
 
 \begin{exemple}
 	TODO
 \end{exemple}
-
-
-\subsection{Relation avec les expressions rationnelles}
 
 
 \begin{definition}
@@ -161,18 +190,21 @@ $V_2$ les variables du second ordre
 
 \begin{definition}
 	Un langage $L \subseteq \mots$ est définissable dans $FO[<]$ (la logique du premier ordre avec <)
-	\ssi $\exists \phi \in FO[x]$ \tlq $L = \setdef {w \in \mots} {w \models \phi}$
+	\ssi $\exists \phi \in FO[<]$ \tlq $L = \setdef {w \in \mots} {w \models \phi}$
 \end{definition}
 
+
+\subsection{Relation avec les expressions rationnelles}
+
 \begin{theorem}
-	Un langage est définissable dans $MSO[<]$ \ssi $L$ est régulier.
+	Un langage est définissable dans $MSO[<]$ ssi $L$ est régulier.
 \end{theorem}
 
 
 \begin{theorem}
-	Un langage est définissable dans $FO[<]$ \ssi il existe une expression rationnelle sans étoile $r$ définissant un langage
-	\ssi
-	le monoïde syntaxique du langage est apériodique (\cad il ne contient aucun sous groupe non trivial).
+	Un langage est définissable dans $FO[<]$ ssi il existe une expression rationnelle sans étoile $r$ définissant un langage
+	ssi
+	le monoïde syntaxique du langage est apériodique (\cad il ne contient aucun sous-groupe non-trivial).
 \end{theorem}
 
 
