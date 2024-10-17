@@ -37,9 +37,7 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 
 \begin{definition} [La logique du premier ordre]
 	\begin{itemize}
-		%TODO: Improve grammar
-		%TODO, make cool V
-		\item $V$ un ensemble de variables : $\set {x,y,z,x_1,y_1,z_1, \ldots}$
+		\item $\Vi$ un ensemble de variables : $\set {x,y,z,x_1,y_1,z_1, \ldots}$
 		\item \underline{Prédicats numériques} :  $\PP = \set {R_i^j, i > 0, j \geq o}$
 		\item \underline{Formules atomiques} :
 		      \begin{syntaxdef}
@@ -58,9 +56,8 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 
 
 \begin{definition} [La logique du second ordre]
-   C'est une extension de la logique du premier ordre :
+	C'est une extension de la logique du premier ordre :
 	\begin{itemize}
-		%TODO: Improve grammar
 		\item un ensemble de variables du second ordre : $X,Y,Z,X_1,Y_1,Z_1 \cdots$
 		\item \underline{Formules atomiques} :
 		      \begin{syntaxdef}
@@ -88,8 +85,8 @@ $$ \interpret {<}_n \subseteq \set {1, \cdots, n} \times \set {1, \cdots, n} = \
 
 
 \begin{definition}
-	Une $\V$-structure, pour $\V \subseteq V$ est un mot de la forme $(a_1, U_1) \ldots (a_n, U_n)$ où $a_1, \ldots, a_n \in \alphabet$ et
-	$U_1, \ldots, U_n \subseteq V$ tels que
+	Une $\V$-structure, pour $\V \subseteq \Vi$ est un mot de la forme $(a_1, U_1) \ldots (a_n, U_n)$ où $a_1, \ldots, a_n \in \alphabet$ et
+	$U_1, \ldots, U_n \subseteq \Vi$ tels que
 
 	\begin{enumerate}
 		\item $U_i \cap U_j = \emptyset, \forall i,j i \neq j$
