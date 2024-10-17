@@ -20,8 +20,12 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 
 %TODO: Comment and add line breaks
 \begin{exemple}
-	$$\phi_3 = \exists X (\forall x (\forall z (z \geq x) \ra X(x))) \land \forall x (\forall z (z \leq x) \ra \lnot X(x)) \land
-		\forall x \forall y (((x < y) \land \forall z(z > x) \ra (z \geq y)) \ra (X (x) \lra \lnot X(y)))$$
+
+	\begin{eqnarray*}
+		phi_3 &=& \exists X (\forall x (\forall z (z \geq x) \ra X(x))) \land \forall x (\forall z (z \leq x) \ra \lnot X(x)) \\
+		&\land& \forall x \forall y (((x < y) \land \forall z(z > x) \ra (z \geq y)) \ra (X (x) \lra \lnot X(y)))
+	\end{eqnarray*}
+
 
 
 	$X \rightsquigarrow $ un ensemble de positions dans un mot
@@ -41,7 +45,7 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 		\item \underline{Prédicats numériques} :  $\PP = \set {R_i^j, i > 0, j \geq o}$
 		\item \underline{Formules atomiques} :
 		      \begin{syntaxdef}
-			      \syntaxHeader {\alpha} {Q_a x} {TODO}
+			      \syntaxHeader {\alpha} {Q_a x} {Lettre $a$ en position $x$}
 			      \syntax {R_i^j(x_1, \ldots, x_j)} {Prédicats numériques}
 		      \end{syntaxdef}
 		\item \underline{Formules du premier ordre} :
@@ -62,7 +66,7 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 		\item \underline{Formules atomiques} :
 		      \begin{syntaxdef}
 			      \syntaxExtension{\alpha}
-			      \syntax {X(x)} {Appartenance a $X$}
+			      \syntax {X(x)} {Appartenance à $X$}
 		      \end{syntaxdef}
 		\item \underline{Formules du second ordre} :
 		      \begin{syntaxdef}
@@ -72,6 +76,11 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 	\end{itemize}
 \end{definition}
 
+
+\begin{notation}[Quantificateur universel]
+	On note $\forall x \phi$ la formule $\lnot \exists x (\lnot \phi)$. Cette notation s'étend aussi
+	à la logique du second ordre.
+\end{notation}
 
 \subsection{Sémantique}
 
