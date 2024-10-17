@@ -198,11 +198,111 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 \end{theorem}
 
 
+\begin{proof}
+	%TODO: use \setminus instead of \
+	\begin{itemize}
+		\item $\Leftarrow$
+
+		      Soit $A = \AFD$ un automate fini déterministe qui accepte un langage $L$.  On peut supposer que $L \subseteq \mots$ (
+		      car $\motvide \in L$, on va prendre la disjonction de la formule obtenue pour $L \setminus \set {\motvide}$ avec $\forall x \neg (x = x)$)
+
+		      Soit $w \in \mots$, Alors $w$ est reconnu par l'automate $A$ ssi $\exists X_0,\cdots,X_{k-1} \subseteq \set{1, \cdots , \abs w}$
+		      tels que les propriéts suivantes soient vérifiés :
+		      \begin{enumerate}
+			      \item $\bigcup_{i=0}^{k - 1} X_i = \set{1, \cdots, \abs w}$
+			      \item $\forall i < j, X_i \cap X_j = \emptyset$
+			      \item $1 \in X_0$
+			      \item $\forall j \in \set{1, \cdots, \abs w}$ si $j \in X_i \et j+i \in X_e$ et si $a$ est la lettre en position $j$ dans le mot
+			            $w$, alors $\delta (q_i,a) = q_e$.
+
+			      \item Si $\abs w \in X$ et $a$ est ;a dernière lettre de $w$, alors $\delta (q_j,a) \in F$.
+		      \end{enumerate}
+
+		      Supposons que $w = \decomp a n$ est accepté par $A$. On construit les ensembles $(X_i)_{i \in \enum 0 {k-1}}$
+		      tel que $i \in X_j$ ssi après avoid lu les premiers $i-1$ lettres de $w$ on arrive a l'état $q_j$
+		      %TODO: Diagram ? 
+
+		      Les ensembles $X_0, \cdots, X_{k-1}$ satisfait les 5 propriétés.
+		      \begin{enumerate}
+			      \item $X_0 \cup \cdots \cup X_{k-1} = \enum i {\abs w}$. L'inclusion a gauche est vraie par définition. Montrons l'autre inclusion.
+			            On considère l'unique chemin dans l'automate $A$ obtenu en lisant les premieres $i-1$ lettres de $w$ à partir de l'etat $q_0$.
+			            Supposons qu'on arrive dans l'état $q_j$. Par définitions $u \in X_j$.
+			      \item $\forall i < j, X_i \cap X_j = \emptyset$ est vrai car l'automate est déterministe.
+			      \item $1 \in X_0$ car si on lit les premieres $0$ lettres de $w$ on reste a l'état $q_0$.
+			      \item Après les premieres $j-1$ lettres on arrive a $q_i$. $a$ est la lettre en position $j$. Donc après les
+			            premieres $j$ lettres on arrive dans l'état $\delta (q_i, a)$. Si après les premières $j$ lettres on arrive dans l'état $q_l$, alors
+			            $\delta (q_i, a) = q_l$.
+			      \item $w$ est accepté par $A$. Donc si $\abs w \in X_j$ alors après avoir lu les premieres $\abs w - 1$ lettres on arrive dans $q_j$.
+			            Si $a$ est la dernière lettre de $w$, alors $\delta (q_j,a)$ est un tat acceptant car $w$ est accepté.
+		      \end{enumerate}
+		      On construit la formule
+		      $$ \phi = \exists X_0 \cdots \exists X_{k-1} (\phi_1 \land \cdots \land \phi_5)$$
+		      où
+		      \begin{itemize}
+			      \item $\phi_1 = \forall x (X_0(x) \lor \cdots \lor X_{k-1}) = \forall x \bigvee_{i=1}^{k-1} X_i(x)$
+			      \item $\phi_2 = \forall x \bigwedge_{0\leq i < j \leq k-1}\lnot (X_i(x) \land X_j(x))$
+			      \item $\phi_3 = \exists x \left((\forall y, x \leq y) \land X_0(x) \right)$
+			      \item $\phi_4 = \forall x \left( \forall y (y = x + 1)  \ra \bigwedge_{0\leq i < l < k} ( (X_i (x) \land X_l(y) )\ra \bigvee_{S_l} Q_a(x))\right)$\\
+			            Où $S_l = \setdef {a \in \alphabet} {\delta (q_i,a) = a_l}$
+			      \item $\phi_5 = \forall x \left( \forall y (x \geq y)  \ra \bigwedge_{i = 0}^{k-1} ( X_i(x) \ra \bigvee_{T_i} Q_a(x)))\right)$\\
+			            Où $T_i = \setdef {a \in \alphabet} {\delta (q_i,a) \in F}$
+
+		      \end{itemize}
+
+		\item $\Rightarrow$
+
+		      On suppose que $L$ est défini par une formule de $MSO[<]$.
+		      La preuve est par induction sur la structure de la formule.
+
+		      $L \subseteq (\alphabet \times 2^{\V_1} \times 2 ^ {\V_2})$.
+
+		      %TODO: Rappel ?
+		      $\La$ esl l'ensemble de toutes les $(\V_1, \V_2)$-structures, pour $\V_1$ en ensemble de variables du premier
+		      ordre et $\V_2$ un ensemble de variables du second ordre.
+
+		      \begin{exercice}
+			      Trouver un automate sur l'alphabet $\alphabet \times 2^{\V_1} \times 2 ^ {\V_2}$ qui accepte $\La$
+		      \end{exercice}
+
+		      \begin{exercice}
+			      Trouver un automate qui accepte les $(\V_1, \V_2)$-structures \tq une variable de premier ordre $x$ apparait
+			      dans une lettre de la forme $(a,S,T)$. Le but est de \mq le $\lang {Q_a(x)}$ est régulier.
+		      \end{exercice}
+
+		      \begin{exercice}
+			      Montrer que $\La_{X(x)}$ est régulier.
+		      \end{exercice}
+
+		      \begin{exercice}
+			      Montrer que $\La_{x< y}$ est régulier.
+		      \end{exercice}
+
+
+
+		      Soit $\phi = \exists x \psi$ et supposons que $L_{\psi}$ est régulier et donc accepté par un automate $A = \AFD$ sur l'alphabet
+		      $\alphabet \times 2^{\V_1} \times 2 ^ {\V_2}$.
+
+		      On définit l'automate $A' = \antuple{Q\times \set {0,1}, (q_0,0), F \times \set 1 , \delta'}$
+		      où $\delta' = \setdef {((q,u),(a,S,T),(q',u))} {u \in \set {0,1}, x \notin S, (q,(a,S,T),q')\in \delta}
+			      \cup
+			      \setdef {((q,0),(a,S\ \set x,T),(q',1))} { x \in S, (q,(a,S,T),q')\in \delta}$
+		      %TODO: diagram ???
+
+		      $A'$ est un automate sur l'alphabet $\alphabet \times 2^{\V_1\setminus \set x} \times 2 ^ {\V_2}$.
+
+		      %TODO: add final step
+	\end{itemize}
+\end{proof}
+
+
+
 \begin{theorem}
 	Un langage est définissable dans $FO[<]$ ssi il existe une expression rationnelle sans étoile $r$ définissant un langage
 	ssi
 	le monoïde syntaxique du langage est apériodique (\cad il ne contient aucun sous-groupe non-trivial).
 \end{theorem}
+
+
 
 
 
