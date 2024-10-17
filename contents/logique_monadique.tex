@@ -95,14 +95,14 @@ $$ \interpret {<}_n \subseteq \set {1, \cdots, n} \times \set {1, \cdots, n} = \
 \end{definition}
 
 \begin{definition}[relation de satisfaction]
-	On définit la relation de satisfaction $w \models \phi$ où $w$ est une $\V-structure$ et $\phi$ une formule de premier ordre \tq
+	On définit la relation de satisfaction $w \models \phi$ où $w$ est une $\V$-structure et $\phi$ une formule de premier ordre \tq
 	\begin{enumerate}
-		\item $\forall x \in FV(\phi) \implies x \in \V$ (FV = variables libres)
+		\item $\forall x \in \text{FV}(\phi) \implies x \in \V$ (FV = ensemble des variables libres)
 		\item Les quantificateurs distincts dans $\phi$ lient des variables distinctes
 	\end{enumerate}
 \end{definition}
 
-Si $\phi$ est un proposition, \cad, $FV(\phi) = \emptyset$ alors on a $\La_{\phi} = \setdef {w \text { les } \emptyset-\text{structures}} {w \models \phi} \subseteq \mots$.
+Si $\phi$ est un proposition, \cad, $FV(\phi) = \emptyset$ alors on a $\La_{\phi} = \setdef {w \text { les } \emptyset\text{-structures}} {w \models \phi} \subseteq \mots$.
 
 
 Pour une interprétation $\interpret {R_i^j}_{{i,j}}$ de prédicats numériques, on définit la relation $w \models \phi$ par induction sur la structure de la formule $\phi$.
@@ -170,7 +170,7 @@ $V_2$ les variables du second ordre
 L'induction est la même que pour le premier ordre, avec ces cas en plus :
 \begin{itemize}
 	\item $w \models X (x)$ ssi $w$ contient une lettre $(a,S,T)$ où $x \in S$ et $X \in T$
-	\item $w \models \exists X \phi$ ssi $\exists J$ un ensemble de positions dans $w$ avec la proprieté:
+	\item $w \models \exists X \phi$ ssi $\exists J$ un ensemble de positions dans $w$ avec la propriété:
 	      la $(\V_1, \V2)$-structure $w'$ obtenue en remplaçant $(a_i, S_i,T_i)$ pour $i \in J$ par $(a_i, S_i, T_i \cup \set X)$ satisfait $\phi$.
 \end{itemize}
 
@@ -199,15 +199,14 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 
 
 \begin{proof}
-	%TODO: use \setminus instead of \
 	\begin{itemize}
-        \item \fbox{$\Leftarrow$}
+		\item \fbox{$\Leftarrow$}
 
 		      Soit $A = \AFD$ un automate fini déterministe qui accepte un langage $L$.  On peut supposer que $L \subseteq \mots$ (
 		      car $\motvide \in L$, on va prendre la disjonction de la formule obtenue pour $L \setminus \set {\motvide}$ avec $\forall x \neg (x = x)$)
 
 		      Soit $w \in \mots$, Alors $w$ est reconnu par l'automate $A$ ssi $\exists X_0,\cdots,X_{k-1} \subseteq \set{1, \cdots , \abs w}$
-		      tels que les propriéts suivantes soient vérifiés :
+		      tels que les propriétés suivantes soient vérifiés :
 		      \begin{enumerate}
 			      \item $\bigcup_{i=0}^{k - 1} X_i = \set{1, \cdots, \abs w}$
 			      \item $\forall i < j, X_i \cap X_j = \emptyset$
@@ -215,7 +214,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 			      \item $\forall j \in \set{1, \cdots, \abs w}$ si $j \in X_i \et j+i \in X_e$ et si $a$ est la lettre en position $j$ dans le mot
 			            $w$, alors $\delta (q_i,a) = q_e$.
 
-			      \item Si $\abs w \in X$ et $a$ est ;a dernière lettre de $w$, alors $\delta (q_j,a) \in F$.
+			      \item Si $\abs w \in X$ et $a$ est la dernière lettre de $w$, alors $\delta (q_j,a) \in F$.
 		      \end{enumerate}
 
 		      Supposons que $w = \decomp a n$ est accepté par $A$. On construit les ensembles $(X_i)_{i \in \enum 0 {k-1}}$
@@ -225,7 +224,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      Les ensembles $X_0, \cdots, X_{k-1}$ satisfait les 5 propriétés.
 		      \begin{enumerate}
 			      \item $X_0 \cup \cdots \cup X_{k-1} = \enum i {\abs w}$. L'inclusion a gauche est vraie par définition. Montrons l'autre inclusion.
-			            On considère l'unique chemin dans l'automate $A$ obtenu en lisant les premieres $i-1$ lettres de $w$ à partir de l'etat $q_0$.
+			            On considère l'unique chemin dans l'automate $A$ obtenu en lisant les premieres $i-1$ lettres de $w$ à partir de l'état $q_0$.
 			            Supposons qu'on arrive dans l'état $q_j$. Par définitions $u \in X_j$.
 			      \item $\forall i < j, X_i \cap X_j = \emptyset$ est vrai car l'automate est déterministe.
 			      \item $1 \in X_0$ car si on lit les premieres $0$ lettres de $w$ on reste a l'état $q_0$.
@@ -257,7 +256,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      $L \subseteq (\alphabet \times 2^{\V_1} \times 2 ^ {\V_2})$.
 
 		      %TODO: Rappel ?
-		      $\La$ esl l'ensemble de toutes les $(\V_1, \V_2)$-structures, pour $\V_1$ en ensemble de variables du premier
+		      $\La$ est l'ensemble de toutes les $(\V_1, \V_2)$-structures, pour $\V_1$ en ensemble de variables du premier
 		      ordre et $\V_2$ un ensemble de variables du second ordre.
 
 		      \begin{exercice}
@@ -278,14 +277,15 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      \end{exercice}
 
 
-
 		      Soit $\phi = \exists x \psi$ et supposons que $L_{\psi}$ est régulier et donc accepté par un automate $A = \AFD$ sur l'alphabet
 		      $\alphabet \times 2^{\V_1} \times 2 ^ {\V_2}$.
 
-		      On définit l'automate $A' = \antuple{Q\times \set {0,1}, (q_0,0), F \times \set 1 , \delta'}$
-		      où $\delta' = \setdef {((q,u),(a,S,T),(q',u))} {u \in \set {0,1}, x \notin S, (q,(a,S,T),q')\in \delta}
-			      \cup
-			      \setdef {((q,0),(a,S\ \set x,T),(q',1))} { x \in S, (q,(a,S,T),q')\in \delta}$
+		      On définit l'automate $A' = \antuple{Q\times \set {0,1}, (q_0,0), F \times \set 1 , \delta'}$ où
+
+		      \begin{eqnarray*}
+			      delta' &=& \setdef {((q,u),(a,S,T),(q',u))} {u \in \set {0,1}, x \notin S, (q,(a,S,T),q')\in \delta} \\
+			      &\cup& \setdef {((q,0),(a,S\setminus \set x,T),(q',1))} { x \in S, (q,(a,S,T),q')\in \delta}
+		      \end{eqnarray*}
 		      %TODO: diagram ???
 
 		      $A'$ est un automate sur l'alphabet $\alphabet \times 2^{\V_1\setminus \set x} \times 2 ^ {\V_2}$.
