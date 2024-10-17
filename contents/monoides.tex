@@ -85,11 +85,11 @@ On dit que $\mots$ est librement engendré sur $\alphabet$.
 		M
 	\end{tikzcd}
 
-    Et on a donc que $ H \cong \mots$.
+	Et on a donc que $ H \cong \mots$.
 \end{definition}
 
 \begin{exemple}
-Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
+	Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 
 	\begin{tikzcd}
 		\set 1 \arrow[r, hook]
@@ -99,8 +99,8 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 	\end{tikzcd}
 
 	Alors on a que $f(1) = m \in M$ et donc $f(n) =  f(\underbrace{1+\ldots+1}_{n \text{ fois}}) = f(1)\cdot \ldots \cdot f(1) = m\cdot \ldots \cdot m = m^n$
-    Donc, si on pose $i: \set 1 \to (\N, + 0)$ \tq $f(1) = 1$, alors quelque soit le choix de $m$, \ie, quelque soit la fonction $f$ choisie (car elle dépend juste du choix $m$), alors 
-    on peut toujours poser $\bar f (\N, +, 0)$ avec $f(0) = 1_M$ et $f(1) = m$ qui vérifie bien que $\bar f \circ i = f$. Ainsi, $(\N, +, 0)$ est librement engendré sur $\set 1$.
+	Donc, si on pose $i: \set 1 \to (\N, + 0)$ \tq $f(1) = 1$, alors quelque soit le choix de $m$, \ie, quelque soit la fonction $f$ choisie (car elle dépend juste du choix $m$), alors
+	on peut toujours poser $\bar f (\N, +, 0)$ avec $f(0) = 1_M$ et $f(1) = m$ qui vérifie bien que $\bar f \circ i = f$. Ainsi, $(\N, +, 0)$ est librement engendré sur $\set 1$.
 \end{exemple}
 
 \begin{remarque}
@@ -119,16 +119,16 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 \end{exercice}
 
 \begin{proof}
-    \begin{itemize}
-        \item $\Leftarrow$
+	\begin{itemize}
+		\item\fbox{$\Leftarrow$}
 
-            Soit $P = \phi(L) \subseteq M$, alors on a que $\quot {\phi} (P) = \quot {\phi} (\phi (L)) = L$ et donc $\phi$ reconnait $L$.
+		      Soit $P = \phi(L) \subseteq M$, alors on a que $\quot {\phi} (P) = \quot {\phi} (\phi (L)) = L$ et donc $\phi$ reconnait $L$.
 
-        \item $\Rightarrow$
+		\item \fbox{$\Rightarrow$}
 
-            On sait qu'il existe $P$ \tq $L = \setdef {w \in \mots} {\phi(w) \in P}$. Regardons ce qu'est $\phi (L)$.
-            On a que $\phi (L) = \setdef {\phi (w)} {w \in \mots, \phi(w) \in P} = P$. Et donc on a bien $\quot {\phi} (\phi (L)) = \quot {\phi} (P) = L$.
-    \end{itemize}
+		      On sait qu'il existe $P$ \tq $L = \setdef {w \in \mots} {\phi(w) \in P}$. Regardons ce qu'est $\phi (L)$.
+		      On a que $\phi (L) = \setdef {\phi (w)} {w \in \mots, \phi(w) \in P} = P$. Et donc on a bien $\quot {\phi} (\phi (L)) = \quot {\phi} (P) = L$.
+	\end{itemize}
 \end{proof}
 
 \begin{prop}
@@ -138,7 +138,7 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 
 \begin{proof}
 	\begin{itemize}
-		\item $\Leftarrow$
+		\item \fbox{$\Leftarrow$}
 
 		      Soit $\phi : \mots \to M$ un morphisme de monoïdes avec $M$ fini qui reconnait le langage $L$.
 		      $\exists P \subseteq M, L = \quot {\phi} (P)$.
@@ -157,7 +157,7 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 				      (1_M, w)                   & \mapsto & \phi (w)
 			      \end{array} $$
 
-		      
+
 		      \begin{eqnarray*}
 			      A \text{ accepte le mot } w &\iff&  \deltaS {1_M} w \in P \iff \phi (w) \in P \\
 			      &\iff&  w \in \quot {\phi}(P) \iff w \in L.
@@ -166,14 +166,14 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 		      Donc $A$ accepte le langage $L$.
 
 
-		\item $\Rightarrow$
+		\item \fbox{$\Rightarrow$}
 
 		      Soit $A = \AFD$ un automate déterministe complet qui accepte $L$.
 		      Soit
 
 		      $$ \begin{array}{rcl}
 				      \phi : \mots & \to     & Q^Q        \reason{$(Q^Q, \circ,\text{id}_Q) $ est bien un monoïde} \\
-				      w  & \mapsto & ( q \mapsto \deltaS q w )
+				      w            & \mapsto & ( q \mapsto \deltaS q w )
 			      \end{array} $$
 
 		      On a bien :
@@ -186,7 +186,7 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 			            est la fonction identité sur $Q$ et donc $\phi$ préserve l'identité (élément neutre).
 			      \item $\phi (w) \circ \phi (w') = \phi (ww'), \ \forall w, w' \in \mots$ car
 			            $\deltaS {\deltaS q w} {w'} = \deltaS q {ww'}$.
-						Donc $\phi$ préserve la multiplication.
+			            Donc $\phi$ préserve la multiplication.
 
 
 			            Soit $P \subseteq Q^Q$ défini par $P \setdef {f : Q \to Q} {f(q_0)\in F}$.
@@ -226,7 +226,7 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 \begin{proof}
 	Soit $m, m' \in \mots$ tels que $m \sim_L m'$, \cad $\forall u,v \in \mots, umv \in L \iff um'v \in L$.
 	Soit $n \in \mots$, montrons que $nmr \sim_L nm'r$ \cad $\forall u, v \in \mots, u(nmr)v \in L \iff u(nm'r)v \in L$.
-	Soit $u,v \in \mots$, posons $u' = un, v' = rv$, alors, on veut montrer que $u'mv' \in L \iff u'm'v' \in L$, 
+	Soit $u,v \in \mots$, posons $u' = un, v' = rv$, alors, on veut montrer que $u'mv' \in L \iff u'm'v' \in L$,
 	ce qui est vrai car $m \sim_L m'$.
 \end{proof}
 
@@ -342,11 +342,11 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 \begin{proof}
 
 	\begin{itemize}
-		\item $\Leftarrow$
+		\item \fbox{$\Leftarrow$}
 
 		      $\mots / \sim_L$ reconnait $L$. Par le lemme, si $\mots / \sim_L$ divise $M$, alors $M$ reconnait $L$.
 
-		\item $\Rightarrow$
+		\item \fbox{$\Rightarrow$}
 
 		      Supposons que $M$ reconnait $L$. Donc on a $\phi : \mots \to M$ et $P \subseteq M$ avec $\quot {\phi} (P) = L$.
 
@@ -358,7 +358,7 @@ Montrons que $(\N, + , 0)$ est librement engendré sur $\set 1$.
 
 		      Si $n \in N$ alors $\exists w \in \mots$ \tq $\phi(w) = n$. On définit $h(n) = [w]$.
 
-		      Il faut \mq : 
+		      Il faut \mq :
 		      \begin{enumerate}
 			      \item $h$ est bien défini (si $\phi (w') = \phi (w) \implies [w] = [w']$). \label{prop:recon1}
 			      \item $h$ est un morphisme de monoïdes.
