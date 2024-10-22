@@ -98,7 +98,7 @@ $$ \interpret {<}_n \subseteq \set {1, \cdots, n} \times \set {1, \cdots, n} = \
 	$U_1, \ldots, U_n \subseteq \Vi$ tels que
 
 	\begin{enumerate}
-		\item $U_i \cap U_j = \emptyset, \forall i,j i \neq j$
+		\item $U_i \cap U_j = \emptyset, \forall i,j, \, i \neq j$
 		\item  $\bigcup_{i=1}^n U_i = \V$
 	\end{enumerate}
 \end{definition}
@@ -252,7 +252,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 			      \item $\phi_3 = \exists x \left((\forall y, x \leq y) \land X_0(x) \right)$
 			      \item $\phi_4 = \forall x \left( \forall y (y = x + 1)  \ra \bigwedge_{0\leq i < l < k} ( (X_i (x) \land X_l(y) )\ra \bigvee_{S_l} Q_a(x))\right)$\\
 			            Où $S_l = \setdef {a \in \alphabet} {\delta (q_i,a) = a_l}$
-			      \item $\phi_5 = \forall x \left( \forall y (x \geq y)  \ra \bigwedge_{i = 0}^{k-1} ( X_i(x) \ra \bigvee_{T_i} Q_a(x)))\right)$\\
+			      \item $\phi_5 = \forall x \left( \forall y (x \geq y)  \ra \bigwedge_{i = 0}^{k-1} ( X_i(x) \ra \bigvee_{T_i} Q_a(x))\right)$\\
 			            Où $T_i = \setdef {a \in \alphabet} {\delta (q_i,a) \in F}$
 
 		      \end{itemize}
@@ -273,7 +273,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      \end{exercice}
 
 		      \begin{exercice}
-			      Trouver un automate qui accepte les $(\V_1, \V_2)$-structures \tq une variable de premier ordre $x$ apparait
+			      Trouver un automate qui accepte les $(\V_1, \V_2)$-structures tel qu'une variable de premier ordre $x$ apparait
 			      dans une lettre de la forme $(a,S,T)$. Le but est de \mq le $\lang {Q_a(x)}$ est régulier.
 		      \end{exercice}
 
@@ -292,9 +292,10 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      On définit l'automate $A' = \antuple{Q\times \set {0,1}, (q_0,0), F \times \set 1 , \delta'}$ où
 
 		      \begin{eqnarray*}
-			      delta' &=& \setdef {((q,u),(a,S,T),(q',u))} {u \in \set {0,1}, x \notin S, (q,(a,S,T),q')\in \delta} \\
+			      \delta' &=& \setdef {((q,u),(a,S,T),(q',u))} {u \in \set {0,1}, x \notin S, (q,(a,S,T),q')\in \delta} \\
 			      &\cup& \setdef {((q,0),(a,S\setminus \set x,T),(q',1))} { x \in S, (q,(a,S,T),q')\in \delta}
 		      \end{eqnarray*}
+
 		      %TODO: diagram ???
 
 		      $A'$ est un automate sur l'alphabet $\alphabet \times 2^{\V_1\setminus \set x} \times 2 ^ {\V_2}$.
@@ -311,7 +312,197 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 	le monoïde syntaxique du langage est apériodique (\cad il ne contient aucun sous-groupe non-trivial).
 \end{theorem}
 
+\subsubsection{Éléments idempotents}
+
+\begin{definition}[Éléments idempotents]
+	Soit $(M,\cdot , 1)$ un monoïde. Un élément $e \in M$ est \emph{idepmpotent} \ssi $e \cdot e = e$.
+\end{definition}
+
+\begin{exercice} \label{ex:puiss_idemp}
+	Soit $e \in M$ est idempotent, alors $\forall i \in \N^*. \ e^i = e$.
+\end{exercice}
+
+\begin{lemma}
+	Soit $(M,\cdot , 1_M)$ un monoïde fini et soit $m \in M$. Si $\abs M = n$ alors $m^{n!}$ est idempotent.
+\end{lemma}
+
+\begin{proof}
+	Parmi les puissances de $m : m, \cdots , m^{n+1}$ il y  deux qui sont égales, car $\abs M = n$ .
+	Soient $k \in \enum 1 n$ et $l \geq 1$ \tq $m ^{k} = m ^{k+l}$ ($k + l \in \enum 1 {n+1}$).
+	$m ^{k} = m ^{k+l} \implies m ^{k+2l} = m ^{k+l} m^l = m^k m^l = m^{k+l} = m^k$
+
+	Par induction on a que $\forall i \geq m^{k+il} = m^{k} \implies \forall i \geq 1, j \geq 1, m^{k+il+ j} = m^{k +j}$
+
+	Donc $\exists x \in \N, \, m^{n!} = m^{klx} = (m^{kl})^x = m^{kl} \implies m^{n!}$ est idempotent.
+\end{proof}
 
 
+\begin{definition}[Puissance idempotente]
+	Une \emph{puissance idempotente} d'un élément $m \in M$ est un élément de la forme $m^i \ (i\geq 1)$ tel que $m^i$ est idempotent.
+\end{definition}
+
+\begin{lemma}\label{lem:puiss_idemp}
+	Une puissance idempotente de $m\ in M$ es unique, dans le sense suivant. Si $m^i$ et $m^j$ sont des idempotents, alors $m^i = m^j$.
+\end{lemma}
+
+\begin{proof}
+	$m^i$ idempotent $\implies (m^i)^j = m^i$, voire \ref{ex:puiss_idemp}.
+
+	Pareil pour $m^j$ idempotent $\implies (m^j)^i = m^j$
+	Donc $m^i = m^{ij} = m^{ji} = m^{j}$
+\end{proof}
+
+\subsubsection{Relations de Green}
+
+\begin{definition}
+	Soit $(M,\cdot , 1_M)$ un monoïde. On défini les relations suivantes.
+
+	\begin{itemize}
+		\item \emph{prefixe, ou $\geqr$, ou R-préordre}: On dit que $m$ est un prefixe de $n$ \ssi $\exists x \in M, \ n = mx$
+		      On va noter cela par $m \geqr n$.
+
+		      Un ensemble de la forme $y \cdot M = \setdef {y \cdot z} {z \in M}$ pour $y \in M$ est appelé un idéal à droite de $M$.
+
+		      $m$ est un préfixe de $n$ ssi $m \cdot M \supseteq n \cdot M$ (à vérifier en exercice)
+
+
+		\item \emph{suffixe, ou $\geql$, ou L-préordre}: On dit que $m$ est un suffixe de $n$ ssi $\exists y \in M, \ n = ym$
+		      On va noter cela par $m \geql n$.
+
+		      TODO: exercice (same as before)
+
+
+		\item \emph{infixe, ou $\geqj$, ou J-préordre}: On dit que $m$ est un infixe de $n$ ssi $\exists x,y \in M, \ n = xmy$
+		      On va noter cela par $m \geqj n$.
+
+		      TODO: exercice (same as before)
+	\end{itemize}
+\end{definition}
+
+\begin{exercice}
+	Montrer que $\geqr,\geqj,\geql$  sont transitives et réflexives et donc des préordres.
+\end{exercice}
+
+\begin{notation}
+	On défini les relations d'équivalece associs a ces préordres L
+	\begin{itemize}
+		\item $m R n$ ssi $m \geqr n \et n \geqr m$ (On dit $m$ est $R$-équivalent  $n$)
+
+		      On note par $\classr m$ la $R$-classe d'équivalence de $m$, \ie, $\classr m =
+			      \setdef {n \in M} {m R n}$
+
+		\item $m L n$ ssi $m \geql n \et n \geql m$ (On dit $m$ est $L$-équivalent  $n$)
+
+		      On note par $\classl m$ la $L$-classe d'équivalence de $m$, \ie, $\classl m =
+			      \setdef {n \in M} {m L n}$
+
+		\item $m J n$ ssi $m \geqj n \et n \geqj m$ (On dit $m$ est $J$-équivalent  $n$)
+
+		      On note par $\classj m$ la $J$-classe d'équivalence de $m$, \ie, $\classj m =
+			      \setdef {n \in M} {m J n}$
+	\end{itemize}
+\end{notation}
+
+\begin{exercice}
+	$\forall m \in M, \classr m \subseteq \classj m$
+\end{exercice}
+
+\begin{proof}
+	TODO
+\end{proof}
+
+\begin{lemma}[Eggbox lemma]
+	Soit $M$ un monoïde fini et $m,n \in M$,
+
+	\begin{enumerate}
+		\item Si $m \geqr n \et m J n$ alors $n \geqr m$ et donc $m R n$
+		\item Si $m \geql n \et m J n$ alors $n \geql m$ et donc $m L n$
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Soit $m,n \in M$ tels que $m \geqr n \et m J n$ alors
+		      $$m \geqr n  \implies \exists x \in M, \ n = mx$$
+		      $$m J n  \implies \exists y,z \in M, \ m = ynz$$
+		      % TODO: make proper {
+		      Tout ça implique $m = ymxz$
+
+		      TODO
+
+		\item Exercice
+	\end{enumerate}
+\end{proof}
+
+
+\begin{definition}
+	On dit $m H n$ ssi $m R n $ et $m L n$. On a $H = R \cap L$.
+\end{definition}
+
+\begin{exercice}
+	L'intersection d'une $R$-classe avec une $L$ classe d'équivalence est soit vide soit une $H$-classe d'équivalence.
+\end{exercice}
+
+\begin{proof}
+	Debut de preuve:
+	Si $\classr m \cap \classl n \neq \emptyset$, sot $s \in \classr m \cap \classl n$. On va montrer que
+	$\classr m \cap \classl n = \classh s$
+
+	\begin{itemize}
+		\item
+		      Soit $s' \in \classr m \cap \classl n$. On sait $s' R s$ car $s' \in \classr m$ donc $s' R m R s$.
+		      Pareil, $s' L s$ car  $s' L b L s$.
+		      Et donc $s' H s$. Et donc $\classr m \cap \classl n \subseteq \classh s$
+
+		\item
+		      \begin{eqnarray}
+			      s' \in \classh S &\implies& s R s' \et s L s'\\
+			      &\implies& s' R m \et s' L n\\
+			      &\implies& s' \in \classr m \cap \classl n
+		      \end{eqnarray}
+
+	\end{itemize}
+\end{proof}
+
+\begin{lemma}
+	Soit $\Hc$ une $H$-classe incluse dans une $J$-classe $\Jc$. Alors, soit
+	\begin{enumerate}
+		\item $\forall m,n \in \Hc, mn \notin \Jc$
+		\item $\Hc$ est un groupe (Attention !! L'élément neutre de $\Hc$ n'est pas forcement $1_M$)
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	TODO
+
+	\begin{itemize}
+		\item Etape 2.
+
+		      \begin{exercice}
+			      Montrer que $mn L n$.
+		      \end{exercice}
+		\item Étape 3: Soit $m \in \Hc$. Par \ref{lem:puiss_idemp}, il existe $i > 1$ tel que $m^i$ est idempotent.
+		      Par l''etape 3, on sait que $m^i \in \Hc$, donc on peut conclure que $\Hc$ contient un élément idempotent, notos le par
+		      $e$. On va montrer que $e$ est l'élément neutre de $\Hc$, \cad, $\forall m \in \Hc, \ m\cdot e m  e \cdot m = m$.
+
+		      Soit $n \in \Hc$, donc $n L e \implies \exists x, \ n = x\cdot e
+			      \implies n e = (x e) e =  x (ee) =  x e = n$
+
+		      De la meme maniere, $n \in \Hc \implies n R e \implies \exists y, \ n = ey \implies en = eey = ey = n$
+		      Donc $e n = n$.
+
+		      Il reste a montrer que chaque élément possède un inverse : $\forall n \in \Hc, \exists n' \in \Hc$ tel que $n n' = e = n'n$
+
+		      On observe que $\Hc$ contient un unique idempotent. Soit $e'$ un autre idempotent, par le meme argument
+		      que ci-dessus, $e'$ es un élément neutre donc : TODO ... $e = 'e$
+
+		      Soit $n \in \Hc$. Par le lemme \ref{lem:puiss_idemp}m il existe $j \geq 1$ tel que $n^j$ est idempotent, mais $n^j \in \Hc$ donc $n^j = e$. Et ainsi,
+		      $n^{j-1}$ est l'inverse de $n$.
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+    Un monoïde $\monoide$ est aperiodique ssi $\forall m \in M, \exists i \geq 1, \text { \tq } m^i = m^{i+1}$
+\end{definition}
 
 
