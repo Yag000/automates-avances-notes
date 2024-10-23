@@ -160,7 +160,7 @@
 \end{rappel}
 
 \begin{remarque}
-	C'est n'est pas vrai pour les automates non-déterministes.
+	Ce n'est pas vrai pour les automates non-déterministes.
 
 
 	\begin{twoautomata}
@@ -229,7 +229,7 @@ Nous allons voir trois algorithmes de minimisation différents:
 \begin{proof}
 	Soit $A = (Q, q_0, T)$, $L = \lang A$. $\mirr (A) = (Q, T, q_0), M = \lang {\mirr (A)} = \mirror L$.
 
-	On note $X \cdot u$ et $\delta (X,u)$, $X$ étant un ensemble d'états et $u$ un mot, l'ensemble $\bigcup\limits_{q \in X} \delta (q,a)$.
+	On note $X \cdot u$ et $\delta (X,u)$, $X$ étant un ensemble d'états et $u$ un mot, l'ensemble $\bigcup\limits_{q \in X} \delta (q,u)$.
 
 	Nous allons montrer que $A^{\sim}$ est l'automate minimal pour $M$. Pour cela, il suffit de montrer que $A^{\sim}$
 	est isomorphe à l'automate des résiduels de $M$.
@@ -276,8 +276,8 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 
 \begin{definition}[Congruence d'automates]
-	Soit $A = (Q,q_0,T,S)$ un automate déterministe et soit $\sim$ un relation d'équivalence définie sur l'ensemble $Q$. On dit que
-	$\sim$ est une congruence si $\sim$ satisfait les conditions suivantes.
+	Soit $A = (Q,q_0,T,S)$ un automate déterministe et soit $\sim$ une relation d'équivalence définie sur l'ensemble $Q$. On dit que
+	$\sim$ est une congruence si $\sim$ satisfait les conditions suivantes :
 	\begin{enumerate}
 		\item Compatibilité aves les transitions: Si $q \sim q'$ alors $\forall a \in \alphabet, \delta (q,a) \sim \delta (q',a)$
 		\item Saturation de $A$: Si $q \sim q'$ alors $q \in T \iff q' \in T$
@@ -286,33 +286,33 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 
 \begin{definition}
-	Si $A = \AFD$ est un AFD et $\sim$ une congruence définie dur $Q$. On définit l'automate quotient :
+	Si $A = \AFD$ est un AFD et $\sim$ une congruence définie sur $Q$. On définit l'automate quotient :
 	$$ A/\sim = (Q',q_0',T',\delta') $$
 
 	avec \begin{itemize}
 		\item $Q' = \setdef {[q]} {q\in Q}$ (chaque état est étiqueté par une classe d'équivalence)
 		\item $q_0' = [q_0]$
 		\item $T' =\setdef  {[q]} {q \in T}$
-		\item $\delta'([q], a) = [p]$ \ssi $q \in [qa]$
+		\item $\delta'([q], a) = [p]$ \ssi $p \in [qa]$
 	\end{itemize}
 
 \end{definition}
 
 \begin{prop}
-	Si $A$ est un automate déterministe et $\sim$ une congruence sur $A$, alors $\lang A = \lang {A/\sim}$
+	Si $A$ est un automate déterministe et $\sim$ une congruence sur $A$, alors $\lang A = \lang {A/\sim}$.
 \end{prop}
 
 
 \begin{definition}[Congruence de Nerode]
 
-	Si $A = (Q, \set {q_0}, T, \delta)$ un AFD. $\forall q, q' \in Q$ on définit $q \cong q' \iff L_q = L_{q'}$.
+	Si $A = (Q, \set {q_0}, T, \delta)$ un AFD, $\forall q, q' \in Q$ on définit $q \cong q' \iff L_q = L_{q'}$.
 \end{definition}
 
 \begin{rappel}
 	$L_q = \setdef w {\deltaS q w \in T}$.
 	Donc
 	\begin{eqnarray*}
-		q \cong q' \iff L_q = L_{q'} &\iff& \forall w, w \in L_q \mssi w \in L_q \\
+		q \cong q' \iff L_q = L_{q'} &\iff& \forall w \in \mots, w \in L_q \mssi w \in L_{q'} \\
 		&\iff& \forall w, \deltaS q w \in T \mssi  \deltaS {q'} w \in T
 	\end{eqnarray*}
 
@@ -320,7 +320,7 @@ Nous allons voir trois algorithmes de minimisation différents:
 	\begin{equation}\label{eq:congnot}
 		q \not\cong q' \iff \exists w, \deltaS q w \in T \et \deltaS {q'} w \notin T
 	\end{equation}
-	où $\deltaS q w \notin T$ et $\deltaS q' w \in T$ sont deux états non équivalents, dits \emph{séparables}.
+	où $\deltaS q w \notin T$ et $\deltaS{q'} w \in T$ sont deux états non équivalents, dits \emph{séparables}.
 \end{rappel}
 
 Si $q$ et $q'$ sont séparables et $w$ est un mot qui satisfait \ref{eq:congnot}, on dira que $w$ \emph{sépare} $q$ et $q'$.
