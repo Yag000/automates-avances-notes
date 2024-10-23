@@ -98,7 +98,8 @@ On dit que $\mots$ est librement engendré sur $\alphabet$.
 		(M,\cdot, 1_M)
 	\end{tikzcd}
 
-	Alors on a que $f(1) = m \in M$ et donc $f(n) =  f(\underbrace{1+\ldots+1}_{n \text{ fois}}) = f(1)\cdot \ldots \cdot f(1) = m\cdot \ldots \cdot m = m^n$
+	Alors on a que $f(1) = m \in M$ et donc 
+    $$f(n) =  f(\underbrace{1+\ldots+1}_{n \text{ fois}}) = \underbrace{f(1)\cdot\ldots\cdot f(1)}_{n \text{ fois}} = \underbrace{m\cdot\ldots\cdot m}_{n \text{ fois}} = m^n$$
 	Donc, si on pose $i: \set 1 \to (\N, +, 0)$ \tq $f(1) = 1$, alors quelque soit le choix de $m$, \ie, quelque soit la fonction $f$ choisie (car elle dépend juste du choix $m$), alors
 	on peut toujours poser $\bar f (\N, +, 0)$ avec $f(0) = 1_M$ et $f(1) = m$ qui vérifie bien que $\bar f \circ i = f$. Ainsi, $(\N, +, 0)$ est librement engendré sur $\set 1$.
 \end{exemple}
@@ -120,11 +121,11 @@ On dit que $\mots$ est librement engendré sur $\alphabet$.
 
 \begin{proof}
 	\begin{itemize}
-		\item\fbox{$\Leftarrow$}
+        \item \bimpRL
 
 		      Soit $P = \phi(L) \subseteq M$, alors on a que $\quot {\phi} (P) = \quot {\phi} (\phi (L)) = L$ et donc $\phi$ reconnait $L$.
 
-		\item \fbox{$\Rightarrow$}
+		\item \bimpLR
 
 		      On sait qu'il existe $P$ \tq $L = \setdef {w \in \mots} {\phi(w) \in P}$. Regardons ce qu'est $\phi (L)$.
 		      On a que $\phi (L) = \setdef {\phi (w)} {w \in \mots, \phi(w) \in P} = P$. Et donc on a bien $\quot {\phi} (\phi (L)) = \quot {\phi} (P) = L$.
@@ -138,7 +139,7 @@ On dit que $\mots$ est librement engendré sur $\alphabet$.
 
 \begin{proof}
 	\begin{itemize}
-		\item \fbox{$\Leftarrow$}
+		\item \bimpRL
 
 		      Soit $\phi : \mots \to M$ un morphisme de monoïdes avec $M$ fini qui reconnait le langage $L$.
 		      $\exists P \subseteq M, L = \quot {\phi} (P)$.
@@ -166,7 +167,7 @@ On dit que $\mots$ est librement engendré sur $\alphabet$.
 		      Donc $A$ accepte le langage $L$.
 
 
-		\item \fbox{$\Rightarrow$}
+		\item \bimpLR
 
 		      Soit $A = \AFD$ un automate déterministe complet qui accepte $L$.
 		      Soit
