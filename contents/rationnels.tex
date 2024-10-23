@@ -87,6 +87,17 @@
 	Montrer que la concaténation de langages est distributive par rapport à l'union, \ie que $L(M \cup N) = LM \cup LN, \forall L, M, N$ langages.
 \end{exercice}
 
+\begin{proof}
+	\begin{eqnarray*}
+		w \in L(M \cup N) &\iff& \exists w_L \in L, \exists w_{M \cup N} \in M \cup N, w = w_Lw_{M \cup N} \\
+		&\iff& \exists w_L \in L, (\exists w_M \in M, w = w_Lw_M \lor \exists w_N \in N, w = w_Lw_N) \\
+		&\iff& (\exists w_L \in L, \exists w_M \in M, w = w_Lw_M) \lor (\exists w_L \in L,\exists w_N \in N, w = w_Lw_N) \\
+		&\iff& w \in LM \lor w \in LN  \\
+		&\iff& w \in (LM \cup LN)
+	\end{eqnarray*}
+\end{proof}
+
+
 \subsection{Langages rationnels : définitions}
 
 \begin{definition}[langage rationnel]
