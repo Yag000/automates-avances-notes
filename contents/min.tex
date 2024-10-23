@@ -361,8 +361,17 @@ Pour calculer la congruence de Nérode on introduit une famille de congruences :
 \end{prop}
 
 \begin{proof}
-    %TODO: Should be feasible.
-	Soit $q,q' \in Q$, $q \cong_k q'$, \mq $L_q = L_{q'}$. Exercice.
+	Soit $q,q' \in Q$, $q \cong_k q'$, \mq $L_q = L_{q'}$.
+
+	Soit $w \in L_q$.
+	\begin{itemize}
+		\item Si $\abs w \leq k$ alors $\deltaS {q'} w \in F$ car $q \cong_k q'$
+		\item Si $\abs w > k$ alors $\exists i $ tel que $\abs w = k + i$ et donc comme $\cong_k \ = \ \cong_{k+i}$ on a que
+		      $\deltaS {q'} w \in F$
+	\end{itemize}
+
+	Et donc $w \in L_{q'}$ et ainsi $L_q \subseteq L_{q'}$. On peut faire la meme preuve pour montrer que $L_{q'} \subseteq L_q$.
+	On en déduit que que $L_q = L_{q'}$.
 \end{proof}
 
 \begin{definition}[Algorithme de Moore]
