@@ -43,7 +43,7 @@
 \end{definition}
 
 \begin{definition}
-	Soit $\AFD$ sur l'alphabet $\alphabet$ et $q \in Q$ alors on définit
+	Soit A = $\AFD$ sur l'alphabet $\alphabet$ et $q \in Q$ alors on définit
 	$$ L_q = \setdef {w \in \mots} {\kleene \delta (q,w) \in F} $$
 \end{definition}
 
@@ -55,7 +55,7 @@
 
 \begin{proof}
 	\begin{eqnarray*}
-		w \in L_q &\iff& \deltaS q u \in F \\
+		u \in L_q &\iff& \deltaS q u \in F \\
 		&\iff& \deltaS {\deltaS {q_0} w} u \in F \\
 		&\iff& \deltaS {q_0} {wu} \in F \\
 		&\iff& wu \in \lang A \\
