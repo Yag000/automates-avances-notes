@@ -14,7 +14,7 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 	$\phi_2 = \exists x \exists y (\forall z (z \geq x) \land Q_a x \land \forall z (z \leq y) \land Q_b y)$
 	où $\leq, \geq$ sont interpretés comme les relations habituelles sur $N$.
 	$Q_a x$ signifie qu'en position $x$, on retrouve la lettre $a$.
-	$La_{\phi_2} = \setdef {w \in \kleene{\set {a,b}}} {w \models \phi_2} = a(a+b)*b$
+	$\La_{\phi_2} = \setdef {w \in \kleene{\set {a,b}}} {w \models \phi_2} = a(a+b)*b$
 \end{exemple}
 
 
@@ -34,7 +34,7 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 	$X (x)\rightsquigarrow$ vrai \ssi $x \in X$
 
 
-	$\La_{\phi_3} = \setdef {w \in \mots} {\abs w \equiv 0 (\text { mod} 2)}$
+	$\La_{\phi_3} = \setdef {w \in \mots} {\abs w \equiv 0 (\text { mod } 2)}$
 \end{exemple}
 
 \subsection{Syntaxe}

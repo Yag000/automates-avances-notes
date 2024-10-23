@@ -29,9 +29,9 @@
 \begin{proof}
 	\begin{eqnarray*}
 		w \in \lang A &\iff& \kleene \delta (q_0, w) \in F \\
-		&\iff& \phi (\kleene \delta (q_0, w)) \in F' \quad \text{par } \ref{morph:1} \\
-		&\iff& \kleene \delta( \phi (q_0), w) \in F' \quad \text{par } \ref{morph:3} \\
-		&\iff& \kleene \delta( q_0', w) \in F' \quad \text{par } \ref{morph:2} \\
+		&\iff& \phi (\kleene \delta (q_0, w)) \in F' \reason{par \ref{morph:1}}\\
+		&\iff& \kleene \delta( \phi (q_0), w) \in F' \reason{par \ref{morph:3}}\\
+		&\iff& \kleene \delta( q_0', w) \in F' \reason{par \ref{morph:2}}\\
 		&\iff& w \in \lang {A'}
 	\end{eqnarray*}
 \end{proof}
@@ -122,11 +122,11 @@
 		A_L & & B
 	\end{tikzcd}
 
-	Si $B = <T,t_0,F,\delta>$ alors $\reach B =  <T',t_0,F',\delta'>$ où
+	Si $B = <F,t_0,F,\delta>$ alors $\reach B =  <F',t_0,F',\delta'>$ où
 	\begin{itemize}
-		\item $T' = \setdef {t \in T} {\exists w \in \mots, \deltaS {t_0} w = t}$
-		\item $F' = F \cap T'$
-		\item $\delta ' = \delta \cap (T' \times \alphabet \times T')$
+		\item $F' = \setdef {t \in F} {\exists w \in \mots, \deltaS {t_0} w = t}$
+		\item $F' = F \cap F'$
+		\item $\delta ' = \delta \cap (F' \times \alphabet \times F')$
 	\end{itemize}
 \end{lemma}
 
@@ -134,22 +134,24 @@
 \begin{exercice}
 	On définit $\phi : \reach B \to A$.
 
-	Si $t \in T', \exists w \in \mots$ \tq $ t = \deltaS {t_0} w$
+	Si $t \in F', \exists w \in \mots$ \tq $ t = \deltaS {t_0} w$
 	On définit $\phi (t) = \quot w L$
 
 	Montrer que $\phi$ est bien définie, \ie, $\phi (t) = \quot {w'} L \implies \quot w L = \quot {w'} L$.
+\end{exercice}
 
-	Vérifions $\phi$ surjective. Si $w \in \mots$ et $\quot w L$ est un état de $A_L$ alors $\phi (\deltaS {t_0} w) = \quot w L$
+\begin{proof}
+	Vérifions $\phi$ surjective.
 
-	Si $\abs B = \abs {A_L}$, alors $B$ est un automate accesible
-	(Sinon $\abs A \leq \abs {\reach B} < \abs B \lightning)$.
+	Si $w \in \mots$ et $\quot w L$ est un état de $A_L$ alors $\phi (\deltaS {t_0} w) = \quot w L$
+
+	Si $\abs B = \abs {A_L}$, alors $B$ est un automate accesible (Sinon $\abs A \leq \abs {\reach B} < \abs B \lightning)$.
 
 	Donc $B = \reach B$
 
 	De plus, le morphisme $\phi$ est une bijection et $\quot {\phi}$ est un morphisme d'automates.
 	Donc $B \cong A_L$.
-
-\end{exercice}
+\end{proof}
 
 
 \subsection{Minimisation d'automates}
@@ -227,16 +229,16 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 
 \begin{proof}
-	Soit $A = (Q, q_0, T)$, $L = \lang A$. $\mirr (A) = (Q, T, q_0), M = \lang {\mirr (A)} = \mirror L$.
+	Soit $A = (Q, q_0, F)$, $L = \lang A$. $\mirr (A) = (Q, F, q_0), M = \lang {\mirr (A)} = \mirror L$.
 
 	On note $X \cdot u$ et $\delta (X,u)$, $X$ étant un ensemble d'états et $u$ un mot, l'ensemble $\bigcup\limits_{q \in X} \delta (q,u)$.
 
 	Nous allons montrer que $A^{\sim}$ est l'automate minimal pour $M$. Pour cela, il suffit de montrer que $A^{\sim}$
 	est isomorphe à l'automate des résiduels de $M$.
 
-	Pour cela, il faut \mq si $u$ et $v$ sont deux mots quelconques \tq $\quot u M = \quot v M$, alors $T \cdot u =  T \cdot v$ dans $A^{\sim}$.
+	Pour cela, il faut \mq si $u$ et $v$ sont deux mots quelconques \tq $\quot u M = \quot v M$, alors $F \cdot u =  F \cdot v$ dans $A^{\sim}$.
 
-	Soit $p$ un état de $T \cdot u$. Puisque $A$ est accesible, il existe un chemin de $q_0 \to p$ dans $A$, et donc il existe un chemin $p \to q_0$ dans $\mirr(A)$.
+	Soit $p$ un état de $F \cdot u$. Puisque $A$ est accesible, il existe un chemin de $q_0 \to p$ dans $A$, et donc il existe un chemin $p \to q_0$ dans $\mirr(A)$.
 	Soit $w$ l'étiquette de ce chemin, alors le mot $uw$ est l'étiquette d'un chemin réussi de $\mirr (A)$. En conséquence, $uw \in M$.
 
 	Mais $uw\in M \iff w \in \quot u M \iff w\in \quot v M \iff vw \in M$.
@@ -276,23 +278,23 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 
 \begin{definition}[Congruence d'automates]
-	Soit $A = (Q,q_0,T,S)$ un automate déterministe et soit $\sim$ une relation d'équivalence définie sur l'ensemble $Q$. On dit que
+	Soit $A = (Q,q_0,F,S)$ un automate déterministe et soit $\sim$ une relation d'équivalence définie sur l'ensemble $Q$. On dit que
 	$\sim$ est une congruence si $\sim$ satisfait les conditions suivantes :
 	\begin{enumerate}
 		\item Compatibilité aves les transitions: Si $q \sim q'$ alors $\forall a \in \alphabet, \delta (q,a) \sim \delta (q',a)$
-		\item Saturation de $A$: Si $q \sim q'$ alors $q \in T \iff q' \in T$
+		\item Saturation de $A$: Si $q \sim q'$ alors $q \in F \iff q' \in F$
 	\end{enumerate}
 \end{definition}
 
 
 \begin{definition}
 	Si $A = \AFD$ est un AFD et $\sim$ une congruence définie sur $Q$. On définit l'automate quotient :
-	$$ A/\sim = (Q',q_0',T',\delta') $$
+	$$ A/\sim = (Q',q_0',F',\delta') $$
 
 	avec \begin{itemize}
 		\item $Q' = \setdef {[q]} {q\in Q}$ (chaque état est étiqueté par une classe d'équivalence)
 		\item $q_0' = [q_0]$
-		\item $T' =\setdef  {[q]} {q \in T}$
+		\item $F' =\setdef  {[q]} {q \in F}$
 		\item $\delta'([q], a) = [p]$ \ssi $p \in [qa]$
 	\end{itemize}
 
@@ -304,23 +306,22 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 
 \begin{definition}[Congruence de Nerode]
-
-	Si $A = (Q, \set {q_0}, T, \delta)$ un AFD, $\forall q, q' \in Q$ on définit $q \cong q' \iff L_q = L_{q'}$.
+	Si $A = (Q, \set {q_0}, F, \delta)$ un AFD, $\forall q, q' \in Q$ on définit $q \cong q' \iff L_q = L_{q'}$.
 \end{definition}
 
 \begin{rappel}
-	$L_q = \setdef w {\deltaS q w \in T}$.
+	$L_q = \setdef w {\deltaS q w \in F}$.
 	Donc
 	\begin{eqnarray*}
 		q \cong q' \iff L_q = L_{q'} &\iff& \forall w \in \mots, w \in L_q \mssi w \in L_{q'} \\
-		&\iff& \forall w, \deltaS q w \in T \mssi  \deltaS {q'} w \in T
+		&\iff& \forall w, \deltaS q w \in F \mssi  \deltaS {q'} w \in F
 	\end{eqnarray*}
 
 	On en déduit que
 	\begin{equation}\label{eq:congnot}
-		q \not\cong q' \iff \exists w, \deltaS q w \in T \et \deltaS {q'} w \notin T
+		q \not\cong q' \iff \exists w, \deltaS q w \in F \et \deltaS {q'} w \notin F
 	\end{equation}
-	où $\deltaS q w \notin T$ et $\deltaS{q'} w \in T$ sont deux états non équivalents, dits \emph{séparables}.
+	où $\deltaS q w \notin F$ et $\deltaS{q'} w \in F$ sont deux états non équivalents, dits \emph{séparables}.
 \end{rappel}
 
 Si $q$ et $q'$ sont séparables et $w$ est un mot qui satisfait \ref{eq:congnot}, on dira que $w$ \emph{sépare} $q$ et $q'$.
@@ -328,16 +329,16 @@ Si $q$ et $q'$ sont séparables et $w$ est un mot qui satisfait \ref{eq:congnot}
 
 Pour calculer la congruence de Nérode on introduit une famille de congruences :
 
-\begin{equation}
-	\cong_i, i  \in \N, q \cong_i q' \iff \forall w, \abs w \leq i \implies \deltaS q w \in T \iff  \deltaS {q'} w \in T
-\end{equation}
+\begin{equation*}
+	\cong_i, i  \in \N, q \cong_i q' \iff \forall w, \abs w \leq i \implies \deltaS q w \in F \iff  \deltaS {q'} w \in F
+\end{equation*}
 
 
 \begin{definition}
 	Définition alternative
 
 	\begin{itemize}
-		\item $q \cong_0 q' \mssi q\in T \iff q' \in T$
+		\item $q \cong_0 q' \mssi q\in F \iff q' \in F$
 		\item $q \cong_{i+1} q' \mssi q \cong_{i} q' \et  \forall a \in \alphabet, \delta (q,a) \cong_i \delta (q', a)$
 	\end{itemize}
 \end{definition}
@@ -360,7 +361,17 @@ Pour calculer la congruence de Nérode on introduit une famille de congruences :
 \end{prop}
 
 \begin{proof}
-	Soit $q,q' \in Q$, $q \cong_k q'$, \mq $L_q = L_{q'}$. Exercice.
+	Soit $q,q' \in Q$, $q \cong_k q'$, \mq $L_q = L_{q'}$.
+
+	Soit $w \in L_q$.
+	\begin{itemize}
+		\item Si $\abs w \leq k$ alors $\deltaS {q'} w \in F$ car $q \cong_k q'$
+		\item Si $\abs w > k$ alors $\exists i $ tel que $\abs w = k + i$ et donc comme $\cong_k \ = \ \cong_{k+i}$ on a que
+		      $\deltaS {q'} w \in F$
+	\end{itemize}
+
+	Et donc $w \in L_{q'}$ et ainsi $L_q \subseteq L_{q'}$. On peut faire la meme preuve pour montrer que $L_{q'} \subseteq L_q$.
+	On en déduit que que $L_q = L_{q'}$.
 \end{proof}
 
 \begin{definition}[Algorithme de Moore]
