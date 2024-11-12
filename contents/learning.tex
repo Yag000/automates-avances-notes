@@ -1,26 +1,246 @@
 \section{Learning}
 
-Basé sur \cite{angluinLearning}
 
 
+Nous allons étudier un algorithme qui permet de générer un automate pour un langage rationnel $L$.
+L'idée est que le \emph{learner}(ou \emph{étudiant}), une entité dont l'objectif est de retrouver le langage, pose
+questions à un \emph{oracle} (ou \emph{teacher}). Les questions sont de deux types :
 
-TODO
+\begin{itemize}
+	\item Les \emph{membership queries} : Est-ce que le mot $w$  appartient au langage $L$ ?
+	\item Les \emph{conjectures} : On présente un automate hypothèse. Si cet automate reconnaît $L$, alors on retourne "Ok".
+	      Sinon, on retourne un mot contre-exemple $w$. Ce mot vérifie soit $w \in L$ et il n’est pas accepté par notre
+	      automate, soit $w \notin L$ mais il est accepté par notre automate.
+\end{itemize}
+
+Cet algorithme découle du travail de \cite{angluinLearning}.
 
 
+\subsection{Définitions}
 
+
+\begin{definition}[Cloture par préfixe / (\blue{suffixe})]
+	Un ensemble $S$ est clos par préfixe (\blue{suffixe}), si
+	$$\forall w \in S, \text{ tout préxife (\blue{suffixe}) de $w$ est dans } S$$
+\end{definition}
+
+\begin{exercice}
+	Indiquez lesquels des ensembles suivants sont clos par préfixe :
+	\begin{enumerate}
+		\item $\set{0,2,10,010} \ \times$
+		\item $\set{110,1,0,\motvide,11} \ \checkmark$
+		\item $\set{1110,10,1} \ \times$
+		\item $\set{011,0,\motvide,11,01} \ \times$
+		\item $\set{111,\motvide,11,1,0} \ \checkmark$
+	\end{enumerate}
+\end{exercice}
+
+Le learner maintient une table $T$ avec:
+
+\begin{itemize}
+	\item Les colonnes de $T$ qui sont indexées par un ensemble $E$ de mot clos par suffixe
+	\item Les lignes sont indexées par un ensemble de mots $S \cup S\cdot \alphabet$, ou $S$ est
+	      un ensemble fermé par préfixe.
+\end{itemize}
+
+
+\begin{definition}
+	Si $s \in S \cup S\alphabet$, soit $n = \abs E$,  on défini $\row s \in [0,1]^n$ la suite suivante :
+	$$ \row s = (T[s,e_1], \ldots, T[s, e_n])$$
+\end{definition}
+
+\begin{definition}
+	Une table est \emph{close} si
+	$$ \forall t = sa \in S\alphabet, \exists s'\in S, \row {s'} = \row s$$
+\end{definition}
+
+\begin{definition}
+	Une table est \emph{cohérente} si
+	$$ \forall s_1, s_2 \in S, \row{s_1} = \row{s_2} \implies \forall a \in \alphabet, \row{s_1a} = \row{s_2a}$$
+\end{definition}
+
+
+\begin{exemple} \label{ex:tables}
+
+	\begin{itemize}
+		\item La table suivante n'est pas close car $\nexists s \in S, \row s = \row {ab}$
+		      \begin{center}
+			      \begin{tabular}{c|c|c}
+				                 & $\motvide$ & a \\ \hline
+				      $\motvide$ & 0          & 1 \\
+				      a          & 1          & 1 \\
+				      b          & 0          & 0 \\ \hline
+
+				      aa         & 0          & 0 \\
+				      ab         & 1          & 0 \\
+				      bb         & 0          & 1 \\
+				      bb         & 1          & 1 \\
+			      \end{tabular}
+		      \end{center}
+
+		\item La table suivante est close et cohérente
+		      \begin{center}
+			      \begin{tabular}{c|c|c}
+				                 & $\motvide$ & a \\ \hline
+				      $\motvide$ & 0          & 0 \\
+				      a          & 1          & 1 \\ \hline
+
+				      b          & 1          & 1 \\
+				      aa         & 0          & 0 \\
+				      ab         & 0          & 0 \\
+			      \end{tabular}
+		      \end{center}
+		\item La table suivante n'es pas cohérente car $\row {\motvide} = \row a$ mais
+		      $\row (\motvide a) = \row a \neq \row {aa}$
+
+		      \begin{center}
+			      \begin{tabular}{c|c|c}
+				                 & $\motvide$ & a \\ \hline
+				      $\motvide$ & 0          & 1 \\
+				      a          & 0          & 1 \\
+				      b          & 0          & 0 \\ \hline
+
+				      aa         & 0          & 0 \\
+				      ab         & 0          & 1 \\
+				      bb         & 1          & 1 \\
+				      bb         & 1          & 0 \\
+			      \end{tabular}
+		      \end{center}
+	\end{itemize}
+\end{exemple}
+
+
+\subsection{L'algorithme}
+
+\begin{theorem}
+	À partir d'une table close te cohérente on peut construire un automate $A = (Q,I,T,\delta)$ où
+	$Q = \setdef {\row s} {s \in S}, \ I = \set {\row{\motvide}}, \ T = \setdef {\row s} {T(s) -1}, \ \delta (\row s, a)  = \row{sa}$
+\end{theorem}
+
+\begin{exemple}
+	Nous allons voir comment passer de l'une des tables de l'exemple \ref{ex:tables} vers son automate associé.\\
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\begin{tabular}{c|c|c}
+			           & $\motvide$ & a \\ \hline
+			$\motvide$ & 0          & 0 \\
+			a          & 1          & 1 \\ \hline
+
+			b          & 1          & 1 \\
+			aa         & 0          & 0 \\
+			ab         & 0          & 0 \\
+		\end{tabular}
+	\end{minipage}
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\digraph[scale=0.5]{automateTable}{
+			rankdir=LR;
+
+			node [shape=circle, style=filled, color=lightblue];
+			q0 [label="00"];
+			q1 [label="11"];
+
+			start [shape=point];
+			start -> q0;
+
+			q0 -> q1 [label="a,b"];
+			q1 -> q0 [label="a,b"];
+
+			q1 [shape=doublecircle];
+		}
+	\end{minipage}
+\end{exemple}
+
+Initialement on propose
+\digraph[scale=0.5]{automateBase1}{
+	rankdir=LR;
+
+	node [shape=circle, style=filled, color=lightblue];
+	q0 [label=" "];
+
+	start [shape=point];
+	start -> q0;
+
+	q0 -> q0 [label="Σ"];
+
+	q0 [shape=doublecircle];
+}
+ou
+\digraph[scale=0.5]{automateBase2}{
+	rankdir=LR;
+
+	node [shape=circle, style=filled, color=lightblue];
+	q0 [label=" "];
+
+	start [shape=point];
+	start -> q0;
+
+	q0 -> q0 [label="Σ"];
+}, selon si $\epsilon \in L$ ou non.
+
+Tant que l'oracle donne un contre exemple
+\begin{itemize}
+	\item $w$ = contre exemple.
+	\item $w$ et tous ses préfixes ajoutés à $S$.
+	\item Les nouvelles lignes sont remplies en posant des "membership queries".
+	\item Tant que $T$ n'est pas cohérente ou n'est pas close:
+	      \begin{itemize}
+		      \item Si T n'est pas cohérent (\cad, $\exists s_1, s_2 \in S, \exists a \in \alphabet, \row{s_1} = \row{s_2} \et \row{s_1a} \neq \row{s_2a}$
+		            \cad $\exists e \in E, T (s_1ae) \neq T(s_2ae)$)
+
+		            On ajoute $ae$ et tous ses suffixes à $E$.
+		      \item Si $T$ n'est pas close alors ($\exists t \in S \alphabet, \forall s \in S, \row t \neq \row s$)
+
+		            Ajouter $t$ à $S$.
+	      \end{itemize}
+	\item On propose à l'oracle l'automate hypothèse associé à $T$
+\end{itemize}
+
+\subsection{Propriétés des tables closes et cohérentes}
+
+\begin{notation}
+	On note $(S,E,T)$ une table, où $S$ est l'ensemble des lignes. $E$ l'ensemble des mots des colonnes et $T$ la fonction de vérité.
+\end{notation}
+
+\begin{definition}
+	Un automate $(Q, q_0, F, S)$ est en accord avec une fonction $T$, si
+	$$ \forall s \in S \cup S\alphabet m \forall \motvide \in E, \delta(q_0,se) \in F \iff T(se) = 1$$
+\end{definition}
+
+\begin{theorem}
+	Si $A$ est l'automate issue d'une table $(S,E,T)$ alors $A$ est en accord avec $T$ et tout autre
+	automate en accord avec $T$ et non isomorphe à $A$ possède au moins un état de plus que $A$.
+\end{theorem}
+
+\begin{lemma}
+	Si $(S,E,T)$ est close et cohérente alors dans l'automate $A = \mathcal A (S,E,T)$
+	$$\forall s \in S \cup S\alphabet, \delta(q_0,s) = \row s$$
+\end{lemma}
+
+\begin{lemma}
+	Si $(S,E,T)$ est close et cohérente alors l'automate $A = \mathcal A (S,E,T)$
+	est d'accord avec la fonction $T$, \ie
+	$$\forall s \in S \cup S\alphabet, \forall e \in E, \delta(q_0,se) \in F \iff T(se) =1$$
+\end{lemma}
+
+
+\begin{lemma}
+	Si $(S,E,T)$ est close et cohérente alors si automate $A = \mathcal A (S,E,T)$
+	a $n$ états, tout automate $A'$ en accord avec $T$ et ayant au plus $n$ états est isomorphe à $A$.
+\end{lemma}
 
 \subsection{Terminaison de l'algorithme}
 
 \begin{lemma}
 	Si $(S,E,T)$ est une table alors tout automate en accord avec $T$ possède au
-	moins autant d'états que le nombre de valeurs distinctes de l'ensemble $\setdef {row(s)} {s \in S}$.
+	moins autant d'états que le nombre de valeurs distinctes de l'ensemble $\setdef {\row s} {s \in S}$.
 \end{lemma}
 
 \begin{proof}
 	Soit $A = (Q,q_0,F,\delta)$ un automate compatible avec $T$ et défissions
-	$f: R \to Q$, $f(row(s)) = \delta(q_0, s)$.
+	$f: R \to Q$, $f(\row s) = \delta(q_0, s)$.
 
-	Soient $s_1 \et s_2$ \tq $row(s_1) \neq row(s_2)$, donc $\exists e \in E, T(s_1,e) = T(s_2,e)$.
+	Soient $s_1 \et s_2$ \tq $\row {s_1} \neq \row{s_2}$, donc $\exists e \in E, T(s_1,e) = T(s_2,e)$.
 	Comme $A$ est en accord avec seulement l'un des deux mots $s_1e$ et $s_2e$ est reconnu.
 
 	Sans perte de généralité on suppose $s_1e$ reconnu et $s_2e$ pas reconnu, donc
@@ -32,7 +252,7 @@ TODO
 Soit $n$ le nombre d'états de l'automate minimal reconnaissant le langage cherché.
 
 \begin{remarque}
-	Le nombre d'étas des différents automates conjecture ne peut qu'augmenter.
+	Le nombre d'états des différents automates conjecture ne peut qu'augmenter.
 	\begin{itemize}
 		\item Si on ajoute un mot à $E$ parce que la table n'était pas cohérente, le nombre de rows distinctes augmente
 		      d'une unité.
@@ -99,3 +319,4 @@ Considérons le coût de chaque type d'opérations :
 \begin{remarque}
 	Si l'oracle fourni toujours un contrexemple de taille $\leq n$ (ce qui est toujours possible), alors le polynôme en question dépend de $n$ seulement.
 \end{remarque}
+
