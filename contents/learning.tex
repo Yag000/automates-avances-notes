@@ -1,0 +1,101 @@
+\section{Learning}
+
+Basé sur \cite{angluinLearning}
+
+
+
+TODO
+
+
+
+
+\subsection{Terminaison de l'algorithme}
+
+\begin{lemma}
+	Si $(S,E,T)$ est une table alors tout automate en accord avec $T$ possède au
+	moins autant d'états que le nombre de valeurs distinctes de l'ensemble $\setdef {row(s)} {s \in S}$.
+\end{lemma}
+
+\begin{proof}
+	Soit $A = (Q,q_0,F,\delta)$ un automate compatible avec $T$ et défissions
+	$f: R \to Q$, $f(row(s)) = \delta(q_0, s)$.
+
+	Soient $s_1 \et s_2$ \tq $row(s_1) \neq row(s_2)$, donc $\exists e \in E, T(s_1,e) = T(s_2,e)$.
+	Comme $A$ est en accord avec seulement l'un des deux mots $s_1e$ et $s_2e$ est reconnu.
+
+	Sans perte de généralité on suppose $s_1e$ reconnu et $s_2e$ pas reconnu, donc
+	$\delta (q_0, s_1, e) \in F$, alors que $\delta (q_0,s_2,e) \notin F$, cela implique que
+	$\delta (q_0,s_1) \neq \delta (q_0,s_2)$.
+
+\end{proof}
+
+Soit $n$ le nombre d'états de l'automate minimal reconnaissant le langage cherché.
+
+\begin{remarque}
+	Le nombre d'étas des différents automates conjecture ne peut qu'augmenter.
+	\begin{itemize}
+		\item Si on ajoute un mot à $E$ parce que la table n'était pas cohérente, le nombre de rows distinctes augmente
+		      d'une unité.
+		\item Si on ajoute un mot a $S$ parce que la table n'est pas close, le nombre de rows distinctes augmente d'une unité.
+	\end{itemize}
+	On déduit qu'on ne peut pas trouver une table non close ou non cohérente plus de $n-1$ fois tout au long de l'algorithme.
+
+	En particulier, on déduit qu'après un nombre fini d'étapes de l'algorithme on arrive toujours à trouver
+	une table close et cohérente et à émettre une conjecture.
+\end{remarque}
+
+
+Combien de fausses conjectures  le learner émet avant de donner la bonne ?
+
+Soit $(S,E,T)$ une table close et cohérente et $A(S,E,T)$ l'automate associé.
+Supposons que $A$ soit une conjecture fausse, et donc l'oracle fournit un contrexemple $t$.
+
+L'automate $S(S,E,T)$ et l'automate du langage cherché son en désaccord su le mot $t$, donc ces deux automates
+ne sont pas équivalents, et dont $A(S,E,T)$ a au moins un état de moins que l'automate cherché.
+Donc $A(S,E,T)$ a au plus $n-1$ états. On en déduit que le nombre de fausses conjectures émises pas le learner est $n-1$.
+
+On en déduit que l'algorithme s'arrête toujours, au pire après avoir rendu la table close et
+cohérente $n-1$ et après avoir émis au plus $n-1$ fausses conjectures.
+
+
+\subsection{Analyse de la complexité}
+
+Elle depend du nombre $m$ et de la longueur du plus long contrexemple fourni par l'oracle, notée $m$.
+
+
+\begin{itemize}
+	\item A chaque fois qu'on trouve un table non cohérente, on ajoute un mot à $E$.
+	\item A chaque fois qu'on trouve un table non close, on ajoute un mot à $S$.
+	\item A chaque fois qu'on émet une conjecture fausse, on ajoute au plus $m$ mots à $S$
+\end{itemize}
+
+On en déduit que $\abs E \leq n$.
+
+La longueur maximale des mots de $E$ augmente au plus d'une unité à chaque fois qu'on rend la table cohérente
+(on ajoute ä $E$ un mot $xe$ avec $e\ in E$). On déduit que la longueur maximale d'un mot de $E$ est toujours $<n$.
+
+De même, on a que  $\abs S \leq n + m(n-1)$. %TODO: explanation of each number.
+
+La longueur maximale des mots de $s$ est inférieure à $m - n -1$.
+
+
+On déduit que le cardinal maximal de $(S \cup S \Sigma) \times E$ (le nombre maximal de casses de la table) est : $(k+1)(n+m(n-1))n \in O(mn^2)$.
+
+
+Considérons le coût de chaque type d'opérations :
+\begin{itemize}
+	\item Vérifier si une table est close et cohérente se fait en temps polynomiale relativement à la taille de la table.
+	\item Ajouter un mot  Ajouter un mot à $S$ ou à E nécessite au plus $nm$ (membership) queries.
+	\item Construire une conjecture à partir d'une table cohérente et close est faisable ne temps polynomial relativement à
+	      la taille de la table.
+	\item Un contrexemple nécessite l'addition d'au plus $m$ mots à $S$ et cette opérations est effectué au plus $n-1$ fois.
+\end{itemize}
+
+\begin{theorem}
+	L'algorithme produit toujours un automate isomorphe à l'automate minimal du language cherché, de plus, le temps de calcul peut être
+	exprimé par un polynôme en $n$ et en $m$.
+\end{theorem}
+
+\begin{remarque}
+	Si l'oracle fourni toujours un contrexemple de taille $\leq n$ (ce qui est toujours possible), alors le polynôme en question dépend de $n$ seulement.
+\end{remarque}

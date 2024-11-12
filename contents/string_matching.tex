@@ -1,0 +1,59 @@
+\section{String matching}
+
+
+\begin{definition}
+	Étant donné deux chaines de caracteres $T$ le texte et $M$ le motif.
+	On dit que $T$ présente une occurrence ce $M$ si
+	$$\forall j \in \enum 1 {\len M -1}, \exists i, 0 \leq 1 \leq \len T - \len M, \text{ \tq } T[i + j] = M[j]$$
+\end{definition}
+
+\begin{remarque}
+	Le texte $T$ contient le facteur $u$ \ssi $T$ a un préfixe qui appartient $\mots u$.
+\end{remarque}
+
+\begin{remarque}
+	L'algorithme trivial qui teste toutes les positions de $T$ et vérifie s'il y a une occurrence de $u$ en position $i$ est en $O(\abs T \abs u)$.
+\end{remarque}
+
+\begin{remarque}
+	Pour chercher les occurrences de $u$ dans $T$ on peut construire un automate qui reconnait $\mots u$ et le faire travailler sur $T$.
+	À chaque fois qu'on passe par un état finale, on vient de voir une occurrence de $M$.
+\end{remarque}
+
+\begin{remarque}
+	Avec l'algorithme naif, chaque caractère de $T$ est analysé $\abs u$ fois. Avec les algorithmes pas les automates chaque caractère est analysé une seule fois.
+\end{remarque}
+
+\begin{remarque}
+	L'approche pas automates présente quelques problèmes d'efficacité :
+	\begin{itemize}
+		\item Si l'automate est non déterministe, le temps de calcul peut devenir tres lourd.
+		\item Si on le déterministe avant, also on risque de trouver un algorithme de taille exponentielle.
+	\end{itemize}
+\end{remarque}
+
+\subsection{Knuth-Morris-Pratt}
+
+L'algorithme Knuth-Morris-Pratt améliore l'algorithme naif en introduisant des décalage d'amplitude
+$> 1$ et fait en sorte que chaque caractère de $T$ soit analysé une seule fois.
+
+
+\begin{definition}
+	Si $w$ est un mot, on appelle bord de $w$ le mot le plus long qui est en même temps préfixe et suffixe de $w$.
+\end{definition}
+
+Si au cours de la vérification de presence du mot $u$ à partir d'une position
+on a un échec au niveau de la $j$-ème lettre du motif, alors :
+
+\begin{itemize}
+	\item On calcule le bord $a$ di préfixe de $u$ de longueur $j-1$.
+	\item Et on décale $u$ de sorte que le $e$ au début est position;e sous e $q$ final.
+\end{itemize}
+
+\begin{exemple}
+	TODO: explain
+	\begin{eqnarray*}
+		T &=&  ABABAABCBABABACAB \\
+		u &=& ABABACA
+	\end{eqnarray*}
+\end{exemple}
