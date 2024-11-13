@@ -124,3 +124,9 @@
 \newcommand{\bimpLR}{\fbox{$\Rightarrow$}}
 
 \newcommand{\row}[1]{\text{row}\left(#1\right)}
+
+\newenvironment{proofI}[1][\proofname]{%
+	\begin{proof}[#1]$ $\par\nobreak\ignorespaces
+		}{%
+	\end{proof}
+}

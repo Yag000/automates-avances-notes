@@ -1,4 +1,4 @@
-\section{Learning}
+\section{Apprentissage de fanages rationnels par queries et contrexemples}
 
 Nous allons étudier un algorithme qui permet de générer un automate pour un langage rationnel $L$.
 L'idée est que le \emph{learner}(ou \emph{étudiant}), une entité dont l'objectif est de retrouver le langage, pose
@@ -59,7 +59,7 @@ Le learner maintient une table $T$ avec:
 
 
 \begin{exemple} \label{ex:tables}
-
+    \ \newline
 	\begin{itemize}
 		\item La table suivante n'est pas close car $\nexists s \in S, \row s = \row {ab}$
 		      \begin{center}
@@ -152,6 +152,7 @@ Le learner maintient une table $T$ avec:
 Initialement on propose Figure \ref{fig:algo-inL} ou Figure \ref{fig:algo-notinL}, selon si $\epsilon \in L$ ou non.
 
 \begin{twoautomata}
+	\centering
 	\digraph[scale=0.5]{automateBase1}{
 		rankdir=LR;
 
@@ -168,6 +169,7 @@ Initialement on propose Figure \ref{fig:algo-inL} ou Figure \ref{fig:algo-notinL
 	\caption{Automate pour $\motvide \in L$}\label{fig:algo-inL}
 \end{twoautomata}
 \begin{twoautomata}
+	\centering
 	\digraph[scale=0.5]{automateBase2}{
 		rankdir=LR;
 
@@ -182,9 +184,9 @@ Initialement on propose Figure \ref{fig:algo-inL} ou Figure \ref{fig:algo-notinL
 	\caption{Automate pour $\motvide \notin L$}\label{fig:algo-notinL}
 \end{twoautomata}
 
-Tant que l'oracle donne un contre exemple
+Tant que l'oracle donne un contrexemple
 \begin{itemize}
-	\item $w$ = contre exemple.
+	\item $w$ = contrexemple.
 	\item $w$ et tous ses préfixes ajoutés à $S$.
 	\item Les nouvelles lignes sont remplies en posant des "membership queries".
 	\item Tant que $T$ n'est pas cohérente ou n'est pas close:

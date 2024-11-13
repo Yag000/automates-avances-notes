@@ -10,6 +10,7 @@
 \end{definition}
 
 \begin{exemple}
+    \ \newline
 	\begin{itemize}
 		\item $(\N, +, 0)$
 		\item $(\mots, \cdot, \motvide)$
@@ -42,7 +43,7 @@
 \end{prop}
 
 
-\begin{proof}
+\begin{proofI}
 	\begin{itemize}
 		\item Existence:
 
@@ -70,7 +71,7 @@
 
 		      Et donc $h = \bar f$
 	\end{itemize}
-\end{proof}
+\end{proofI}
 
 On dit que $\mots$ est librement engendré sur $\alphabet$.
 
@@ -119,7 +120,7 @@ On dit que $\mots$ est librement engendré sur $\alphabet$.
 	$\phi$ reconnaît $L$ \ssi $L = \quot {\phi} (\phi (L))$.
 \end{exercice}
 
-\begin{proof}
+\begin{proofI}
 	\begin{itemize}
         \item \bimpRL
 
@@ -130,14 +131,14 @@ On dit que $\mots$ est librement engendré sur $\alphabet$.
 		      On sait qu'il existe $P$ \tq $L = \setdef {w \in \mots} {\phi(w) \in P}$. Regardons ce qu'est $\phi (L)$.
 		      On a que $\phi (L) = \setdef {\phi (w)} {w \in \mots, \phi(w) \in P} = P$. Et donc on a bien $\quot {\phi} (\phi (L)) = \quot {\phi} (P) = L$.
 	\end{itemize}
-\end{proof}
+\end{proofI}
 
 \begin{prop}
 	Soit $L \subseteq \mots$ un langage sur l'alphabet $\alphabet$. Alors $L$ est reconnaissable \ssi $L$ est reconnu par un morphisme de monoïdes $\phi : \mots \to M$ où $M$ est fini.
 \end{prop}
 
 
-\begin{proof}
+\begin{proofI}
 	\begin{itemize}
 		\item \bimpRL
 
@@ -203,7 +204,7 @@ On dit que $\mots$ est librement engendré sur $\alphabet$.
 
 		      Donc $L$ est reconnu par $\phi$.
 	\end{itemize}
-\end{proof}
+\end{proofI}
 
 \begin{definition}
 	On va appeler $\phi (\mots)\subseteq Q^Q$ le \textbf{monoïde de transition de l'automate} $A$.
@@ -317,8 +318,6 @@ On dit que $\mots$ est librement engendré sur $\alphabet$.
 \end{terminologie}
 
 
-
-
 \begin{lemma}
 	Si $N$ divise $M$ et $N$ reconnait un langage $L$ alors $M$ reconnait $L$.
 
@@ -340,8 +339,7 @@ On dit que $\mots$ est librement engendré sur $\alphabet$.
 	Un monoïde  $M$ reconnait  un langage $L$ \ssi le monoïde syntaxique $\mots / \sim_L$ divise $M$.
 \end{prop}
 
-\begin{proof}
-
+\begin{proofI}
 	\begin{itemize}
 		\item \bimpRL
 
@@ -385,4 +383,4 @@ On dit que $\mots$ est librement engendré sur $\alphabet$.
 		      \end{itemize}
 		      Exercice : finir la preuve.
 	\end{itemize}
-\end{proof}
+\end{proofI}
