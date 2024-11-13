@@ -1,7 +1,5 @@
 \section{Learning}
 
-
-
 Nous allons étudier un algorithme qui permet de générer un automate pour un langage rationnel $L$.
 L'idée est que le \emph{learner}(ou \emph{étudiant}), une entité dont l'objectif est de retrouver le langage, pose
 questions à un \emph{oracle} (ou \emph{teacher}). Les questions sont de deux types :
@@ -151,32 +149,38 @@ Le learner maintient une table $T$ avec:
 	\end{minipage}
 \end{exemple}
 
-Initialement on propose
-\digraph[scale=0.5]{automateBase1}{
-	rankdir=LR;
+Initialement on propose Figure \ref{fig:algo-inL} ou Figure \ref{fig:algo-notinL}, selon si $\epsilon \in L$ ou non.
 
-	node [shape=circle, style=filled, color=lightblue];
-	q0 [label=" "];
+\begin{twoautomata}
+	\digraph[scale=0.5]{automateBase1}{
+		rankdir=LR;
 
-	start [shape=point];
-	start -> q0;
+		node [shape=circle, style=filled, color=lightblue];
+		q0 [label=" "];
 
-	q0 -> q0 [label="Σ"];
+		start [shape=point];
+		start -> q0;
 
-	q0 [shape=doublecircle];
-}
-ou
-\digraph[scale=0.5]{automateBase2}{
-	rankdir=LR;
+		q0 -> q0 [label="Σ"];
 
-	node [shape=circle, style=filled, color=lightblue];
-	q0 [label=" "];
+		q0 [shape=doublecircle];
+	}
+	\caption{Automate pour $\motvide \in L$}\label{fig:algo-inL}
+\end{twoautomata}
+\begin{twoautomata}
+	\digraph[scale=0.5]{automateBase2}{
+		rankdir=LR;
 
-	start [shape=point];
-	start -> q0;
+		node [shape=circle, style=filled, color=lightblue];
+		q0 [label=" "];
 
-	q0 -> q0 [label="Σ"];
-}, selon si $\epsilon \in L$ ou non.
+		start [shape=point];
+		start -> q0;
+
+		q0 -> q0 [label="Σ"];
+	}
+	\caption{Automate pour $\motvide \notin L$}\label{fig:algo-notinL}
+\end{twoautomata}
 
 Tant que l'oracle donne un contre exemple
 \begin{itemize}
@@ -185,7 +189,7 @@ Tant que l'oracle donne un contre exemple
 	\item Les nouvelles lignes sont remplies en posant des "membership queries".
 	\item Tant que $T$ n'est pas cohérente ou n'est pas close:
 	      \begin{itemize}
-		      \item Si T n'est pas cohérent (\cad, $\exists s_1, s_2 \in S, \exists a \in \alphabet, \row{s_1} = \row{s_2} \et \row{s_1a} \neq \row{s_2a}$
+		      \item Si $T$ n'est pas cohérent (\cad, $\exists s_1, s_2 \in S, \exists a \in \alphabet, \row{s_1} = \row{s_2} \et \row{s_1a} \neq \row{s_2a}$
 		            \cad $\exists e \in E, T (s_1ae) \neq T(s_2ae)$)
 
 		            On ajoute $ae$ et tous ses suffixes à $E$.
