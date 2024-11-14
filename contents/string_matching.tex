@@ -12,6 +12,22 @@
 
 \begin{remarque}
 	L'algorithme trivial qui teste toutes les positions de $T$ et vérifie s'il y a une occurrence de $u$ en position $i$ est en $O(\abs T \abs u)$.
+
+	\begin{algorithmic}[lines]
+		\Function{Naif}{$T,u$}
+		\For{$i$ in $0, \ldots , \len T - \len u + 1$}
+		\State $j = 0$
+		\If  {$j  <  \len u \et (u[j] == t[i+j])$}
+		\State k ++
+		\EndIf
+		\If {$j == \abs u$}
+		\State Afficher l'eccurence de $u$ en position $i$
+		\EndIf
+		\EndFor
+		\EndFunction
+	\end{algorithmic}
+
+
 \end{remarque}
 
 \begin{remarque}
@@ -33,20 +49,34 @@
 
 \subsection{Knuth-Morris-Pratt}
 
+
 L'algorithme Knuth-Morris-Pratt améliore l'algorithme naif en introduisant des décalage d'amplitude
 $> 1$ et fait en sorte que chaque caractère de $T$ soit analysé une seule fois.
 
+\iffalse
+	\begin{itemize}
+		\item Amélioration par rapport a l'algorithme naif:
+
+		      L'algorithme ne prend en consideration que certains décalages
+		      pour le motif en excluant les décalages où on ne pourra pas trouver le motif.
+	\end{itemize}
+\fi
+
 
 \begin{definition}
-	Si $w$ est un mot, on appelle bord de $w$ le mot le plus long qui est en même temps préfixe et suffixe de $w$.
+	Si $w$ est un mot, on appelle bord de $w$ le mot le plus long qui est en même temps préfixe et suffixe de $w$ et propre.
 \end{definition}
+
+\begin{exemple}
+	"ABA" est le plus long bord de "ABABA".
+\end{exemple}
 
 Si au cours de la vérification de presence du mot $u$ à partir d'une position
 on a un échec au niveau de la $j$-ème lettre du motif, alors :
 
 \begin{itemize}
 	\item On calcule le bord $a$ di préfixe de $u$ de longueur $j-1$.
-	\item Et on décale $u$ de sorte que le $e$ au début est position;e sous e $q$ final.
+	\item Et on décale $u$ de sorte que le $q$ au début est positionné sous le $q$ final.
 \end{itemize}
 
 \begin{exemple}
@@ -56,3 +86,168 @@ on a un échec au niveau de la $j$-ème lettre du motif, alors :
 		u &=& ABABACA
 	\end{eqnarray*}
 \end{exemple}
+
+
+L'algorithme effectue un pré-traitement dans lequel pour tout $j$ avec $0 \leq j \leq \len u - 1$
+calcule le plus grand bord du préfixe de $u$ de longueur $j$.
+
+\begin{exemple}
+	Pour le motif "ABABACA"
+	\begin{itemize}
+		\item Bord($\motvide$) = $\motvide$
+		\item Bord(A) = $\motvide$
+		\item Bord(AB) = $\motvide$
+		\item Bord(ABA) = A
+		\item Bord(ABAB) = BA
+		\item Bord(ABABA) = ABA
+		\item Bord(ABABAC) = $\motvide$
+		\item Bord(ABABACA) = A
+	\end{itemize}
+\end{exemple}
+
+Il suffit de calculer une fonction $\N \to \N$ qui à tout $j \in \enum 0 {\len u}$ associe
+la longueur du plus long bord du préfixe de longueur $j$ du motif (la fonction préfixe).
+
+
+Cet algorithme peut aussi se retrouver comme un algorithme issue des automates.
+
+
+\begin{definition}
+	Pour tout $w \in \mots$ on défini
+	$q(w) = \setdef {\text{ le plus long } X} {X \text{ est suffixe de } w \et X \text{ est prefixe de } u}$
+\end{definition}
+
+\begin{prop}
+	Soit $\cong$ la congruence de Nerode induite pat le langage $\mots u$, alors
+	$$ w_1 \cong w_2 \iff q(w_1) = q(w_2)$$
+\end{prop}
+
+\begin{proofI}
+	\item \bimpLR \\
+	Supposons $w_1 \cong w_2$ ($\forall w \in \mots, w_1y \in \mots w \iff w_2y\in \mots u$)
+
+	Soit $y$ tel que $w_1 y \in \mots u$ et $w_2 y \in \mots u$ et prenons $y$ de longueur minimale.
+	On a donc $\len y \leq \len u$.
+
+	TODO: Add image
+
+	O n a donc $z_1 = z_2$
+	De plus on a $z_1 = z_2 = q(w_1) = q(w_2)$  à cause de la minimalité de $y$.
+
+	\item \bimpRL \\
+	Supposons que $q(w_1) = q(w_2)$ et nous voulons montrer que
+	$$\forall y, \quad w_1 y \in \mots u \iff w_2 y \in \mots u$$
+
+	Ceci est trivialement vrai si $\len y \geq \len u$.
+
+	TODO: add image
+	car dans ce cas
+	$$\quad w_1 y \in \mots u \iff  y \in \mots u \iff w_2 y \in \mots u$$
+
+	Supposons donc que $\len y < \len u$ et considérons le mot $w_1 y$
+
+	TODO: image
+
+	$w_1y \in \mots u \implies \exists$ un suffixe $z$ de $w_1$ qui est préfixe de $u$ et $z$ est un suffixe de $q(w_1) = q(w_2)$
+	donc $z$ est aussi un suffixe de $q(w_2)$ et en particulier il est un suffixe de $w_2 \implies w_2 y $ se décompose en
+	$w_2'zy = w_2 y \in \mots u$
+\end{proofI}
+
+Cette proposition suggère une nouvelle manière pour calculer l'automate minimal pour $\mots u$
+
+\begin{eqnarray*}
+	Q  &=& \set {\text {les prefixes de } u} \\
+	q_0 &=& <e> \\
+	F &=& \set{<u>} \\
+	\delta(<v>,a) &=& = \left\{ \begin{array}{cc}
+		<v \cdot a>  & \text{si } v\cdot a \text{ est un prefixe de } u \\
+		q(v \cdot a) & \text{sinon }
+	\end{array}\right.
+\end{eqnarray*}
+
+\begin{exemple}
+	TODO
+\end{exemple}
+
+
+\begin{remarque}
+	Si dans cet automate on remplace les prefixes de $u$ par leur longueur on se rend compte que cet automate
+	contient la même information que la fonction préfixe.
+\end{remarque}
+
+
+\subsection{ Find me a better place }
+
+\begin{notation}
+	On note $\B = \set {0,1}$.
+\end{notation}
+
+On veut évaluer les fonctions $f : \B ^ n \to B$
+
+\begin{exemple}
+	Une telle fonction est $f(x_1,x_2,x_3) = (x_1 \land x_2) \lor x_3 : \B^3 \to \B$
+\end{exemple}
+
+Une fonction $f : \B ^ n \to B$ est représentable avec $2^k$ bits
+(on donne les images des $2^n$ $n$-uplets sur $\B$)
+
+Donc au total il y a $2^{2^n}$ fonction $\B^n \to \B$.
+
+\begin{idee}
+	Utiliser des automates qui reconnaissent le langage des $n$-uplets
+	$(x_1,x_2,\ldots, x_n)$ pour lesquels $f(x_1, x_2, \ldots, x_n) = 1$.
+\end{idee}
+
+Un "automate" qui fait cela est l'arbre de décision de $f$.
+
+\begin{exemple}
+	Si $f(x_1,x_2,x_3) = (x_1 \land x_2) \lor x_3$, $Sol(f) = 111,110,001,011,101$
+
+	TODO: image
+\end{exemple}
+
+
+Pour éviter cet inconvenient, plutôt que de travailler avec les automates génériques
+on travaille avec des BDD (Binary Decision Diagrams)
+
+\begin{definition}
+	Un BDD est un graphe avec une seule racine, acyclique, il possède deux feuilles,
+	une etiqueté par 0 (false) et une etiqueté par 1 (true).
+
+	Les nœuds internes (nœuds de décision) on toujours deux fils. Notamment, si $n$ est un nœud interne
+	et $x_i$ la variable relative a ce nœud, on nome $\low n$ le fils de $n$ correspondant a l'assignation
+	$x_1 = 0$ et $\high n$ celui correspondant a l'assignation $x_1 = 1$.
+
+	Chaque nœud a une étiquette qui est un entier $\geq 0$ et $\etiquette n > \etiquette {\low n},  \etiquette {\high n}$.
+\end{definition}
+
+
+\begin{definition}
+	Un BDD est dit réduit si :
+	\begin{enumerate}
+		\item On a jamais $\low n = \high n$
+		\item Il n'y a pas deux sous arbres isomorphes.
+	\end{enumerate}
+\end{definition}
+
+A partir d'un arbre de décison on peut obtenir un BDD réduit par la méthode suivante :
+\begin{itemize}
+	\item Les feuilles qui reconnaissent pas ont comme étiquette $0$.
+	\item Les feuilles qui reconnaissent ont comme étiquette $1$.
+	\item Si $n$ est un nœud interne
+	      \begin{itemize}
+		      \item si $\etiquette {\low n} = \etiquette {\high n} = e$, alors $\etiquette n = e$.
+		      \item il existe un nœud $n'$ déjà étiqueté et \tq
+		            \begin{eqnarray*}
+			            \etiquette {\low {n'}} &=& \etiquette {\low {n}} \\
+			            \etiquette {\high{n'}} &=& \etiquette {\high{n}}
+		            \end{eqnarray*}
+		            Alors on pose $\etiquette n = \etiquette {n'}$
+		      \item Sinon l'étiquette de $n$ est le plus petit entier qui n;a pas encore été utilisé.
+	      \end{itemize}
+\end{itemize}
+
+Une fois qu'on a attribué un étiquette à tous les nœuds on identifie les tats ayant la même étiquette.
+
+
+
