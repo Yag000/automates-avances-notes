@@ -279,7 +279,7 @@ Tant que l'oracle donne un contrexemple
 			      &=& \delta(\row s,xe') \reason{par le lemme \ref{lem:learning-9}} \\
 			      &=& \delta(\row {s'},xe') \reason{ car $\row s = \row {s'}$} \\
 			      &=& \delta(\delta (\row {s'}, x), e') \\
-			      &=& \delta(\row {s'x}, e') \reason {par définition de $\dalta$}\\
+			      &=& \delta(\row {s'x}, e') \reason {par définition de $\delta$}\\
 			      &=& \delta(\delta{q_0, s'x}, e') \\
 			      &=& \delta(q_0, s'x e')
 		      \end{eqnarray*}
@@ -298,7 +298,7 @@ Tant que l'oracle donne un contrexemple
 \begin{proof}
 	Soit $A' = (Q', q_0', F', \delta')$ un autre automate en accord avec $T$ et ayant au plus $n$ états.
 
-	L'objectif est d'exhiber un isomorphisme entre les deux automates. \en	La construction et la vérification
+	L'objectif est d'exhiber un isomorphisme entre les deux automates. La construction et la vérification
 	de cet isomorphisme suivent les arguments détaillés dans la preuve du Lemme 4 de \cite{angluinLearning}.
 \end{proof}
 
