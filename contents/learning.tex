@@ -1,4 +1,4 @@
-\section{Apprentissage de fanages rationnels par queries et contrexemples}
+\section{Apprentissage de langages rationnels par queries et contrexemples}
 
 Nous allons étudier un algorithme qui permet de générer un automate pour un langage rationnel $L$.
 L'idée est que le \emph{learner}(ou \emph{étudiant}), une entité dont l'objectif est de retrouver le langage, pose
@@ -59,7 +59,7 @@ Le learner maintient une table $T$ avec:
 
 
 \begin{exemple} \label{ex:tables}
-    \ \newline
+	\ \newline
 	\begin{itemize}
 		\item La table suivante n'est pas close car $\nexists s \in S, \row s = \row {ab}$
 		      \begin{center}
@@ -110,9 +110,16 @@ Le learner maintient une table $T$ avec:
 
 \subsection{L'algorithme}
 
-\begin{theorem}
-	À partir d'une table close te cohérente on peut construire un automate $A = (Q,I,T,\delta)$ où
-	$Q = \setdef {\row s} {s \in S}, \ I = \set {\row{\motvide}}, \ T = \setdef {\row s} {T(s) -1}, \ \delta (\row s, a)  = \row{sa}$
+\begin{theorem}\label{thm:automata-tables}
+	À partir d'une table close et cohérente, on peut construire un automate $A = (Q, I, T, \delta)$ où :
+	$$
+		\begin{aligned}
+			Q                  & = \setdef{ \row{s}} {s \in S }  \\
+			I                  & = \set{ \row{\motvide} }        \\
+			T                  & = \setdef{ \row{s} }{T(s) = 1 } \\
+			\delta(\row{s}, a) & = \row{sa}.
+		\end{aligned}
+	$$
 \end{theorem}
 
 \begin{exemple}
@@ -222,6 +229,27 @@ Tant que l'oracle donne un contrexemple
 	Si $(S,E,T)$ est close et cohérente alors dans l'automate $A = \mathcal A (S,E,T)$
 	$$\forall s \in S \cup S\alphabet, \delta(q_0,s) = \row s$$
 \end{lemma}
+
+
+\begin{proof}
+	Induction sur la taille de $s$.
+	\begin{itemize}
+		\item Si $\len s = 0$, alors $s = \motvide$ et donc $\delta(q_0, \motvide) = \row \motvide$
+		      est vrai par construction de l'automate.
+		\item Supposons l'énoncé vrai pour tout mot appartenant a $S \cup S\alphabet$ de longueur inférieure ou égale a $n$ et
+		      soit $t$ un mot de longueur $n +1$, alors $ t  = s \cdot x,$ avec $s \in S$, car
+		      si $t \in S\alphabet$, $s \in S$ trivialement et si $t \in S$, comme $S$ est clos par préfixe, $s \in S$.
+
+		      \begin{eqnarray*}
+			      \delta(q_0, t) &=& \delta(\delta(q_0, s), x) \\
+			      &=& \delta(\row s, x)  \reason {Par hypothèse d'induction} \\
+			      &=& \row {sx}  \reason {Par la définition da $\delta$ dans \ref{thm:automata-tables}} \\
+			      &=& \row t
+		      \end{eqnarray*}
+
+	\end{itemize}
+\end{proof}
+
 
 \begin{lemma}
 	Si $(S,E,T)$ est close et cohérente alors l'automate $A = \mathcal A (S,E,T)$
