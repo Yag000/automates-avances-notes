@@ -114,10 +114,10 @@ Le learner maintient une table $T$ avec:
 	À partir d'une table close et cohérente, on peut construire un automate $A = (Q, I, T, \delta)$ où :
 	$$
 		\begin{aligned}
-			Q                  & = \setdef{ \row{s}} {s \in S }  \\
-			I                  & = \set{ \row{\motvide} }        \\
-			T                  & = \setdef{ \row{s} }{T(s) = 1 } \\
-			\delta(\row{s}, a) & = \row{sa}.
+			Q                   = & \setdef{ \row{s}} {s \in S }  \\
+			I                   = & \set{ \row{\motvide} }        \\
+			T                   = & \setdef{ \row{s} }{T(s) = 1 } \\
+			\delta(\row{s}, a)  = & \row{sa}.
 		\end{aligned}
 	$$
 \end{theorem}
@@ -225,11 +225,10 @@ Tant que l'oracle donne un contrexemple
 	automate en accord avec $T$ et non isomorphe à $A$ possède au moins un état de plus que $A$.
 \end{theorem}
 
-\begin{lemma}
+\begin{lemma} \label{lem:learning-9}
 	Si $(S,E,T)$ est close et cohérente alors dans l'automate $A = \mathcal A (S,E,T)$
 	$$\forall s \in S \cup S\alphabet, \delta(q_0,s) = \row s$$
 \end{lemma}
-
 
 \begin{proof}
 	Induction sur la taille de $s$.
@@ -246,7 +245,6 @@ Tant que l'oracle donne un contrexemple
 			      &=& \row {sx}  \reason {Par la définition da $\delta$ dans \ref{thm:automata-tables}} \\
 			      &=& \row t
 		      \end{eqnarray*}
-
 	\end{itemize}
 \end{proof}
 
@@ -257,6 +255,40 @@ Tant que l'oracle donne un contrexemple
 	$$\forall s \in S \cup S\alphabet, \forall e \in E, \delta(q_0,se) \in F \iff T(se) =1$$
 \end{lemma}
 
+\begin{proof}
+
+	Induction sur la taille de $e$.
+
+	\begin{itemize}
+		\item Si $\len e = 0$, alors $e = \motvide$.
+		      Soit $s \in S \cup S \alphabet$, et donc $se = e$.
+		      \begin{itemize}
+			      \item Si $s \in S$, alors par le lemme precedent,
+			            $\delta(q_0, s) = \row {s}$ et
+			            comme $\row {s} \in F \iff T(s) = 1$ par construction de l'automate on retrouve le résultat cherché.
+			      \item Si $s \in S\alphabet$, comma la table est close, il existe $s' \in S$, \tq $\row {s'} = \row s$ qui vérifie
+			            $\row {s'} \in F \iff T(s') = 1$ par construction de l'automate.
+
+		      \end{itemize}
+		\item Supposons l'énoncé vrai pour tout mot de $E$ de longueur inférieure ou égale a $n$. Soit $e \in E$ tel que $\len e = n + 1$,
+		      et on pose $e = x e'$, avec $x \in \alphabet$. Soit $s \in S \cup S\alphabet$, il existe
+		      $s'$ \tq $\row s = \row {s'}$ car la table est close.
+		      \begin{eqnarray*}
+			      \delta(q_0, se) &=& \delta(\delta(q_0,s),e) \\
+			      &=& \delta(\delta(q_0,s),xe') \\
+			      &=& \delta(\row s,xe') \reason{par le lemme \ref{lem:learning-9}} \\
+			      &=& \delta(\row {s'},xe') \reason{ car $\row s = \row {s'}$} \\
+			      &=& \delta(\delta (\row {s'}, x), e') \\
+			      &=& \delta(\row {s'x}, e') \reason {par définition de $\dalta$}\\
+			      &=& \delta(\delta{q_0, s'x}, e') \\
+			      &=& \delta(q_0, s'x e')
+		      \end{eqnarray*}
+		      Comme $\len {e'} = n$ on peut appliquer l'hypothèse d'induction et on a
+		      $$ \delta(q_0, se) = \delta(q_0, s'x e') \in F \iff T(s'x e') = 1$$
+
+		      Comme $\row s = \row {s'}$  et $e = xe'$ on a que $T(s'xe') = T(sxe') = T(se)$.
+	\end{itemize}
+\end{proof}
 
 \begin{lemma}
 	Si $(S,E,T)$ est close et cohérente alors si automate $A = \mathcal A (S,E,T)$
