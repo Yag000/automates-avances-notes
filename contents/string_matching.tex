@@ -118,6 +118,7 @@ Cet algorithme peut aussi se retrouver comme un algorithme issue des automates.
 \end{definition}
 
 \begin{prop}
+	%TODO: Use right symbol for congrunce
 	Soit $\cong$ la congruence de Nerode induite pat le langage $\mots u$, alors
 	$$ w_1 \cong w_2 \iff q(w_1) = q(w_2)$$
 \end{prop}
@@ -159,95 +160,15 @@ Cette proposition suggère une nouvelle manière pour calculer l'automate minima
 	Q  &=& \set {\text {les prefixes de } u} \\
 	q_0 &=& <e> \\
 	F &=& \set{<u>} \\
-	\delta(<v>,a) &=& = \left\{ \begin{array}{cc}
+	\delta(<v>,a) &=&  \left\{ \begin{array}{cc}
 		<v \cdot a>  & \text{si } v\cdot a \text{ est un prefixe de } u \\
 		q(v \cdot a) & \text{sinon }
 	\end{array}\right.
 \end{eqnarray*}
 
-\begin{exemple}
-	TODO
-\end{exemple}
 
 
 \begin{remarque}
 	Si dans cet automate on remplace les prefixes de $u$ par leur longueur on se rend compte que cet automate
 	contient la même information que la fonction préfixe.
 \end{remarque}
-
-
-\subsection{ Find me a better place }
-
-\begin{notation}
-	On note $\B = \set {0,1}$.
-\end{notation}
-
-On veut évaluer les fonctions $f : \B ^ n \to B$
-
-\begin{exemple}
-	Une telle fonction est $f(x_1,x_2,x_3) = (x_1 \land x_2) \lor x_3 : \B^3 \to \B$
-\end{exemple}
-
-Une fonction $f : \B ^ n \to B$ est représentable avec $2^k$ bits
-(on donne les images des $2^n$ $n$-uplets sur $\B$)
-
-Donc au total il y a $2^{2^n}$ fonction $\B^n \to \B$.
-
-\begin{idee}
-	Utiliser des automates qui reconnaissent le langage des $n$-uplets
-	$(x_1,x_2,\ldots, x_n)$ pour lesquels $f(x_1, x_2, \ldots, x_n) = 1$.
-\end{idee}
-
-Un "automate" qui fait cela est l'arbre de décision de $f$.
-
-\begin{exemple}
-	Si $f(x_1,x_2,x_3) = (x_1 \land x_2) \lor x_3$, $Sol(f) = 111,110,001,011,101$
-
-	TODO: image
-\end{exemple}
-
-
-Pour éviter cet inconvenient, plutôt que de travailler avec les automates génériques
-on travaille avec des BDD (Binary Decision Diagrams)
-
-\begin{definition}
-	Un BDD est un graphe avec une seule racine, acyclique, il possède deux feuilles,
-	une etiqueté par 0 (false) et une etiqueté par 1 (true).
-
-	Les nœuds internes (nœuds de décision) on toujours deux fils. Notamment, si $n$ est un nœud interne
-	et $x_i$ la variable relative a ce nœud, on nome $\low n$ le fils de $n$ correspondant a l'assignation
-	$x_1 = 0$ et $\high n$ celui correspondant a l'assignation $x_1 = 1$.
-
-	Chaque nœud a une étiquette qui est un entier $\geq 0$ et $\etiquette n > \etiquette {\low n},  \etiquette {\high n}$.
-\end{definition}
-
-
-\begin{definition}
-	Un BDD est dit réduit si :
-	\begin{enumerate}
-		\item On a jamais $\low n = \high n$
-		\item Il n'y a pas deux sous arbres isomorphes.
-	\end{enumerate}
-\end{definition}
-
-A partir d'un arbre de décison on peut obtenir un BDD réduit par la méthode suivante :
-\begin{itemize}
-	\item Les feuilles qui reconnaissent pas ont comme étiquette $0$.
-	\item Les feuilles qui reconnaissent ont comme étiquette $1$.
-	\item Si $n$ est un nœud interne
-	      \begin{itemize}
-		      \item si $\etiquette {\low n} = \etiquette {\high n} = e$, alors $\etiquette n = e$.
-		      \item il existe un nœud $n'$ déjà étiqueté et \tq
-		            \begin{eqnarray*}
-			            \etiquette {\low {n'}} &=& \etiquette {\low {n}} \\
-			            \etiquette {\high{n'}} &=& \etiquette {\high{n}}
-		            \end{eqnarray*}
-		            Alors on pose $\etiquette n = \etiquette {n'}$
-		      \item Sinon l'étiquette de $n$ est le plus petit entier qui n;a pas encore été utilisé.
-	      \end{itemize}
-\end{itemize}
-
-Une fois qu'on a attribué un étiquette à tous les nœuds on identifie les tats ayant la même étiquette.
-
-
-
