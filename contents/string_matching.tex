@@ -166,6 +166,47 @@ Cette proposition suggère une nouvelle manière pour calculer l'automate minima
 	\end{array}\right.
 \end{eqnarray*}
 
+\begin{exemple}
+	Pour le mot "ABABACA" on construit l'automate suivant : \\
+	\digraph[scale=0.50]{automateDet}{
+		rankdir=LR;
+
+		node [shape=circle, style=filled, color=lightblue];
+		0;
+		1;
+		2;
+		3;
+		4;
+		5;
+		6;
+
+		start [shape=point];
+		start -> 0;
+
+		0 -> 0 [label="X ≠ A"];
+		0 -> 1 [label="A"];
+		1 -> 1 [label="A"];
+		1 -> 0 [label="X ≠ A,B"];
+		1 -> 2 [label="B"];
+		2 -> 3 [label="A"];
+		2 -> 0 [label="X ≠ A"];
+		3 -> 4 [label="B"];
+		3 -> 1 [label="A"];
+		4 -> 0 [label="X ≠ A"];
+		4 -> 5  [label="A"];
+		5 -> 6  [label="C"];
+		5 -> 4  [label="B"];
+		5 -> 1  [label="A"];
+		6 -> 7  [label="A"];
+		6 -> 0  [label="X ≠ A"];
+		7 -> 2  [label="B"];
+		7 -> 1  [label="A"];
+		7 -> 0  [label="X ≠ A,B"];
+
+		7 [shape=doublecircle];
+	}
+
+\end{exemple}
 
 
 \begin{remarque}
