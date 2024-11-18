@@ -11,9 +11,8 @@ On veut évaluer les fonctions $f : \B ^ n \to B$
 \end{exemple}
 
 Une fonction $f : \B ^ n \to B$ est représentable avec $2^k$ bits
-(on donne les images des $2^n$ $n$-uplets sur $\B$)
-
-Donc au total il y a $2^{2^n}$ fonction $\B^n \to \B$.
+(on donne les images des $2^n$ $n$-uplets sur $\B$).
+Donc au total il y a $2^{2^n}$ fonctions $\B^n \to \B$.
 
 \begin{idee}
 	Utiliser des automates qui reconnaissent le langage des $n$-uplets
@@ -34,10 +33,10 @@ on travaille avec des BDD (Binary Decision Diagrams)
 
 \begin{definition}
 	Un BDD est un graphe avec une seule racine, acyclique, il possède deux feuilles,
-	une etiqueté par 0 (false) et une etiqueté par 1 (true).
+	une étiquetée par 0 (false) et une étiquetée par 1 (true).
 
 	Les nœuds internes (nœuds de décision) on toujours deux fils. Notamment, si $n$ est un nœud interne
-	et $x_i$ la variable relative a ce nœud, on nome $\low n$ le fils de $n$ correspondant a l'assignation
+	et $x_i$ la variable relative a ce nœud, on nomme $\low n$ le fils de $n$ correspondant a l'assignation
 	$x_1 = 0$ et $\high n$ celui correspondant a l'assignation $x_1 = 1$.
 
 	Chaque nœud a une étiquette qui est un entier $\geq 0$ et $\etiquette n > \etiquette {\low n},  \etiquette {\high n}$.
@@ -65,11 +64,11 @@ A partir d'un arbre de décison on peut obtenir un BDD réduit par la méthode s
 			            \etiquette {\high{n'}} &=& \etiquette {\high{n}}
 		            \end{eqnarray*}
 		            Alors on pose $\etiquette n = \etiquette {n'}$
-		      \item Sinon l'étiquette de $n$ est le plus petit entier qui n;a pas encore été utilisé.
+		      \item Sinon l'étiquette de $n$ est le plus petit entier qui n'a pas encore été utilisé.
 	      \end{itemize}
 \end{itemize}
 
-Une fois qu'on a attribué un étiquette à tous les nœuds on identifie les tats ayant la même étiquette.
+Une fois qu'on a attribué un étiquette à tous les nœuds on identifie les états ayant la même étiquette.
 
 
 
