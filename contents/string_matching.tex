@@ -1,13 +1,12 @@
 \section{String matching}
 
 \begin{definition}
-	Étant donné deux chaines de caracteres $T$ le texte et $M$ le motif.
-	On dit que $T$ présente une occurrence ce $M$ si
+	Étant donné deux chaines de caractères $T$ le texte et $M$ le motif, on dit que $T$ présente une occurrence de $M$ si
 	$$\forall j \in \enum 1 {\len M -1}, \exists i, 0 \leq 1 \leq \len T - \len M, \text{ \tq } T[i + j] = M[j]$$
 \end{definition}
 
 \begin{remarque}
-	Le texte $T$ contient le facteur $u$ \ssi $T$ a un préfixe qui appartient $\mots u$.
+	Le texte $T$ contient le facteur $u$ \ssi $T$ a un préfixe qui appartient à $\mots u$.
 \end{remarque}
 
 \begin{remarque}
@@ -18,10 +17,10 @@
 		\For{$i$ in $0, \ldots , \len T - \len u + 1$}
 		\State $j = 0$
 		\If  {$j  <  \len u \et (u[j] == t[i+j])$}
-		\State k ++
+		\State j ++
 		\EndIf
 		\If {$j == \abs u$}
-		\State Afficher l'eccurence de $u$ en position $i$
+		\State Afficher l'occurence de $u$ en position $i$
 		\EndIf
 		\EndFor
 		\EndFunction
@@ -31,33 +30,33 @@
 \end{remarque}
 
 \begin{remarque}
-	Pour chercher les occurrences de $u$ dans $T$ on peut construire un automate qui reconnait $\mots u$ et le faire travailler sur $T$.
-	À chaque fois qu'on passe par un état finale, on vient de voir une occurrence de $M$.
+	Pour chercher les occurrences de $u$ dans $T$, on peut construire un automate qui reconnait $\mots u$ et le faire travailler sur $T$.
+	À chaque fois qu'on passe par un état final, on vient de voir une occurrence de $M$.
 \end{remarque}
 
 \begin{remarque}
-	Avec l'algorithme naif, chaque caractère de $T$ est analysé $\abs u$ fois. Avec les algorithmes pas les automates chaque caractère est analysé une seule fois.
+	Avec l'algorithme naïf, chaque caractère de $T$ est analysé $\abs u$ fois. Avec les automates, chaque caractère est analysé une seule fois.
 \end{remarque}
 
 \begin{remarque}
-	L'approche pas automates présente quelques problèmes d'efficacité :
+	L'approche par automates présente quelques problèmes d'efficacité :
 	\begin{itemize}
-		\item Si l'automate est non déterministe, le temps de calcul peut devenir tres lourd.
-		\item Si on le déterministe avant, also on risque de trouver un algorithme de taille exponentielle.
+		\item Si l'automate est non déterministe, le temps de calcul peut devenir très lourd.
+		\item Si on le déterminise avant, alors on risque de trouver un algorithme de taille exponentielle.
 	\end{itemize}
 \end{remarque}
 
 \subsection{Knuth-Morris-Pratt}
 
 
-L'algorithme Knuth-Morris-Pratt améliore l'algorithme naif en introduisant des décalage d'amplitude
+L'algorithme Knuth-Morris-Pratt améliore l'algorithme naïf en introduisant des décalages d'amplitude
 $> 1$ et fait en sorte que chaque caractère de $T$ soit analysé une seule fois.
 
 \iffalse
 	\begin{itemize}
-		\item Amélioration par rapport a l'algorithme naif:
+		\item Amélioration par rapport à l'algorithme naïf:
 
-		      L'algorithme ne prend en consideration que certains décalages
+		      L'algorithme ne prend en considération que certains décalages
 		      pour le motif en excluant les décalages où on ne pourra pas trouver le motif.
 	\end{itemize}
 \fi
@@ -71,11 +70,11 @@ $> 1$ et fait en sorte que chaque caractère de $T$ soit analysé une seule fois
 	"ABA" est le plus long bord de "ABABA".
 \end{exemple}
 
-Si au cours de la vérification de presence du mot $u$ à partir d'une position
+Si au cours de la vérification de la présence du mot $u$ à partir d'une position
 on a un échec au niveau de la $j$-ème lettre du motif, alors :
 
 \begin{itemize}
-	\item On calcule le bord $a$ di préfixe de $u$ de longueur $j-1$.
+	\item On calcule le bord $a$ du préfixe de $u$ de longueur $j-1$.
 	\item Et on décale $u$ de sorte que le $q$ au début est positionné sous le $q$ final.
 \end{itemize}
 
@@ -109,17 +108,17 @@ Il suffit de calculer une fonction $\N \to \N$ qui à tout $j \in \enum 0 {\len 
 la longueur du plus long bord du préfixe de longueur $j$ du motif (la fonction préfixe).
 
 
-Cet algorithme peut aussi se retrouver comme un algorithme issue des automates.
+Cet algorithme peut aussi se retrouver comme un algorithme issu des automates.
 
 
 \begin{definition}
 	Pour tout $w \in \mots$ on défini
-	$q(w) = \setdef {\text{ le plus long } X} {X \text{ est suffixe de } w \et X \text{ est prefixe de } u}$
+	$q(w) = \setdef {\text{ le plus long } X} {X \text{ est suffixe de } w \et X \text{ est préfixe de } u}$
 \end{definition}
 
 \begin{prop}
 	%TODO: Use right symbol for congrunce
-	Soit $\cong$ la congruence de Nerode induite pat le langage $\mots u$, alors
+	Soit $\cong$ la congruence de Nérode induite par le langage $\mots u$, alors
 	$$ w_1 \cong w_2 \iff q(w_1) = q(w_2)$$
 \end{prop}
 
@@ -132,8 +131,8 @@ Cet algorithme peut aussi se retrouver comme un algorithme issue des automates.
 
 	TODO: Add image
 
-	O n a donc $z_1 = z_2$
-	De plus on a $z_1 = z_2 = q(w_1) = q(w_2)$  à cause de la minimalité de $y$.
+	On a donc $z_1 = z_2$
+	De plus, on a $z_1 = z_2 = q(w_1) = q(w_2)$  à cause de la minimalité de $y$.
 
 	\item \bimpRL \\
 	Supposons que $q(w_1) = q(w_2)$ et nous voulons montrer que
@@ -157,11 +156,11 @@ Cet algorithme peut aussi se retrouver comme un algorithme issue des automates.
 Cette proposition suggère une nouvelle manière pour calculer l'automate minimal pour $\mots u$
 
 \begin{eqnarray*}
-	Q  &=& \set {\text {les prefixes de } u} \\
-	q_0 &=& <e> \\
+	Q  &=& \set {\text {les préfixes de } u} \\
+	q_0 &=& <\motvide> \\
 	F &=& \set{<u>} \\
 	\delta(<v>,a) &=&  \left\{ \begin{array}{cc}
-		<v \cdot a>  & \text{si } v\cdot a \text{ est un prefixe de } u \\
+		<v \cdot a>  & \text{si } v\cdot a \text{ est un préfixe de } u \\
 		q(v \cdot a) & \text{sinon }
 	\end{array}\right.
 \end{eqnarray*}
@@ -209,6 +208,6 @@ Cette proposition suggère une nouvelle manière pour calculer l'automate minima
 
 
 \begin{remarque}
-	Si dans cet automate on remplace les prefixes de $u$ par leur longueur on se rend compte que cet automate
+	Si dans cet automate on remplace les préfixes de $u$ par leur longueur, on se rend compte que cet automate
 	contient la même information que la fonction préfixe.
 \end{remarque}
