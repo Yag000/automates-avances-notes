@@ -445,7 +445,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 \end{exercice}
 
 \begin{proof}
-	Debut de preuve:
+	Début de preuve:
 	Si $\classr m \cap \classl n \neq \emptyset$, sot $s \in \classr m \cap \classl n$. On va montrer que
 	$\classr m \cap \classl n = \classh s$
 
@@ -469,7 +469,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 	Soit $\Hc$ une $H$-classe incluse dans une $J$-classe $\Jc$. Alors, soit
 	\begin{enumerate}
 		\item $\forall m,n \in \Hc, mn \notin \Jc$
-		\item $\Hc$ est un groupe (Attention !! L'élément neutre de $\Hc$ n'est pas forcement $1_M$)
+		\item $\Hc$ est un groupe (Attention !! L'élément neutre de $\Hc$ n'est pas forcément $1_M$)
 	\end{enumerate}
 \end{lemma}
 
@@ -483,19 +483,19 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 			      Montrer que $mn L n$.
 		      \end{exercice}
 		\item Étape 3: Soit $m \in \Hc$. Par \ref{lem:puiss_idemp}, il existe $i > 1$ tel que $m^i$ est idempotent.
-		      Par l''etape 3, on sait que $m^i \in \Hc$, donc on peut conclure que $\Hc$ contient un élément idempotent, notos le par
+		      Par l''etape 3, on sait que $m^i \in \Hc$, donc on peut conclure que $\Hc$ contient un élément idempotent, notons le par
 		      $e$. On va montrer que $e$ est l'élément neutre de $\Hc$, \cad, $\forall m \in \Hc, \ m\cdot e m  e \cdot m = m$.
 
 		      Soit $n \in \Hc$, donc $n L e \implies \exists x, \ n = x\cdot e
 			      \implies n e = (x e) e =  x (ee) =  x e = n$
 
-		      De la même maniere, $n \in \Hc \implies n R e \implies \exists y, \ n = ey \implies en = eey = ey = n$
+		      De la même manière, $n \in \Hc \implies n R e \implies \exists y, \ n = ey \implies en = eey = ey = n$
 		      Donc $e n = n$.
 
-		      Il reste a montrer que chaque élément possède un inverse : $\forall n \in \Hc, \exists n' \in \Hc$ tel que $n n' = e = n'n$
+		      Il reste à montrer que chaque élément possède un inverse : $\forall n \in \Hc, \exists n' \in \Hc$ tel que $n n' = e = n'n$
 
 		      On observe que $\Hc$ contient un unique idempotent. Soit $e'$ un autre idempotent, par le même argument
-		      que ci-dessus, $e'$ es un élément neutre donc : TODO ... $e = 'e$
+		      que ci-dessus, $e'$ est un élément neutre donc : TODO ... $e = 'e$
 
 		      Soit $n \in \Hc$. Par le lemme \ref{lem:puiss_idemp}, il existe $j \geq 1$ tel que $n^j$ est idempotent, mais $n^j \in \Hc$ donc $n^j = e$. Et ainsi,
 		      $n^{j-1}$ est l'inverse de $n$.
@@ -503,7 +503,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 \end{proof}
 
 \begin{definition}
-	Un monoïde $\monoide$ est aperiodique ssi $\forall m \in M, \exists i \geq 1, \text { \tq } m^i = m^{i+1}$
+	Un monoïde $\monoide$ est apériodique ssi $\forall m \in M, \exists i \geq 1, \text { \tq } m^i = m^{i+1}$
 \end{definition}
 
 

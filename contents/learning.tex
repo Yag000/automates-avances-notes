@@ -1,14 +1,14 @@
 \section{Apprentissage de langages rationnels par queries et contrexemples}
 
 Nous allons étudier un algorithme qui permet de générer un automate pour un langage rationnel $L$.
-L'idée est que le \emph{learner}(ou \emph{étudiant}), une entité dont l'objectif est de retrouver le langage, pose
+L'idée est que le \emph{learner}(ou \emph{étudiant}), une entité dont l'objectif est de retrouver le langage, pose des
 questions à un \emph{oracle} (ou \emph{teacher}). Les questions sont de deux types :
 
 \begin{itemize}
 	\item Les \emph{membership queries} : Est-ce que le mot $w$  appartient au langage $L$ ?
-	\item Les \emph{conjectures} : On présente un automate hypothèse. Si cet automate reconnaît $L$, alors on retourne "Ok".
-	      Sinon, on retourne un mot contre-exemple $w$. Ce mot vérifie soit $w \in L$ et il n’est pas accepté par notre
-	      automate, soit $w \notin L$ mais il est accepté par notre automate.
+	\item Les \emph{conjectures} : On présente un automate hypothèse. Si cet automate reconnaît $L$, alors il retourne "Ok".
+	      Sinon, il retourne un mot contre-exemple $w$. Ce mot vérifie soit $w \in L$ (il n’est pas accepté par notre
+	      automate), soit $w \notin L$ (il est accepté par notre automate).
 \end{itemize}
 
 Cet algorithme découle du travail de \cite{angluinLearning}.
@@ -17,9 +17,9 @@ Cet algorithme découle du travail de \cite{angluinLearning}.
 \subsection{Définitions}
 
 
-\begin{definition}[Cloture par préfixe / (\blue{suffixe})]
+\begin{definition}[Clôture par préfixe / (\blue{suffixe})]
 	Un ensemble $S$ est clos par préfixe (\blue{suffixe}), si
-	$$\forall w \in S, \text{ tout préxife (\blue{suffixe}) de $w$ est dans } S$$
+	$$\forall w \in S, \text{ tout préfixe (\blue{suffixe}) de $w$ est dans } S$$
 \end{definition}
 
 \begin{exercice}
@@ -36,14 +36,14 @@ Cet algorithme découle du travail de \cite{angluinLearning}.
 Le learner maintient une table $T$ avec:
 
 \begin{itemize}
-	\item Les colonnes de $T$ qui sont indexées par un ensemble $E$ de mot clos par suffixe
+	\item Les colonnes de $T$ qui sont indexées par un ensemble $E$ de mot clos par suffixe.
 	\item Les lignes sont indexées par un ensemble de mots $S \cup S\cdot \alphabet$, ou $S$ est
 	      un ensemble fermé par préfixe.
 \end{itemize}
 
 
 \begin{definition}
-	Si $s \in S \cup S\alphabet$, soit $n = \abs E$,  on défini $\row s \in [0,1]^n$ la suite suivante :
+	Si $s \in S \cup S\alphabet$, soit $n = \abs E$,  on définit $\row s \in [0,1]^n$ la suite suivante :
 	$$ \row s = (T[s,e_1], \ldots, T[s, e_n])$$
 \end{definition}
 
@@ -89,7 +89,7 @@ Le learner maintient une table $T$ avec:
 			      \end{tabular}
 		      \end{center}
 		\item La table suivante n'es pas cohérente car $\row {\motvide} = \row a$ mais
-		      $\row (\motvide a) = \row a \neq \row {aa}$
+		      $\row {\motvide a} = \row a \neq \row {aa}$
 
 		      \begin{center}
 			      \begin{tabular}{c|c|c}
@@ -111,12 +111,12 @@ Le learner maintient une table $T$ avec:
 \subsection{L'algorithme}
 
 \begin{theorem}\label{thm:automata-tables}
-	À partir d'une table close et cohérente, on peut construire un automate $A = (Q, I, T, \delta)$ où :
+	À partir d'une table close et cohérente, on peut construire un automate $A = (Q, I, F, \delta)$ où :
 	$$
 		\begin{aligned}
 			Q                   = & \setdef{ \row{s}} {s \in S }  \\
 			I                   = & \set{ \row{\motvide} }        \\
-			T                   = & \setdef{ \row{s} }{T(s) = 1 } \\
+			F                   = & \setdef{ \row{s} }{T(s) = 1 } \\
 			\delta(\row{s}, a)  = & \row{sa}.
 		\end{aligned}
 	$$
@@ -194,7 +194,7 @@ Initialement on propose Figure \ref{fig:algo-inL} ou Figure \ref{fig:algo-notinL
 Tant que l'oracle donne un contrexemple
 \begin{itemize}
 	\item $w$ = contrexemple.
-	\item $w$ et tous ses préfixes ajoutés à $S$.
+	\item $w$ et tous ses préfixes sont ajoutés à $S$.
 	\item Les nouvelles lignes sont remplies en posant des "membership queries".
 	\item Tant que $T$ n'est pas cohérente ou n'est pas close:
 	      \begin{itemize}
@@ -217,11 +217,11 @@ Tant que l'oracle donne un contrexemple
 
 \begin{definition}
 	Un automate $(Q, q_0, F, S)$ est en accord avec une fonction $T$, si
-	$$ \forall s \in S \cup S\alphabet m \forall \motvide \in E, \delta(q_0,se) \in F \iff T(se) = 1$$
+	$$ \forall s \in S \cup S\alphabet, \forall e \in E, \delta(q_0,se) \in F \iff T(se) = 1$$
 \end{definition}
 
 \begin{theorem}
-	Si $A$ est l'automate issue d'une table $(S,E,T)$ alors $A$ est en accord avec $T$ et tout autre
+	Si $A$ est l'automate issu d'une table $(S,E,T)$ alors $A$ est en accord avec $T$ et tout autre
 	automate en accord avec $T$ et non isomorphe à $A$ possède au moins un état de plus que $A$.
 \end{theorem}
 
@@ -235,14 +235,14 @@ Tant que l'oracle donne un contrexemple
 	\begin{itemize}
 		\item Si $\len s = 0$, alors $s = \motvide$ et donc $\delta(q_0, \motvide) = \row \motvide$
 		      est vrai par construction de l'automate.
-		\item Supposons l'énoncé vrai pour tout mot appartenant a $S \cup S\alphabet$ de longueur inférieure ou égale a $n$ et
+		\item Supposons l'énoncé vrai pour tout mot appartenant à $S \cup S\alphabet$ de longueur inférieure ou égale a $n$ et
 		      soit $t$ un mot de longueur $n +1$, alors $ t  = s \cdot x,$ avec $s \in S$, car
 		      si $t \in S\alphabet$, $s \in S$ trivialement et si $t \in S$, comme $S$ est clos par préfixe, $s \in S$.
 
 		      \begin{eqnarray*}
 			      \delta(q_0, t) &=& \delta(\delta(q_0, s), x) \\
 			      &=& \delta(\row s, x)  \reason {Par hypothèse d'induction} \\
-			      &=& \row {sx}  \reason {Par la définition da $\delta$ dans \ref{thm:automata-tables}} \\
+			      &=& \row {sx}  \reason {Par la définition de $\delta$ dans \ref{thm:automata-tables}} \\
 			      &=& \row t
 		      \end{eqnarray*}
 	\end{itemize}
@@ -261,12 +261,12 @@ Tant que l'oracle donne un contrexemple
 
 	\begin{itemize}
 		\item Si $\len e = 0$, alors $e = \motvide$.
-		      Soit $s \in S \cup S \alphabet$, et donc $se = e$.
+		      Soit $s \in S \cup S \alphabet$, et donc $se = s$.
 		      \begin{itemize}
-			      \item Si $s \in S$, alors par le lemme precedent,
+			      \item Si $s \in S$, alors par le lemme précédent,
 			            $\delta(q_0, s) = \row {s}$ et
 			            comme $\row {s} \in F \iff T(s) = 1$ par construction de l'automate on retrouve le résultat cherché.
-			      \item Si $s \in S\alphabet$, comma la table est close, il existe $s' \in S$, \tq $\row {s'} = \row s$ qui vérifie
+			      \item Si $s \in S\alphabet$, comme la table est close, il existe $s' \in S$, \tq $\row {s'} = \row s$ qui vérifie
 			            $\row {s'} \in F \iff T(s') = 1$ par construction de l'automate.
 
 		      \end{itemize}
@@ -277,7 +277,7 @@ Tant que l'oracle donne un contrexemple
 			      \delta(q_0, se) &=& \delta(\delta(q_0,s),e) \\
 			      &=& \delta(\delta(q_0,s),xe') \\
 			      &=& \delta(\row s,xe') \reason{par le lemme \ref{lem:learning-9}} \\
-			      &=& \delta(\row {s'},xe') \reason{ car $\row s = \row {s'}$} \\
+			      &=& \delta(\row {s'},xe') \reason{car $\row s = \row {s'}$} \\
 			      &=& \delta(\delta (\row {s'}, x), e') \\
 			      &=& \delta(\row {s'x}, e') \reason {par définition de $\delta$}\\
 			      &=& \delta(\delta{q_0, s'x}, e') \\
@@ -310,13 +310,13 @@ Tant que l'oracle donne un contrexemple
 \end{lemma}
 
 \begin{proof}
-	Soit $A = (Q,q_0,F,\delta)$ un automate compatible avec $T$ et défissions
+	Soit $A = (Q,q_0,F,\delta)$ un automate compatible avec $T$ et définissons
 	$f: R \to Q$, $f(\row s) = \delta(q_0, s)$.
 
-	Soient $s_1 \et s_2$ \tq $\row {s_1} \neq \row{s_2}$, donc $\exists e \in E, T(s_1,e) = T(s_2,e)$.
-	Comme $A$ est en accord avec seulement l'un des deux mots $s_1e$ et $s_2e$ est reconnu.
+	Soient $s_1 \et s_2$ \tq $\row {s_1} \neq \row{s_2}$, donc $\exists e \in E, T(s_1,e) \neq T(s_2,e)$.
+	Comme $A$ est en accord avec $T$, seulement l'un des deux mots est reconnu.
 
-	Sans perte de généralité on suppose $s_1e$ reconnu et $s_2e$ pas reconnu, donc
+	Sans perte de généralité, on suppose $s_1e$ reconnu et $s_2e$ pas reconnu, donc
 	$\delta (q_0, s_1, e) \in F$, alors que $\delta (q_0,s_2,e) \notin F$, cela implique que
 	$\delta (q_0,s_1) \neq \delta (q_0,s_2)$.
 
@@ -327,9 +327,9 @@ Soit $n$ le nombre d'états de l'automate minimal reconnaissant le langage cherc
 \begin{remarque}
 	Le nombre d'états des différents automates conjecture ne peut qu'augmenter.
 	\begin{itemize}
-		\item Si on ajoute un mot à $E$ parce que la table n'était pas cohérente, le nombre de rows distinctes augmente
+		\item Si on ajoute un mot à $E$ parce que la table n'était pas cohérente, le nombre de rows distincts augmente
 		      d'une unité.
-		\item Si on ajoute un mot a $S$ parce que la table n'est pas close, le nombre de rows distinctes augmente d'une unité.
+		\item Si on ajoute un mot à $S$ parce que la table n'est pas close, le nombre de rows distincts augmente d'une unité.
 	\end{itemize}
 	On déduit qu'on ne peut pas trouver une table non close ou non cohérente plus de $n-1$ fois tout au long de l'algorithme.
 
@@ -338,13 +338,13 @@ Soit $n$ le nombre d'états de l'automate minimal reconnaissant le langage cherc
 \end{remarque}
 
 
-Combien de fausses conjectures  le learner émet avant de donner la bonne ?
+Combien de conjectures  le learner émet-il avant de donner la bonne ?
 
 Soit $(S,E,T)$ une table close et cohérente et $A(S,E,T)$ l'automate associé.
 Supposons que $A$ soit une conjecture fausse, et donc l'oracle fournit un contrexemple $t$.
 
-L'automate $S(S,E,T)$ et l'automate du langage cherché son en désaccord su le mot $t$, donc ces deux automates
-ne sont pas équivalents, et dont $A(S,E,T)$ a au moins un état de moins que l'automate cherché.
+L'automate $S(S,E,T)$ et l'automate du langage cherché sont en désaccord sur le mot $t$, donc ces deux automates
+ne sont pas équivalents, et donc $A(S,E,T)$ a au moins un état de moins que l'automate cherché.
 Donc $A(S,E,T)$ a au plus $n-1$ états. On en déduit que le nombre de fausses conjectures émises pas le learner est $n-1$.
 
 On en déduit que l'algorithme s'arrête toujours, au pire après avoir rendu la table close et
@@ -353,35 +353,35 @@ cohérente $n-1$ et après avoir émis au plus $n-1$ fausses conjectures.
 
 \subsection{Analyse de la complexité}
 
-Elle depend du nombre $m$ et de la longueur du plus long contrexemple fourni par l'oracle, notée $m$.
+Elle dépend du nombre $n$ et de la longueur du plus long contrexemple fourni par l'oracle, notée $m$.
 
 
 \begin{itemize}
-	\item A chaque fois qu'on trouve un table non cohérente, on ajoute un mot à $E$.
-	\item A chaque fois qu'on trouve un table non close, on ajoute un mot à $S$.
+	\item A chaque fois qu'on trouve une table non cohérente, on ajoute un mot à $E$.
+	\item A chaque fois qu'on trouve une table non close, on ajoute un mot à $S$.
 	\item A chaque fois qu'on émet une conjecture fausse, on ajoute au plus $m$ mots à $S$
 \end{itemize}
 
 On en déduit que $\abs E \leq n$.
 
 La longueur maximale des mots de $E$ augmente au plus d'une unité à chaque fois qu'on rend la table cohérente
-(on ajoute ä $E$ un mot $xe$ avec $e\ in E$). On déduit que la longueur maximale d'un mot de $E$ est toujours $<n$.
+(on ajoute à $E$ un mot $xe$ avec $e \in E$). On déduit que la longueur maximale d'un mot de $E$ est toujours $<n$.
 
 De même, on a que  $\abs S \leq n + m(n-1)$. %TODO: explanation of each number.
 
 La longueur maximale des mots de $s$ est inférieure à $m - n -1$.
 
 
-On déduit que le cardinal maximal de $(S \cup S \Sigma) \times E$ (le nombre maximal de casses de la table) est : $(k+1)(n+m(n-1))n \in O(mn^2)$.
+On déduit que le cardinal maximal de $(S \cup S \Sigma) \times E$ (le nombre maximal de classes de la table) est : $(k+1)(n+m(n-1))n \in O(mn^2)$.
 
 
 Considérons le coût de chaque type d'opérations :
 \begin{itemize}
-	\item Vérifier si une table est close et cohérente se fait en temps polynomiale relativement à la taille de la table.
-	\item Ajouter un mot  Ajouter un mot à $S$ ou à E nécessite au plus $nm$ (membership) queries.
-	\item Construire une conjecture à partir d'une table cohérente et close est faisable ne temps polynomial relativement à
+	\item Vérifier si une table est close et cohérente se fait en temps polynomial relativement à la taille de la table.
+	\item Ajouter un mot à $S$ ou à E nécessite au plus $nm$ (membership) queries.
+	\item Construire une conjecture à partir d'une table cohérente et close est faisable en temps polynomial relativement à
 	      la taille de la table.
-	\item Un contrexemple nécessite l'addition d'au plus $m$ mots à $S$ et cette opérations est effectué au plus $n-1$ fois.
+	\item Un contrexemple nécessite l'addition d'au plus $m$ mots à $S$ et cette opérations est effectuée au plus $n-1$ fois.
 \end{itemize}
 
 \begin{theorem}
@@ -390,6 +390,6 @@ Considérons le coût de chaque type d'opérations :
 \end{theorem}
 
 \begin{remarque}
-	Si l'oracle fourni toujours un contrexemple de taille $\leq n$ (ce qui est toujours possible), alors le polynôme en question dépend de $n$ seulement.
+	Si l'oracle fournit toujours un contrexemple de taille $\leq n$ (ce qui est toujours possible), alors le polynôme en question dépend de $n$ seulement.
 \end{remarque}
 
