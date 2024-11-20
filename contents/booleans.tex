@@ -28,7 +28,7 @@ Un "automate" qui fait cela est l'arbre de décision de $f$.
 \end{exemple}
 
 
-Pour éviter cet inconvenient, plutôt que de travailler avec les automates génériques
+Pour éviter cet inconvénient, plutôt que de travailler avec les automates génériques
 on travaille avec des BDD (Binary Decision Diagrams)
 
 \begin{definition}
@@ -36,8 +36,8 @@ on travaille avec des BDD (Binary Decision Diagrams)
 	une étiquetée par 0 (false) et une étiquetée par 1 (true).
 
 	Les nœuds internes (nœuds de décision) on toujours deux fils. Notamment, si $n$ est un nœud interne
-	et $x_i$ la variable relative a ce nœud, on nomme $\low n$ le fils de $n$ correspondant a l'assignation
-	$x_1 = 0$ et $\high n$ celui correspondant a l'assignation $x_1 = 1$.
+	et $x_i$ la variable relative à ce nœud, on nomme $\low n$ le fils de $n$ correspondant à l'assignation
+	$x_1 = 0$ et $\high n$ celui correspondant à l'assignation $x_1 = 1$.
 
 	Chaque nœud a une étiquette qui est un entier $\geq 0$ et $\etiquette n > \etiquette {\low n},  \etiquette {\high n}$.
 \end{definition}
@@ -46,14 +46,14 @@ on travaille avec des BDD (Binary Decision Diagrams)
 \begin{definition}
 	Un BDD est dit réduit si :
 	\begin{enumerate}
-		\item On a jamais $\low n = \high n$
+		\item On n'a jamais $\low n = \high n$
 		\item Il n'y a pas deux sous arbres isomorphes.
 	\end{enumerate}
 \end{definition}
 
 A partir d'un arbre de décison on peut obtenir un BDD réduit par la méthode suivante :
 \begin{itemize}
-	\item Les feuilles qui reconnaissent pas ont comme étiquette $0$.
+	\item Les feuilles qui ne reconnaissent pas ont comme étiquette $0$.
 	\item Les feuilles qui reconnaissent ont comme étiquette $1$.
 	\item Si $n$ est un nœud interne
 	      \begin{itemize}
@@ -68,7 +68,7 @@ A partir d'un arbre de décison on peut obtenir un BDD réduit par la méthode s
 	      \end{itemize}
 \end{itemize}
 
-Une fois qu'on a attribué un étiquette à tous les nœuds on identifie les états ayant la même étiquette.
+Une fois qu'on a attribué une étiquette à tous les nœuds, on identifie les états ayant la même étiquette.
 
 
 
