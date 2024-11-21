@@ -13,7 +13,7 @@
 
 	Soit $L \subseteq A^*$ un langage (de mots finis), on définit
 	$\lomega = \setdef {x_0x_1\cdots} {x_i \in L \setminus \set {\motvide}}$
-	( généralisation de l'opérateur $*$ à une concatenation d'un nombre infini de mots de $L$.)
+	( généralisation de l'opérateur $*$ à une concaténation d'un nombre infini de mots de $L$.)
 \end{notation}
 
 
@@ -29,7 +29,7 @@
 \end{definition}
 
 \begin{remarque}
-	La classe $R$ continent en particulier tous les langages rationnels de $A^*$.
+	La classe $R$ contient en particulier tous les langages rationnels de $A^*$.
 \end{remarque}
 
 \begin{exemple}
@@ -37,15 +37,15 @@
 
 	$L = \setdef {w \in \aomega} {w \text{ a un nombre fini de } b}$
 
-	On peut le definir par l'expression $\omega$-rationnelle $(a + b)^* a^{\omega}$ ou $(a^*b)^* a^{\omega}$ ou
+	On peut le définir par l'expression $\omega$-rationnelle $(a + b)^* a^{\omega}$ ou $(a^*b)^* a^{\omega}$ 
 
 
-	$L = \setdef {w \in \aomega} {w \text{ commence par } a \et e \text{ a un nombre infini de } b}$
+	$L = \setdef {w \in \aomega} {w \text{ commence par } a \et \text{ a un nombre infini de } b}$
 
 	Avec l'expression : $a(a^*b)^{\omega}$.
 \end{exemple}
 
-\begin{prop}[caractérisation des langages $\omega$-rationnels]
+\begin{prop}[Caractérisation des langages $\omega$-rationnels]
 	Un langage $L \subseteq \ainf$ est $w$-rationnel \ssi $L$ est l'union finie de langages
 	de la forme $XY^{\omega}$ avec $X,Y \in R \cap A^*$ ($X,Y$ sont des langages rationnels "classiques").
 \end{prop}
@@ -60,32 +60,33 @@
 		      $$Y^{\omega} \in R \reason {par \ref{omega-clot-fi}}$$
 		      et
 		      $$XY^{\omega} \in R \reason{par \ref{omega-clot-op}}$$
-		      et puisque $R$ est fermé relativement à l'union finie, on a que tous les langages de $\Delta$ sont dans $R$, donc
+		      et puisque $R$ est fermé relativement à l'union finie, on a que tous les langages de $\Delta$ sont dans $R$, 
+			  donc $\Delta \subseteq R$.
 		\item \fbox{$R \subseteq \Delta$} \\
 
-		      Pour montrer l'infusion inverse, on défini une classe $\mathcal{E}$.
+		      Pour montrer l'inclusion inverse, on définit une classe $\mathcal{E}$.
 		      TODO
 	\end{itemize}
 \end{proofI}
 
 \begin{definition}
 	Un automate de Büchi est un quadruplet $(Q,I,T,\delta)$, avec $\abs Q < \infty$, où
-	$Q,I,T,\delta$ on la meme signification que pour les automates finis
+	$Q,I,T,\delta$ ont la même signification que pour les automates finis.
 \end{definition}
 
 \begin{definition}
-	Un chemin infini est une suite infinie $(q_i,a_i,q{i+1})$ tel que $\forall i, (q_i,a_i,q{i+1}) \in \sigma$ et le mot
-	infini $a_0a_1\cdots$ est dit l'étiquète du chemin
+	Un chemin infini est une suite infinie $(q_i,a_i,q_{i+1})$ tel que $\forall i, (q_i,a_i,q_{i+1}) \in \delta$ et le mot
+	infini $a_0a_1\cdots$ est dit l'étiquette du chemin.
 \end{definition}
 
 
 \begin{definition}
-	Un chemin est réussi (ou acceptant) si $\exists q_0 \in I, \exists \text{ une suite infinie d'indices}, q_{i_J} \in F$,
-	donc un chemin est réussi \ssi il passe un nombre infini de fois pas des états terminaux.
+	Un chemin est réussi (ou acceptant) si $\exists q_0 \in I, \exists \text{ une suite infinie d'indices}, q_{i_J} \in T$,
+	donc un chemin est réussi \ssi il passe un nombre infini de fois par des états terminaux.
 \end{definition}
 
 \begin{definition}
-	Un mot $w \in \aomega$ est accepté par un automate de Büchi \ssi il est l'étiquète d'un chemin réussi
+	Un mot $w \in \aomega$ est accepté par un automate de Büchi \ssi il est l'étiquette d'un chemin réussi.
 \end{definition}
 
 
@@ -105,22 +106,22 @@
 
 
 \begin{definition}
-	Un automate est dit émondé si tous ses états sont accesibles (on peut y acceder à partir d'un état initial)
-	et co-accessible (à partiré de n'importe quel état on peut arriver un un état final).
+	Un automate est dit émondé si tous ses états sont accesibles (on peut y accéder à partir d'un état initial)
+	et co-accessibles (à partiré de n'importe quel état, on peut arriver à un état final).
 \end{definition}
 
 Les notions d'automate émondé, complet, déterministe se généralisent aux automates de Büchi.
 
 
 Mais alors que les algorithmes pour rendre émondé ou complet un automate marchent aussi
-pour les automates de Büchi, il n'existe pas d'algorithme pour "déterminiser" un automate.
+pour les automates de Büchi, il n'existe pas d'algorithme pour "déterminiser" un automate de Büchi.
 
-En fait il existe des langages reconnaissables de $\aomega$ qui ne sont pas reconnus par un automate déterministe.
+En fait, il existe des langages reconnaissables de $\aomega$ qui ne sont pas reconnus par un automate déterministe.
 
 
 
-La classe des langages reconnaissables par un automate de Büchi est fermée relativement relativement à l'union finie
-et la méthode pour construire l'automate que reconnait l'union est la même que pour les automates dinis (on "met ensemble"
+La classe des langages reconnaissables par un automate de Büchi est fermée relativement à l'union finie
+et la méthode pour construire l'automate qui reconnait l'union est la même que pour les automates finis (on "met ensemble"
 les deux automates).
 
 On verra que cette classe est aussi fermée relativement au complémentaire et à l'intersection.
@@ -134,11 +135,11 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 	\begin{itemize}
 		\item \bimpRL
 
-		      Soit $L$ reconnaissable il existe $A = (Q,I,T,S)$ tel que $L = \La^{\omega}(A)$.
+		      Soit $L$ reconnaissable, il existe $A = (Q,I,T,\delta)$ tel que $L = \La^{\omega}(A)$.
 
-		      Soient $q,q' \in Q$ pour chaque couple $(q,q')$ on défini $A_{qq'} = (Q,q,q',\delta)$
+		      Soient $q,q' \in Q$.Pour chaque couple $(q,q')$, on définit $A_{qq'} = (Q,q,q',\delta)$
 
-		      Soit $\La^*(A_{qq'}$ le langage reconnu par $A_{qq'}$ et $\La^+(A_{qq'} = \La^*(A_{qq'} \setminus \set {\motvide}$
+		      Soit $\La^*(A_{qq'})$ le langage reconnu par $A_{qq'}$ et $\La^+(A_{qq'}) = \La^*(A_{qq'}) \setminus \set {\motvide}$
 
 
 		      Alors $L = \bigcup_{(q,q') \in I \times T} \La^*(q,q')(\La^+(q',q'))^{\omega}$, en effet :
@@ -148,7 +149,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 			            TODO
 
 			      \item \fbox{$\subseteq$} \\
-			            Analogue a la contraposée.
+			            Analogue à la contraposée.
 		      \end{itemize}
 
 
