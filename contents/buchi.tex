@@ -37,7 +37,7 @@
 
 	$L = \setdef {w \in \aomega} {w \text{ a un nombre fini de } b}$
 
-	On peut le définir par l'expression $\omega$-rationnelle $(a + b)^* a^{\omega}$ ou $(a^*b)^* a^{\omega}$ 
+	On peut le définir par l'expression $\omega$-rationnelle $(a + b)^* a^{\omega}$ ou $(a^*b)^* a^{\omega}$
 
 
 	$L = \setdef {w \in \aomega} {w \text{ commence par } a \et \text{ a un nombre infini de } b}$
@@ -51,8 +51,6 @@
 \end{prop}
 
 \begin{proofI}
-	%TODO: Make pretty
-
 	\begin{itemize}
 		\item \fbox{$\Delta \subseteq R$} \\
 		      Soit $\Delta$ la classe des langages obtenue comme union finie de langages de la forme $XY^{\omega}, X,Y \in Rat(A^*)$
@@ -60,12 +58,30 @@
 		      $$Y^{\omega} \in R \reason {par \ref{omega-clot-fi}}$$
 		      et
 		      $$XY^{\omega} \in R \reason{par \ref{omega-clot-op}}$$
-		      et puisque $R$ est fermé relativement à l'union finie, on a que tous les langages de $\Delta$ sont dans $R$, 
-			  donc $\Delta \subseteq R$.
+		      et puisque $R$ est fermé relativement à l'union finie, on a que tous les langages de $\Delta$ sont dans $R$,
+		      donc $\Delta \subseteq R$.
 		\item \fbox{$R \subseteq \Delta$} \\
 
 		      Pour montrer l'inclusion inverse, on définit une classe $\mathcal{E}$.
-		      TODO
+		      Avec
+		      \begin{eqnarray*}
+			      L \in \mathcal{E} &\iff& L \cap A^* \in \text{Rat}(A^*) \\
+			      &\iff& L \cap \aomega \in \Delta
+		      \end{eqnarray*}
+		      et on montre que $R \subseteq \mathcal{E} \subseteq \Delta$.
+		      Il faut vérifier que
+		      \begin{enumerate}
+			      \item $\emptyset \in \mathcal{E}$
+			      \item $\forall a \in A, \set a \in  \mathcal{E}$
+			      \item $\mathcal{E}$ est fermé par union finie
+
+			      \item $\forall X \in \mathcal{E} \cap A^*, \forall Y \in \mathcal{E} \cap \ainf, X \cdot Y \in \mathcal{E}$
+			      \item $\forall X \in \mathcal{E} \cap A^*, X^* \in \mathcal{E} \et X^{\omega} \in \mathcal{E}$
+		      \end{enumerate}
+		      La vérification de ces propriétés est laissé en exercice.
+
+		      Comme $R$ est définie comme la plus petite classe qui satisfait
+		      les propriétés precedentes, on en déduit que $R \subseteq \mathcal{E}$
 	\end{itemize}
 \end{proofI}
 
@@ -96,12 +112,84 @@
 
 
 \begin{exemple}
-	TODO
+	L'automate suivant reconnait les mots qui commencent par $a$ et qui ont un nombre infini de $b$ :
+
+	\digraph[scale=0.50]{buchi1}{
+		rankdir=LR;
+
+		node [shape=circle, style=filled, color=lightblue];
+		0;
+		1;
+
+		start [shape=point];
+		start -> 0;
+
+		0 -> 0 [label="a"];
+		0 -> 1 [label="a"];
+		1 -> 1 [label="b"];
+		1 -> 0 [label="b"];
+
+		1 [shape=doublecircle];
+	}
 \end{exemple}
 
 
 \begin{exercice}
-	TODO
+	écrire un automate de Büchi qui reconnait les mots infinis sur $\set {a,b}$ ayant un nombre fini de $b$. \\
+	\begin{minipage}{0.3\textwidth}
+		\digraph[scale=0.50]{buchi2}{
+			rankdir=LR;
+
+			node [shape=circle, style=filled, color=lightblue];
+			0;
+			1;
+
+			start [shape=point];
+			start -> 0;
+
+			0 -> 0 [label="a,b"];
+			0 -> 1 [label="a"];
+			1 -> 1 [label="a"];
+
+			1 [shape=doublecircle];
+		}
+	\end{minipage}
+	\begin{minipage}{0.3\textwidth}
+		\digraph[scale=0.50]{buchi3}{
+			rankdir=LR;
+
+			node [shape=circle, style=filled, color=lightblue];
+			0;
+			1;
+
+			start [shape=point];
+			start -> 0;
+
+			0 -> 0 [label="a,b"];
+			0 -> 1 [label="a,b"];
+			1 -> 1 [label="a"];
+
+			1 [shape=doublecircle];
+		}
+	\end{minipage}
+	\begin{minipage}{0.3\textwidth}
+		\digraph[scale=0.50]{buchi4}{
+			rankdir=LR;
+
+			node [shape=circle, style=filled, color=lightblue];
+			0;
+			1;
+
+			start [shape=point];
+			start -> 0;
+
+			0 -> 0 [label="a,b"];
+			0 -> 1 [label="b"];
+			1 -> 1 [label="a"];
+
+			1 [shape=doublecircle];
+		}
+	\end{minipage}
 \end{exercice}
 
 
@@ -133,8 +221,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 \begin{proofI}
 	\begin{itemize}
-		\item \bimpRL
-
+		\item \bimpRL \\
 		      Soit $L$ reconnaissable, il existe $A = (Q,I,T,\delta)$ tel que $L = \La^{\omega}(A)$.
 
 		      Soient $q,q' \in Q$.Pour chaque couple $(q,q')$, on définit $A_{qq'} = (Q,q,q',\delta)$
@@ -146,14 +233,16 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 		      \begin{itemize}
 			      \item \fbox{$\supseteq$} \\
-			            TODO
-
+			            En effet, si $w \in \bigcup_{(q,q') \in I \times T} \La^*(q,q')(\La^+(q',q'))^{\omega}$, alors
+			            $$\exists i_0 \in I, \exists t_0 \in T, \text{ tels que } w \in \La^*(i_0,t_0)(\La^+(t_0,t_0))^{\omega}$$
+			            donc $w$ est l'étiquette d'un chemin qui passe un nombre infini de fois par l'état final $t_0$, et donc
+			            $w\in \La^w (a) = L$
 			      \item \fbox{$\subseteq$} \\
 			            Analogue à la contraposée.
 		      \end{itemize}
 
 
-		\item \bimpLR
-            TODO
+		\item \bimpLR \\
+		      TODO
 	\end{itemize}
 \end{proofI}
