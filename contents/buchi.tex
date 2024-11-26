@@ -260,12 +260,12 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 	où
 	\begin{eqnarray*}
 		\eta_0 &=& \setdef {(f_1,a,f_1)} {(i_2,a,f_2) \in \delta_2} \\
-		\eta_1 &=& \setdef {(f_1,a,q)} {(f_2,a,q) \in \delta_2} \\
+		\eta_1 &=& \setdef {(f_1,a,q)} {(i_2,a,q) \in \delta_2} \\
 		\eta_2 &=& \setdef {(q,a,f_1)} {(q,a,f_2) \in \delta_2}
 	\end{eqnarray*}
 
 
-	Si $\motvide \in L_1$ alors on rend $f_1$ initial.
+	Si $\motvide \in L_1$, alors on rend $f_1$ initial.
 \end{proof}
 
 \begin{exemple}
@@ -275,7 +275,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 \begin{definition}
 	Soit $L \subseteq \mots$ un langage de mots finis. On note
-	$$\larr L = \setdef {w \in \alphabet^ {\omega}} {w \text{ a une infinité de prefixes dans } L}$$
+	$$\larr L = \setdef {w \in \alphabet^ {\omega}} {w \text{ a une infinité de préfixes dans } L}$$
 \end{definition}
 
 
@@ -304,7 +304,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 \end{prop}
 
 \begin{proof}
-	Par l'absurde, si un automate déterministe $\exists  L \in \text{Rat}(\alphabet)$ \tq tout mot de $X$ a un nombre infini de préfixes dans $L$.
+	Par l'absurde, s'il y a un automate déterministe $\exists  L \in \text{Rat}(\alphabet)$ \tq tout mot de $X$ a un nombre infini de préfixes dans $L$.
 
 	\begin{itemize}
 		\item Prenons le mot $ba^{\omega}$, il a un préfixe $ba^{i_1} \in L$
@@ -314,6 +314,6 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 	Alors on peut construire un mot infini :
 	$$ ba^{i_1}ba^{i_2}\ldots ba^{i_k}\ldots$$
-	qui est l'étiquette d'un chemin qui passe un nombre infini de fois par un état final. Donc ce mot serait reconnu pat l'automate, or il
-	contient un nombre infini de $b$.  $\contradict$
+	qui est l'étiquette d'un chemin qui passe un nombre infini de fois par un état final. 
+	Donc ce mot serait reconnu par l'automate, or il contient un nombre infini de $b$.  $\contradict$
 \end{proof}
