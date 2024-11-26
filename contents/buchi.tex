@@ -249,7 +249,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 
 
-\begin{prop}
+\begin{prop} \label{prop:l1l2o}
 	Soit $L_1$ reconnu par $A_1 = (Q_1,i_1,f_1,\delta_1)$ et $L_2$ reconnu par $A_2 = (Q_2,i_2,f_2,\delta_2)$ normalisés,
 	alors on peut donner un automate pour $L_1(L_2)^{\omega}$.
 \end{prop}
@@ -269,7 +269,91 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 \end{proof}
 
 \begin{exemple}
-	$L_1 = \motvide, L_2 = \lang {a^*b}$ TODO
+	$L_1 = \motvide, L_2 = \lang {a^*b}$
+
+	L'automate classique pour $L_2$ :
+
+	\digraph[scale=0.50]{buchi5}{
+		rankdir=LR;
+
+		node [shape=circle, style=filled, color=lightblue];
+		i [label="i"];
+		f [label="f"];
+
+		start [shape=point];
+		start -> i;
+
+		i -> i [label="a"];
+		i -> f [label="b"];
+
+		f [shape=doublecircle];
+	}
+
+	on normalise l'automate
+
+	\digraph[scale=0.50]{buchi6}{
+		rankdir=LR;
+
+		node [shape=circle, style=filled, color=lightblue];
+		q [label="qnew"];
+		i [label="i"];
+		f [label="f"];
+
+		start [shape=point];
+		start -> q;
+
+		q -> i [label="a"];
+		q -> f [label="b"];
+		i -> i [label="a"];
+		i -> f [label="b"];
+
+		f [shape=doublecircle];
+	}
+
+	On applique utilise la construction de la proposition \ref{prop:l1l2o} et on obtient :
+
+	\digraph[scale=0.50]{buchi7}{
+		rankdir=LR;
+
+		node [shape=circle, style=filled, color=lightblue];
+		q [label="qnew"];
+		i [label="i"];
+		f [label="f"];
+
+		start [shape=point];
+		start -> q;
+
+		q -> q [label="b"];
+		q -> i [label="a"];
+		q -> f [label="b"];
+
+		i -> i [label="a"];
+		i -> f [label="b"];
+		i -> q [label="b"];
+
+		q [shape=doublecircle];
+	}
+
+	Et parfois certains états sont inutiles :
+
+	\digraph[scale=0.50]{buchi8}{
+		rankdir=LR;
+
+		node [shape=circle, style=filled, color=lightblue];
+		q [label="qnew"];
+		i [label="i"];
+
+		start [shape=point];
+		start -> q;
+
+		q -> q [label="b"];
+		q -> i [label="a"];
+
+		i -> i [label="a"];
+		i -> q [label="b"];
+
+		q [shape=doublecircle];
+	}
 \end{exemple}
 
 
@@ -314,6 +398,6 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 	Alors on peut construire un mot infini :
 	$$ ba^{i_1}ba^{i_2}\ldots ba^{i_k}\ldots$$
-	qui est l'étiquette d'un chemin qui passe un nombre infini de fois par un état final. 
+	qui est l'étiquette d'un chemin qui passe un nombre infini de fois par un état final.
 	Donc ce mot serait reconnu par l'automate, or il contient un nombre infini de $b$.  $\contradict$
 \end{proof}
