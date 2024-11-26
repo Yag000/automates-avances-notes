@@ -246,3 +246,74 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 		      TODO
 	\end{itemize}
 \end{proofI}
+
+
+
+\begin{prop}
+	Soit $L_1$ reconnu par $A_1 = (Q_1,i_1,f_1,\delta_1)$ et $L_2$ reconnu par $A_2 = (Q_2,i_2,f_2,\delta_2)$ normalisés,
+	alors on peut donner un automate pour $L_1(L_2)^{\omega}$.
+\end{prop}
+
+\begin{proof}
+	Supposons que $\motvide \notin L_1$,
+	$$ A = ( Q_1 \cup Q_2 \setminus \set {i_2,f_2}, \set {i_1}, \set {f_1}, \delta_1 \cup \delta_2 \cup \eta_0 \cup \eta_1 \cup \eta_2)$$
+	où
+	\begin{eqnarray*}
+		\eta_0 &=& \setdef {(f_1,a,f_1)} {(i_2,a,f_2) \in \delta_2} \\
+		\eta_1 &=& \setdef {(f_1,a,q)} {(f_2,a,q) \in \delta_2} \\
+		\eta_2 &=& \setdef {(q,a,f_1)} {(q,a,f_2) \in \delta_2}
+	\end{eqnarray*}
+
+
+	Si $\motvide \in L_1$ alors on rend $f_1$ initial.
+\end{proof}
+
+\begin{exemple}
+	$L_1 = \motvide, L_2 = \lang {a^*b}$ TODO
+\end{exemple}
+
+
+\begin{definition}
+	Soit $L \subseteq \mots$ un langage de mots finis. On note
+	$$\larr L = \setdef {w \in \alphabet^ {\omega}} {w \text{ a une infinité de prefixes dans } L}$$
+\end{definition}
+
+
+\begin{exemple}
+	\begin{enumerate}
+		\item $L = a^*b, \larr L = \emptyset$
+		\item $L = (ab)^*, \larr L = (ab)^{\omega}$
+		\item $L = (a^*b)^+, \larr L =  (a^*b)^{\omega}$
+	\end{enumerate}
+\end{exemple}
+
+
+\begin{prop}[Admis]
+	Soit $A = (Q,I,T,\delta)$ un automate de Büchi déterministe alors $\La^{\omega} (A) = \larr {\La^+ (A)}$
+	où $\La^+ (A)$ est le langage des mots finis reconnus par $A$ comme un automate fini "traditionnel".
+\end{prop}
+
+
+\begin{coro}
+	$X \subseteq \mots$ est reconnu par un automate de Büchi déterministe \ssi $\exists L \in \text{Rat}(\mots)$
+	\tq $X = \larr L$.
+\end{coro}
+
+\begin{prop}
+	Le langage $X = (a+b)^*a^{\omega}$ ($ {\abs w}_b < \infty $) ne peut pas être reconnu par un automate de Büchi déterministe.
+\end{prop}
+
+\begin{proof}
+	Par l'absurde, si un automate déterministe $\exists  L \in \text{Rat}(\alphabet)$ \tq tout mot de $X$ a un nombre infini de préfixes dans $L$.
+
+	\begin{itemize}
+		\item Prenons le mot $ba^{\omega}$, il a un préfixe $ba^{i_1} \in L$
+		\item Prenons le mot $ba^{i_1}ba^{\omega}$, il a un préfixe $ba^{i_1}ba^{i_2} \in L$
+		\item Prenons le mot $ba^{i_1}ba^{i_2}a^{\omega}$, il a un préfixe $ba^{i_1}ba^{i_2}ba^{i_3} \in L$
+	\end{itemize}
+
+	Alors on peut construire un mot infini :
+	$$ ba^{i_1}ba^{i_2}\ldots ba^{i_k}\ldots$$
+	qui est l'étiquette d'un chemin qui passe un nombre infini de fois par un état final. Donc ce mot serait reconnu pat l'automate, or il
+	contient un nombre infini de $b$.  $\contradict$
+\end{proof}
