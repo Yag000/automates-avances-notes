@@ -215,6 +215,15 @@ les deux automates).
 On verra que cette classe est aussi fermée relativement au complémentaire et à l'intersection.
 
 
+\begin{definition}
+	Un automate est dit normalisé s'il a
+
+	\begin{itemize}
+		\item 1 seul état initial sans flèches rentrantes
+		\item 1 seul état final sans flèches sortantes
+	\end{itemize}
+\end{definition}
+
 \begin{theorem}[lien avec le théorème de Kleene]
 	$L \subseteq \aomega$ est $\omega$-reconnaissable \ssi il est reconnu par un automate de Büchi.
 \end{theorem}
@@ -228,7 +237,6 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 		      Soit $\La^*(A_{qq'})$ le langage reconnu par $A_{qq'}$ et $\La^+(A_{qq'}) = \La^*(A_{qq'}) \setminus \set {\motvide}$
 
-
 		      Alors $L = \bigcup_{(q,q') \in I \times T} \La^*(q,q')(\La^+(q',q'))^{\omega}$, en effet :
 
 		      \begin{itemize}
@@ -241,32 +249,102 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 			            Analogue à la contraposée.
 		      \end{itemize}
 
-
 		\item \bimpLR \\
-		      TODO
+		      Au vu de la caractérisation et du fait que la classe Rec est fermée relativement a l'union finie, il suffit de \mq que si
+		      $X,Y \in \text{Rat}(A^+)$, alors $XY^{\omega} \in \text{Rec}$.
+
+		      D'après le théorème de Kleene, $X,Y \in \text{Rat} (A^*)$, alors $X,Y$ sont reconnaissables par des automates finis, donc
+
+		      \begin{eqnarray*}
+			      &\exists A_1 \text{ \tq } X = \lang {A_1} \\
+			      &\exists A_2 \text{ \tq } Y = \lang {A_2}
+		      \end{eqnarray*}
+
+		      De plus on peut choisir $A_1$ et $A_2$ normalisés.
+
+		      Soit $A_1 = (Q_1, i_1, f_1, \delta_1)$ et $A_2 = (Q_2, i_2, f_2, \delta_2)$.
+		      Donc les automates ont la forme suivante :
+		      \digraph[scale=0.50]{buchithm1}{
+			      rankdir=LR;
+
+			      node [shape=circle, style=filled, color=lightblue];
+			      i1;
+			      f1;
+			      i2;
+			      f2;
+
+			      node [shape=box, style=filled, color=lightblue];
+			      a1 [label = "A1"]
+			      a2 [label = "A2"]
+
+			      start [shape=point];
+			      start -> i1;
+
+
+			      start2 [shape=point];
+			      start2 -> i2;
+
+			      i1 -> a1;
+			      i1 -> a1;
+			      a1 -> f1;
+			      a1 -> f1;
+
+
+			      i2 -> a2;
+			      i2 -> a2;
+			      a2 -> f2;
+			      a2 -> f2;
+
+			      f1 [shape=doublecircle];
+			      f2 [shape=doublecircle];
+		      }
+
+		      Supposons que $\motvide \notin X$.
+
+		      Alors on identifie les états $f_1,i_2$ et $f_2$ :
+
+		      \digraph[scale=0.50]{buchithm2}{
+			      rankdir=LR;
+
+			      node [shape=circle, style=filled, color=lightblue];
+			      i1;
+			      end;
+
+			      node [shape=box, style=filled, color=lightblue];
+			      a1 [label = "A1"]
+			      a2 [label = "A2"]
+
+			      start [shape=point];
+			      start -> i1;
+
+			      i1 -> a1;
+			      i1 -> a1;
+			      a1 -> end;
+			      a1 -> end;
+
+
+			      end -> a2;
+			      end -> a2;
+			      a2 -> end;
+			      a2 -> end;
+
+			      end [shape=doublecircle];
+		      }
+
+		      L'automate obtenu reconnait bien les mots $XY^{\omega}$ et il se correspond à:
+
+		      $$ A = ( Q_1 \cup Q_2 \setminus \set {i_2,f_2}, \set {i_1}, \set {f_1}, \delta_1 \cup \delta_2 \cup \eta_0 \cup \eta_1 \cup \eta_2)$$
+		      où
+		      \begin{eqnarray*}
+			      \eta_0 &=& \setdef {(f_1,a,f_1)} {(i_2,a,f_2) \in \delta_2} \\
+			      \eta_1 &=& \setdef {(f_1,a,q)} {(i_2,a,q) \in \delta_2} \\
+			      \eta_2 &=& \setdef {(q,a,f_1)} {(q,a,f_2) \in \delta_2}
+		      \end{eqnarray*}
+
+
+		      Si $\motvide \in L_1$, alors on rend $f_1$ initial.
 	\end{itemize}
 \end{proofI}
-
-
-
-\begin{prop} \label{prop:l1l2o}
-	Soit $L_1$ reconnu par $A_1 = (Q_1,i_1,f_1,\delta_1)$ et $L_2$ reconnu par $A_2 = (Q_2,i_2,f_2,\delta_2)$ normalisés,
-	alors on peut donner un automate pour $L_1(L_2)^{\omega}$.
-\end{prop}
-
-\begin{proof}
-	Supposons que $\motvide \notin L_1$,
-	$$ A = ( Q_1 \cup Q_2 \setminus \set {i_2,f_2}, \set {i_1}, \set {f_1}, \delta_1 \cup \delta_2 \cup \eta_0 \cup \eta_1 \cup \eta_2)$$
-	où
-	\begin{eqnarray*}
-		\eta_0 &=& \setdef {(f_1,a,f_1)} {(i_2,a,f_2) \in \delta_2} \\
-		\eta_1 &=& \setdef {(f_1,a,q)} {(i_2,a,q) \in \delta_2} \\
-		\eta_2 &=& \setdef {(q,a,f_1)} {(q,a,f_2) \in \delta_2}
-	\end{eqnarray*}
-
-
-	Si $\motvide \in L_1$, alors on rend $f_1$ initial.
-\end{proof}
 
 \begin{exemple}
 	$L_1 = \motvide, L_2 = \lang {a^*b}$
