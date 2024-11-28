@@ -479,3 +479,99 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 	qui est l'étiquette d'un chemin qui passe un nombre infini de fois par un état final.
 	Donc ce mot serait reconnu par l'automate, or il contient un nombre infini de $b$.  $\contradict$
 \end{proof}
+
+
+\begin{prop}
+	La famille des langages reconnaissables par un automate de Büchi est fermée relativement à l'intersection.
+\end{prop}
+
+\begin{proof}
+	Soit $L_1$ et $L_2$ deux langages reconnaisable ey soeint
+	\begin{eqnarray*}
+		A_1 &=& (Q_1,I_1,T_1.\delta_1) \\
+		A_2 &=& (Q_2,I_2,T_2.\delta_2)
+	\end{eqnarray*}
+	tels que $L_1 = \La ^ {\omega} (A_1) \et  L_2 = \La ^ {\omega} (A_2)$.
+
+	Alors l'automate $A = (Q,I,T,\delta)$ :
+	\begin{eqnarray*}
+		Q &=& Q_1 \times Q_2 \times \set{1,2}  \\
+		I &=& \setdef {i_1,i_2,1} {i_1 \in I_1,i_2 \in I_2 } \\
+		T &=&  \setdef {t,q,1} {t \in T_1, q \in Q} \\
+		\delta ((q_1,q_2,x), a) &=&
+		\left\{
+		\begin{array}{cc}
+			(\delta_1(q_1,a), \delta_2 (q_2,a), 2) & \text {si } q_1 \in T_1 \et x = 1 \\
+			(\delta_1(q_1,a), \delta_2 (q_2,a), 1) & \text {si } q_2 \in T_2 \et x = 2 \\
+			(\delta_1(q_1,a), \delta_2 (q_2,a), x) & \text {sinon}
+		\end{array}
+		\right.
+	\end{eqnarray*}
+\end{proof}
+
+\begin{exemple}
+	TODO
+\end{exemple}
+
+\begin{notation}
+	Soit $w \in \mots$, not note $\inf (w) = \setdef {x \in \alphabet} {{\abs w}_x = \infty}$
+\end{notation}
+
+
+
+\begin{theorem}{Factorisation Ramsayenne}
+	Soit $f : \N \times \N \to C $, où $C$ est un ensemble fini, alors il existe une suite infinie d'entiers $E = i_0, i_1, \ldots, i_n, \ldots$
+	telle que $f(E \times E)$ soit un singleton, \ie $\forall i_{j_1},i_{e_1},i_{j_2},i_{e_2}$ dans $E$, $f(i_{j_1},i_{e_1})=f(i_{j_2},i_{e_2})$.
+\end{theorem}
+
+\begin{proof}
+	On construit une suite de sous-ensembles de $\N$, $T_0, T_1, \ldots$, de la maniere suivante :
+	$T_0 = \N$. Si on a déjà $T_i$, on construit $T_{i+1}$.
+
+	Comme les couleurs sont au nombre fini, il existe une couleur $c_0$ et une suite
+	$u_0, v_1, v_2, \ldots$ tel que $f(u_0, v_i) = c_0 \forall i \geq 1$ (il existe un nombre infini d'arcs sortant de $u_0$ de couleur $c_0$)
+	alors $T_{i+1} = \set {v_1, v_2, \ldots}$
+
+
+	Soit $u_i = \min (T_1)$. et considérons $u_0, u_1, \ldots$. Par construction $\forall i \in \N, \forall j \in \N, f(u_i, u_{i + j}) = c_i$
+	puisque les couleurs sont en nombre fini, il doit exister une suite $i_0, i_1, \ldots$ telle que $f(u_{i_J}, u_{i_{J+1}}) = c_{i_0}$
+	et donc la suite $u_{i_0},u_{i_1}, \ldots$ est la suite cherchée.
+\end{proof}
+
+
+Soit $X$ un langage reconnaisable et $A = (Q,I,T,\delta)$ un automate de Büchi qui reconnait $X$.
+
+%TODO: Make pretty
+
+On défini une relation sur $\mots$:
+\begin{eqnarray*}
+	w \sim w' \iff \forall p,q \in Q, & \exists \text{un chemin de $p$ à $q$ étiquetté par } w \\
+	&\et \exists \text{ un chemin de $p$ à $q$ d'étiquette $w$ qui passe par un état terminal}
+\end{eqnarray*}
+
+
+\begin{itemize}
+	\item $\sim$ est d'équivalence : trivial
+	\item $\sim$ est une relation d'équivalence d'index fini, son nombre de classe ne peut pas dépasser $3^{{\abs Q}^2}$
+	      car chacune des ${\abs Q}^2$ coupes d'états distingue 33types de mots :
+	      \begin{itemize}
+		      \item Les mots qui ne sont pas l'étiquette d'un chemin de $p$ à $q$.
+		      \item Les mots qui sont l'étiquette d'un chemin $s$ de $p$ à $q$ dont aucun ne passe par un état terminal.
+		      \item Les mots qui sont l'étiquette d'un chemin $s$ de $p$ à $q$ dont au moins 1 par par un état terminal.
+	      \end{itemize}
+	\item $\sim$ est une congruence.
+
+	      Si $w \sim w'$ et $u,v \in \mots$ alors $uwv \sim uw'v$
+
+	      TODO
+\end{itemize}
+
+Alors $\mots / \sim$ est un monoïde fini.
+
+Et donc $\forall w \in \mots, [w]$ est un langage rationnel, en effet, $[x]$ est l'image inverse d'un singleton de $\mots / \sim$
+par le morphisme de projection $\phi : \mots \to \mots / \sim$ tel que $f (x) = [w] \forall x \in \mots$.
+
+
+\begin{prop}
+	La classe des langages reconnaissables pas un automate de Büchi est fermée relativement au passage au complémentaire.
+\end{prop}
