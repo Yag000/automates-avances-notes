@@ -1,5 +1,7 @@
 \section{Langages de mots infinis et automates de Büchi}
 
+\subsection{Langages de mot infinis}
+
 \begin{notation}
 	Soit $A$ un alphabet.
 
@@ -83,6 +85,9 @@
 		      les propriétés precedentes, on en déduit que $R \subseteq \mathcal{E}$
 	\end{itemize}
 \end{proofI}
+
+
+\subsection{Automates de Büchi}
 
 \begin{definition}
 	Un automate de Büchi est un quadruplet $(Q,I,T,\delta)$, avec $\abs Q < \infty$, où
@@ -387,33 +392,9 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 		f [shape=doublecircle];
 	}
 
-	On applique utilise la construction de la proposition \ref{prop:l1l2o} et on obtient :
+	On identifie les états $qnew$ et $f$.
 
 	\digraph[scale=0.50]{buchi7}{
-		rankdir=LR;
-
-		node [shape=circle, style=filled, color=lightblue];
-		q [label="qnew"];
-		i [label="i"];
-		f [label="f"];
-
-		start [shape=point];
-		start -> q;
-
-		q -> q [label="b"];
-		q -> i [label="a"];
-		q -> f [label="b"];
-
-		i -> i [label="a"];
-		i -> f [label="b"];
-		i -> q [label="b"];
-
-		q [shape=doublecircle];
-	}
-
-	Et parfois certains états sont inutiles :
-
-	\digraph[scale=0.50]{buchi8}{
 		rankdir=LR;
 
 		node [shape=circle, style=filled, color=lightblue];
@@ -480,12 +461,14 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 \end{proof}
 
 
+\subsection{Clôture sous intersection et complémentaire}
+
 \begin{prop}
 	La famille des langages reconnaissables par un automate de Büchi est fermée relativement à l'intersection.
 \end{prop}
 
 \begin{proof}
-	Soit $L_1$ et $L_2$ deux langages reconnaisable ey soeint
+	Soit $L_1$ et $L_2$ deux langages reconnaissable et soient
 	\begin{eqnarray*}
 		A_1 &=& (Q_1,I_1,T_1.\delta_1) \\
 		A_2 &=& (Q_2,I_2,T_2.\delta_2)
@@ -518,7 +501,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 
 
-\begin{theorem}{Factorisation Ramsayenne}
+\begin{theorem}[Factorisation Ramsayenne]
 	Soit $f : \N \times \N \to C $, où $C$ est un ensemble fini, alors il existe une suite infinie d'entiers $E = i_0, i_1, \ldots, i_n, \ldots$
 	telle que $f(E \times E)$ soit un singleton, \ie $\forall i_{j_1},i_{e_1},i_{j_2},i_{e_2}$ dans $E$, $f(i_{j_1},i_{e_1})=f(i_{j_2},i_{e_2})$.
 \end{theorem}
