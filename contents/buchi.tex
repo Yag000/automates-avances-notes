@@ -1,6 +1,5 @@
 \section{Langages de mots infinis et automates de Büchi}
 
-
 \begin{notation}
 	Soit $A$ un alphabet.
 
@@ -539,13 +538,13 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 \end{proof}
 
 
-Soit $X$ un langage reconnaisable et $A = (Q,I,T,\delta)$ un automate de Büchi qui reconnait $X$.
+Soit $X$ un langage reconnaissable et $A = (Q,I,T,\delta)$ un automate de Büchi qui reconnait $X$.
 
 %TODO: Make pretty
 
 On défini une relation sur $\mots$:
 \begin{eqnarray*}
-	w \sim w' \iff \forall p,q \in Q, & \exists \text{un chemin de $p$ à $q$ étiquetté par } w \\
+	w \sim w' \iff &\forall p,q \in Q, \exists \text{un chemin de $p$ à $q$ étiquetté par } w \\
 	&\et \exists \text{ un chemin de $p$ à $q$ d'étiquette $w$ qui passe par un état terminal}
 \end{eqnarray*}
 
@@ -553,7 +552,7 @@ On défini une relation sur $\mots$:
 \begin{itemize}
 	\item $\sim$ est d'équivalence : trivial
 	\item $\sim$ est une relation d'équivalence d'index fini, son nombre de classe ne peut pas dépasser $3^{{\abs Q}^2}$
-	      car chacune des ${\abs Q}^2$ coupes d'états distingue 33types de mots :
+	      car chacune des ${\abs Q}^2$ coupes d'états distingue 3 types de mots :
 	      \begin{itemize}
 		      \item Les mots qui ne sont pas l'étiquette d'un chemin de $p$ à $q$.
 		      \item Les mots qui sont l'étiquette d'un chemin $s$ de $p$ à $q$ dont aucun ne passe par un état terminal.
