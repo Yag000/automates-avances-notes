@@ -492,7 +492,90 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 \end{proof}
 
 \begin{exemple}
-	TODO
+
+	Soit
+
+	\begin{itemize}
+		\item $L_1 = \setdef {u \in {\set {a,b}}^{\omega}} {{\abs u}_a = \infty}$
+
+		      \digraph[scale=0.50]{buchi8}{
+			      rankdir=LR;
+
+			      node [shape=circle, style=filled, color=lightblue];
+			      0 [label=" "];
+			      1 [label=" "];
+
+			      start [shape=point];
+			      start -> 0;
+
+			      0 -> 0 [label="a"];
+			      0 -> 1 [label="b"];
+
+			      1 -> 1 [label="b"];
+			      1 -> 0 [label="a"];
+
+			      0 [shape=doublecircle];
+		      }
+
+		\item $L_2 = \setdef {u \in {\set {a,b}}^{\omega}} {{\abs u}_b = \infty}$
+
+		      \digraph[scale=0.50]{buchi9}{
+			      rankdir=LR;
+
+			      node [shape=circle, style=filled, color=lightblue];
+
+			      0 [label=" "];
+			      1 [label=" "];
+
+			      start [shape=point];
+			      start -> 0;
+
+			      0 -> 0 [label="b"];
+			      0 -> 1 [label="a"];
+
+			      1 -> 1 [label="a"];
+			      1 -> 0 [label="b"];
+
+			      0 [shape=doublecircle];
+		      }
+
+		\item On cherche $L_3 = \setdef {u \in {\set {a,b}}^{\omega}} {{\abs u}_a = \infty \et {\abs u}_b = \infty} = L_1 \cap L_2$
+
+		      \digraph[scale=0.50]{buchi10}{
+			      rankdir=LR;
+
+			      node [shape=circle, style=filled, color=lightblue];
+
+                  021 [label = "0,2,1"];
+                  032 [label = "0,3,2"];
+                  122 [label = "1,2,2"];
+                  031 [label = "0,3,1"];
+                  121 [label = "1,2,1"];
+
+			      start [shape=point];
+			      start -> 021;
+
+			      021 -> 032 [label="a"];
+			      021 -> 122 [label="b"];
+
+                  032 -> 032 [label="a"];
+                  032 -> 122 [label="b"];
+
+
+                  122 -> 031 [label="a"];
+                  122 -> 121 [label="b"];
+
+
+                  031 -> 032 [label="a"];
+                  031 -> 122 [label="b"];
+
+                  121 -> 031 [label="a"];
+                  121 -> 121 [label="b"];
+
+			      021 [shape=doublecircle];
+			      031 [shape=doublecircle];
+		      }
+	\end{itemize}
 \end{exemple}
 
 \begin{notation}
