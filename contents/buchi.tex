@@ -546,11 +546,11 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 			      node [shape=circle, style=filled, color=lightblue];
 
-                  021 [label = "0,2,1"];
-                  032 [label = "0,3,2"];
-                  122 [label = "1,2,2"];
-                  031 [label = "0,3,1"];
-                  121 [label = "1,2,1"];
+			      021 [label = "0,2,1"];
+			      032 [label = "0,3,2"];
+			      122 [label = "1,2,2"];
+			      031 [label = "0,3,1"];
+			      121 [label = "1,2,1"];
 
 			      start [shape=point];
 			      start -> 021;
@@ -558,19 +558,19 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 			      021 -> 032 [label="a"];
 			      021 -> 122 [label="b"];
 
-                  032 -> 032 [label="a"];
-                  032 -> 122 [label="b"];
+			      032 -> 032 [label="a"];
+			      032 -> 122 [label="b"];
 
 
-                  122 -> 031 [label="a"];
-                  122 -> 121 [label="b"];
+			      122 -> 031 [label="a"];
+			      122 -> 121 [label="b"];
 
 
-                  031 -> 032 [label="a"];
-                  031 -> 122 [label="b"];
+			      031 -> 032 [label="a"];
+			      031 -> 122 [label="b"];
 
-                  121 -> 031 [label="a"];
-                  121 -> 121 [label="b"];
+			      121 -> 031 [label="a"];
+			      121 -> 121 [label="b"];
 
 			      021 [shape=doublecircle];
 			      031 [shape=doublecircle];
@@ -610,7 +610,7 @@ Soit $X$ un langage reconnaissable et $A = (Q,I,T,\delta)$ un automate de Büchi
 
 On défini une relation sur $\mots$:
 \begin{eqnarray*}
-	w \sim w' \iff &\forall p,q \in Q, \exists \text{un chemin de $p$ à $q$ étiquetté par } w \\
+	w \sim w' \iff &\forall p,q \in Q, \exists \text{un chemin de $p$ à $q$ étiqueté par } w \\
 	&\et \exists \text{ un chemin de $p$ à $q$ d'étiquette $w$ qui passe par un état terminal}
 \end{eqnarray*}
 
@@ -637,6 +637,87 @@ Et donc $\forall w \in \mots, [w]$ est un langage rationnel, en effet, $[x]$ est
 par le morphisme de projection $\phi : \mots \to \mots / \sim$ tel que $f (x) = [w] \forall x \in \mots$.
 
 
-\begin{prop}
-	La classe des langages reconnaissables pas un automate de Büchi est fermée relativement au passage au complémentaire.
+On considère la famille de langages de $\Sigma^{\omega}$ de la forme $[u][v]^{\omega}$ où $[u] \et [v]$ sont des classes d'équivalence de $\sim$.
+
+On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\omega}$ plus fine que la partition $<X,\mathcal{C}(X)>$.
+
+
+
+\begin{prop}\label{prop:buchi1}
+	Soit $Y = [u][v]^{\omega}$ pour un choix de $u \et v$, alors $Y \cap X = \emptyset$ ou $Y \subseteq X$.
 \end{prop}
+
+
+\begin{proof}
+	Supposons $Y \cap X \neq \emptyset$ et soit $x \in Y \cap X$, alors $x$ est l'étiquette d'un chemin réussi de $A$
+	de la forme
+	$$q_0 \to^{u_0} q_1 \to^{v_1} q_2 \to^{v_0} q_3 \ldots$$
+	avec x = [v][v] et $u_0 = [u]$ et $\forall i, v_i = [v]$.
+	Soit $y \in Y = [u][v]$. On peut donc écrire $y$ comme :
+	$$ y = u_0'v_1'v_2'\ldots$$
+	avec et $u_0' = [u]$ et $\forall i, v_i' = [v]$.
+
+	Mais alors $u \sim u_0'$ et $\forall i, v_i \sim v_i'$ et donc
+
+	$$q_0 \to^{u_0'} q_1 \to^{v_1'} q_2 \to^{v_0'} q_3 \ldots$$
+	et donc $y$ est l'étiquette d'un chemin réussi de $A$ et donc $A$ reconnait $y$, donc $y \in X$.
+\end{proof}
+
+
+
+\begin{prop}\label{prop:buchi2}
+	$\forall x \in \Sigma^{\omega}, \exists u,v \in \Sigma^*, x \in [u][v]^{\omega}$
+\end{prop}
+
+
+\begin{proof}
+	Écrivons $x = a_0a_1 \ldots a_n \ldots$ où $a_i \in \Sigma$.
+
+	On définit une fonction $f : \N \times \N \to \Sigma/\sim$
+	$$f(i,j) = [a_ia_{i+1}\ldots a_{j-1}], i \leq j$$
+	par le théorème de Ramsey, il existe une suite $I = i_0,i_1,\ldots$ \tlq $f{I}$ est un singleton.
+	En particulier,
+	$$f(i_0,i_1) =f(i_1,i_2) \ldots$$
+	Mais alors, soit $u - q_0 \ldots q_{i_0-1}$, $v_j = a_{i+j} \ldots a_{{i_{j+1} -1}}$ et $x = a_0a_ 1\ldots a_{i_0-1}a_{i+0}$
+	mais
+	\begin{eqnarray}
+		f(i_0,i_1) &=& [a_{i_0} a_{i_0+1}\ldots a_{i_1-1}] \\
+		f(i_1,i_2) &=& [a_{i_1} a_{i_1+1}\ldots a_{i_2-1}] \\
+		f(i_2,i_3) &=& [a_{i_2} a_{i_2+1}\ldots a_{i_3-1}]
+	\end{eqnarray}
+	en fait on a que $v_j \sim v_1 \forall j \geq 1$ et donc $x \in [u][v_1]^{\omega}$
+\end{proof}
+
+\begin{theorem}
+	$\forall X$ $\omega$-rationnel, on a
+	$$ \mathcal{C}(X) = \bigcup_{(u,v) \mid [u][w]^{\omega} \cap X = \emptyset} [u][v]^{\omega}$$
+\end{theorem}
+
+\begin{proofI}
+	\begin{itemize}
+		\item \fbox{$\supseteq$} \\
+		      Évidente car on fait une union d'ensembles qui sont tous contenus dans $\mathcal C (X)$
+		\item \fbox{$\subseteq$} \\
+		      Soit $y \in \mathcal C (X)$.
+		      $$\exists u,v, y \in [u][v]^{\omega} \reason{Propositon \ref{prop:buchi2}}$$
+		      alors $[u][v]^{\omega} \subseteq \mathcal C (X)$ (Proposition \ref{prop:buchi1})
+		      \cad $[u][v]^{\omega} \cap X = \emptyset$ et donc $y$ est bin dans l'union.
+	\end{itemize}
+\end{proofI}
+
+\begin{coro}
+	La classe des langages reconnaissables pas un automate de Büchi est fermée relativement au passage au complémentaire.
+\end{coro}
+
+
+\subsection{Automates de Muller}
+
+\begin{definition}
+	Un automate de Muller est un quadruplet $(Q,I, \mathcal T, \sigma)$ où $\mathcal T$ (la table de l'automate) est un ensemble de sous ensembles
+	de $Q$ : $\mathcal T \subseteq \parts Q$.
+
+	Soit $w \in \Sigma^{\omega}$, $w$ est accepté par $A$ si $w$ est l'étiquette d'un chemin $\gamma$ \tq $\inf {\gamma} \in \mathcal T$ où
+	$\inf {\gamma}$ est l'ensemble d'états de $Q$ par qui $\gamma$ passe infiniment souvent.
+
+	%TODO: exemple
+\end{definition}
