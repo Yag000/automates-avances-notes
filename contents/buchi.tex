@@ -634,7 +634,7 @@ On défini une relation sur $\mots$:
 Alors $\mots / \sim$ est un monoïde fini.
 
 Et donc $\forall w \in \mots, [w]$ est un langage rationnel, en effet, $[x]$ est l'image inverse d'un singleton de $\mots / \sim$
-par le morphisme de projection $\phi : \mots \to \mots / \sim$ tel que $f (x) = [w] \forall x \in \mots$.
+par le morphisme de projection $\phi : \mots \to \mots / \sim$ tel que $\forall x \in \mots,\ f (x) = [w] $.
 
 
 On considère la famille de langages de $\Sigma^{\omega}$ de la forme $[u][v]^{\omega}$ où $[u] \et [v]$ sont des classes d'équivalence de $\sim$.
@@ -653,6 +653,7 @@ On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\
 	de la forme
 	$$q_0 \to^{u_0} q_1 \to^{v_1} q_2 \to^{v_0} q_3 \ldots$$
 	avec x = [v][v] et $u_0 = [u]$ et $\forall i, v_i = [v]$.
+
 	Soit $y \in Y = [u][v]$. On peut donc écrire $y$ comme :
 	$$ y = u_0'v_1'v_2'\ldots$$
 	avec et $u_0' = [u]$ et $\forall i, v_i' = [v]$.
@@ -675,16 +676,16 @@ On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\
 
 	On définit une fonction $f : \N \times \N \to \Sigma/\sim$
 	$$f(i,j) = [a_ia_{i+1}\ldots a_{j-1}], i \leq j$$
-	par le théorème de Ramsey, il existe une suite $I = i_0,i_1,\ldots$ \tlq $f{I}$ est un singleton.
+	par le théorème de Ramsey, il existe une suite $I = i_0,i_1,\ldots$ \tlq $f(I)$ est un singleton.
 	En particulier,
-	$$f(i_0,i_1) =f(i_1,i_2) \ldots$$
+	$$f(i_0,i_1) = f(i_1,i_2) = f(i_2,i_3) \ \ldots$$
 	Mais alors, soit $u - q_0 \ldots q_{i_0-1}$, $v_j = a_{i+j} \ldots a_{{i_{j+1} -1}}$ et $x = a_0a_ 1\ldots a_{i_0-1}a_{i+0}$
 	mais
-	\begin{eqnarray}
+	\begin{eqnarray*}
 		f(i_0,i_1) &=& [a_{i_0} a_{i_0+1}\ldots a_{i_1-1}] \\
 		f(i_1,i_2) &=& [a_{i_1} a_{i_1+1}\ldots a_{i_2-1}] \\
 		f(i_2,i_3) &=& [a_{i_2} a_{i_2+1}\ldots a_{i_3-1}]
-	\end{eqnarray}
+	\end{eqnarray*}
 	en fait on a que $v_j \sim v_1 \forall j \geq 1$ et donc $x \in [u][v_1]^{\omega}$
 \end{proof}
 
@@ -701,12 +702,12 @@ On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\
 		      Soit $y \in \mathcal C (X)$.
 		      $$\exists u,v, y \in [u][v]^{\omega} \reason{Propositon \ref{prop:buchi2}}$$
 		      alors $[u][v]^{\omega} \subseteq \mathcal C (X)$ (Proposition \ref{prop:buchi1})
-		      \cad $[u][v]^{\omega} \cap X = \emptyset$ et donc $y$ est bin dans l'union.
+		      \cad $[u][v]^{\omega} \cap X = \emptyset$ et donc $y$ est bien dans l'union.
 	\end{itemize}
 \end{proofI}
 
 \begin{coro}
-	La classe des langages reconnaissables pas un automate de Büchi est fermée relativement au passage au complémentaire.
+	La classe des langages reconnaissables par un automate de Büchi est fermée relativement au passage au complémentaire.
 \end{coro}
 
 
