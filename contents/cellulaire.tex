@@ -5,7 +5,7 @@
 	\begin{itemize}
 		\item L'entier positif $d$ représentant la dimension de l'espace $(\Z^d)$
 		\item Un ensemble fini $S$ d'états
-		\item Un "voisinage", \ie, un ensemble de vecteurs de $\Z^d (\vec{v_1},  \vec{v_1}, \ldots ,\vec{v_m})$
+		\item Un "voisinage", \ie un ensemble de vecteurs de $\Z^d (\vec{v_1},  \vec{v_1}, \ldots ,\vec{v_m})$
 		      qui représente la position relative des voisins (relative à la position de la cellule). Les voisins de la
 		      cellule $\vec r$ sont $\vec r + \vec {v_1},  \ldots , \vec r + \vec {v_m}$.
 		\item Une fonction $f : S ^ m \to S$ de transitions locale qui défini l'état d'une cellule à l'instant $t + 1$
@@ -14,7 +14,6 @@
 \end{definition}
 
 Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'espace.
-
 
 \begin{definition}
 	Une configuration est une fonction $\Z ^ d \to S$ qui décrit l'état courant de chaque cellule.
@@ -65,6 +64,7 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 	TODO
 \end{exemple}
 
+\subsection{Le jeu de la vie}
 
 \begin{exemple}
 	Pour $d = 2$ le Game of Life de Conway \cite{conwayGOL}:
@@ -130,9 +130,9 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 		\substack{\square \square \square \\ \square}
 	\]
 
-    Maintenant on peut voir ceci comme un nombre binaire sur 8 bits ou le i-ème bit correspond a la 
-    nouvelle valeur de la cellule a la i-ème possition, ainsi pour cet automate cellulaire on obtient :
-    
+	Maintenant on peut voir ceci comme un nombre binaire sur 8 bits ou le i-ème bit correspond a la
+	nouvelle valeur de la cellule a la i-ème possition, ainsi pour cet automate cellulaire on obtient :
+
 
 	\[ \LARGE
 		\substack{\blacksquare \blacksquare \blacksquare \\ \square \\ 0 } \enspace
@@ -145,8 +145,10 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 		\substack{\square \square \square \\ \square \\ 0}
 	\]
 
-    Ainsi cet automate est numéroté par $01011010_2 = 90_{10}$
+	Ainsi cet automate est numéroté par $01011010_2 = 90_{10}$
 \end{notation}
+
+\subsection{Configurations périodiques}
 
 \begin{definition}
 	Soit $s \in S$ un état, on appelle $s$-support l'ensemble de cellules qui ont
@@ -156,10 +158,34 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 \begin{notation}
 	Souvent on impose qu'un état $q_0$ est un état "quiescent" (typiquement c'est l'état 0).
 
-	Il est stable par $f$, \ie, $f(\underbrace{q_0,\ldots, q_0}_m)$
+	Il est stable par $f$, \ie $f(\underbrace{q_0,\ldots, q_0}_m)$
 \end{notation}
 
 \begin{definition}
 	On apelle configurations finies ($q_0$-finies) les configurations ayant un $q_0$-support fini.
 \end{definition}
+
+\begin{definition}
+	Soit $\vec v$ un vecteur de $\Z^d$, la translation $\tau_{\vec v}$ est une fonction d'automate cellulaire où le voisinage contient seulement des $\vec v$,
+	autrement dit, la valeur d'une cellule $\vec r$ à l'instant $t+1$ est simplement la valuer de la cellule $\vec r + \vec v$ à l'instant $t$.
+
+
+	Si $\vec v = (0,\ldots,0, 1, 0, \ldots, 0) = \sigma_i$ est nommé shift élémentaire, où le 1 est à la position $i$.
+
+	Tout transition peut être exprimée en fonction de shifts élémentaires.
+\end{definition}
+
+\begin{definition}
+	Une configuration est dite $\vec v$-périodique si $c(\vec n) = c (\vec n + \vec v)$.
+\end{definition}
+
+\begin{definition}
+	Une configuration est dite spatialement périodique si $\exists \vec v,$ \tq $c$ est $\vec v$-périodique.
+\end{definition}
+
+
+\begin{definition}
+	Une configuration est dite totalement périodique si $\exists k, \forall i \in \enum 1 d$, $c$ est $\sigma_i^k$-périodique.
+\end{definition}
+
 
