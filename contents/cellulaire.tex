@@ -62,7 +62,7 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 
 
 \begin{exemple}
-	exemple
+	TODO
 \end{exemple}
 
 
@@ -70,7 +70,7 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 	Pour $d = 2$ le Game of Life de Conway \cite{conwayGOL}:
 	\begin{itemize}
 		\item $S = \set {0,1}$
-		\item $V = ((0,1), (1,0), (0,-1), (-1,0), (1,1), (1,-1), (-1,1), (-1,-1)$
+		\item $V = ((0,1), (1,0), (0,-1), (-1,0), (1,1), (1,-1), (-1,1), (-1,-1))$
 		\item La fonction de transition
 		      \begin{itemize}
 			      \item Une cellule vivante reste vivante \ssi elle a 2 ou 3 vision vivant
@@ -98,11 +98,58 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 	Wolfgram a introduit un numérotation \cite{wolfgramClass} pour les automates cellulaires élémentaires ou chaque automate
 	est associé a un entier entre 0 et 255.
 
-	TODO: explain how it works
+	Comme on peut definir l'automate juste en etudiant son cortemetn sur trois cellules voisines, il suffit d'associer une
+	ettiquete a ce comportemetn pour caracterises tout l'automate cellulaire. Ainsi, o ceommence par trier
+	les 8 configurations possibles pour 3 cellues voisines ainsi :
+
+	% From : https://tex.stackexchange.com/questions/320195/is-there-an-implemented-way-to-draw-wolframs-elementary-cellular-automata
+	\[ \LARGE
+		\substack{\blacksquare \blacksquare \blacksquare } \enspace
+		\substack{\blacksquare \blacksquare \square } \enspace
+		\substack{\blacksquare \square \blacksquare } \enspace
+		\substack{\blacksquare \square \square } \enspace
+		\substack{\square \blacksquare \blacksquare } \enspace
+		\substack{\square \blacksquare \square } \enspace
+		\substack{\square \square \blacksquare } \enspace
+		\substack{\square \square \square }
+	\]
+
+	Si on considere ces trois cellules comme un nombre binaire encodé sur 3 bits, ce tri se correspond a un tri decoissant sur la
+	valeur de ces configurations. On peut donc regarder quel sera l'état de la cellule du milieu, apr exemple pour la
+	fonction \textbf{xor} :
+
+
+	\[ \LARGE
+		\substack{\blacksquare \blacksquare \blacksquare \\ \square } \enspace
+		\substack{\blacksquare \blacksquare \square \\ \blacksquare} \enspace
+		\substack{\blacksquare \square \blacksquare \\ \square} \enspace
+		\substack{\blacksquare \square \square \\ \blacksquare} \enspace
+		\substack{\square \blacksquare \blacksquare \\ \blacksquare} \enspace
+		\substack{\square \blacksquare \square \\ \square} \enspace
+		\substack{\square \square \blacksquare \\ \blacksquare} \enspace
+		\substack{\square \square \square \\ \square}
+	\]
+
+    Maintenant on peut voir ceci comme un nombre binaire sur 8 bits ou le i-ème bit correspond a la 
+    nouvelle valeur de la cellule a la i-ème possition, ainsi pour cet automate cellulaire on obtient :
+    
+
+	\[ \LARGE
+		\substack{\blacksquare \blacksquare \blacksquare \\ \square \\ 0 } \enspace
+		\substack{\blacksquare \blacksquare \square \\ \blacksquare \\ 1} \enspace
+		\substack{\blacksquare \square \blacksquare \\ \square \\ 0} \enspace
+		\substack{\blacksquare \square \square \\ \blacksquare \\ 1} \enspace
+		\substack{\square \blacksquare \blacksquare \\ \blacksquare \\ 1} \enspace
+		\substack{\square \blacksquare \square \\ \square \\ 0} \enspace
+		\substack{\square \square \blacksquare \\ \blacksquare \\ 1} \enspace
+		\substack{\square \square \square \\ \square \\ 0}
+	\]
+
+    Ainsi cet automate est numéroté par $01011010_2 = 90_{10}$
 \end{notation}
 
 \begin{definition}
-	Soit $s \in S$ un état, on appelle $s$-support l'ensemble de cellules qui ount
+	Soit $s \in S$ un état, on appelle $s$-support l'ensemble de cellules qui ont
 	un état différent de $s$.
 \end{definition}
 
@@ -115,3 +162,4 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 \begin{definition}
 	On apelle configurations finies ($q_0$-finies) les configurations ayant un $q_0$-support fini.
 \end{definition}
+
