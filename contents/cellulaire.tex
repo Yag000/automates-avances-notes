@@ -1,0 +1,117 @@
+\section{Automates cellulaires}
+
+\begin{definition}
+	Un automate cellulaire est définit par :
+	\begin{itemize}
+		\item L'entier positif $d$ représentant la dimension de l'espace $(\Z^d)$
+		\item Un ensemble fini $S$ d'états
+		\item Un "voisinage", \ie, un ensemble de vecteurs de $\Z^d (\vec{v_1},  \vec{v_1}, \ldots ,\vec{v_m})$
+		      qui représente la position relative des voisins (relative à la position de la cellule). Les voisins de la
+		      cellule $\vec r$ sont $\vec r + \vec {v_1},  \ldots , \vec r + \vec {v_m}$.
+		\item Une fonction $f : S ^ m \to S$ de transitions locale qui défini l'état d'une cellule à l'instant $t + 1$
+		      en fonction des états de ses voisins a l'instant $t$.
+	\end{itemize}
+\end{definition}
+
+Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'espace.
+
+
+\begin{definition}
+	Une configuration est une fonction $\Z ^ d \to S$ qui décrit l'état courant de chaque cellule.
+
+	Si $C$ est l'ensemble des configurations, alors un automate cellulaire défini une fonction $G: C \to C$ où si $c \in C$, alors
+	$G(x) = c'$ est la configuration obtenue de $c$ en applicant la règle $f$ à toutes les cellules.
+
+	En général, en itère la fonction $G$ et pour une configuration $c$ on s'intéresse à la suite :
+	$$ G^0 (c) = e, G^1 (c), G^2 (c), \text{ où } G^i (c) = G ( G^{i - 1 }(c))$$
+\end{definition}
+
+\begin{definition}
+	Un point fixe (ou nature morte) est une configuration $c$ \tlq $\forall k, G^k(c) = c$.
+\end{definition}
+
+
+\begin{definition}
+	Une configuration $c$ est dite périodique (dans le temps) (ou oscillateur) si $\exists k$, \tq , $G^k(c) =c$. Le plus petit
+	petit $k$ \tq $G^k(c) =c$ est dite la période d'oscillation.
+\end{definition}
+
+\begin{definition}
+	Une configuration est dite ultimement fixe si $\exists k, \forall j, \ G^{k+j}(c) =  G^{k}(c)$
+\end{definition}
+
+
+\begin{definition}
+	Une configuration est dite ultimement périodique si $\exists k, \exists l>0, \ G^{k+l}(c) =  G^{k}(c)$
+\end{definition}
+
+
+\begin{exemple}
+	TODO
+\end{exemple}
+
+
+\subsection{Unicité des automates cellulaires}
+
+
+\begin{theorem}
+	Si deux automates cellulaires $A \et B$ réalisent la meme fonction $G$ alors $A \et B$ ne peuvent pas différer que par
+	leur voisinages et les deux voisinages ne peuvent différent que par la presence (ou pas) de voisins inutiles (\cad
+	des voisins dont l'état n'a aucune influence sur la valuer de $f$).
+\end{theorem}
+
+
+\begin{exemple}
+	exemple
+\end{exemple}
+
+
+\begin{exemple}
+	Pour $d = 2$ le Game of Life de Conway \cite{conwayGOL}:
+	\begin{itemize}
+		\item $S = \set {0,1}$
+		\item $V = ((0,1), (1,0), (0,-1), (-1,0), (1,1), (1,-1), (-1,1), (-1,-1)$
+		\item La fonction de transition
+		      \begin{itemize}
+			      \item Une cellule vivante reste vivante \ssi elle a 2 ou 3 vision vivant
+			      \item Une cellule morte devient vivante \ssi 3 voisins sont vivants
+		      \end{itemize}
+	\end{itemize}
+
+
+	Une implementation sur navigateur est disponible sur: \url{https://conwaylife.com/}.
+\end{exemple}
+
+\begin{definition}
+
+	On apelle automates cellulaires élémentaires les automates cellulaires qui respectent :
+	\begin{itemize}
+		\item $d = 1$
+		\item $S = \set{0,1}$
+		\item $d = (-1,0,1)$
+	\end{itemize}
+
+	Les automates élémentaires sont exactement $2^8 = 256$.
+\end{definition}
+
+\begin{notation}
+	Wolfgram a introduit un numérotation \cite{wolfgramClass} pour les automates cellulaires élémentaires ou chaque automate
+	est associé a un entier entre 0 et 255.
+
+	TODO: explain how it works
+\end{notation}
+
+\begin{definition}
+	Soit $s \in S$ un état, on appelle $s$-support l'ensemble de cellules qui ount
+	un état différent de $s$.
+\end{definition}
+
+\begin{notation}
+	Souvent on impose qu'un état $q_0$ est un état "quiescent" (typiquement c'est l'état 0).
+
+	Il est stable par $f$, \ie, $f(\underbrace{q_0,\ldots, q_0}_m)$
+\end{notation}
+
+\begin{definition}
+	On apelle configurations finies ($q_0$-finies) les configurations ayant un $q_0$-support fini.
+\end{definition}
