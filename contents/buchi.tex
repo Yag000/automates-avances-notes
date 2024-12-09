@@ -41,7 +41,7 @@
 	On peut le définir par l'expression $\omega$-rationnelle $(a + b)^* a^{\omega}$ ou $(a^*b)^* a^{\omega}$
 
 
-	$L = \setdef {w \in \aomega} {w \text{ commence par } a \et \text{ a un nombre infini de } b}$
+	$L = \setdef {w \in \aomega} {w \text{ commence par } a \et \text{a un nombre infini de } b}$
 
 	Avec l'expression : $a(a^*b)^{\omega}$.
 \end{exemple}
@@ -54,11 +54,11 @@
 \begin{proofI}
 	\begin{itemize}
 		\item \fbox{$\Delta \subseteq R$} \\
-		      Soit $\Delta$ la classe des langages obtenue comme union finie de langages de la forme $XY^{\omega}, X,Y \in Rat(A^*)$
-		      mais alors par définition de $R$
-		      $$Y^{\omega} \in R \reason {par \ref{omega-clot-fi}}$$
+		      Soit $\Delta$ la classe des langages obtenue comme union finie de langages de la forme $XY^{\omega}, X,Y \in Rat(A^*)$,
+		      alors par définition de $R$
+		      $$Y^{\omega} \in R \reason {par \ref{omega-clot-op}}$$
 		      et
-		      $$XY^{\omega} \in R \reason{par \ref{omega-clot-op}}$$
+		      $$XY^{\omega} \in R \reason{par \ref{omega-clot-fi}}$$
 		      et puisque $R$ est fermé relativement à l'union finie, on a que tous les langages de $\Delta$ sont dans $R$,
 		      donc $\Delta \subseteq R$.
 		\item \fbox{$R \subseteq \Delta$} \\
@@ -79,10 +79,10 @@
 			      \item $\forall X \in \mathcal{E} \cap A^*, \forall Y \in \mathcal{E} \cap \ainf, X \cdot Y \in \mathcal{E}$
 			      \item $\forall X \in \mathcal{E} \cap A^*, X^* \in \mathcal{E} \et X^{\omega} \in \mathcal{E}$
 		      \end{enumerate}
-		      La vérification de ces propriétés est laissé en exercice.
+		      La vérification de ces propriétés est laissée en exercice.
 
 		      Comme $R$ est définie comme la plus petite classe qui satisfait
-		      les propriétés precedentes, on en déduit que $R \subseteq \mathcal{E}$
+		      les propriétés précédentes, on en déduit que $R \subseteq \mathcal{E}$.
 	\end{itemize}
 \end{proofI}
 
@@ -101,7 +101,7 @@
 
 
 \begin{definition}
-	Un chemin est réussi (ou acceptant) si $\exists q_0 \in I, \exists \text{ une suite infinie d'indices}, q_{i_J} \in T$,
+	Un chemin est réussi (ou acceptant) si $\exists q_0 \in I, \exists \text{ une suite infinie d'indices} q_{i_J} \in T$,
 	donc un chemin est réussi \ssi il passe un nombre infini de fois par des états terminaux.
 \end{definition}
 
@@ -139,7 +139,7 @@
 
 
 \begin{exercice}
-	écrire un automate de Büchi qui reconnait les mots infinis sur $\set {a,b}$ ayant un nombre fini de $b$. \\
+	Ecrire un automate de Büchi qui reconnait les mots infinis sur $\set {a,b}$ ayant un nombre fini de $b$. \\
 	\begin{minipage}{0.3\textwidth}
 		\digraph[scale=0.50]{buchi2}{
 			rankdir=LR;
@@ -199,7 +199,7 @@
 
 \begin{definition}
 	Un automate est dit émondé si tous ses états sont accesibles (on peut y accéder à partir d'un état initial)
-	et co-accessibles (à partiré de n'importe quel état, on peut arriver à un état final).
+	et co-accessibles (à partir de n'importe quel état, on peut arriver à un état final).
 \end{definition}
 
 Les notions d'automate émondé, complet, déterministe se généralisent aux automates de Büchi.
@@ -241,20 +241,20 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 		      Soit $\La^*(A_{qq'})$ le langage reconnu par $A_{qq'}$ et $\La^+(A_{qq'}) = \La^*(A_{qq'}) \setminus \set {\motvide}$
 
-		      Alors $L = \bigcup_{(q,q') \in I \times T} \La^*(q,q')(\La^+(q',q'))^{\omega}$, en effet :
+		      Alors $L = \bigcup_{(q,q') \in I \times T} \La^*(q,q')(\La^+(q',q'))^{\omega}$ :
 
 		      \begin{itemize}
 			      \item \fbox{$\supseteq$} \\
 			            En effet, si $w \in \bigcup_{(q,q') \in I \times T} \La^*(q,q')(\La^+(q',q'))^{\omega}$, alors
 			            $$\exists i_0 \in I, \exists t_0 \in T, \text{ tels que } w \in \La^*(i_0,t_0)(\La^+(t_0,t_0))^{\omega}$$
 			            donc $w$ est l'étiquette d'un chemin qui passe un nombre infini de fois par l'état final $t_0$, et donc
-			            $w\in \La^w (a) = L$
+			            $w\in \La^w (A) = L$
 			      \item \fbox{$\subseteq$} \\
 			            Analogue à la contraposée.
 		      \end{itemize}
 
 		\item \bimpLR \\
-		      Au vu de la caractérisation et du fait que la classe Rec est fermée relativement a l'union finie, il suffit de \mq que si
+		      Au vu de la caractérisation et du fait que la classe Rec est fermée relativement à l'union finie, il suffit de \mq si
 		      $X,Y \in \text{Rat}(A^+)$, alors $XY^{\omega} \in \text{Rec}$.
 
 		      D'après le théorème de Kleene, $X,Y \in \text{Rat} (A^*)$, alors $X,Y$ sont reconnaissables par des automates finis, donc
@@ -268,6 +268,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 		      Soit $A_1 = (Q_1, i_1, f_1, \delta_1)$ et $A_2 = (Q_2, i_2, f_2, \delta_2)$.
 		      Donc les automates ont la forme suivante :
+
 		      \digraph[scale=0.50]{buchithm1}{
 			      rankdir=LR;
 
@@ -335,7 +336,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 			      end [shape=doublecircle];
 		      }
 
-		      L'automate obtenu reconnait bien les mots $XY^{\omega}$ et il se correspond à:
+		      L'automate obtenu reconnait bien les mots $XY^{\omega}$ et il correspond à:
 
 		      $$ A = ( Q_1 \cup Q_2 \setminus \set {i_2,f_2}, \set {i_1}, \set {f_1}, \delta_1 \cup \delta_2 \cup \eta_0 \cup \eta_1 \cup \eta_2)$$
 		      où
