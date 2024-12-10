@@ -308,3 +308,9 @@ TSWLatexianTemp*
 *.ps
 *.gvpr
 *.graphviz
+
+# knowledge package
+
+*.diagnose
+*.kaux
+
