@@ -319,7 +319,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 	Soit $(M,\cdot , 1)$ un monoïde. Un élément $e \in M$ est \emph{idepmpotent} \ssi $e \cdot e = e$.
 \end{definition}
 
-\begin{exercice} \label{ex:puiss_idemp}
+\begin{exercice} \label{ex:puiss-idemp}
 	Soit $e \in M$ est idempotent, alors $\forall i \in \N^*. \ e^i = e$.
 \end{exercice}
 
@@ -342,12 +342,12 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 	Une \emph{puissance idempotente} d'un élément $m \in M$ est un élément de la forme $m^i \ (i\geq 1)$ tel que $m^i$ est idempotent.
 \end{definition}
 
-\begin{lemma}\label{lem:puiss_idemp}
+\begin{lemma}\label{lem:puiss-idemp}
 	Une puissance idempotente de $m\ in M$ es unique, dans le sense suivant. Si $m^i$ et $m^j$ sont des idempotents, alors $m^i = m^j$.
 \end{lemma}
 
 \begin{proof}
-	$m^i$ idempotent $\implies (m^i)^j = m^i$, voire \ref{ex:puiss_idemp}.
+	$m^i$ idempotent $\implies (m^i)^j = m^i$, voire \ref{ex:puiss-idemp}.
 
 	Pareil pour $m^j$ idempotent $\implies (m^j)^i = m^j$
 	Donc $m^i = m^{ij} = m^{ji} = m^{j}$
@@ -482,7 +482,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      \begin{exercice}
 			      Montrer que $mn L n$.
 		      \end{exercice}
-		\item Étape 3: Soit $m \in \Hc$. Par \ref{lem:puiss_idemp}, il existe $i > 1$ tel que $m^i$ est idempotent.
+		\item Étape 3: Soit $m \in \Hc$. Par \ref{lem:puiss-idemp}, il existe $i > 1$ tel que $m^i$ est idempotent.
 		      Par l''etape 3, on sait que $m^i \in \Hc$, donc on peut conclure que $\Hc$ contient un élément idempotent, notons le par
 		      $e$. On va montrer que $e$ est l'élément neutre de $\Hc$, \cad, $\forall m \in \Hc, \ m\cdot e m  e \cdot m = m$.
 
@@ -497,7 +497,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      On observe que $\Hc$ contient un unique idempotent. Soit $e'$ un autre idempotent, par le même argument
 		      que ci-dessus, $e'$ est un élément neutre donc : TODO ... $e = 'e$
 
-		      Soit $n \in \Hc$. Par le lemme \ref{lem:puiss_idemp}, il existe $j \geq 1$ tel que $n^j$ est idempotent, mais $n^j \in \Hc$ donc $n^j = e$. Et ainsi,
+		      Soit $n \in \Hc$. Par le lemme \ref{lem:puiss-idemp}, il existe $j \geq 1$ tel que $n^j$ est idempotent, mais $n^j \in \Hc$ donc $n^j = e$. Et ainsi,
 		      $n^{j-1}$ est l'inverse de $n$.
 	\end{itemize}
 \end{proof}
