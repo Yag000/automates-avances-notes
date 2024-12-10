@@ -188,4 +188,210 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 	Une configuration est dite totalement périodique si $\exists k, \forall i \in \enum 1 d$, $c$ est $\sigma_i^k$-périodique.
 \end{definition}
 
+\begin{prop}
+	Si $G$ est la fonction d'un automate cellulaire ye $\tau$ une translation, alors $G \circ \tau = \tau \circ G$.
+\end{prop}
 
+\begin{definition}
+	Si $\vec r$ est un vecteur on dit que une configuration $c$ est $\vec r$-périodique si $c(\vec n) = (\vec n + \vec r)$
+\end{definition}
+
+\begin{exemple}
+	TODO
+\end{exemple}
+
+\begin{definition}
+	Une configuration est dite totalement périodique si $\forall i \in \enum 1 d\exists k_i, $ \tq $c$ est $k_i\sigma_i$-périodique.
+\end{definition}
+
+\begin{remarque}
+	Puisque les fonctions dun automate cellulaire commutent avec les translations il en découle que si $c$ est totalement périodique alors $G(c)$
+	est aussi totalement périodique.
+
+	Donc si $P$ represente l'ensemble de toutes les configurations totalement périodiques, on considère $\restr G P : P \to P$, notée $G_P$.
+	Les deux fonctions $G_F$ et $G_P$ donnent des renseignements sur le surjectivité et injectivité de $G$.
+\end{remarque}
+
+\subsection{Une topologie sur l'espace des configurations $S^{\Z^d}$}
+
+
+\begin{definition}
+	Soit $c_1,c_2, \ldots, c_n, \ldots$ une suite de configurations on dit que la suite converge vers
+	la configuration $c$ (ou qu'elle a comme limite la configuration $c$) si
+	$$ \forall \vec n \in \Z^d \exists i, c_j(\vec n) = c(\vec n) \forall j > i$$
+\end{definition}
+
+\begin{prop}(Compacité de $S^{\Z^n}$)
+	TOute suite de configurations possède une sous-suite convergente.
+\end{prop}
+
+\begin{proof}
+	La demonstration est une généralisation de la factorisation de Ramsay à un nombre $d$ quelconque de dimension.
+	*Une configurations $c : \Z^d \to S$, avec $S$ fini, Ramsay le fait pour les fonctions $\N ^ 2 \to M$, avec $M$ fini).
+\end{proof}
+
+\begin{prop}[Les fonctions d'automates cellulaires sont continues] \label{prop:continues}
+	Soit $c_1,c_2, \ldots, c_n, \ldots$ une suite de configurations qui converge vers $c$,
+	alors $G(c_1),G(c_2), \ldots, G(c_n), \ldots$ une suite de configurations qui converge vers $G(c)$,
+\end{prop}
+
+\begin{proof}
+	La demonstration n'est pas compliqué et elle est laissée en exercice.
+\end{proof}
+
+\begin{prop}[Les configurations finies et totalement périodiques sont denses]\label{prop:dense}
+	$$\forall c \in S^{\Z^n}, \exists c_1,c_2, \ldots,\forall c_i \in F, \exists p_1,p_2, \ldots \forall c_j \in P, \lim_{i \to \infty} c_i = c \et \lim_{j \to \infty} p_j = c $$
+\end{prop}
+
+\begin{proof}
+	Soit $c$ une configuration.
+	Soit $\vec {r_0}, \vec {r_1},\ldots$ un dénombrement de cellules de $\Z^d$ et poir $u \in \N$,
+	$c_i$ la configuration définie par :
+
+	$$ c_i(r_j) = \left\{ \begin{array}{cc}
+			c(r_j) & \text{ si } j \leq i \\
+			q      & \text{ sinon }
+		\end{array}
+		\right.$$
+	ou $q$ est un état quiescent.
+
+	Il est évident que $\forall i, c_i \in F$ et que $\lim_{i \to \infty} c_i = c$.
+
+	Pour obtenir une suite de configurations périodiques qui convergent vers $c$ on peut obtenir une suite de configurations
+	$p_1, p_2, \ldots $ où $p_i$ coincide avec $v$ dans l'hypercube centré a l'origine et de coté $2i + 1$ et a une
+	période $2i + 1$ dans toutes les directions.
+
+	Les configurations $p_i$ sont évidement périodiques et $\lim_{i \to \infty} p_i = c$.
+\end{proof}
+
+\subsection{Injectivité et surjectivité des automates cellulaires}
+
+\begin{definition}
+	un automate cellulaire est dit
+	$\begin{array}{c}
+			\text{injectif}  \\
+			\text{surjectif} \\
+			\text{bijectif}
+		\end{array}$
+	si sa fonction $G$ est
+	$\begin{array}{c}
+			\text{injective}  \\
+			\text{surjective} \\
+			\text{bijective}
+		\end{array}$
+\end{definition}
+
+
+\begin{theorem}
+	\begin{enumerate}
+		\item $G$ injective $\implies G_F, G_P$ injectives \label{thm:big1}
+		\item Si $G_F$ est surjective ou $G_F$ est surjective $\implies G$ surjective \label{thm:big2}
+		\item Si $G_P$ est injective $\implies G_P$ surjective \label{thm:big3}
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Trivial, la restriction d'une fonction injective est toujours injective.
+		\item Dans le cas oh $G_F$ est surjective.
+
+		      Soit $c$ une configuration. On sait, par la Proposition \ref{prop:dense} qu'il existe
+		      une suite de configurations finies $c_1, c_2m \ldots$ \tlq $\lim_{i \to \infty} c_i = c$
+		      puisque chaque $c_i$ est une configuration dinie et comme $G_F$ est surjective,
+		      $$\forall i \exists e_i \in F, G_F(e)i) = c_i = G(e_i)$$
+		      La suite $e_1, e_2, \ldots \to e$
+		      et soit $e$ la limite de cette sous-suite. $G$ est continue par la Proposition \ref{prop:continues}, alors
+		      $G(e_1), G(e_2), \ldots \to G(e)$.
+
+		      De plus,
+		      \begin{eqnarray*}
+			      \lim_{j \to \infty} (G(e_{i_j})) &=& \lim_{j \to \infty} (e_{i_j}) \\
+			      &=& \lim_{i \to \infty} (c_i) \\
+			      &=& c
+		      \end{eqnarray*}
+
+		      On a donc $G(e) = c$ et $c$ possède donc une anti-image.
+		\item Soit $c$ une configuration périodique.
+		      $\exists k_1, k_2, \ldots, k_d$ \tlq
+		      \begin{equation}
+			      \forall i \in \enum 1 d, \ c \text{ est }\sigma_i^{k_i}\text{-périodique} \et
+			      c(\vec n) = c(\vec n + \sigma_i^{k_i})
+			      \label{eq:tmhc}
+		      \end{equation}
+
+		      Soit $K$ l'ensemble de toutes les configurations qui satisfont \ref{eq:tmhc}. On a que $K \subseteq P$ et $K$ est fini,
+		      car chaque configuration de $K$ est uniquement identifiée par les cellules dans un hypercube de cotés $k_1, k_2, \ldots, k_d$
+		      ($\abs K = {\abs S}^{k_1k_2\ldots k_d}$)
+
+		      Puisque $G$ commute avec les translations on a que $G(K) \subseteq K$.
+
+		      Considérons $\restr G K$. Cette fonction est injective car c'est une restrictions de $G$ a un
+		      sous ensemble de $P$ et $G_P$ injective par hypothèse.
+		      Mais toute fonctions injective sur un ensemble fini est aussi surjective,
+		      \cad chaque élément de $K$ (dont $c$) a un antecedent dans $K$
+		      donc $\exists e \in K \subsetneq P, G(e) = c$, et donc $G_P$ est surjective.
+	\end{enumerate}
+\end{proof}
+
+\begin{coro} \label{coro:inj-surj}
+	Si un automate cellulaire est injectif, alors il est surjectif (et donc bijectif).
+\end{coro}
+
+\begin{proof}
+	\begin{eqnarray*}
+		G \text{injective } &\implies& G_P \text{ injective} \reason{\ref{thm:big1}} \\
+		&\implies& G_P \text{ surjective} \reason{\ref{thm:big3}} \\
+		&\implies& G \text{ surjective} \reason{\ref{thm:big2}}
+	\end{eqnarray*}
+\end{proof}
+
+
+\begin{definition}
+	On dit qu'un automate cellulaire est reversible s'il est injectif et si $G^{-1}$ est une fonction d'automates cellulaire.
+\end{definition}
+
+\begin{remarque}
+	Par définition si un automate cellulaire est reversible alors il est bijectif.
+\end{remarque}
+
+\begin{prop}\label{prop:bij-rev}
+	Si $A$ est un automate cellulaire bijectif, alors il est reversible.
+\end{prop}
+
+\begin{proof}
+	La preuve montre que la fonction $G^{-1}$ est aussi une fonction d'automates cellulaires
+	(défini la règle locale d'évolution en fonction de l'état des cellules appartenant à un voisinage \emph{borné})
+\end{proof}
+
+\begin{coro}
+	$G$ injective $\implies \ G_F$ surjective.
+\end{coro}
+
+
+\begin{proof}
+	\begin{eqnarray*}
+		G \text{ injective} &\implies& G \text{ bijective} \reason{\ref{coro:inj-surj}}\\
+		&\implies& G \text{ reversible} \reason{\ref{prop:bij-rev}}
+	\end{eqnarray*}
+	Si $q$ est l'état quiescent pour $G$, alors $q$ est aussi l'état quiescent de $G^{-1}$
+	(Si toutes les cellules du voisinage sont a $q$ alors $G^{-1}$ met la cellule a l'état $q$)
+
+	Donc si $c$ est une configuration finie alors $e = G^{-1}(c)$ (la configuration obtenue en applicant
+	l'automate inverse) est aussi finie, et alors $G(e) = c$ et $c$ a bien une anti-image finie.
+\end{proof}
+
+TODO add graph
+
+\subsubsection{Surjectivité et balance}
+
+\begin{exemple}
+	$W_{110}$ n'est pas surjectif. TODO
+\end{exemple}
+
+\begin{definition}
+	une configuration qui n'a pas d'anti-image est dire un Jardin d'Éden (GOE, JDE).
+\end{definition}
+
+\begin{exercice}
+	Montrer que toute configuration contenant le motif $01010$ est un Jardin d'Éden pour $W_{110}$.
+\end{exercice}
