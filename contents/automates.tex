@@ -35,24 +35,26 @@
 		\end{itemize}
 	\end{minipage}
 	\begin{minipage}{0.5\textwidth}
-		\digraph[scale=0.75]{automateDet}{
-			rankdir=LR;
+		\begin{automata}
+			\digraph[scale=0.75]{automateDet}{
+				rankdir=LR;
 
-			node [shape=circle, style=filled, color=lightblue];
-			q0 [label="q_0"];
-			q1 [label="q_1"];
+				node [shape=circle, style=filled, color=lightblue];
+				q0 [label="q_0"];
+				q1 [label="q_1"];
 
-			start [shape=point];
-			start -> q0;
+				start [shape=point];
+				start -> q0;
 
-			q0 -> q0 [label="a"];
-			q0 -> q1 [label="b"];
-			q1 -> q1 [label="b"];
-			q1 -> q0 [label="a"];
+				q0 -> q0 [label="a"];
+				q0 -> q1 [label="b"];
+				q1 -> q1 [label="b"];
+				q1 -> q0 [label="a"];
 
-			q0 [shape=doublecircle];
-			q1 [shape=doublecircle];
-		}
+				q0 [shape=doublecircle];
+				q1 [shape=doublecircle];
+			}
+		\end{automata}
 	\end{minipage}
 \end{exemple}
 
@@ -75,23 +77,25 @@
 	Pour l'automate $A$ suivant, avec $\alphabet = \set {a,b}$, le langage reconnu est $\lang A = \lang {\kleene {(a + b)} b} = \lang {\kleene {(a + b)} b \kleene b} = \setdef {wb} {w \in \mots}$.
 
 	\begin{center}
-		\digraph[scale=0.75]{automateDet2}{
-			rankdir=LR;
+		\begin{automata}
+			\digraph[scale=0.75]{automateDet2}{
+				rankdir=LR;
 
-			node [shape=circle, style=filled, color=lightblue];
-			q0 [label="q_0"];
-			q1 [label="q_1"];
+				node [shape=circle, style=filled, color=lightblue];
+				q0 [label="q_0"];
+				q1 [label="q_1"];
 
-			start [shape=point];
-			start -> q0;
+				start [shape=point];
+				start -> q0;
 
-			q0 -> q0 [label="a"];
-			q0 -> q1 [label="b"];
-			q1 -> q1 [label="b"];
-			q1 -> q0 [label="a"];
+				q0 -> q0 [label="a"];
+				q0 -> q1 [label="b"];
+				q1 -> q1 [label="b"];
+				q1 -> q0 [label="a"];
 
-			q1 [shape=doublecircle];
-		}
+				q1 [shape=doublecircle];
+			}
+		\end{automata}
 	\end{center}
 \end{exemple}
 
@@ -115,27 +119,30 @@ definition d'un automate fini non déterministe.
 \begin{exemple}
 	Un automate fini non déterministe avec $\alphabet = \set{a, b}$ :
 	\begin{center}
-		\digraph[scale=0.65]{automateNonDet}{
-			rankdir=LR;
+		\begin{automata}
 
-			node [shape=circle, style=filled, color=lightblue];
-			q0 [label="q_0"];
-			q1 [label="q_1"];
-			q2 [label="q_2"];
+			\digraph[scale=0.65]{automateNonDet}{
+				rankdir=LR;
 
-			start [shape=point];
-			start -> q0;
+				node [shape=circle, style=filled, color=lightblue];
+				q0 [label="q_0"];
+				q1 [label="q_1"];
+				q2 [label="q_2"];
 
-			q0 -> q0 [label="b"];
-			q0 -> q1 [label="a"];
-			q1 -> q1 [label="b"];
-			q1 -> q0 [label="b"];
-			q0 -> q2 [label="a"];
-			q2 -> q2 [label="b"];
+				start [shape=point];
+				start -> q0;
 
-			q1 [shape=doublecircle];
-			q2 [shape=doublecircle];
-		}
+				q0 -> q0 [label="b"];
+				q0 -> q1 [label="a"];
+				q1 -> q1 [label="b"];
+				q1 -> q0 [label="b"];
+				q0 -> q2 [label="a"];
+				q2 -> q2 [label="b"];
+
+				q1 [shape=doublecircle];
+				q2 [shape=doublecircle];
+			}
+		\end{automata}
 	\end{center}
 \end{exemple}
 
@@ -178,47 +185,53 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 	\begin{minipage}{0.4\textwidth}
 		\begin{center}
 			Automate non déterministe :
-			\digraph[scale=0.65]{automateNonDet2}{
-				rankdir=LR;
 
-				node [shape=circle, style=filled, color=lightblue];
-				q0 [label="q_0"];
-				q1 [label="q_1"];
+			\begin{automata}
+				\digraph[scale=0.65]{automateNonDet2}{
+					rankdir=LR;
 
-				start [shape=point];
-				start -> q0;
+					node [shape=circle, style=filled, color=lightblue];
+					q0 [label="q_0"];
+					q1 [label="q_1"];
 
-				q0 -> q0 [label="a"];
-				q0 -> q1 [label="a,b"];
-				q1 -> q1 [label="a,b"];
+					start [shape=point];
+					start -> q0;
 
-				q1 [shape=doublecircle];
-			}
+					q0 -> q0 [label="a"];
+					q0 -> q1 [label="a,b"];
+					q1 -> q1 [label="a,b"];
+
+					q1 [shape=doublecircle];
+				}
+			\end{automata}
 		\end{center}
 	\end{minipage}
 	\begin{minipage}{0.6\textwidth}
 		\begin{center}
 			Automate déterminisé :
-			\digraph[scale=0.5]{automateDet3}{
-			rankdir=LR;
 
-			node [shape=circle, style=filled, color=lightblue];
-			q0 [label="{q_0}"];
-			q0q1 [label="{q_0, q_1}"];
-			q1 [label="{q_1}"];
+			\begin{automata}
+				\digraph[scale=0.5]{automateDet3}{
+				rankdir=LR;
 
-			start [shape=point];
-			start -> q0;
+				node [shape=circle, style=filled, color=lightblue];
+				q0 [label="{q_0}"];
+				q0q1 [label="{q_0, q_1}"];
+				q1 [label="{q_1}"];
 
-			q0 -> q0q1 [label="a"];
-			q0q1 -> q0q1 [label="q"];
-			q0q1 -> q1 [label="b"];
-			q0 -> q1 [label="b"];
-			q1 -> q1 [label="a,b"];
+				start [shape=point];
+				start -> q0;
 
-			q0q1 [shape=doublecircle];
-			q1 [shape=doublecircle];
-			}
+				q0 -> q0q1 [label="a"];
+				q0q1 -> q0q1 [label="q"];
+				q0q1 -> q1 [label="b"];
+				q0 -> q1 [label="b"];
+				q1 -> q1 [label="a,b"];
+
+				q0q1 [shape=doublecircle];
+				q1 [shape=doublecircle];
+				}
+			\end{automata}
 		\end{center}
 	\end{minipage}
 \end{exemple}

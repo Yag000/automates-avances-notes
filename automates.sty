@@ -69,9 +69,10 @@
 
 \newcommand{\reason}[1]{\quad\left(\textit{#1}\right)}
 
+\newenvironment{automata} { } { }
 
-\newenvironment{twoautomata} { \begin{minipage}{0.5\textwidth} \begin{figure}[H] }
-			{ \end{figure}  \end{minipage} }
+\newenvironment{twoautomata} { \begin{automata} \begin{minipage}{0.5\textwidth} \begin{figure}[H] }
+				{ \end{figure}  \end{minipage} \end{automata}}
 
 
 

@@ -30,11 +30,33 @@
 
 \usepackage{algpseudocode,algorithmicx}
 
-\usepackage[xcolor,hyperref,notion]{knowledge}
+\usepackage[xcolor,hyperref]{knowledge}
 
 \usepackage{automates}
 
-\knowledgeconfigure{label scope=false}
+\knowledgeconfigure{label scope=false, notion, quotation, protect quotation={tikzcd, automata}}
+
+
+\knowledge{notion}
+ | learner
+ | étudiant
+\knowledge{notion}
+ | oracle
+ | teacher
+
+\knowledge{notion}
+ | membership queries
+\knowledge{notion}
+ | conjectures
+ | conjecture
+
+\knowledge{notion}
+ | voisinage
+
+\knowledge{notion}
+ | quiescent
+
+
 
 \begin{document}
 

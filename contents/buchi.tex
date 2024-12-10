@@ -48,7 +48,7 @@
 
 \begin{prop}[Caractérisation des langages $\omega$-rationnels]
 	Un langage $L \subseteq \ainf$ est $w$-rationnel \ssi $L$ est l'union finie de langages
-	de la forme $XY^{\omega}$ avec $X,Y \in R \cap A^*$ ($X,Y$ sont des langages rationnels "classiques").
+	de la forme $XY^{\omega}$ avec $X,Y \in R \cap A^*$ ($X,Y$ sont des langages rationnels classiques).
 \end{prop}
 
 \begin{proofI}
@@ -118,81 +118,89 @@
 \begin{exemple}
 	L'automate suivant reconnait les mots qui commencent par $a$ et qui ont un nombre infini de $b$ :
 
-	\digraph[scale=0.50]{buchi1}{
-		rankdir=LR;
+	\begin{automata}
+		\digraph[scale=0.50]{buchi1}{
+			rankdir=LR;
 
-		node [shape=circle, style=filled, color=lightblue];
-		0;
-		1;
+			node [shape=circle, style=filled, color=lightblue];
+			0;
+			1;
 
-		start [shape=point];
-		start -> 0;
+			start [shape=point];
+			start -> 0;
 
-		0 -> 0 [label="a"];
-		0 -> 1 [label="a"];
-		1 -> 1 [label="b"];
-		1 -> 0 [label="b"];
+			0 -> 0 [label="a"];
+			0 -> 1 [label="a"];
+			1 -> 1 [label="b"];
+			1 -> 0 [label="b"];
 
-		1 [shape=doublecircle];
-	}
+			1 [shape=doublecircle];
+		}
+	\end{automata}
 \end{exemple}
 
 
 \begin{exercice}
 	Ecrire un automate de Büchi qui reconnait les mots infinis sur $\set {a,b}$ ayant un nombre fini de $b$. \\
 	\begin{minipage}{0.3\textwidth}
-		\digraph[scale=0.50]{buchi2}{
-			rankdir=LR;
+		\begin{automata}
+			\digraph[scale=0.50]{buchi2}{
+				rankdir=LR;
 
-			node [shape=circle, style=filled, color=lightblue];
-			0;
-			1;
+				node [shape=circle, style=filled, color=lightblue];
+				0;
+				1;
 
-			start [shape=point];
-			start -> 0;
+				start [shape=point];
+				start -> 0;
 
-			0 -> 0 [label="a,b"];
-			0 -> 1 [label="a"];
-			1 -> 1 [label="a"];
+				0 -> 0 [label="a,b"];
+				0 -> 1 [label="a"];
+				1 -> 1 [label="a"];
 
-			1 [shape=doublecircle];
-		}
+				1 [shape=doublecircle];
+			}
+		\end{automata}
 	\end{minipage}
 	\begin{minipage}{0.3\textwidth}
-		\digraph[scale=0.50]{buchi3}{
-			rankdir=LR;
+		\begin{automata}
+			\digraph[scale=0.50]{buchi3}{
+				rankdir=LR;
 
-			node [shape=circle, style=filled, color=lightblue];
-			0;
-			1;
+				node [shape=circle, style=filled, color=lightblue];
+				0;
+				1;
 
-			start [shape=point];
-			start -> 0;
+				start [shape=point];
+				start -> 0;
 
-			0 -> 0 [label="a,b"];
-			0 -> 1 [label="a,b"];
-			1 -> 1 [label="a"];
+				0 -> 0 [label="a,b"];
+				0 -> 1 [label="a,b"];
+				1 -> 1 [label="a"];
 
-			1 [shape=doublecircle];
-		}
+				1 [shape=doublecircle];
+			}
+		\end{automata}
 	\end{minipage}
 	\begin{minipage}{0.3\textwidth}
-		\digraph[scale=0.50]{buchi4}{
-			rankdir=LR;
+		\begin{automata}
+			\digraph[scale=0.50]{buchi4}{
+				rankdir=LR;
 
-			node [shape=circle, style=filled, color=lightblue];
-			0;
-			1;
+				node [shape=circle, style=filled, color=lightblue];
+				0;
+				1;
 
-			start [shape=point];
-			start -> 0;
+				start [shape=point];
+				start -> 0;
 
-			0 -> 0 [label="a,b"];
-			0 -> 1 [label="b"];
-			1 -> 1 [label="a"];
+				0 -> 0 [label="a,b"];
+				0 -> 1 [label="b"];
+				1 -> 1 [label="a"];
 
-			1 [shape=doublecircle];
-		}
+				1 [shape=doublecircle];
+			}
+		\end{automata}
 	\end{minipage}
 \end{exercice}
 
@@ -206,14 +214,14 @@ Les notions d'automate émondé, complet, déterministe se généralisent aux au
 
 
 Mais alors que les algorithmes pour rendre émondé ou complet un automate marchent aussi
-pour les automates de Büchi, il n'existe pas d'algorithme pour "déterminiser" un automate de Büchi.
+pour les automates de Büchi, il n'existe pas d'algorithme pour déterminiser un automate de Büchi.
 
 En fait, il existe des langages reconnaissables de $\aomega$ qui ne sont pas reconnus par un automate déterministe.
 
 
 
 La classe des langages reconnaissables par un automate de Büchi est fermée relativement à l'union finie
-et la méthode pour construire l'automate qui reconnait l'union est la même que pour les automates finis (on "met ensemble"
+et la méthode pour construire l'automate qui reconnait l'union est la même que pour les automates finis (on met ensemble
 les deux automates).
 
 On verra que cette classe est aussi fermée relativement au complémentaire et à l'intersection.
@@ -269,72 +277,76 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 		      Soit $A_1 = (Q_1, i_1, f_1, \delta_1)$ et $A_2 = (Q_2, i_2, f_2, \delta_2)$.
 		      Donc les automates ont la forme suivante :
 
-		      \digraph[scale=0.50]{buchithm1}{
-			      rankdir=LR;
+		      \begin{automata}
+			      \digraph[scale=0.50]{buchithm1}{
+				      rankdir=LR;
 
-			      node [shape=circle, style=filled, color=lightblue];
-			      i1;
-			      f1;
-			      i2;
-			      f2;
+				      node [shape=circle, style=filled, color=lightblue];
+				      i1;
+				      f1;
+				      i2;
+				      f2;
 
-			      node [shape=box, style=filled, color=lightblue];
-			      a1 [label = "A1"]
-			      a2 [label = "A2"]
+				      node [shape=box, style=filled, color=lightblue];
+				      a1 [label = "A1"]
+				      a2 [label = "A2"]
 
-			      start [shape=point];
-			      start -> i1;
-
-
-			      start2 [shape=point];
-			      start2 -> i2;
-
-			      i1 -> a1;
-			      i1 -> a1;
-			      a1 -> f1;
-			      a1 -> f1;
+				      start [shape=point];
+				      start -> i1;
 
 
-			      i2 -> a2;
-			      i2 -> a2;
-			      a2 -> f2;
-			      a2 -> f2;
+				      start2 [shape=point];
+				      start2 -> i2;
 
-			      f1 [shape=doublecircle];
-			      f2 [shape=doublecircle];
-		      }
+				      i1 -> a1;
+				      i1 -> a1;
+				      a1 -> f1;
+				      a1 -> f1;
+
+
+				      i2 -> a2;
+				      i2 -> a2;
+				      a2 -> f2;
+				      a2 -> f2;
+
+				      f1 [shape=doublecircle];
+				      f2 [shape=doublecircle];
+			      }
+		      \end{automata}
 
 		      Supposons que $\motvide \notin X$.
 
 		      Alors on identifie les états $f_1,i_2$ et $f_2$ :
 
-		      \digraph[scale=0.50]{buchithm2}{
-			      rankdir=LR;
+		      \begin{automata}
+			      \digraph[scale=0.50]{buchithm2}{
+				      rankdir=LR;
 
-			      node [shape=circle, style=filled, color=lightblue];
-			      i1;
-			      end;
+				      node [shape=circle, style=filled, color=lightblue];
+				      i1;
+				      end;
 
-			      node [shape=box, style=filled, color=lightblue];
-			      a1 [label = "A1"]
-			      a2 [label = "A2"]
+				      node [shape=box, style=filled, color=lightblue];
+				      a1 [label = "A1"]
+				      a2 [label = "A2"]
 
-			      start [shape=point];
-			      start -> i1;
+				      start [shape=point];
+				      start -> i1;
 
-			      i1 -> a1;
-			      i1 -> a1;
-			      a1 -> end;
-			      a1 -> end;
+				      i1 -> a1;
+				      i1 -> a1;
+				      a1 -> end;
+				      a1 -> end;
 
 
-			      end -> a2;
-			      end -> a2;
-			      a2 -> end;
-			      a2 -> end;
+				      end -> a2;
+				      end -> a2;
+				      a2 -> end;
+				      a2 -> end;
 
-			      end [shape=doublecircle];
-		      }
+				      end [shape=doublecircle];
+			      }
+		      \end{automata}
 
 		      L'automate obtenu reconnait bien les mots $XY^{\omega}$ et il correspond à:
 
@@ -356,63 +368,69 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 	L'automate classique pour $L_2$ :
 
-	\digraph[scale=0.50]{buchi5}{
-		rankdir=LR;
+	\begin{automata}
+		\digraph[scale=0.50]{buchi5}{
+			rankdir=LR;
 
-		node [shape=circle, style=filled, color=lightblue];
-		i [label="i"];
-		f [label="f"];
+			node [shape=circle, style=filled, color=lightblue];
+			i [label="i"];
+			f [label="f"];
 
-		start [shape=point];
-		start -> i;
+			start [shape=point];
+			start -> i;
 
-		i -> i [label="a"];
-		i -> f [label="b"];
+			i -> i [label="a"];
+			i -> f [label="b"];
 
-		f [shape=doublecircle];
-	}
+			f [shape=doublecircle];
+		}
+	\end{automata}
 
 	on normalise l'automate
 
-	\digraph[scale=0.50]{buchi6}{
-		rankdir=LR;
+	\begin{automata}
+		\digraph[scale=0.50]{buchi6}{
+			rankdir=LR;
 
-		node [shape=circle, style=filled, color=lightblue];
-		q [label="qnew"];
-		i [label="i"];
-		f [label="f"];
+			node [shape=circle, style=filled, color=lightblue];
+			q [label="qnew"];
+			i [label="i"];
+			f [label="f"];
 
-		start [shape=point];
-		start -> q;
+			start [shape=point];
+			start -> q;
 
-		q -> i [label="a"];
-		q -> f [label="b"];
-		i -> i [label="a"];
-		i -> f [label="b"];
+			q -> i [label="a"];
+			q -> f [label="b"];
+			i -> i [label="a"];
+			i -> f [label="b"];
 
-		f [shape=doublecircle];
-	}
+			f [shape=doublecircle];
+		}
+	\end{automata}
 
 	On identifie les états $qnew$ et $f$.
 
-	\digraph[scale=0.50]{buchi7}{
-		rankdir=LR;
+	\begin{automata}
+		\digraph[scale=0.50]{buchi7}{
+			rankdir=LR;
 
-		node [shape=circle, style=filled, color=lightblue];
-		q [label="qnew"];
-		i [label="i"];
+			node [shape=circle, style=filled, color=lightblue];
+			q [label="qnew"];
+			i [label="i"];
 
-		start [shape=point];
-		start -> q;
+			start [shape=point];
+			start -> q;
 
-		q -> q [label="b"];
-		q -> i [label="a"];
+			q -> q [label="b"];
+			q -> i [label="a"];
 
-		i -> i [label="a"];
-		i -> q [label="b"];
+			i -> i [label="a"];
+			i -> q [label="b"];
 
-		q [shape=doublecircle];
-	}
+			q [shape=doublecircle];
+		}
+	\end{automata}
 \end{exemple}
 
 
@@ -433,7 +451,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 \begin{prop}[Admis]
 	Soit $A = (Q,I,T,\delta)$ un automate de Büchi déterministe alors $\La^{\omega} (A) = \larr {\La^+ (A)}$
-	où $\La^+ (A)$ est le langage des mots finis reconnus par $A$ comme un automate fini "traditionnel".
+	où $\La^+ (A)$ est le langage des mots finis reconnus par $A$ comme un automate fini traditionnel.
 \end{prop}
 
 
@@ -499,83 +517,89 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 	\begin{itemize}
 		\item $L_1 = \setdef {u \in {\set {a,b}}^{\omega}} {{\abs u}_a = \infty}$
 
-		      \digraph[scale=0.50]{buchi8}{
-			      rankdir=LR;
+		      \begin{automata}
+			      \digraph[scale=0.50]{buchi8}{
+				      rankdir=LR;
 
-			      node [shape=circle, style=filled, color=lightblue];
-			      0 [label=" "];
-			      1 [label=" "];
+				      node [shape=circle, style=filled, color=lightblue];
+				      0 [label=" "];
+				      1 [label=" "];
 
-			      start [shape=point];
-			      start -> 0;
+				      start [shape=point];
+				      start -> 0;
 
-			      0 -> 0 [label="a"];
-			      0 -> 1 [label="b"];
+				      0 -> 0 [label="a"];
+				      0 -> 1 [label="b"];
 
-			      1 -> 1 [label="b"];
-			      1 -> 0 [label="a"];
+				      1 -> 1 [label="b"];
+				      1 -> 0 [label="a"];
 
-			      0 [shape=doublecircle];
-		      }
+				      0 [shape=doublecircle];
+			      }
+		      \end{automata}
 
 		\item $L_2 = \setdef {u \in {\set {a,b}}^{\omega}} {{\abs u}_b = \infty}$
 
-		      \digraph[scale=0.50]{buchi9}{
-			      rankdir=LR;
+		      \begin{automata}
+			      \digraph[scale=0.50]{buchi9}{
+				      rankdir=LR;
 
-			      node [shape=circle, style=filled, color=lightblue];
+				      node [shape=circle, style=filled, color=lightblue];
 
-			      0 [label=" "];
-			      1 [label=" "];
+				      0 [label=" "];
+				      1 [label=" "];
 
-			      start [shape=point];
-			      start -> 0;
+				      start [shape=point];
+				      start -> 0;
 
-			      0 -> 0 [label="b"];
-			      0 -> 1 [label="a"];
+				      0 -> 0 [label="b"];
+				      0 -> 1 [label="a"];
 
-			      1 -> 1 [label="a"];
-			      1 -> 0 [label="b"];
+				      1 -> 1 [label="a"];
+				      1 -> 0 [label="b"];
 
-			      0 [shape=doublecircle];
-		      }
+				      0 [shape=doublecircle];
+			      }
+		      \end{automata}
 
 		\item On cherche $L_3 = \setdef {u \in {\set {a,b}}^{\omega}} {{\abs u}_a = \infty \et {\abs u}_b = \infty} = L_1 \cap L_2$
 
-		      \digraph[scale=0.50]{buchi10}{
-			      rankdir=LR;
+		      \begin{automata}
+			      \digraph[scale=0.50]{buchi10}{
+				      rankdir=LR;
 
-			      node [shape=circle, style=filled, color=lightblue];
+				      node [shape=circle, style=filled, color=lightblue];
 
-			      021 [label = "0,2,1"];
-			      032 [label = "0,3,2"];
-			      122 [label = "1,2,2"];
-			      031 [label = "0,3,1"];
-			      121 [label = "1,2,1"];
+				      021 [label = "0,2,1"];
+				      032 [label = "0,3,2"];
+				      122 [label = "1,2,2"];
+				      031 [label = "0,3,1"];
+				      121 [label = "1,2,1"];
 
-			      start [shape=point];
-			      start -> 021;
+				      start [shape=point];
+				      start -> 021;
 
-			      021 -> 032 [label="a"];
-			      021 -> 122 [label="b"];
+				      021 -> 032 [label="a"];
+				      021 -> 122 [label="b"];
 
-			      032 -> 032 [label="a"];
-			      032 -> 122 [label="b"];
-
-
-			      122 -> 031 [label="a"];
-			      122 -> 121 [label="b"];
+				      032 -> 032 [label="a"];
+				      032 -> 122 [label="b"];
 
 
-			      031 -> 032 [label="a"];
-			      031 -> 122 [label="b"];
+				      122 -> 031 [label="a"];
+				      122 -> 121 [label="b"];
 
-			      121 -> 031 [label="a"];
-			      121 -> 121 [label="b"];
 
-			      021 [shape=doublecircle];
-			      031 [shape=doublecircle];
-		      }
+				      031 -> 032 [label="a"];
+				      031 -> 122 [label="b"];
+
+				      121 -> 031 [label="a"];
+				      121 -> 121 [label="b"];
+
+				      021 [shape=doublecircle];
+				      031 [shape=doublecircle];
+			      }
+		      \end{automata}
 	\end{itemize}
 \end{exemple}
 

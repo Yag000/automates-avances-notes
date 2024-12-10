@@ -1,12 +1,12 @@
 \section{Apprentissage de langages rationnels par queries et contrexemples}
 
 Nous allons étudier un algorithme qui permet de générer un automate pour un langage rationnel $L$.
-L'idée est que le \emph{learner}(ou \emph{étudiant}), une entité dont l'objectif est de retrouver le langage, pose des
-questions à un \emph{oracle} (ou \emph{teacher}). Les questions sont de deux types :
+L'idée est que le ""learner"" (ou "étudiant"), une entité dont l'objectif est de retrouver le langage, pose des
+questions à un ""oracle"" (ou "teacher"). Les questions sont de deux types :
 
 \begin{itemize}
-	\item Les \emph{membership queries} : Est-ce que le mot $w$  appartient au langage $L$ ?
-	\item Les \emph{conjectures} : On présente un automate hypothèse. Si cet automate reconnaît $L$, alors il retourne "Ok".
+	\item Les ""membership queries"" : Est-ce que le mot $w$  appartient au langage $L$ ?
+	\item Les ""conjectures"" : On présente un automate hypothèse. Si cet automate reconnaît $L$, alors il retourne \"Ok\".
 	      Sinon, il retourne un mot contre-exemple $w$. Ce mot vérifie soit $w \in L$ (il n’est pas accepté par notre
 	      automate), soit $w \notin L$ (il est accepté par notre automate).
 \end{itemize}
@@ -43,7 +43,7 @@ Le learner maintient une table $T$ avec:
 
 
 \begin{definition}
-	Si $s \in S \cup S\alphabet$, soit $n = \abs E$,  on définit $\row s \in [0,1]^n$ la suite suivante :
+	Si $s \in S \cup S\alphabet$, soit $n = \abs E$, on définit $\row s \in [0,1]^n$ la suite suivante :
 	$$ \row s = (T[s,e_1], \ldots, T[s, e_n])$$
 \end{definition}
 
@@ -138,21 +138,23 @@ Le learner maintient une table $T$ avec:
 	\end{minipage}
 	\begin{minipage}{0.5\textwidth}
 		\centering
-		\digraph[scale=0.5]{automateTable}{
-			rankdir=LR;
+		\begin{automata}
+			\digraph[scale=0.5]{automateTable}{
+				rankdir=LR;
 
-			node [shape=circle, style=filled, color=lightblue];
-			q0 [label="00"];
-			q1 [label="11"];
+				node [shape=circle, style=filled, color=lightblue];
+				q0 [label="00"];
+				q1 [label="11"];
 
-			start [shape=point];
-			start -> q0;
+				start [shape=point];
+				start -> q0;
 
-			q0 -> q1 [label="a,b"];
-			q1 -> q0 [label="a,b"];
+				q0 -> q1 [label="a,b"];
+				q1 -> q0 [label="a,b"];
 
-			q1 [shape=doublecircle];
-		}
+				q1 [shape=doublecircle];
+			}
+		\end{automata}
 	\end{minipage}
 \end{exemple}
 
@@ -160,38 +162,42 @@ Initialement on propose Figure \ref{fig:algo-inL} ou Figure \ref{fig:algo-notinL
 
 \begin{twoautomata}
 	\centering
-	\digraph[scale=0.5]{automateBase1}{
-		rankdir=LR;
+	\begin{automata}
+		\digraph[scale=0.5]{automateBase1}{
+			rankdir=LR;
 
-		node [shape=circle, style=filled, color=lightblue];
-		q0 [label=" "];
+			node [shape=circle, style=filled, color=lightblue];
+			q0 [label=" "];
 
-		start [shape=point];
-		start -> q0;
+			start [shape=point];
+			start -> q0;
 
-		q0 -> q0 [label="Σ"];
+			q0 -> q0 [label="Σ"];
 
-		q0 [shape=doublecircle];
-	}
+			q0 [shape=doublecircle];
+		}
+	\end{automata}
 	\caption{Automate pour $\motvide \in L$}\label{fig:algo-inL}
 \end{twoautomata}
 \begin{twoautomata}
 	\centering
-	\digraph[scale=0.5]{automateBase2}{
-		rankdir=LR;
+	\begin{automata}
+		\digraph[scale=0.5]{automateBase2}{
+			rankdir=LR;
 
-		node [shape=circle, style=filled, color=lightblue];
-		q0 [label=" "];
+			node [shape=circle, style=filled, color=lightblue];
+			q0 [label=" "];
 
-		start [shape=point];
-		start -> q0;
+			start [shape=point];
+			start -> q0;
 
-		q0 -> q0 [label="Σ"];
-	}
+			q0 -> q0 [label="Σ"];
+		}
+	\end{automata}
 	\caption{Automate pour $\motvide \notin L$}\label{fig:algo-notinL}
 \end{twoautomata}
 
-Tant que l'oracle donne un contrexemple
+Tant que l'"oracle" donne un contrexemple
 \begin{itemize}
 	\item $w$ = contrexemple.
 	\item $w$ et tous ses préfixes sont ajoutés à $S$.
@@ -206,7 +212,7 @@ Tant que l'oracle donne un contrexemple
 
 		            Ajouter $t$ à $S$.
 	      \end{itemize}
-	\item On propose à l'oracle l'automate hypothèse associé à $T$
+	\item On propose à l'"oracle" l'automate hypothèse associé à $T$
 \end{itemize}
 
 \subsection{Propriétés des tables closes et cohérentes}
@@ -325,7 +331,7 @@ Tant que l'oracle donne un contrexemple
 Soit $n$ le nombre d'états de l'automate minimal reconnaissant le langage cherché.
 
 \begin{remarque}
-	Le nombre d'états des différents automates conjecture ne peut qu'augmenter.
+	Le nombre d'états des différents automates ""conjecture"" ne peut qu'augmenter.
 	\begin{itemize}
 		\item Si on ajoute un mot à $E$ parce que la table n'était pas cohérente, le nombre de rows distincts augmente
 		      d'une unité.
@@ -334,21 +340,21 @@ Soit $n$ le nombre d'états de l'automate minimal reconnaissant le langage cherc
 	On déduit qu'on ne peut pas trouver une table non close ou non cohérente plus de $n-1$ fois tout au long de l'algorithme.
 
 	En particulier, on déduit qu'après un nombre fini d'étapes de l'algorithme on arrive toujours à trouver
-	une table close et cohérente et à émettre une conjecture.
+	une table close et cohérente et à émettre une ""conjecture"".
 \end{remarque}
 
 
-Combien de conjectures  le learner émet-il avant de donner la bonne ?
+Combien de "conjectures" le "learner" émet-il avant de donner la bonne ?
 
 Soit $(S,E,T)$ une table close et cohérente et $A(S,E,T)$ l'automate associé.
-Supposons que $A$ soit une conjecture fausse, et donc l'oracle fournit un contrexemple $t$.
+Supposons que $A$ soit une "conjecture" fausse, et donc l'"oracle" fournit un contrexemple $t$.
 
 L'automate $S(S,E,T)$ et l'automate du langage cherché sont en désaccord sur le mot $t$, donc ces deux automates
 ne sont pas équivalents, et donc $A(S,E,T)$ a au moins un état de moins que l'automate cherché.
-Donc $A(S,E,T)$ a au plus $n-1$ états. On en déduit que le nombre de fausses conjectures émises pas le learner est $n-1$.
+Donc $A(S,E,T)$ a au plus $n-1$ états. On en déduit que le nombre de fausses "conjectures" émises pas le "learner" est $n-1$.
 
 On en déduit que l'algorithme s'arrête toujours, au pire après avoir rendu la table close et
-cohérente $n-1$ et après avoir émis au plus $n-1$ fausses conjectures.
+cohérente $n-1$ et après avoir émis au plus $n-1$ fausses "conjectures".
 
 
 \subsection{Analyse de la complexité}
@@ -359,7 +365,7 @@ Elle dépend du nombre $n$ et de la longueur du plus long contrexemple fourni pa
 \begin{itemize}
 	\item A chaque fois qu'on trouve une table non cohérente, on ajoute un mot à $E$.
 	\item A chaque fois qu'on trouve une table non close, on ajoute un mot à $S$.
-	\item A chaque fois qu'on émet une conjecture fausse, on ajoute au plus $m$ mots à $S$
+	\item A chaque fois qu'on émet une "conjecture" fausse, on ajoute au plus $m$ mots à $S$
 \end{itemize}
 
 On en déduit que $\abs E \leq n$.
@@ -378,8 +384,8 @@ On déduit que le cardinal maximal de $(S \cup S \Sigma) \times E$ (le nombre ma
 Considérons le coût de chaque type d'opérations :
 \begin{itemize}
 	\item Vérifier si une table est close et cohérente se fait en temps polynomial relativement à la taille de la table.
-	\item Ajouter un mot à $S$ ou à E nécessite au plus $nm$ (membership) queries.
-	\item Construire une conjecture à partir d'une table cohérente et close est faisable en temps polynomial relativement à
+	\item Ajouter un mot à $S$ ou à $E$ nécessite au plus $nm$ "membership queries".
+	\item Construire une "conjecture" à partir d'une table cohérente et close est faisable en temps polynomial relativement à
 	      la taille de la table.
 	\item Un contrexemple nécessite l'addition d'au plus $m$ mots à $S$ et cette opérations est effectuée au plus $n-1$ fois.
 \end{itemize}
@@ -390,6 +396,6 @@ Considérons le coût de chaque type d'opérations :
 \end{theorem}
 
 \begin{remarque}
-	Si l'oracle fournit toujours un contrexemple de taille $\leq n$ (ce qui est toujours possible), alors le polynôme en question dépend de $n$ seulement.
+	Si l'"oracle" fournit toujours un contrexemple de taille $\leq n$ (ce qui est toujours possible), alors le polynôme en question dépend de $n$ seulement.
 \end{remarque}
 
