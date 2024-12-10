@@ -55,7 +55,7 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 
 \begin{theorem}
 	Si deux automates cellulaires $A \et B$ réalisent la meme fonction $G$ alors $A \et B$ ne peuvent pas différer que par
-	leur voisinages et les deux voisinages ne peuvent différent que par la presence (ou pas) de voisins inutiles (\cad
+	leur "voisinages" et les deux "voisinages" ne peuvent différent que par la presence (ou pas) de voisins inutiles (\cad
 	des voisins dont l'état n'a aucune influence sur la valuer de $f$).
 \end{theorem}
 
@@ -166,7 +166,7 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 \end{definition}
 
 \begin{definition}
-	Soit $\vec v$ un vecteur de $\Z^d$, la translation $\tau_{\vec v}$ est une fonction d'automate cellulaire où le voisinage contient seulement des $\vec v$,
+	Soit $\vec v$ un vecteur de $\Z^d$, la translation $\tau_{\vec v}$ est une fonction d'automate cellulaire où le "voisinage" contient seulement des $\vec v$,
 	autrement dit, la valeur d'une cellule $\vec r$ à l'instant $t+1$ est simplement la valuer de la cellule $\vec r + \vec v$ à l'instant $t$.
 
 
@@ -253,7 +253,7 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 			q      & \text{ sinon }
 		\end{array}
 		\right.$$
-	ou $q$ est un état quiescent.
+	ou $q$ est un état "quiescent".
 
 	Il est évident que $\forall i, c_i \in F$ et que $\lim_{i \to \infty} c_i = c$.
 
@@ -339,9 +339,9 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 
 \begin{proof}
 	\begin{eqnarray*}
-		G \text{injective } &\implies& G_P \text{ injective} \reason{\ref{thm:big1}} \\
-		&\implies& G_P \text{ surjective} \reason{\ref{thm:big3}} \\
-		&\implies& G \text{ surjective} \reason{\ref{thm:big2}}
+		G \text{injective } &\implies& G_P \text{ injective} \reason{\ref{thm:big1} } \\
+		&\implies& G_P \text{ surjective} \reason{\ref{thm:big3} } \\
+		&\implies& G \text{ surjective} \reason{\ref{thm:big2} }
 	\end{eqnarray*}
 \end{proof}
 
@@ -370,10 +370,10 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 
 \begin{proof}
 	\begin{eqnarray*}
-		G \text{ injective} &\implies& G \text{ bijective} \reason{\ref{coro:inj-surj}}\\
-		&\implies& G \text{ reversible} \reason{\ref{prop:bij-rev}}
+		G \text{ injective} &\implies& G \text{ bijective} \reason{\ref{coro:inj-surj} }\\
+		&\implies& G \text{ reversible} \reason{\ref{prop:bij-rev} }
 	\end{eqnarray*}
-	Si $q$ est l'état quiescent pour $G$, alors $q$ est aussi l'état quiescent de $G^{-1}$
+	Si $q$ est l'état "quiescent" pour $G$, alors $q$ est aussi l'état "quiescent" de $G^{-1}$
 	(Si toutes les cellules du voisinage sont a $q$ alors $G^{-1}$ met la cellule a l'état $q$)
 
 	Donc si $c$ est une configuration finie alors $e = G^{-1}(c)$ (la configuration obtenue en applicant

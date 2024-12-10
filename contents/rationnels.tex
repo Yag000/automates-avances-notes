@@ -21,11 +21,11 @@
 \subsection{Définitions de base}
 
 \begin{definition}[alphabet]
-	Un \textbf{alphabet} est un ensemble fini de lettres ou de symboles.
+	Un ""alphabet"" est un ensemble fini de lettres ou de symboles.
 \end{definition}
 
 \begin{definition}[mot]
-	Un \textbf{mot} sur un alphabet $\alphabet$ est une séquence de lettres de $\alphabet$.
+	Un ""mot"" sur un "alphabet" $\alphabet$ est une séquence de lettres de $\alphabet$.
 	On écrit $\motDecomp w n$ où $w_i \in \alphabet, \forall i \in \{1, \ldots, n\}$.
 	La longueur d'un mot $w$ est notée $\len w = n$, pour $\motDecomp w n$.
 \end{definition}
@@ -35,16 +35,16 @@
 \end{notation}
 
 \begin{definition}[concaténation]
-	La \textbf{concaténation} de deux mots $w$ et $v$ est notée $wv$.
+	La ""concaténation"" de deux mots $w$ et $v$ est notée $wv$.
 	Si $\motDecomp w n$ et $\motDecomp v m$, alors $wv = \decomp w n \decomp v m$.
 \end{definition}
 
 \begin{definition}[langage]
-	Un langage sur un alphabet $\alphabet$ est un sous-ensemble de $\mots$.
+	Un ""langage"" sur un "alphabet" $\alphabet$ est un sous-ensemble de $\mots$.
 \end{definition}
 
 \begin{definition}[concaténation de langages]
-	Soient $L_1, L_2$ deux langages sur $\alphabet$, leur \textbf{concaténation} est le langage
+	Soient $L_1, L_2$ deux "langages" sur $\alphabet$, leur "concaténation" est le "langage"
 	$$
 		L_1L_2 = \setdef {w_1w_2} {w_1 \in L_1, w_2 \in L_2}
 	$$
@@ -57,7 +57,7 @@
 
 
 \begin{definition}[étoile de Kleene]
-	Soit $L$ un langage sur $\alphabet$, son \textbf{étoile de Kleene} est le langage
+	Soit $L$ un "langage" sur $\alphabet$, son \textbf{étoile de Kleene} est le "langage"
 	$$
 		\kleene L = \bigcup_{n \in \N} L^n
 	$$
@@ -83,7 +83,7 @@
 \end{remarque}
 
 \begin{exercice}
-	Montrer que la concaténation de langages est distributive par rapport à l'union, \ie que $L(M \cup N) = LM \cup LN, \forall L, M, N$ langages.
+	Montrer que la "concaténation" de "langages" est distributive par rapport à l'union, \ie que $L(M \cup N) = LM \cup LN, \forall L, M, N$ "langages".
 \end{exercice}
 
 \begin{proof}
@@ -100,7 +100,7 @@
 \subsection{Langages rationnels : définitions}
 
 \begin{definition}[langage rationnel]
-	Soit $\alphabet$ un alphabet fini, l'ensemble \eratsym \ des expressions rationnelles sur $\alphabet$ est défini comme suit :
+	Soit $\alphabet$ un "alphabet" fini, l'ensemble \eratsym \ des ""expressions rationnelles"" sur $\alphabet$ est défini comme suit :
 	\begin{itemize}
 		\item $\motvide \in \eratsym$
 		\item $\emptyset \in \eratsym$
@@ -112,7 +112,7 @@
 \end{definition}
 
 \begin{definition}[sémantique des expressions rationnelles]
-	Soit $r \in \erat$, on définit le langage $\lang r$ associé à $r$ par induction sur la structure de $r$ :
+	Soit $r \in \erat$, on définit le "langage" $\lang r$ associé à $r$ par induction sur la structure de $r$ :
 	\begin{itemize}
 		\item $\lang \motvide = \set\motvide$
 		\item $\lang \emptyset = \emptyset$
@@ -130,12 +130,12 @@
 
 
 \begin{definition}[langage rationnel]
-	Un langage $L$ sur un alphabet $\alphabet$ est dit \textbf{rationnel} s'il existe une \exprat $r \in \erat$ \tlq $L = \lang r$.
+	Un "langage" $L$ sur un "alphabet" $\alphabet$ est dit ""rationnel"" s'il existe une \exprat $r \in \erat$ \tlq $L = \lang r$.
 
 \end{definition}
 
 \begin{exemple}
-	$\setdef {a^n} {n \in \N}$ est un langage rationnel engendré par l'expression rationnelle $\kleene a$.
+	$\setdef {a^n} {n \in \N}$ est un langage "rationnel" engendré par l'"expression rationnelle" $\kleene a$.
 
-	Cependant, $\setdef {a^n b^n} {n \in \N}$ n'est pas un langage rationnel.
+	Cependant, $\setdef {a^n b^n} {n \in \N}$ n'est pas un langage "rationnel".
 \end{exemple}

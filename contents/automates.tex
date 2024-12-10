@@ -4,7 +4,7 @@
 \subsection{Automates finis déterministes}
 
 \begin{definition}[automate fini déterministe]
-	Soit $\alphabet$ un alphabet, un \textbf{automate fini déterministe} (AFD) est un tuple $\AFD$ où
+	Soit $\alphabet$ un "alphabet", un ""automate fini déterministe"" ("AFD") est un tuple $\AFD$ où
 	\begin{itemize}
 		\item $Q$ est un ensemble fini d'états
 		\item $q_0 \in Q$ est appelé l'état initial
@@ -14,7 +14,7 @@
 \end{definition}
 
 
-\begin{exemple} Un automate fini déterministe :
+\begin{exemple} Un "automate fini déterministe" :
 
 	\vspace{0.5cm}
 	\begin{minipage}{0.5\textwidth}
@@ -59,22 +59,23 @@
 \end{exemple}
 
 \begin{definition}[lecture d'un mot par un AFD]
-	Soit $A = \AFD$ un AFD qui a pour alphabet $\alphabet$. On définit la fonction $\kleene \delta$ par induction sur la longueur du mot $w$ :
+	Soit $A = \AFD$ un "AFD" qui a pour "alphabet" $\alphabet$. On définit la fonction $\kleene \delta$ par induction sur la longueur du "mot" $w$ :
 	$$ \begin{array}{rcl}
 			\kleene \delta : Q \times \mots & \to     & Q                               \\
 			(q, \motvide)                   & \mapsto & q                               \\
 			(q, wa)                         & \mapsto & \delta(\kleene \delta(q, w), a)
 		\end{array} $$
-	On a alors que $\kleene \delta(q, w)$ est l'état atteint par $A$ après avoir lu le mot $w$ depuis l'état $q$.
+	On a alors que $\kleene \delta(q, w)$ est l'état atteint par $A$ après avoir lu le "mot" $w$ depuis l'état $q$.
 \end{definition}
 
 \begin{definition}[langage reconnu par un AFD]
-	Le langage reconnu / accepté par un AFD $A = \AFD$ est le langage
+	Le ""langage reconnu"" / accepté par un "AFD" $A = \AFD$ est le "langage"
 	$$ \lang A = \setdef w {w \in \mots, \kleene \delta(q_0, w) \in F} $$
 \end{definition}
 
 \begin{exemple}
-	Pour l'automate $A$ suivant, avec $\alphabet = \set {a,b}$, le langage reconnu est $\lang A = \lang {\kleene {(a + b)} b} = \lang {\kleene {(a + b)} b \kleene b} = \setdef {wb} {w \in \mots}$.
+	Pour l'automate $A$ suivant, avec $\alphabet = \set {a,b}$, le "langage reconnu" est 
+    $\lang A = \lang {\kleene {(a + b)} b} = \lang {\kleene {(a + b)} b \kleene b} = \setdef {wb} {w \in \mots}$.
 
 	\begin{center}
 		\begin{automata}
@@ -103,10 +104,10 @@
 
 Dans cette partie, on traite en meme temps les cas avec et sans $\motvide$-transitions. Les additions en
 \darkgreen{vert} correspondent à la définitions avec $\motvide$-transitions. En ignorant cela, on retrouve la
-definition d'un automate fini non déterministe.
+definition d'un "automate fini non déterministe".
 
 \begin{definition}[automate fini non déterministe \darkgreen{+ $\motvide$-transitions}]
-	Soit $\alphabet$ un alphabet, un \textbf{automate fini non déterministe} (AFN) est un tuple $\AFN$ où
+	Soit $\alphabet$ un alphabet, un ""automate fini non déterministe"" ("AFN") est un tuple $\AFN$ où
 	\begin{itemize}
 		\item $Q$ est un ensemble fini d'états
 		\item $I \subseteq Q$ est l'ensemble des états initiaux
@@ -117,7 +118,7 @@ definition d'un automate fini non déterministe.
 
 
 \begin{exemple}
-	Un automate fini non déterministe avec $\alphabet = \set{a, b}$ :
+	Un "automate fini non déterministe" avec $\alphabet = \set{a, b}$ :
 	\begin{center}
 		\begin{automata}
 
@@ -148,7 +149,7 @@ definition d'un automate fini non déterministe.
 
 
 \begin{definition}[lecture d'un mot par un AFN]
-	Soit $A = \AFN$ un AFN qui a pour alphabet $\alphabet$. On définit la fonction $\kleene \delta$ par induction sur la longueur du mot $w$ :
+	Soit $A = \AFN$ un "AFN" qui a pour "alphabet" $\alphabet$. On définit la fonction $\kleene \delta$ par induction sur la longueur du "mot" $w$ :
 	$$ \begin{array}{rcl}
 			\kleene \delta : Q \times \mots & \to     & \parts Q                                                  \\
 			(q, \motvide)                   & \mapsto & \set q                                                    \\
@@ -158,14 +159,14 @@ definition d'un automate fini non déterministe.
 
 
 \begin{definition}[langage reconnu par un AFN]
-	Le langage reconnu / accepté par un AFN $A = \AFN$ est le langage
+	Le langage reconnu / accepté par un "AFN" $A = \AFN$ est le langage
 	$$ \lang A = \setdef {w \in \mots} {\exists q_0 \in I, \kleene \delta(q_0, w) \cap F \neq \emptyset} $$
 
 \end{definition}
 
 \subsection{Déterminisation d'un AFN}
 
-Soit $A = \AFN$ un AFN, on considère l'AFD $A' = \antuple{\parts Q, I, F', \delta'}$ où
+Soit $A = \AFN$ un AFN, on considère l'"AFD" $A' = \antuple{\parts Q, I, F', \delta'}$ où
 \begin{itemize}
 	\item $F' = \setdef {q \in \parts Q} {q \cap F \neq \emptyset}$
 	      \vspace{0.25cm}
@@ -177,10 +178,10 @@ Soit $A = \AFN$ un AFN, on considère l'AFD $A' = \antuple{\parts Q, I, F', \del
 
 \vspace{0.25cm}
 
-Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de transformer un AFN en un AFD équivalent.
+Ce processus est appelé ""déterminisation"" d'un "AFN" et nous permet de transformer un "AFN" en un "AFD" équivalent.
 
 \begin{exemple}
-	Déterminisation d'un automate non déterministe :
+	"Déterminisation" d'un "automate non déterministe" :
 
 	\begin{minipage}{0.4\textwidth}
 		\begin{center}
@@ -238,18 +239,18 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 
 
 \begin{theorem}
-	Soit $A$ un automate fini non déterministe avec des $\motvide$-transitions, alors il existe un automate fini non déterministe $A'$, \tq $\lang A = \lang {A'}$.
+	Soit $A$ un "automate fini non déterministe" avec des $\motvide$-transitions, alors il existe un "automate fini déterministe" $A'$, \tq $\lang A = \lang {A'}$.
 \end{theorem}
 
 \subsection{Équivalence entre expressions rationnelles et automates finis déterministes}
 
 \begin{theorem}[Injection des expressions rationnelles vers les automates finis déterministes]
-	Soit $r \in \erat$, alors il existe un automate fini déterministe $N(r)$ \tq $\lang A = \lang r$.
+	Soit $r \in \erat$, alors il existe un "automate fini déterministe" $N(r)$ \tq $\lang A = \lang r$.
 \end{theorem}
 
 \begin{proof}
-	Nous allons construire un tel automate par induction sur la structure de $r$ cependant la preuve du fait que cet automate reconnaît le langage associé à $r$ est omise.
-	Cette construction est appelée \textbf{construction de Thompson}.
+	Nous allons construire un tel automate par induction sur la structure de $r$ cependant la preuve du fait que cet 
+    utomate reconnaît le langage associé à $r$ est omise. Cette construction est appelée \textbf{construction de Thompson}.
 
 	\begin{twoautomata}
 		\digraph[scale=0.5]{thompson1}{
@@ -402,7 +403,7 @@ Ce processus est appelé \textbf{déterminisation} d'un AFN et nous permet de tr
 		\caption*{$N(\kleene r)$}
 	\end{twoautomata}
 
-	En combinant ces constructions, on peut construire un automate fini non déterministe pour n'importe quelle
-	expression rationnelle qui peut être determinisé pour obtenir un automate fini déterministe.
+	En combinant ces constructions, on peut construire un "automate fini non déterministe" pour n'importe quelle
+	"expression rationnelle" qui peut être "determinisé" pour obtenir un "automate fini déterministe".
 
 \end{proof}
