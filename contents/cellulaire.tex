@@ -389,9 +389,74 @@ TODO add graph
 \end{exemple}
 
 \begin{definition}
-	une configuration qui n'a pas d'anti-image est dire un Jardin d'Éden (GOE, JDE).
+	une configuration qui n'a pas d'anti-image est dire un ""Jardin d'Éden"" ("GOE", "JDE").
 \end{definition}
 
 \begin{exercice}
 	Montrer que toute configuration contenant le motif $01010$ est un Jardin d'Éden pour $W_{110}$.
 \end{exercice}
+
+\begin{remarque}
+	Si un automate cellulaire n'est pas surjectif alors il existent des configurations qui n'ont pas d'anti-image dites "Jardins d'Éden".
+\end{remarque}
+
+\begin{definition}
+	Une configuration finie qui n'a pas d'anti-image est dite un \emph{"orphelin"}.
+\end{definition}
+
+\begin{prop}
+	Il existe un "JDE" \ssi il existe un "orphelin"
+\end{prop}
+
+
+\begin{proofI}
+	\begin{itemize}
+		\item \bimpRL\\
+		      S'il existe un "orphelin" $D$ alors toute configuration qui inclut l'"orphelin" est un "JDE".
+		\item \bimpLR\\
+		      Si un "JDE" existe, alors la fonction $G$ de l'automate n'est pas surjective, et donc $\restr G F$ n'est pas surjective,
+		      \cad, $\exists$ une configuration finie qui n'a pas d'anti-image, \ie un "orphelin"
+	\end{itemize}
+\end{proofI}
+
+\begin{definition}
+	Deux motifs finis $J_1$ et $J_2$ sont dits jumeaux, si en remplaçant $J_1$ par $J_2$ dans
+	n'importe quelle configuration qui contient $J_1$ on génère la meme configuration
+\end{definition}
+
+\begin{theorem}[du Jardin d'Éden \cite{mooreGOE, myhillGOE}]
+	$G_F \text{ inj} \iff G \text{ surj}$, autrement dit, un automate cellulaire possède un "JDE" \ssi il possède deux jumeaux.
+\end{theorem}
+
+
+
+\begin{proofI}
+	\begin{itemize}
+		\item \bimpLR\\
+		      Supposons que $G$ ne soit pas surjective, alors il existe un "JDE" et donc un "orphelin".
+		      A partir de l'existence de cet "orphelin" on doit montrer l'existence d'un couple de jumeaux.
+		      Prenons comme exemple $W_{110}$. On a montré que \emph{01010} est un "orphelin". Soit $k$ un entier
+		      et considérons $C_k$ l'ensemble de toutes les configurations finies qui ont un support de taille
+		      $5k-2$, alors $\abs {C_k} = 2^{5k-2} - \frac {32^k} 4$
+
+		      Si $c$ est une configuration de $C_k$, alors son image $G(c)$ est une configuration avec un support de taille $5k$.
+		      Si on découpe ce support de taille $5k$ en $k$ segments de taille $5$, il y e au plus $31$ choix pour chaque bloc car
+		      \emph{01010} est interdit. Alors l'ensemble $G(C_k)$ a une taille d'au plus $31^k$ pour un $K$ suffisamment grand.
+		      Or $\frac {32^k} 4 > 31 ^ k$ pour un $k$ suffisamment grand. On a donc qu'il y aura plis de configurations
+		      dans $C_k$ que dans son image, donc il existent des configurations de $G_k$ qui ont la meme image (deux jumeaux).
+
+		      Cette preuve est incomplete, il faut la généraliser au cas de dimension $d > 1$.
+
+
+		\item \bimpRL\\
+		      Soient $J_1$ et $J_2$ deux jumeaux, montrons qu'il existe un orphelin.
+
+		      Soit $n$ un entier tel que
+		      \begin{enumerate}
+			      \item $J_1$ et $J_2$ rentrent das un carré de taille $n$.
+			      \item Le voisinage de chaque cellule contient que des cellules à distance inférieure a $n$.
+		      \end{enumerate}
+              TODO
+	\end{itemize}
+\end{proofI}
+
