@@ -6,7 +6,7 @@ questions à un ""oracle"" (ou "teacher"). Les questions sont de deux types :
 
 \begin{itemize}
 	\item Les ""membership queries"" : Est-ce que le mot $w$  appartient au langage $L$ ?
-	\item Les ""conjectures"" : On présente un automate hypothèse. Si cet automate reconnaît $L$, alors il retourne \"Ok\".
+	\item Les ""conjectures"" : On présente un automate conjecture. Si cet automate reconnaît $L$, alors il retourne \emph{Ok}.
 	      Sinon, il retourne un mot contre-exemple $w$. Ce mot vérifie soit $w \in L$ (il n’est pas accepté par notre
 	      automate), soit $w \notin L$ (il est accepté par notre automate).
 \end{itemize}
@@ -36,7 +36,7 @@ Cet algorithme découle du travail de \cite{angluinLearning}.
 Le learner maintient une table $T$ avec:
 
 \begin{itemize}
-	\item Les colonnes de $T$ qui sont indexées par un ensemble $E$ de mot clos par suffixe.
+	\item Les colonnes de $T$ qui sont indexées par un ensemble $E$ de mots clos par suffixe.
 	\item Les lignes sont indexées par un ensemble de mots $S \cup S\cdot \alphabet$, ou $S$ est
 	      un ensemble fermé par préfixe.
 \end{itemize}
@@ -212,7 +212,7 @@ Tant que l'"oracle" donne un contrexemple
 
 		            Ajouter $t$ à $S$.
 	      \end{itemize}
-	\item On propose à l'"oracle" l'automate hypothèse associé à $T$
+	\item On propose à l'"oracle" l'automate conjecture associé à $T$
 \end{itemize}
 
 \subsection{Propriétés des tables closes et cohérentes}
