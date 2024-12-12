@@ -20,7 +20,7 @@
 		\State j ++
 		\EndIf
 		\If {$j == \abs u$}
-		\State Afficher l'occurence de $u$ en position $i$
+		\State Afficher l'occurrence de $u$ en position $i$
 		\EndIf
 		\EndFor
 		\EndFunction
@@ -52,31 +52,45 @@
 L'algorithme Knuth-Morris-Pratt, \cite{kmp}, améliore l'algorithme naïf en introduisant des décalages d'amplitude
 $> 1$ et fait en sorte que chaque caractère de $T$ soit analysé une seule fois.
 
-\iffalse
-	\begin{itemize}
-		\item Amélioration par rapport à l'algorithme naïf:
-
-		      L'algorithme ne prend en considération que certains décalages
-		      pour le motif en excluant les décalages où on ne pourra pas trouver le motif.
-	\end{itemize}
-\fi
-
-
 \begin{definition}
-	Si $w$ est un mot, on appelle bord de $w$ le mot le plus long qui est en même temps préfixe et suffixe de $w$ et propre.
+	Si $w$ est un mot, on appelle ""bord"" de $w$ le mot le plus long qui est en même temps préfixe et suffixe de $w$ et propre.
 \end{definition}
 
 \begin{exemple}
-	\emph{ABA} est le plus long bord de \emph{ABABA}.
+	\emph{ABA} est le plus long "bord" de \emph{ABABA}.
 \end{exemple}
 
-Si au cours de la vérification de la présence du mot $u$ à partir d'une position
-on a un échec au niveau de la $j$-ème lettre du motif, alors :
 
+Pour tout mot $w \in \mots$, on note $\Bord w$ le plus long "bord" de $w$,
+\cad le plus long préfixe propre de  $w$ qui est aussi un suffixe propre de $w$.
+On note également $b(w)$ la longueur de $\Bord w$. De plus, pour tout $j$ tel que
+$0 \leq j \leq \len w $, on note $w_j$ le préfixe de $w$ de longueur $j$.
+
+La fonction KMP repose sur le calcul préalable de $\Bord{w_j}$ et  $b(w_j)$ pour tous les
+$j$, dans un temps polynomial en $\len w$. Cette phase de prétraitement permet d’optimiser les décalages
+à effectuer lors de la recherche d’un motif $u$ dans un texte $T$.
+
+Supposons qu’au cours de la recherche de $u$ dans $T$, un échec se produit au niveau de la position $j$
+du motif $u$ alors que l'on examine le texte à partir de la position $i$. Cet échec indique que le caractère
+$T[i+j]$ ne correspond pas à $u[j]$.
+
+Pour déterminer le prochain décalage efficace de $u$, on observe que :
 \begin{itemize}
-	\item On calcule le bord $a$ du préfixe de $u$ de longueur $j-1$.
-	\item Et on décale $u$ de sorte que le $q$ au début est positionné sous le $q$ final.
+	\item Décaler $u$ d’une amplitude $k$, $1 \leq k \leq j$, n’a de sens que si, après ce décalage,
+	      un préfixe de $u$ peut s’aligner avec la portion correspondante de $T$.
+	\item Il est inutile de considérer des décalages $k < b(u_{j-1})$, car $\Bord{u_{j-1}}$
+	      est précisément le plus long suffixe de $u_{j-1}$ qui est aussi un préfixe de $u$.
 \end{itemize}
+
+Ainsi, après un échec à la position $j$, le décalage optimal consiste à aligner $\Bord{u_{j-1}}$
+au début de $u$ avec sa précédente occurrence dans $T$. Autrement dit, on recule le curseur
+$j$ à $b(u_{j-1})$ sans avoir à comparer à nouveau les $b(u_{j-1})$ premiers caractères,
+car ils sont garantis égaux en raison de la définition du "bord".
+
+Ce mécanisme permet de limiter les comparaisons inutiles et assure que chaque caractère de $T$
+est comparé à un nombre constant de caractères de $u$ en moyenne, rendant ainsi le nombre total
+de comparaisons linéaire en $\len T + \len u$.
+
 
 \begin{exemple}
 	TODO: explain
@@ -88,25 +102,25 @@ on a un échec au niveau de la $j$-ème lettre du motif, alors :
 
 
 L'algorithme effectue un pré-traitement dans lequel pour tout $j$ avec $0 \leq j \leq \len u - 1$
-calcule le plus grand bord du préfixe de $u$ de longueur $j$.
+calcule le plus grand "bord" du préfixe de $u$ de longueur $j$.
 
 \begin{exemple}
 	Pour le motif \emph{ABABACA}:
 
 	\begin{itemize}
-		\item Bord($\motvide$) = $\motvide$
-		\item Bord(A) = $\motvide$
-		\item Bord(AB) = $\motvide$
-		\item Bord(ABA) = A
-		\item Bord(ABAB) = BA
-		\item Bord(ABABA) = ABA
-		\item Bord(ABABAC) = $\motvide$
-		\item Bord(ABABACA) = A
+		\item $\Bord {\motvide} = \motvide$
+		\item $\Bord A = \motvide$
+		\item $\Bord {AB} = \motvide$
+		\item $\Bord {ABA} = A$
+		\item $\Bord {ABAB} = BA$
+		\item $\Bord {ABABA} = ABA$
+		\item $\Bord {ABABAC} = \motvide$
+		\item $\Bord {ABABACA} = A$
 	\end{itemize}
 \end{exemple}
 
 Il suffit de calculer une fonction $\N \to \N$ qui à tout $j \in \enum 0 {\len u}$ associe
-la longueur du plus long bord du préfixe de longueur $j$ du motif (la fonction préfixe).
+la longueur du plus long "bord" du préfixe de longueur $j$ du motif (la fonction préfixe).
 
 
 Cet algorithme peut aussi se retrouver comme un algorithme issu des automates.
