@@ -74,8 +74,8 @@
 \end{definition}
 
 \begin{exemple}
-	Pour l'automate $A$ suivant, avec $\alphabet = \set {a,b}$, le "langage reconnu" est 
-    $\lang A = \lang {\kleene {(a + b)} b} = \lang {\kleene {(a + b)} b \kleene b} = \setdef {wb} {w \in \mots}$.
+	Pour l'automate $A$ suivant, avec $\alphabet = \set {a,b}$, le "langage reconnu" est
+	$\lang A = \lang {\kleene {(a + b)} b} = \lang {\kleene {(a + b)} b \kleene b} = \setdef {wb} {w \in \mots}$.
 
 	\begin{center}
 		\begin{automata}
@@ -99,6 +99,18 @@
 		\end{automata}
 	\end{center}
 \end{exemple}
+
+
+\begin{definition}[chemin]
+	Soit $A = \AFD$ un "AFD", et $p,q \in Q$, un ""chemin"" $p \to q$ est une suite
+	$(q_1, \ldots, q_n)\in Q^n,(a_1, \ldots, a_n)\in \alphabet^n$ telle que $q_1 = p$ et $q_n = q$ et
+	$\forall i \in \enum 1 {n-1}, \delta(q_i, a_i) = q_{i+1}$.
+\end{definition}
+
+\begin{definition}
+	Un automate $A = \AFD$ est ""accesible"" si, pour tout état de l'automate, il existe un "chemin" partant de
+	$q_0$ qui mène a lui.
+\end{definition}
 
 \subsection{Automates finis non déterministes \darkgreen{+ $\motvide$-transitions}}
 
@@ -249,8 +261,8 @@ Ce processus est appelé ""déterminisation"" d'un "AFN" et nous permet de trans
 \end{theorem}
 
 \begin{proof}
-	Nous allons construire un tel automate par induction sur la structure de $r$ cependant la preuve du fait que cet 
-    utomate reconnaît le langage associé à $r$ est omise. Cette construction est appelée \textbf{construction de Thompson}.
+	Nous allons construire un tel automate par induction sur la structure de $r$ cependant la preuve du fait que cet
+	utomate reconnaît le langage associé à $r$ est omise. Cette construction est appelée \textbf{construction de Thompson}.
 
 	\begin{twoautomata}
 		\digraph[scale=0.5]{thompson1}{

@@ -16,7 +16,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{geometry}
-\usepackage{hyperref}        
+\usepackage{hyperref}
 
 
 \usepackage{caption}
@@ -30,25 +30,41 @@
 
 \usepackage{algpseudocode,algorithmicx}
 
-\usepackage[xcolor,hyperref]{knowledge}
+\usepackage[hyperref]{knowledge}
 
 \usepackage{automates}
 
 \knowledgeconfigure{label scope=false, notion, quotation, protect quotation={tikzcd, automata}}
 
+\knowledgenewrobustcmd \congN {\cmdkl {\cong}}
+
+\knowledge{relation d'équivalence}{url={https://fr.wikipedia.org/wiki/Relation_d\%27\%C3\%A9quivalence}}
+    
 
 \knowledge{alphabet}{notion}
-\knowledge{mot}{notion}
+\knowledge{mot}[mots]{notion}
 \knowledge{concaténation}{notion}
 \knowledge{langage}[langages]{notion}
 
 
-\knowledge{expressions rationnelles}[expression rationnelle]{notion}
-\knowledge{rationnel}{notion}
+\knowledge{expressions rationnelles}[expression rationnelle|ERat]{notion}
+\knowledge{rationnel}[langage rationnel|régulier|langage régulier]{notion}
 \knowledge{automate fini déterministe}[automate déterministe|AFD]{notion}
 \knowledge{automate fini non déterministe}[automate non déterministe|AFN]{notion}
-\knowledge{langage reconnu}{notion}
-\knowledge{déterminisation}[Déterminisation|determinisé]{notion}
+\knowledge{langage reconnu}[langage accepté]{notion}
+\knowledge{déterminisation}[Déterminisation|determinisé|déterminisant|det|déterministe]{notion}
+\knowledge{accesible}{notion}
+\knowledge{chemin}{notion}
+
+
+\knowledge{morphisme d'automates}{notion}
+\knowledge{quotient}[quotients]{notion}
+\knowledge{automate des quotients}[automate des résiduels]{notion}
+\knowledge{automate minimal}[automate déterministe minimal|minimal]{notion}
+\knowledge{automate miroir}[mirr]{notion}
+\knowledge{reach}{notion}
+\knowledge{congruence}{notion}
+\knowledge{Congruence de Nérode}[congruence de Nérode]{notion}
 
 
 \knowledge{learner}[étudiant]{notion}
@@ -56,11 +72,14 @@
 \knowledge{membership queries}{notion}
 \knowledge{conjectures}[conjecture]{notion}
 
+
+\knowledge{bord}{notion}
+
+
 \knowledge{voisinage}[voisinages]{notion}
 \knowledge{quiescent}{notion}
 \knowledge{Jardin d'Éden}[GOE | JDE | Jardins d'Éden]{notion}
 \knowledge{orphelin}{notion}
-
 
 
 \begin{document}
@@ -68,6 +87,8 @@
 \titlepageY{Automates Avancés et Applications} {Yago \textsc{Iglesias}} { }
 
 \tableofcontents
+
+\newpage
 
 \input{contents/index.tex}
 

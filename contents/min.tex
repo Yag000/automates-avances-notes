@@ -3,8 +3,8 @@
 \subsection{Morphismes d'automates}
 
 \begin{definition}[Morphisme d'automates]
-	Soit $A = \antuple{Q, q_0, F, \delta}$ et $ A' = \antuple{Q', q_0', F', \delta'} $ sur un alphabet $\alphabet$.
-	Alors un morphisme d'automates $\phi: A \to A'$ est une fonction $\phi: Q \to Q'$ \tlq
+	Soit $A = \antuple{Q, q_0, F, \delta}$ et $ A' = \antuple{Q', q_0', F', \delta'} $ sur un "alphabet" $\alphabet$.
+	Alors un ""morphisme d'automates"" $\phi: A \to A'$ est une fonction $\phi: Q \to Q'$ \tlq
 	\begin{enumerate}
 		\item $\phi (q_0) = q_0'$ \label{morph:1}
 		\item $\forall q \in Q,\quad  \phi (q) \in F' \iff q \in F$ \label{morph:2}
@@ -23,7 +23,7 @@
 
 
 \begin{exercice}
-	Soit $\phi : A \to A'$ un morphisme d'automates déterministes, alors $\lang A = \lang {A'}$
+	Soit $\phi : A \to A'$ un "morphisme d'automates" déterministes, alors $\lang A = \lang {A'}$
 \end{exercice}
 
 \begin{proof}
@@ -38,18 +38,18 @@
 
 
 \begin{definition}[Quotient d'un automate]
-	Soit $L \subseteq \mots$ et $w \in \mots$. Le quotient $\quot w L$ est défini par
+	Soit $L \subseteq \mots$ et $w \in \mots$. Le ""quotient"" $\quot w L$ est défini par
 	$$ \quot w L = \setdef {u \in \mots} {wu \in L} $$
 \end{definition}
 
 \begin{definition}
-	Soit A = $\AFD$ sur l'alphabet $\alphabet$ et $q \in Q$ alors on définit
+	Soit A = $\AFD$ sur l'"alphabet" $\alphabet$ et $q \in Q$ alors on définit
 	$$ L_q = \setdef {w \in \mots} {\kleene \delta (q,w) \in F} $$
 \end{definition}
 
 
 \begin{lemma}
-	Soit A = $\AFD$ un automate fini déterministe, $q \in Q$ et $w \in \mots$. Si $\deltaS {q_0} w = q$ alors
+	Soit A = $\AFD$ un "automate fini déterministe", $q \in Q$ et $w \in \mots$. Si $\deltaS {q_0} w = q$ alors
 	$L_q = \quot w \lang A$
 \end{lemma}
 
@@ -64,23 +64,22 @@
 \end{proof}
 
 \begin{coro}
-	Si $L \subseteq \mots$ est un langage régulier alors l'ensemble $\setdef {\quot w L} {w \in \mots}$ est fini.
+	Si $L \subseteq \mots$ est un "langage régulier" alors l'ensemble $\setdef {\quot w L} {w \in \mots}$ est fini.
 \end{coro}
 
 \begin{proof}
 	Si $L = \lang A$, avec A = $\AFD$, alors $\abs {\setdef {\quot w L} {w \in \mots}} \leq \abs Q$. Car $\forall w \in \mots,$ $\quot w L$ est
-	le langage accepté par $A$ à partir de l'état $\deltaS {q_0} w$.
+	le "langage accepté" par $A$ à partir de l'état $\deltaS {q_0} w$.
 \end{proof}
 
 \begin{coro} \label{coro:2}
-	Si $\AFN$ accepte un langage $L$ alors $\abs Q \geq $ \# quotients de $L$
+	Si $\AFN$ accepte un "langage" $L$ alors $\abs Q \geq $ \# "quotients" de $L$
 \end{coro}
 
 \begin{definition} [Automate des quotients]
 
-	Soit $L \subseteq \mots$ un langage régulier, soit $Q = \setdef {\quot w L} {w \in \mots}$ et $\AFD$. Alors l'automate des quotients de $L$
+	Soit $L \subseteq \mots$ un "langage régulier", soit $Q = \setdef {\quot w L} {w \in \mots}$ et $\AFD$. Alors l'""automate des quotients"" de $L$
 	est défini par
-
 	\begin{itemize}
 		\item L'état initial est $\quot {\motvide} L$
 		\item $F = \setdef {\quot w L} {w \in L}$
@@ -100,21 +99,21 @@
 		&\iff& (w'a)u \in L \\
 		&\iff& u \in \quot {(w'a)}L
 	\end{eqnarray*}
-	Donc la fonction de transition $\delta$ de l'automate des quotients est bien définie.
+	Donc la fonction de transition $\delta$ de l'"automate des quotients" est bien définie.
 \end{remarque}
 
 \begin{prop}
-	Étant donné un automate $A$ qui accepte le langage $L$, l'automate des quotients accepte aussi $L$ et il est minimal parmi les automates acceptant $L$.
+	Étant donné un automate $A$ qui accepte le langage $L$, l'"automate des quotients" accepte aussi $L$ et il est minimal parmi les automates acceptant $L$.
 \end{prop}
 
 \begin{proof}
 	$\deltaS L w = \quot w L$ et donc $\underbrace{\deltaS L w \in F}_{w \in \lang A} \iff w \in L$
 
-	Et ainsi, par le corollaire \ref{coro:2}, l'automate des quotients est minimal.
+	Et ainsi, par le corollaire \ref{coro:2}, l'"automate des quotients" est minimal.
 \end{proof}
 
 \begin{lemma}\label{lem:reach}
-	Soit $L \subseteq \mots$ un langage régulier. Soit $A_L$ l'automate des quotients de $L$ et soit $B$ un autre automate acceptant $L$.
+	Soit $L \subseteq \mots$ un "langage régulier". Soit $A_L$ l'"automate des quotients" de $L$ et soit $B$ un autre automate acceptant $L$.
 	Soit $\reach B$ un sous-automate accessible de $B$. Alors on a un morphisme surjectif (un quotient) d'automates $\reach B \twoheadrightarrow A_L$.
 
 	\begin{tikzcd}[row sep=large]
@@ -132,7 +131,7 @@
 
 
 \begin{exercice}
-	On définit $\phi : \reach B \to A$.
+	On définit $\phi : \text{\intro{reach}} (B) \to A$.
 
 	Si $t \in F', \exists w \in \mots$ \tq $ t = \deltaS {t_0} w$
 	On définit $\phi (t) = \quot w L$
@@ -145,25 +144,23 @@
 
 	Si $w \in \mots$ et $\quot w L$ est un état de $A_L$ alors $\phi (\deltaS {t_0} w) = \quot w L$
 
-	Si $\abs B = \abs {A_L}$, alors $B$ est un automate accesible (Sinon $\abs A \leq \abs {\reach B} < \abs B \lightning)$.
+	Si $\abs B = \abs {A_L}$, alors $B$ est un automate "accesible" (Sinon $\abs A \leq \abs {\reach B} < \abs B \lightning)$.
 
 	Donc $B = \reach B$
 
-	De plus, le morphisme $\phi$ est une bijection et $\quot {\phi}$ est un morphisme d'automates.
-	Donc $B \cong A_L$.
+	De plus, le morphisme $\phi$ est une bijection et $\quot {\phi}$ est un "morphisme d'automates".
+	Donc $B \congN A_L$.
 \end{proof}
-
 
 \subsection{Minimisation d'automates}
 
 \begin{rappel}
-	Pour tout langage rationnel $L$, il existe un unique (à isomorphisme près) automate déterministe minimal
+	Pour tout "langage rationnel" $L$, il existe un unique (à isomorphisme près) ""automate déterministe minimal""
 	(avec le plus petit nombre possible d'états) qui reconnait $L$.
 \end{rappel}
 
 \begin{remarque}
 	Ce n'est pas vrai pour les automates non-déterministes.
-
 
 	\begin{twoautomata}
 		\digraph[scale=0.5]{minex310}{
@@ -208,7 +205,9 @@
 	\end{twoautomata}
 \end{remarque}
 
-L'automate des résiduels de L est l'automate minimal reconnaissant L.
+L'"automate des résiduels" de $L$ est l'"automate minimal" reconnaissant $L$.
+
+\subsection{Algorithmes de minimisation}
 
 
 Nous allons voir trois algorithmes de minimisation différents:
@@ -221,29 +220,37 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 \subsubsection{Algorithme de Brzozowski}
 
+
+\begin{definition}
+	Soit $A = \AFN$ un "automate déterministe", son ""automate miroir"" est l'automate $A' = \antuple{Q, F, \set {q_0}, \delta'}$ avec
+	$\delta'$ définie enivrement par:
+	$$\forall q,q' \in Q, a \in \alphabet, \ \delta(q,a) = q' \iff q \in \delta'(q',a)$$
+\end{definition}
+
+
 \begin{prop}
-	Si $A$ est un automate déterministe et accesible, \ie, $\forall q \in Q, \exists \text{ un chemin } q_0 \to q$,
-	et  $A^ {\sim} = \detA (\mirr(A)) $ est l'automate obtenu en déterminisant l'automate miroir de $A$. Alors
-	$A^{\sim}$ est l'automate minimal qui reconnait $\mirror {\lang A}$.
+	Si $A$ est un "automate déterministe" et "accesible", et  $A^ {\sim} = \detA (\mirr(A)) $ est l'automate
+	obtenu en "déterminisant" l'"automate miroir" de $A$. Alors $A^{\sim}$ est l'"automate minimal" qui
+	reconnait $\mirror {\lang A}$.
 \end{prop}
 
 
 \begin{proof}
 	Soit $A = (Q, q_0, F)$, $L = \lang A$. $\mirr (A) = (Q, F, q_0), M = \lang {\mirr (A)} = \mirror L$.
 
-	On note $X \cdot u$ et $\delta (X,u)$, $X$ étant un ensemble d'états et $u$ un mot, l'ensemble $\bigcup\limits_{q \in X} \delta (q,u)$.
+	On note $X \cdot u$ et $\delta (X,u)$, $X$ étant un ensemble d'états et $u$ un "mot", l'ensemble $\bigcup\limits_{q \in X} \delta (q,u)$.
 
-	Nous allons montrer que $A^{\sim}$ est l'automate minimal pour $M$. Pour cela, il suffit de montrer que $A^{\sim}$
-	est isomorphe à l'automate des résiduels de $M$.
+	Nous allons montrer que $A^{\sim}$ est l'"automate minimal" pour $M$. Pour cela, il suffit de \mq $A^{\sim}$
+	est isomorphe à l'"automate des résiduels" de $M$.
 
-	Pour cela, il faut \mq si $u$ et $v$ sont deux mots quelconques \tq $\quot u M = \quot v M$, alors $F \cdot u =  F \cdot v$ dans $A^{\sim}$.
+	Pour cela, il faut \mq si $u$ et $v$ sont deux "mots" quelconques \tq $\quot u M = \quot v M$, alors $F \cdot u =  F \cdot v$ dans $A^{\sim}$.
 
-	Soit $p$ un état de $F \cdot u$. Puisque $A$ est accesible, il existe un chemin de $q_0 \to p$ dans $A$, et donc il existe un chemin $p \to q_0$ dans $\mirr(A)$.
-	Soit $w$ l'étiquette de ce chemin, alors le mot $uw$ est l'étiquette d'un chemin réussi de $\mirr (A)$. En conséquence, $uw \in M$.
+	Soit $p$ un état de $F \cdot u$. Puisque $A$ est "accesible", il existe un "chemin" de $q_0 \to p$ dans $A$, et donc il existe un "chemin" $p \to q_0$ dans $\mirr(A)$.
+	Soit $w$ l'étiquette de ce "chemin", alors le "mot" $uw$ est l'étiquette d'un "chemin" réussi de $\mirr (A)$. En conséquence, $uw \in M$.
 
 	Mais $uw\in M \iff w \in \quot u M \iff w\in \quot v M \iff vw \in M$.
 
-	Donc $vw$ est l'étiquette d'un chemin réussi $\Gamma$ dans $\mirr (A)$. Étant donné que $A$ est déterministe, tout chemin aboutissant dans $q_0$
+	Donc $vw$ est l'étiquette d'un "chemin" réussi $\Gamma$ dans $\mirr (A)$. Étant donné que $A$ est "déterministe", tout "chemin" aboutissant dans $q_0$
 	et dont l'étiquette a $w$ comme suffixe doit passer par $p$.
 
 	On en  déduit que $p \in Tv$.
@@ -251,16 +258,14 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 
 \begin{coro}
-	Soit $A$ un automate, alors l'automate $\detA (\mirr (\detA(\mirr (A))))$ est l'automate minimal pour $\lang A$.
+	Soit $A$ un automate, alors l'automate $\detA (\mirr (\detA(\mirr (A))))$ est l'"automate minimal" pour $\lang A$.
 \end{coro}
 
 \begin{proof}
 	En effet,
-
 	$\underbrace{\detA (\mirr (
-			\underbrace{\detA(\mirr (A))}_{\text{Un automate déterministe et accesible qui reconnait }\mirror {\lang A}}
-			))}_{\text{la proposition précédente garantit que cet automate est minimal pour }  \mirror{\mirror {\lang A} } = \lang A}
-	$
+			\underbrace{\detA(\mirr (A))}_{\text{Un \kl{automate déterministe} et \kl{accesible} qui reconnait }\mirror {\lang A}}
+			))}_{\text{la proposition précédente garantit que cet automate est \kl{minimal} pour }  \mirror{\mirror {\lang A} } = \lang A} $
 \end{proof}
 
 \begin{complexite}
@@ -271,15 +276,15 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 \begin{remarque}
 	Alors que d'autres algorithmes, \tq Moore, ont une complexité polynomiale, Brzozowski à différence des autres, ne nécessite pas
-	que l'automate donné soit déterministe.
+	que l'automate donné soit "déterministe".
 \end{remarque}
 
 \subsubsection{Algorithme de Moore}
 
 
 \begin{definition}[Congruence d'automates]
-	Soit $A = (Q,q_0,F,S)$ un automate déterministe et soit $\sim$ une relation d'équivalence définie sur l'ensemble $Q$. On dit que
-	$\sim$ est une congruence si $\sim$ satisfait les conditions suivantes :
+	Soit $A = (Q,q_0,F,S)$ un automate déterministe et soit $\sim$ une "relation d'équivalence" définie sur l'ensemble $Q$. On dit que
+	$\sim$ est une ""congruence"" si $\sim$ satisfait les conditions suivantes :
 	\begin{enumerate}
 		\item Compatibilité aves les transitions: Si $q \sim q'$ alors $\forall a \in \alphabet, \delta (q,a) \sim \delta (q',a)$
 		\item Saturation de $A$: Si $q \sim q'$ alors $q \in F \iff q' \in F$
@@ -288,7 +293,7 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 
 \begin{definition}
-	Si $A = \AFD$ est un AFD et $\sim$ une congruence définie sur $Q$. On définit l'automate quotient :
+	Si $A = \AFD$ est un "AFD" et $\sim$ une "congruence" définie sur $Q$. On définit l'automate "quotient" :
 	$$ A/\sim = (Q',q_0',F',\delta') $$
 
 	avec \begin{itemize}
@@ -301,25 +306,25 @@ Nous allons voir trois algorithmes de minimisation différents:
 \end{definition}
 
 \begin{prop}
-	Si $A$ est un automate déterministe et $\sim$ une congruence sur $A$, alors $\lang A = \lang {A/\sim}$.
+	Si $A$ est un "automate déterministe" et $\sim$ une "congruence" sur $A$, alors $\lang A = \lang {A/\sim}$.
 \end{prop}
 
 
-\begin{definition}[Congruence de Nerode]
-	Si $A = (Q, \set {q_0}, F, \delta)$ un AFD, $\forall q, q' \in Q$ on définit $q \cong q' \iff L_q = L_{q'}$.
+\begin{definition}[""Congruence de Nérode""]
+	Si $A = (Q, \set {q_0}, F, \delta)$ un "AFD", $\forall q, q' \in Q$ on définit $q \ \intro *\congN \ q' \iff L_q = L_{q'}$.
 \end{definition}
 
 \begin{rappel}
 	$L_q = \setdef w {\deltaS q w \in F}$.
 	Donc
 	\begin{eqnarray*}
-		q \cong q' \iff L_q = L_{q'} &\iff& \forall w \in \mots, w \in L_q \mssi w \in L_{q'} \\
+		q \ \congN \ q' \iff L_q = L_{q'} &\iff& \forall w \in \mots, w \in L_q \mssi w \in L_{q'} \\
 		&\iff& \forall w, \deltaS q w \in F \mssi  \deltaS {q'} w \in F
 	\end{eqnarray*}
 
 	On en déduit que
 	\begin{equation}\label{eq:congnot}
-		q \not\cong q' \iff \exists w, \deltaS q w \in F \et \deltaS {q'} w \notin F
+        q \ \not{\congN} \ q' \iff \exists w, \deltaS q w \in F \et \deltaS {q'} w \notin F
 	\end{equation}
 	où $\deltaS q w \notin F$ et $\deltaS{q'} w \in F$ sont deux états non équivalents, dits \emph{séparables}.
 \end{rappel}
@@ -327,7 +332,7 @@ Nous allons voir trois algorithmes de minimisation différents:
 Si $q$ et $q'$ sont séparables et $w$ est un mot qui satisfait \ref{eq:congnot}, on dira que $w$ \emph{sépare} $q$ et $q'$.
 
 
-Pour calculer la congruence de Nérode on introduit une famille de congruences :
+Pour calculer la "congruence de Nérode" on introduit une famille de congruences :
 
 \begin{equation*}
 	\cong_i, i  \in \N, q \cong_i q' \iff \forall w, \abs w \leq i \implies \deltaS q w \in F \iff  \deltaS {q'} w \in F
@@ -357,7 +362,7 @@ Pour calculer la congruence de Nérode on introduit une famille de congruences :
 
 
 \begin{prop}
-	Si $k \in \N$ \tq $ \cong_k \ = \ \cong_{k+j} \forall j \in \N$, alors $\cong_k \ = \ \cong$
+	Si $k \in \N$ \tq $ \cong_k \ = \ \cong_{k+j} \forall j \in \N$, alors $\cong_k \ = \ \congN$
 \end{prop}
 
 \begin{proof}
@@ -375,7 +380,7 @@ Pour calculer la congruence de Nérode on introduit une famille de congruences :
 \end{proof}
 
 \begin{definition}[Algorithme de Moore]
-	L'algorithme consiste à créer un automate à partir des classes d'équivalence sur $\cong$.
+	L'algorithme consiste à créer un automate à partir des classes d'équivalence sur $\congN$.
 	Les états sont les classes d'équivalence, on obtient les transitions en regardant le comportement
 	d'un représentant de la classe et les états finaux sont les classes qui ont un représentant qui est un état final.
 \end{definition}
