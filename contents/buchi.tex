@@ -101,12 +101,12 @@
 
 
 \begin{definition}
-	Un chemin est réussi (ou acceptant) si $\exists q_0 \in I, \exists \text{ une suite infinie d'indices} q_{i_J} \in T$,
-	donc un chemin est réussi \ssi il passe un nombre infini de fois par des états terminaux.
+	Un chemin est réussi (ou acceptant) si $\exists q_0 \in I, \exists \text{ une suite infinie d'indices } q_{i_J} \in T$,
+	donc un chemin est réussi si et seulement s'il passe un nombre infini de fois par des états terminaux.
 \end{definition}
 
 \begin{definition}
-	Un mot $w \in \aomega$ est accepté par un automate de Büchi \ssi il est l'étiquette d'un chemin réussi.
+	Un mot $w \in \aomega$ est accepté par un automate de Büchi si et seulement s'il est l'étiquette d'un chemin réussi.
 \end{definition}
 
 
@@ -206,7 +206,7 @@
 
 
 \begin{definition}
-	Un automate est dit émondé si tous ses états sont accesibles (on peut y accéder à partir d'un état initial)
+	Un automate est dit émondé si tous ses états sont accessibles (on peut y accéder à partir d'un état initial)
 	et co-accessibles (à partir de n'importe quel état, on peut arriver à un état final).
 \end{definition}
 
@@ -237,7 +237,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 \end{definition}
 
 \begin{theorem}[lien avec le théorème de Kleene]
-	$L \subseteq \aomega$ est $\omega$-rationnel \ssi il est reconnu par un automate de Büchi.
+	$L \subseteq \aomega$ est $\omega$-rationnel si et seulement s'il est reconnu par un automate de Büchi.
 \end{theorem}
 
 \begin{proofI}
@@ -245,7 +245,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 		\item \bimpRL \\
 		      Soit $L$ reconnaissable, il existe $A = (Q,I,T,\delta)$ tel que $L = \La^{\omega}(A)$.
 
-		      Soient $q,q' \in Q$.Pour chaque couple $(q,q')$, on définit $A_{qq'} = (Q,q,q',\delta)$
+		      Soient $q,q' \in Q$. Pour chaque couple $(q,q')$, on définit $A_{qq'} = (Q,q,q',\delta)$
 
 		      Soit $\La^*(A_{qq'})$ le langage reconnu par $A_{qq'}$ et $\La^+(A_{qq'}) = \La^*(A_{qq'}) \setminus \set {\motvide}$
 
@@ -386,7 +386,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 		}
 	\end{automata}
 
-	on normalise l'automate
+	On normalise l'automate :
 
 	\begin{automata}
 		\digraph[scale=0.50]{buchi6}{
@@ -409,7 +409,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 		}
 	\end{automata}
 
-	On identifie les états $qnew$ et $f$.
+	On identifie les états $qnew$ et $f$ :
 
 	\begin{automata}
 		\digraph[scale=0.50]{buchi7}{
@@ -450,7 +450,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 
 \begin{prop}[Admis]
-	Soit $A = (Q,I,T,\delta)$ un automate de Büchi déterministe alors $\La^{\omega} (A) = \larr {\La^+ (A)}$
+	Soit $A = (Q,I,T,\delta)$ un automate de Büchi déterministe, alors $\La^{\omega} (A) = \larr {\La^+ (A)}$
 	où $\La^+ (A)$ est le langage des mots finis reconnus par $A$ comme un automate fini traditionnel.
 \end{prop}
 
@@ -468,15 +468,16 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 	Par l'absurde, s'il y a un automate déterministe $\exists  L \in \text{Rat}(\alphabet)$ \tq tout mot de $X$ a un nombre infini de préfixes dans $L$.
 
 	\begin{itemize}
-		\item Prenons le mot $ba^{\omega}$, il a un préfixe $ba^{i_1} \in L$
-		\item Prenons le mot $ba^{i_1}ba^{\omega}$, il a un préfixe $ba^{i_1}ba^{i_2} \in L$
-		\item Prenons le mot $ba^{i_1}ba^{i_2}a^{\omega}$, il a un préfixe $ba^{i_1}ba^{i_2}ba^{i_3} \in L$
+		\item Prenons le mot $ba^{\omega}$, il a un préfixe $ba^{i_1} \in L$.
+		\item Prenons le mot $ba^{i_1}ba^{\omega}$, il a un préfixe $ba^{i_1}ba^{i_2} \in L$.
+		\item Prenons le mot $ba^{i_1}ba^{i_2}a^{\omega}$, il a un préfixe $ba^{i_1}ba^{i_2}ba^{i_3} \in L$.
 	\end{itemize}
 
 	Alors on peut construire un mot infini :
 	$$ ba^{i_1}ba^{i_2}\ldots ba^{i_k}\ldots$$
 	qui est l'étiquette d'un chemin qui passe un nombre infini de fois par un état final.
-	Donc ce mot serait reconnu par l'automate, or il contient un nombre infini de $b$.  $\contradict$
+	
+	Ce mot serait reconnu par l'automate, or il contient un nombre infini de $b$.  $\contradict$
 \end{proof}
 
 
@@ -604,12 +605,12 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 \end{exemple}
 
 \begin{notation}
-	Soit $w \in \mots$, not note $\inf (w) = \setdef {x \in \alphabet} {{\abs w}_x = \infty}$
+	Soit $w \in \mots$, on note $\inf (w) = \setdef {x \in \alphabet} {{\abs w}_x = \infty}$
 \end{notation}
 
 
 
-\begin{theorem}[Factorisation Ramsayenne]
+\begin{theorem}[Factorisation Ramseyenne]
 	Soit $f : \N \times \N \to C $, où $C$ est un ensemble fini, alors il existe une suite infinie d'entiers $E = i_0, i_1, \ldots, i_n, \ldots$
 	telle que $f(E \times E)$ soit un singleton, \ie $\forall i_{j_1},i_{e_1},i_{j_2},i_{e_2}$ dans $E$, $f(i_{j_1},i_{e_1})=f(i_{j_2},i_{e_2})$.
 \end{theorem}
@@ -618,7 +619,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 	On construit une suite de sous-ensembles de $\N$, $T_0, T_1, \ldots$, de la maniere suivante :
 	$T_0 = \N$. Si on a déjà $T_i$, on construit $T_{i+1}$.
 
-	Comme les couleurs sont au nombre fini, il existe une couleur $c_0$ et une suite
+	Comme les couleurs sont en nombre fini, il existe une couleur $c_0$ et une suite
 	$u_0, v_1, v_2, \ldots$ tel que $f(u_0, v_i) = c_0 \forall i \geq 1$ (il existe un nombre infini d'arcs sortant de $u_0$ de couleur $c_0$)
 	alors $T_{i+1} = \set {v_1, v_2, \ldots}$
 
@@ -633,7 +634,7 @@ Soit $X$ un langage reconnaissable et $A = (Q,I,T,\delta)$ un automate de Büchi
 
 %TODO: Make pretty
 
-On défini une relation sur $\mots$:
+On définit une relation sur $\mots$:
 \begin{eqnarray*}
 	w \sim w' \iff &\forall p,q \in Q, \exists \text{un chemin de $p$ à $q$ étiqueté par } w \\
 	&\et \exists \text{ un chemin de $p$ à $q$ d'étiquette $w$ qui passe par un état terminal}
@@ -641,13 +642,13 @@ On défini une relation sur $\mots$:
 
 
 \begin{itemize}
-	\item $\sim$ est d'équivalence : trivial
-	\item $\sim$ est une relation d'équivalence d'index fini, son nombre de classe ne peut pas dépasser $3^{{\abs Q}^2}$
+	\item $\sim$ est une relation d'équivalence : trivial
+	\item $\sim$ est une relation d'équivalence d'index fini, son nombre de classes ne peut pas dépasser $3^{{\abs Q}^2}$
 	      car chacune des ${\abs Q}^2$ coupes d'états distingue 3 types de mots :
 	      \begin{itemize}
-		      \item Les mots qui ne sont pas l'étiquette d'un chemin de $p$ à $q$.
-		      \item Les mots qui sont l'étiquette d'un chemin $s$ de $p$ à $q$ dont aucun ne passe par un état terminal.
-		      \item Les mots qui sont l'étiquette d'un chemin $s$ de $p$ à $q$ dont au moins 1 par par un état terminal.
+		      \item les mots qui ne sont pas l'étiquette d'un chemin de $p$ à $q$,
+		      \item les mots qui sont l'étiquette d'un chemin $s$ de $p$ à $q$ dont aucun ne passe par un état terminal,
+		      \item les mots qui sont l'étiquette d'un chemin $s$ de $p$ à $q$ dont au moins 1 passe par un état terminal
 	      \end{itemize}
 	\item $\sim$ est une congruence.
 
@@ -659,7 +660,7 @@ On défini une relation sur $\mots$:
 Alors $\mots / \sim$ est un monoïde fini.
 
 Et donc $\forall w \in \mots, [w]$ est un langage rationnel, en effet, $[x]$ est l'image inverse d'un singleton de $\mots / \sim$
-par le morphisme de projection $\phi : \mots \to \mots / \sim$ tel que $\forall x \in \mots,\ f (x) = [w] $.
+par le morphisme de projection $\phi : \mots \to \mots / \sim$ tel que $\forall x \in \mots,\ f (x) = [x] $.
 
 
 On considère la famille de langages de $\Sigma^{\omega}$ de la forme $[u][v]^{\omega}$ où $[u] \et [v]$ sont des classes d'équivalence de $\sim$.
@@ -677,22 +678,22 @@ On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\
 	Supposons $Y \cap X \neq \emptyset$ et soit $x \in Y \cap X$, alors $x$ est l'étiquette d'un chemin réussi de $A$
 	de la forme
 	$$q_0 \to^{u_0} q_1 \to^{v_1} q_2 \to^{v_0} q_3 \ldots$$
-	avec x = [v][v] et $u_0 = [u]$ et $\forall i, v_i = [v]$.
+	avec x = [u][v] et $u_0 = [u]$ et $\forall i, v_i = [v]$.
 
 	Soit $y \in Y = [u][v]$. On peut donc écrire $y$ comme :
 	$$ y = u_0'v_1'v_2'\ldots$$
-	avec et $u_0' = [u]$ et $\forall i, v_i' = [v]$.
+	avec $u_0' = [u]$ et $\forall i, v_i' = [v]$.
 
 	Mais alors $u \sim u_0'$ et $\forall i, v_i \sim v_i'$ et donc
 
 	$$q_0 \to^{u_0'} q_1 \to^{v_1'} q_2 \to^{v_0'} q_3 \ldots$$
-	et donc $y$ est l'étiquette d'un chemin réussi de $A$ et donc $A$ reconnait $y$, donc $y \in X$.
+	et donc $y$ est l'étiquette d'un chemin réussi de $A$, donc $A$ reconnait $y$, donc $y \in X$, donc $Y \subseteq X$.
 \end{proof}
 
 
 
 \begin{prop}\label{prop:buchi2}
-	$\forall x \in \Sigma^{\omega}, \exists u,v \in \Sigma^*, x \in [u][v]^{\omega}$
+	$\forall x \in \Sigma^{\omega}, \exists u,v \in \Sigma^*, x \in [u][v]^{\omega}$.
 \end{prop}
 
 
@@ -700,7 +701,7 @@ On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\
 	Écrivons $x = a_0a_1 \ldots a_n \ldots$ où $a_i \in \Sigma$.
 
 	On définit une fonction $f : \N \times \N \to \Sigma/\sim$
-	$$f(i,j) = [a_ia_{i+1}\ldots a_{j-1}], i \leq j$$
+	$$f(i,j) = [a_ia_{i+1}\ldots a_{j-1}], i < j$$
 	par le théorème de Ramsey, il existe une suite $I = i_0,i_1,\ldots$ \tlq $f(I)$ est un singleton.
 	En particulier,
 	$$f(i_0,i_1) = f(i_1,i_2) = f(i_2,i_3) \ \ldots$$
@@ -711,18 +712,18 @@ On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\
 		f(i_1,i_2) &=& [a_{i_1} a_{i_1+1}\ldots a_{i_2-1}] \\
 		f(i_2,i_3) &=& [a_{i_2} a_{i_2+1}\ldots a_{i_3-1}]
 	\end{eqnarray*}
-	en fait on a que $v_j \sim v_1 \forall j \geq 1$ et donc $x \in [u][v_1]^{\omega}$
+	en fait, on a que $v_j \sim v_1 \forall j \geq 1$ et donc $x \in [u][v_1]^{\omega}$.
 \end{proof}
 
 \begin{theorem}
 	$\forall X$ $\omega$-rationnel, on a
-	$$ \mathcal{C}(X) = \bigcup_{(u,v) \mid [u][w]^{\omega} \cap X = \emptyset} [u][v]^{\omega}$$
+	$$ \mathcal{C}(X) = \bigcup_{(u,v) \mid [u][v]^{\omega} \cap X = \emptyset} [u][v]^{\omega}$$
 \end{theorem}
 
 \begin{proofI}
 	\begin{itemize}
 		\item \fbox{$\supseteq$} \\
-		      Évidente car on fait une union d'ensembles qui sont tous contenus dans $\mathcal C (X)$
+		      Évidente car on fait une union d'ensembles qui sont tous contenus dans $\mathcal C (X)$.
 		\item \fbox{$\subseteq$} \\
 		      Soit $y \in \mathcal C (X)$.
 		      $$\exists u,v, y \in [u][v]^{\omega} \reason{Propositon \ref{prop:buchi2}}$$
@@ -739,11 +740,11 @@ On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\
 \subsection{Automates de Muller}
 
 \begin{definition}
-	Un automate de Muller est un quadruplet $(Q,I, \mathcal T, \sigma)$ où $\mathcal T$ (la table de l'automate) est un ensemble de sous ensembles
+	Un automate de Muller est un quadruplet $(Q,I, \mathcal T, \sigma)$ où $\mathcal T$ (la table de l'automate) est un ensemble de sous-ensembles
 	de $Q$ : $\mathcal T \subseteq \parts Q$.
 
-	Soit $w \in \Sigma^{\omega}$, $w$ est accepté par $A$ si $w$ est l'étiquette d'un chemin $\gamma$ \tq $\inf {\gamma} \in \mathcal T$ où
-	$\inf {\gamma}$ est l'ensemble d'états de $Q$ par qui $\gamma$ passe infiniment souvent.
+	Soit $w \in \Sigma^{\omega}$, $w$ est accepté par $A$ si $w$ est l'étiquette d'un chemin $\gamma$ \tq $\inf ({\gamma}) \in \mathcal T$ où
+	$\inf ({\gamma}()$ est l'ensemble d'états de $Q$ par qui $\gamma$ passe infiniment souvent.
 
 	%TODO: exemple
 \end{definition}
