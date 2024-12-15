@@ -1,8 +1,8 @@
 \section{String matching}
 
 \begin{definition}
-	Étant donné deux chaines de caractères $T$ le texte et $M$ le motif, on dit que $T$ présente une occurrence de $M$ si
-	$$\forall j \in \enum 1 {\len M -1}, \exists i, 0 \leq 1 \leq \len T - \len M, \text{ \tq } T[i + j] = M[j]$$
+	Étant donné deux chaines de caractères, $T$ le texte et $M$ le motif, on dit que $T$ présente une occurrence de $M$ si
+	$$ \exists i, 0 \leq i \leq \len T - \len M, \forall j \in \enum 1 {\len M -1}, T[i + j] = M[j]$$
 \end{definition}
 
 \begin{remarque}
@@ -16,33 +16,32 @@
 		\Function{Naif}{$T,u$}
 		\For{$i$ in $0, \ldots , \len T - \len u + 1$}
 		\State $j = 0$
-		\If  {$j  <  \len u \et (u[j] == t[i+j])$}
+		\While  {$j  <  \len u \et (u[j] == t[i+j])$}
 		\State j ++
-		\EndIf
+		\EndWhile
 		\If {$j == \abs u$}
 		\State Afficher l'occurrence de $u$ en position $i$
 		\EndIf
 		\EndFor
 		\EndFunction
 	\end{algorithmic}
-
-
 \end{remarque}
 
-\begin{remarque}
-	Pour chercher les occurrences de $u$ dans $T$, on peut construire un automate qui reconnait $\mots u$ et le faire travailler sur $T$.
+\begin{remarque}(Un premier algorithme meilleur que le naïf)
+	Pour chercher les occurrences de $u$ dans $T$, on peut construire un automate qui reconnait $\mots u$ et lui faire analyser $T$.
 	À chaque fois qu'on passe par un état final, on vient de voir une occurrence de $M$.
 \end{remarque}
 
 \begin{remarque}
-	Avec l'algorithme naïf, chaque caractère de $T$ est analysé $\abs u$ fois. Avec les automates, chaque caractère est analysé une seule fois.
+	Avec l'algorithme naïf, chaque caractère de $T$ pourrait être analysé $\abs u$ fois, car le motif est décalé d'une position à chaque fois.
+	Avec les automates, chaque caractère est analysé une seule fois, ce qui explique l'amélioration.
 \end{remarque}
 
 \begin{remarque}
-	L'approche par automates présente quelques problèmes d'efficacité :
+	L'approche par automates présente cependant quelques problèmes d'efficacité :
 	\begin{itemize}
-		\item Si l'automate est non déterministe, le temps de calcul peut devenir très lourd.
-		\item Si on le déterminise avant, alors on risque de trouver un algorithme de taille exponentielle.
+		\item Si l'automate est non déterministe, le temps de calcul peut devenir très lourd : il faut analyser un nombre potentiellement exponentiel de chemins.
+		\item Si on le "déterminise" avant, alors on risque de trouver un automate de taille exponentielle.
 	\end{itemize}
 \end{remarque}
 
@@ -53,11 +52,11 @@ L'algorithme Knuth-Morris-Pratt, \cite{kmp}, améliore l'algorithme naïf en int
 $> 1$ et fait en sorte que chaque caractère de $T$ soit analysé une seule fois.
 
 \begin{definition}
-	Si $w$ est un mot, on appelle ""bord"" de $w$ le mot le plus long qui est en même temps préfixe et suffixe de $w$ et propre.
+	Si $w$ est un mot, on appelle ""bord"" de $w$ le mot le plus long qui est en même temps préfixe et suffixe propre de $w$ .
 \end{definition}
 
 \begin{exemple}
-	\emph{ABA} est le plus long "bord" de \emph{ABABA}.
+	\quotes A et  \quotes{ABA} sont les "bords" de \quotes{ABABA}.
 \end{exemple}
 
 
@@ -105,7 +104,7 @@ L'algorithme effectue un pré-traitement dans lequel pour tout $j$ avec $0 \leq 
 calcule le plus grand "bord" du préfixe de $u$ de longueur $j$.
 
 \begin{exemple}
-	Pour le motif \emph{ABABACA}:
+	Pour le motif \quotes{ABABACA}:
 
 	\begin{itemize}
 		\item $\Bord {\motvide} = \motvide$
@@ -119,12 +118,13 @@ calcule le plus grand "bord" du préfixe de $u$ de longueur $j$.
 	\end{itemize}
 \end{exemple}
 
-Il suffit de calculer une fonction $\N \to \N$ qui à tout $j \in \enum 0 {\len u}$ associe
-la longueur du plus long "bord" du préfixe de longueur $j$ du motif (la fonction préfixe).
+Il suffit de calculer une fonction qui à tout $j \in \enum 0 {\len u - 1}$ associe
+la longueur du plus long "bord" du préfixe de longueur $j$ du motif, c'est la fonction dite préfixe.
 
 
 Cet algorithme peut aussi se retrouver comme un algorithme issu des automates.
 
+Soit $u$ le motif à chercher.
 
 \begin{definition}
 	Pour tout $w \in \mots$ on défini
@@ -132,36 +132,42 @@ Cet algorithme peut aussi se retrouver comme un algorithme issu des automates.
 \end{definition}
 
 \begin{prop}
-	%TODO: Use right symbol for congrunce
-	Soit $\cong$ la congruence de Nérode induite par le langage $\mots u$, alors
-	$$ w_1 \cong w_2 \iff q(w_1) = q(w_2)$$
+	Soit $\congN$ la congruence de Nérode induite par le langage $\mots u$, alors
+	$$ w_1 \congN w_2 \iff q(w_1) = q(w_2)$$
 \end{prop}
 
 \begin{proofI}
 	\item \bimpLR \\
-	Supposons $w_1 \cong w_2$ ($\forall w \in \mots, w_1y \in \mots w \iff w_2y\in \mots u$)
+	Supposons $w_1 \cong w_2$ ($\forall y \in \mots, w_1y \in \mots u \iff w_2y\in \mots u$)
 
-	Soit $y$ tel que $w_1 y \in \mots u$ et $w_2 y \in \mots u$ et prenons $y$ de longueur minimale.
-	On a donc $\len y \leq \len u$.
+	Notons $z$ le plus long suffixe de $w_1$ qui est aussi préfixe de  $u$ et notons $y$ le mot $z^{-1}u$ (le mot obtenu de $u$ en effaçant $z$ au début)
+	alors $w_1y$ se termine par $u$, c'est-à-dire est  dans $\Sigma^*u$.
 
-	TODO: Add image
 
-	On a donc $z_1 = z_2$
-	De plus, on a $z_1 = z_2 = q(w_1) = q(w_2)$  à cause de la minimalité de $y$.
+	Le mot $y$ est le mot de longueur minimale tel que $w_1y$ se termine par $u$, car s'il existait un mot $y'$ plus court que $y$  tel que $w_1y'$
+	se termine par $u$ alors $z$ ne serait pas le plus long suffixe de $w_1$ qui est aussi préfixe de $u$.
+
+
+	Puisque $w_1 \cong  w_2$ on a que   $w_2y$  est  dans $\Sigma^*u$ aussi, c'est-à-dire  se termine par $u$, de plus  $y$ est aussi le mot de
+	longueur minimale  tel que $w_2y$  est  dans $\Sigma^*u$. En effet  si un mot $y''$ tel que $w_2y''$  est  dans $\Sigma^*u$  existait alors
+	$w_1 y''$ serait aussi dans $\Sigma^*u$  à cause de l'équivalence, en contradiction avec la minimalité de $y$.
+
+
+	Il en découle que $z$ est aussi un suffixe de $w_2$ et que c'est le plus long suffixe de $w_2$ qui aussi préfixe de $u$, donc $q(w_1)=q(w_2)$.
 
 	\item \bimpRL \\
 	Supposons que $q(w_1) = q(w_2)$ et nous voulons montrer que
 	$$\forall y, \quad w_1 y \in \mots u \iff w_2 y \in \mots u$$
 
-	Ceci est trivialement vrai si $\len y \geq \len u$.
+	Ceci est trivialement vrai si $\len y \geq \len u$,
+	dans ce cas
 
-	TODO: add image
-	car dans ce cas
-	$$\quad w_1 y \in \mots u \iff  y \in \mots u \iff w_2 y \in \mots u$$
+	\begin{eqnarray*}
+		w_1 y \text{ se termine par } u & \text{ ssi }& y \text{ se termine par } u \\
+		& \text{ ssi }& w_2y \text{ se termine par } u
+	\end{eqnarray*}
 
 	Supposons donc que $\len y < \len u$ et considérons le mot $w_1 y$
-
-	TODO: image
 
 	$w_1y \in \mots u \implies \exists$ un suffixe $z$ de $w_1$ qui est préfixe de $u$ et $z$ est un suffixe de $q(w_1) = q(w_2)$
 	donc $z$ est aussi un suffixe de $q(w_2)$ et en particulier il est un suffixe de $w_2 \implies w_2 y $ se décompose en
@@ -181,7 +187,7 @@ Cette proposition suggère une nouvelle manière pour calculer l'automate minima
 \end{eqnarray*}
 
 \begin{exemple}
-	Pour le mot \emph{ABABACA} on construit l'automate suivant : \\
+	Pour le mot \quotes{ABABACA} on construit l'automate suivant : \\
 	\begin{automata}
 		\digraph[scale=0.50]{automateStringMatch}{
 			rankdir=LR;
@@ -200,27 +206,31 @@ Cette proposition suggère une nouvelle manière pour calculer l'automate minima
 
 			0 -> 0 [label="X ≠ A"];
 			0 -> 1 [label="A"];
+
 			1 -> 1 [label="A"];
-			1 -> 0 [label="X ≠ A,B"];
 			1 -> 2 [label="B"];
+
 			2 -> 3 [label="A"];
-			2 -> 0 [label="X ≠ A"];
+
 			3 -> 4 [label="B"];
 			3 -> 1 [label="A"];
-			4 -> 0 [label="X ≠ A"];
+
 			4 -> 5  [label="A"];
+
 			5 -> 6  [label="C"];
 			5 -> 4  [label="B"];
 			5 -> 1  [label="A"];
+
 			6 -> 7  [label="A"];
-			6 -> 0  [label="X ≠ A"];
+
 			7 -> 2  [label="B"];
 			7 -> 1  [label="A"];
-			7 -> 0  [label="X ≠ A,B"];
 
 			7 [shape=doublecircle];
 		}
 	\end{automata}
+
+	L'automate est complet et tout transition \quotes{manquante} va vers l'état 0.
 \end{exemple}
 
 
