@@ -4,7 +4,7 @@
 	On note $\B = \set {0,1}$.
 \end{notation}
 
-On veut évaluer les fonctions $f : \B ^ n \to B$
+On veut évaluer les fonctions $f : \B ^ n \to \B$
 
 \begin{exemple}
 	Une telle fonction est $f(x_1,x_2,x_3) = (x_1 \land x_2) \lor x_3 : \B^3 \to \B$
@@ -29,7 +29,7 @@ Un automate qui fait cela est l'arbre de décision de $f$.
 
 
 Pour éviter cet inconvénient, plutôt que de travailler avec les automates génériques
-on travaille avec des BDD (Binary Decision Diagrams)
+on travaille avec des BDD (Binary Decision Diagrams).
 
 \begin{definition}
 	Un BDD est un graphe avec une seule racine, acyclique, il possède deux feuilles,
@@ -37,9 +37,9 @@ on travaille avec des BDD (Binary Decision Diagrams)
 
 	Les nœuds internes (nœuds de décision) on toujours deux fils. Notamment, si $n$ est un nœud interne
 	et $x_i$ la variable relative à ce nœud, on nomme $\low n$ le fils de $n$ correspondant à l'assignation
-	$x_1 = 0$ et $\high n$ celui correspondant à l'assignation $x_1 = 1$.
+	$x_i = 0$ et $\high n$ celui correspondant à l'assignation $x_i = 1$.
 
-	Chaque nœud a une étiquette qui est un entier $\geq 0$ et $\etiquette n > \etiquette {\low n},  \etiquette {\high n}$.
+	Chaque nœud a une étiquette qui est un entier $\geq 0$ et on a toujours $\etiquette n > \etiquette {\low n},  \etiquette {\high n}$.
 \end{definition}
 
 
@@ -51,14 +51,14 @@ on travaille avec des BDD (Binary Decision Diagrams)
 	\end{enumerate}
 \end{definition}
 
-A partir d'un arbre de décison on peut obtenir un BDD réduit par la méthode suivante :
+A partir d'un arbre de décision on peut obtenir un BDD réduit par la méthode suivante :
 \begin{itemize}
-	\item Les feuilles qui ne reconnaissent pas ont comme étiquette $0$.
-	\item Les feuilles qui reconnaissent ont comme étiquette $1$.
-	\item Si $n$ est un nœud interne
+	\item Les feuilles qui ne se correspondent pas à des états terminaux ont comme étiquette $0$.
+	\item Les feuilles qui se correspondent à des états terminaux ont comme étiquette $1$.
+	\item Si $n$ est un nœud interne :
 	      \begin{itemize}
 		      \item si $\etiquette {\low n} = \etiquette {\high n} = e$, alors $\etiquette n = e$.
-		      \item il existe un nœud $n'$ déjà étiqueté et \tq
+		      \item s'l existe un nœud $n'$ déjà étiqueté et \tq
 		            \begin{eqnarray*}
 			            \etiquette {\low {n'}} &=& \etiquette {\low {n}} \\
 			            \etiquette {\high{n'}} &=& \etiquette {\high{n}}
