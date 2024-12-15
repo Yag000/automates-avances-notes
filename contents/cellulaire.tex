@@ -1,15 +1,15 @@
 \section{Automates cellulaires}
 
 \begin{definition}
-	Un automate cellulaire est définit par :
+	Un automate cellulaire est défini par :
 	\begin{itemize}
 		\item L'entier positif $d$ représentant la dimension de l'espace $(\Z^d)$
 		\item Un ensemble fini $S$ d'états
 		\item Un ""voisinage"", \ie un ensemble de vecteurs de $\Z^d (\vec{v_1},  \vec{v_1}, \ldots ,\vec{v_m})$
 		      qui représente la position relative des voisins (relative à la position de la cellule). Les voisins de la
 		      cellule $\vec r$ sont $\vec r + \vec {v_1},  \ldots , \vec r + \vec {v_m}$.
-		\item Une fonction $f : S ^ m \to S$ de transitions locale qui défini l'état d'une cellule à l'instant $t + 1$
-		      en fonction des états de ses voisins a l'instant $t$.
+		\item Une fonction $f : S ^ m \to S$ de transition locale qui définit l'état d'une cellule à l'instant $t + 1$
+		      en fonction des états de ses voisins à l'instant $t$.
 	\end{itemize}
 \end{definition}
 
@@ -18,11 +18,11 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 \begin{definition}
 	Une configuration est une fonction $\Z ^ d \to S$ qui décrit l'état courant de chaque cellule.
 
-	Si $C$ est l'ensemble des configurations, alors un automate cellulaire défini une fonction $G: C \to C$ où si $c \in C$, alors
-	$G(x) = c'$ est la configuration obtenue de $c$ en applicant la règle $f$ à toutes les cellules.
+	Si $C$ est l'ensemble des configurations, alors un automate cellulaire définit une fonction $G: C \to C$ où si $c \in C$, alors
+	$G(x) = c'$ est la configuration obtenue de $c$ en appliquant la règle $f$ à toutes les cellules.
 
-	En général, en itère la fonction $G$ et pour une configuration $c$ on s'intéresse à la suite :
-	$$ G^0 (c) = e, G^1 (c), G^2 (c), \text{ où } G^i (c) = G ( G^{i - 1 }(c))$$
+	En général, on itère la fonction $G$ et pour une configuration $c$ on s'intéresse à la suite :
+	$$ G^0 (c) = c, G^1 (c), G^2 (c), \text{ où } G^i (c) = G ( G^{i - 1 }(c))$$
 \end{definition}
 
 \begin{definition}
@@ -31,17 +31,17 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 
 
 \begin{definition}
-	Une configuration $c$ est dite périodique (dans le temps) (ou oscillateur) si $\exists k$, \tq , $G^k(c) = c$. Le plus petit
+	Une configuration $c$ est dite périodique (dans le temps), ou oscillateur, si $\exists k$ \tq $G^k(c) = c$. Le plus petit
 	petit $k$ \tq $G^k(c) = c$ est dite la période d'oscillation.
 \end{definition}
 
 \begin{definition}
-	Une configuration est dite ultimement fixe si $\exists k, \forall j, \ G^{k+j}(c) =  G^{k}(c)$
+	Une configuration est dite ultimement fixe si $\exists k$ \tq $\forall j, \ G^{k+j}(c) =  G^{k}(c)$.
 \end{definition}
 
 
 \begin{definition}
-	Une configuration est dite ultimement périodique si $\exists k, \exists l>0, \ G^{k+l}(c) =  G^{k}(c)$
+	Une configuration est dite ultimement périodique si $\exists k, \exists l>0$ \tq $ G^{k+l}(c) =  G^{k}(c)$
 \end{definition}
 
 
@@ -54,9 +54,9 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 
 
 \begin{theorem}
-	Si deux automates cellulaires $A \et B$ réalisent la meme fonction $G$ alors $A \et B$ ne peuvent pas différer que par
-	leur "voisinages" et les deux "voisinages" ne peuvent différent que par la presence (ou pas) de voisins inutiles (\cad
-	des voisins dont l'état n'a aucune influence sur la valuer de $f$).
+	Si deux automates cellulaires $A \et B$ réalisent la même fonction $G$, alors $A \et B$ ne peuvent différer que par
+	leur "voisinages" et les deux "voisinages" ne peuvent être différents que par la présence (ou pas) de voisins inutiles (\cad
+	des voisins dont l'état n'a aucune influence sur la valeur de $f$).
 \end{theorem}
 
 
@@ -67,19 +67,19 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 \subsection{Le jeu de la vie}
 
 \begin{exemple}
-	Pour $d = 2$ le Game of Life de Conway \cite{conwayGOL}:
+	Pour $d = 2$, Game of Life de Conway \cite{conwayGOL} est défini par :
 	\begin{itemize}
 		\item $S = \set {0,1}$
 		\item $V = ((0,1), (1,0), (0,-1), (-1,0), (1,1), (1,-1), (-1,1), (-1,-1))$
-		\item La fonction de transition
+		\item Fonction de transition :
 		      \begin{itemize}
-			      \item Une cellule vivante reste vivante \ssi elle a 2 ou 3 vision vivant
-			      \item Une cellule morte devient vivante \ssi 3 voisins sont vivants
+			      \item Une cellule vivante reste vivante \ssi elle a 2 ou 3 voisins vivant.
+			      \item Une cellule morte devient vivante \ssi elle a 3 voisins vivants.
 		      \end{itemize}
 	\end{itemize}
 
 
-	Une implementation sur navigateur est disponible sur: \url{https://conwaylife.com/}.
+	Une implémentation sur navigateur est disponible sur: \url{https://conwaylife.com/}.
 \end{exemple}
 
 \begin{definition}
@@ -91,16 +91,16 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 		\item $d = (-1,0,1)$
 	\end{itemize}
 
-	Les automates élémentaires sont exactement $2^8 = 256$.
+	Il y a exactement $2^8 = 256$ automates élémentaires.
 \end{definition}
 
 \begin{notation}
-	Wolfgram a introduit un numérotation \cite{wolfgramClass} pour les automates cellulaires élémentaires ou chaque automate
-	est associé a un entier entre 0 et 255.
+	Wolfgram a introduit une numérotation \cite{wolfgramClass} pour les automates cellulaires élémentaires où chaque automate
+	est associé à un entier entre 0 et 255.
 
-	Comme on peut definir l'automate juste en etudiant son cortemetn sur trois cellules voisines, il suffit d'associer une
-	ettiquete a ce comportemetn pour caracterises tout l'automate cellulaire. Ainsi, o ceommence par trier
-	les 8 configurations possibles pour 3 cellues voisines ainsi :
+	Comme on peut définir l'automate juste en étudiant son comportement sur trois cellules voisines, il suffit d'associer une
+	étiquette à ce comportement pour caractériser tout l'automate cellulaire. Ainsi, on commence par trier
+	les 8 configurations possibles pour 3 cellules voisines ainsi :
 
 	% From : https://tex.stackexchange.com/questions/320195/is-there-an-implemented-way-to-draw-wolframs-elementary-cellular-automata
 	\[ \LARGE
@@ -114,8 +114,8 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 		\substack{\square \square \square }
 	\]
 
-	Si on considere ces trois cellules comme un nombre binaire encodé sur 3 bits, ce tri se correspond a un tri decoissant sur la
-	valeur de ces configurations. On peut donc regarder quel sera l'état de la cellule du milieu, apr exemple pour la
+	Si on considère ces trois cellules comme un nombre binaire encodé sur 3 bits, ce tri correspond à un tri décroissant sur la
+	valeur de ces configurations. On peut donc regarder quel sera l'état de la cellule du milieu, par exemple pour la
 	fonction \textbf{xor} :
 
 
@@ -130,8 +130,8 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 		\substack{\square \square \square \\ \square}
 	\]
 
-	Maintenant on peut voir ceci comme un nombre binaire sur 8 bits ou le i-ème bit correspond a la
-	nouvelle valeur de la cellule a la i-ème possition, ainsi pour cet automate cellulaire on obtient :
+	Maintenant, on peut voir ceci comme un nombre binaire sur 8 bits ou le i-ème bit correspond à la
+	nouvelle valeur de la cellule à la i-ème position. Ainsi, pour cet automate cellulaire, on obtient :
 
 
 	\[ \LARGE
@@ -145,55 +145,38 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 		\substack{\square \square \square \\ \square \\ 0}
 	\]
 
-	Ainsi cet automate est numéroté par $01011010_2 = 90_{10}$
+	Ainsi cet automate est numéroté par $01011010_2 = 90_{10}$.
 \end{notation}
 
-\subsection{Configurations périodiques}
+\subsection{Configurations finies et configuérations périodiques}
 
 \begin{definition}
-	Soit $s \in S$ un état, on appelle $s$-support l'ensemble de cellules qui ont
+	Soit $s \in S$ un état, on appelle $s$-support l'ensemble des cellules qui ont
 	un état différent de $s$.
 \end{definition}
 
 \begin{notation}
-	Souvent on impose qu'un état $q_0$ est un état ""quiescent"" (typiquement c'est l'état 0).
+	Souvent, on impose qu'un état $q_0$ soit un état ""quiescent"" (généralement, c'est l'état 0).
 
-	Il est stable par $f$, \ie $f(\underbrace{q_0,\ldots, q_0}_m)$
+	Il est stable par $f$, \ie $f(\underbrace{q_0,\ldots, q_0}_m) = q_0$.
 \end{notation}
 
 \begin{definition}
-	On apelle configurations finies ($q_0$-finies) les configurations ayant un $q_0$-support fini.
+	On appelle configurations finies ($q_0$-finies) les configurations ayant un $q_0$-support fini.
 \end{definition}
 
 \begin{definition}
 	Soit $\vec v$ un vecteur de $\Z^d$, la translation $\tau_{\vec v}$ est une fonction d'automate cellulaire où le "voisinage" contient seulement des $\vec v$,
-	autrement dit, la valeur d'une cellule $\vec r$ à l'instant $t+1$ est simplement la valuer de la cellule $\vec r + \vec v$ à l'instant $t$.
+	autrement dit, la valeur d'une cellule $\vec r$ à l'instant $t+1$ est simplement la valeur de la cellule $\vec r + \vec v$ à l'instant $t$.
 
 
-	Si $\vec v = (0,\ldots,0, 1, 0, \ldots, 0) = \sigma_i$ est nommé shift élémentaire, où le 1 est à la position $i$.
+	$\vec v = (0,\ldots,0, 1, 0, \ldots, 0) = \sigma_i$ est nommé shift élémentaire, où le 1 est à la position $i$.
 
-	Tout transition peut être exprimée en fonction de shifts élémentaires.
+	Toute transition peut être exprimée en fonction de shifts élémentaires.
 \end{definition}
 
 \begin{definition}
-	Une configuration est dite $\vec v$-périodique si $c(\vec n) = c (\vec n + \vec v)$.
-\end{definition}
-
-\begin{definition}
-	Une configuration est dite spatialement périodique si $\exists \vec v,$ \tq $c$ est $\vec v$-périodique.
-\end{definition}
-
-
-\begin{definition}
-	Une configuration est dite totalement périodique si $\exists k, \forall i \in \enum 1 d$, $c$ est $\sigma_i^k$-périodique.
-\end{definition}
-
-\begin{prop}
-	Si $G$ est la fonction d'un automate cellulaire ye $\tau$ une translation, alors $G \circ \tau = \tau \circ G$.
-\end{prop}
-
-\begin{definition}
-	Si $\vec r$ est un vecteur on dit que une configuration $c$ est $\vec r$-périodique si $c(\vec n) = (\vec n + \vec r)$
+	Si $\vec v$ est un vecteur, on dit qu'une configuration $c$ est $\vec v$-périodique si $c(\vec n) = c (\vec n + \vec v)$.
 \end{definition}
 
 \begin{exemple}
@@ -201,51 +184,67 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 \end{exemple}
 
 \begin{definition}
+	Une configuration est dite spatialement périodique si $\exists \vec v$ \tq $c$ est $\vec v$-périodique.
+\end{definition}
+
+\begin{definition}
+	Une configuration est dite totalement périodique si $\exists k$ \tq $\forall i \in \enum 1 d$, $c$ est $\sigma_i^k$-périodique.
+\end{definition}
+
+\begin{prop}
+	Si $G$ est la fonction d'un automate cellulaire et $\tau$ une translation, alors $G \circ \tau = \tau \circ G$.
+\end{prop}
+
+\begin{definition}
 	Une configuration est dite totalement périodique si $\forall i \in \enum 1 d\exists k_i, $ \tq $c$ est $k_i\sigma_i$-périodique.
 \end{definition}
 
 \begin{remarque}
-	Puisque les fonctions dun automate cellulaire commutent avec les translations il en découle que si $c$ est totalement périodique alors $G(c)$
+	Puisque les fonctions d'un automate cellulaire commutent avec les translations, il en découle que si $c$ est totalement périodique, alors $G(c)$
 	est aussi totalement périodique.
 
-	Donc si $P$ represente l'ensemble de toutes les configurations totalement périodiques, on considère $\restr G P : P \to P$, notée $G_P$.
-	Les deux fonctions $G_F$ et $G_P$ donnent des renseignements sur le surjectivité et injectivité de $G$.
+	Donc si $P$ représente l'ensemble de toutes les configurations totalement périodiques, on considère $\restr G P : P \to P$, notée $G_P$.
+	Les deux fonctions $G_F$ et $G_P$ donnent des renseignements sur la surjectivité et l'injectivité de $G$.
 \end{remarque}
 
 \subsection{Une topologie sur l'espace des configurations $S^{\Z^d}$}
 
 
 \begin{definition}
-	Soit $c_1,c_2, \ldots, c_n, \ldots$ une suite de configurations on dit que la suite converge vers
+	Soit $c_1,c_2, \ldots, c_n, \ldots$ une suite de configurations, on dit que la suite converge vers
 	la configuration $c$ (ou qu'elle a comme limite la configuration $c$) si
-	$$ \forall \vec n \in \Z^d \exists i, c_j(\vec n) = c(\vec n) \forall j > i$$
+	$$ \forall \vec n \in \Z^d, \exists i, c_j(\vec n) = c(\vec n) \forall j > i$$
 \end{definition}
 
-\begin{prop}(Compacité de $S^{\Z^n}$)
-	TOute suite de configurations possède une sous-suite convergente.
+\begin{prop}(Compacité de $S^{\Z^d}$)
+	Toute suite de configurations possède une sous-suite convergente.
 \end{prop}
 
 \begin{proof}
-	La demonstration est une généralisation de la factorisation de Ramsay à un nombre $d$ quelconque de dimension.
-	*Une configurations $c : \Z^d \to S$, avec $S$ fini, Ramsay le fait pour les fonctions $\N ^ 2 \to M$, avec $M$ fini).
+	La démonstration est une généralisation de la factorisation de Ramsay à un nombre $d$ quelconque de dimension.
+	(Pour une configuration $c : \Z^d \to S$ avec $S$ fini, Ramsay le fait pour les fonctions $\N ^ 2 \to M$, avec $M$ fini).
 \end{proof}
 
-\begin{prop}[Les fonctions d'automates cellulaires sont continues] \label{prop:continues}
+\begin{prop}\label{prop:continues}
+	Les fonctions d'automates cellulaires sont continues.
+	
 	Soit $c_1,c_2, \ldots, c_n, \ldots$ une suite de configurations qui converge vers $c$,
-	alors $G(c_1),G(c_2), \ldots, G(c_n), \ldots$ une suite de configurations qui converge vers $G(c)$,
+	alors $G(c_1),G(c_2), \ldots, G(c_n), \ldots$ est une suite de configurations qui converge vers $G(c)$.
 \end{prop}
 
 \begin{proof}
-	La demonstration n'est pas compliqué et elle est laissée en exercice.
+	La démonstration n'est pas compliquée et elle est laissée en exercice.
 \end{proof}
 
-\begin{prop}[Les configurations finies et totalement périodiques sont denses]\label{prop:dense}
-	$$\forall c \in S^{\Z^n}, \exists c_1,c_2, \ldots,\forall c_i \in F, \exists p_1,p_2, \ldots \forall c_j \in P, \lim_{i \to \infty} c_i = c \et \lim_{j \to \infty} p_j = c $$
+\begin{prop}\label{prop:dense}
+	Les configurations finies et totalement périodiques sont denses.
+
+	$$\forall c \in S^{\Z^d}, \exists c_1,c_2, \ldots,\forall c_i, c_i \in F, \exists p_1,p_2, \ldots \forall c_j, c_j \in P$$
+	$$ \lim_{i \to \infty} c_i = c \et \lim_{j \to \infty} p_j = c $$
 \end{prop}
 
 \begin{proof}
-	Soit $c$ une configuration.
-	Soit $\vec {r_0}, \vec {r_1},\ldots$ un dénombrement de cellules de $\Z^d$ et poir $u \in \N$,
+	Soit $c$ une configuration. Soit $\vec {r_0}, \vec {r_1},\ldots$ un dénombrement de cellules de $\Z^d$ et pour $i \in \N$,
 	$c_i$ la configuration définie par :
 
 	$$ c_i(r_j) = \left\{ \begin{array}{cc}
@@ -253,12 +252,12 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 			q      & \text{ sinon }
 		\end{array}
 		\right.$$
-	ou $q$ est un état "quiescent".
+	où $q$ est un état "quiescent".
 
 	Il est évident que $\forall i, c_i \in F$ et que $\lim_{i \to \infty} c_i = c$.
 
-	Pour obtenir une suite de configurations périodiques qui convergent vers $c$ on peut obtenir une suite de configurations
-	$p_1, p_2, \ldots $ où $p_i$ coincide avec $v$ dans l'hypercube centré a l'origine et de coté $2i + 1$ et a une
+	Pour obtenir une suite de configurations périodiques qui convergent vers $c$, on peut obtenir une suite de configurations
+	$p_1, p_2, \ldots $ où $p_i$ coïncide avec $c$ dans l'hypercube centré à l'origine et de coté $2i + 1$ et a une
 	période $2i + 1$ dans toutes les directions.
 
 	Les configurations $p_i$ sont évidement périodiques et $\lim_{i \to \infty} p_i = c$.
@@ -267,7 +266,7 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 \subsection{Injectivité et surjectivité des automates cellulaires}
 
 \begin{definition}
-	un automate cellulaire est dit
+	Un automate cellulaire est dit
 	$\begin{array}{c}
 			\text{injectif}  \\
 			\text{surjectif} \\
@@ -279,13 +278,14 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 			\text{surjective} \\
 			\text{bijective}
 		\end{array}$
+	.
 \end{definition}
 
 
 \begin{theorem}
 	\begin{enumerate}
 		\item $G$ injective $\implies G_F, G_P$ injectives \label{thm:big1}
-		\item Si $G_F$ est surjective ou $G_F$ est surjective $\implies G$ surjective \label{thm:big2}
+		\item Si $G_F$ est surjective ou $G_P$ est surjective $\implies G$ surjective \label{thm:big2}
 		\item Si $G_P$ est injective $\implies G_P$ surjective \label{thm:big3}
 	\end{enumerate}
 \end{theorem}
@@ -293,19 +293,21 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 \begin{proof}
 	\begin{enumerate}
 		\item Trivial, la restriction d'une fonction injective est toujours injective.
-		\item Dans le cas oh $G_F$ est surjective.
+		\item Dans le cas où $G_F$ est surjective :
 
-		      Soit $c$ une configuration. On sait, par la Proposition \ref{prop:dense} qu'il existe
-		      une suite de configurations finies $c_1, c_2m \ldots$ \tlq $\lim_{i \to \infty} c_i = c$
-		      puisque chaque $c_i$ est une configuration dinie et comme $G_F$ est surjective,
-		      $$\forall i \exists e_i \in F, G_F(e)i) = c_i = G(e_i)$$
-		      La suite $e_1, e_2, \ldots \to e$
-		      et soit $e$ la limite de cette sous-suite. $G$ est continue par la Proposition \ref{prop:continues}, alors
-		      $G(e_1), G(e_2), \ldots \to G(e)$.
+		      Soit $c$ une configuration quelconque, on sait par la Proposition \ref{prop:dense} qu'il existe
+		      une suite de configurations finies $c_1, c_2, \ldots , c_m$ \tlq $\lim_{i \to \infty} c_i = c$.
+		      Puisque chaque $c_i$ est une configuration finie et comme $G_F$ est surjective,
+		      $$\forall i \exists e_i \in F, G_F(e_i) = c_i = G(e_i)$$
+		      Soit la suite $e_1, e_2, \ldots e_i$  doit posséder une sous-suite convergente.
+			  $$ e_{i_1}, e_{i_2}, \ldots , e_{i_j} \ldots \to e $$ 
+			  et sois $e$ la limite de cette sous-suite.
+			  $G$ est continue par la proposition \ref{prop:continues}, donc
+		      $G(e_{i_1}), G(e_{i_2}), \ldots , G(e_{i_j}) \ldots  \to G(e)$.
 
-		      De plus,
+		      Mais par ailleurs,
 		      \begin{eqnarray*}
-			      \lim_{j \to \infty} (G(e_{i_j})) &=& \lim_{j \to \infty} (e_{i_j}) \\
+			      \lim_{j \to \infty} (G(e_{i_j})) &=& \lim_{j \to \infty} (c_{i_j}) \\
 			      &=& \lim_{i \to \infty} (c_i) \\
 			      &=& c
 		      \end{eqnarray*}
@@ -319,16 +321,16 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 			      \label{eq:tmhc}
 		      \end{equation}
 
-		      Soit $K$ l'ensemble de toutes les configurations qui satisfont \ref{eq:tmhc}. On a que $K \subseteq P$ et $K$ est fini,
+		      Soit $K$ l'ensemble de toutes les configurations qui satisfont (\ref{eq:tmhc}). On a que $K \subseteq P$ et $K$ est fini,
 		      car chaque configuration de $K$ est uniquement identifiée par les cellules dans un hypercube de cotés $k_1, k_2, \ldots, k_d$
 		      ($\abs K = {\abs S}^{k_1k_2\ldots k_d}$)
 
-		      Puisque $G$ commute avec les translations on a que $G(K) \subseteq K$.
+		      Puisque $G$ commute avec les translations, on a que $G(K) \subseteq K$.
 
-		      Considérons $\restr G K$. Cette fonction est injective car c'est une restrictions de $G$ a un
-		      sous ensemble de $P$ et $G_P$ injective par hypothèse.
-		      Mais toute fonctions injective sur un ensemble fini est aussi surjective,
-		      \cad chaque élément de $K$ (dont $c$) a un antecedent dans $K$
+		      Considérons $\restr G K$. Cette fonction est injective car c'est une restriction de $G$ à un
+		      sous-ensemble de $P$ et $G_P$ est injective par hypothèse.
+		      Mais toute fonction injective sur un ensemble fini est aussi surjective,
+		      \cad chaque élément de $K$ (dont $c$) a un antécédent dans $K$,
 		      donc $\exists e \in K \subsetneq P, G(e) = c$, et donc $G_P$ est surjective.
 	\end{enumerate}
 \end{proof}
@@ -339,7 +341,7 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 
 \begin{proof}
 	\begin{eqnarray*}
-		G \text{injective } &\implies& G_P \text{ injective} \reason{\ref{thm:big1} } \\
+		G \text{ injective } &\implies& G_P \text{ injective} \reason{\ref{thm:big1} } \\
 		&\implies& G_P \text{ surjective} \reason{\ref{thm:big3} } \\
 		&\implies& G \text{ surjective} \reason{\ref{thm:big2} }
 	\end{eqnarray*}
@@ -347,20 +349,20 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 
 
 \begin{definition}
-	On dit qu'un automate cellulaire est reversible s'il est injectif et si $G^{-1}$ est une fonction d'automates cellulaire.
+	On dit qu'un automate cellulaire est réversible s'il est injectif et si $G^{-1}$ est une fonction d'automate cellulaire.
 \end{definition}
 
 \begin{remarque}
-	Par définition si un automate cellulaire est reversible alors il est bijectif.
+	Par définition, si un automate cellulaire est réversible alors il est bijectif.
 \end{remarque}
 
 \begin{prop}\label{prop:bij-rev}
-	Si $A$ est un automate cellulaire bijectif, alors il est reversible.
+	Si $A$ est un automate cellulaire bijectif, alors il est réversible.
 \end{prop}
 
 \begin{proof}
-	La preuve montre que la fonction $G^{-1}$ est aussi une fonction d'automates cellulaires
-	(défini la règle locale d'évolution en fonction de l'état des cellules appartenant à un voisinage \emph{borné})
+	La preuve montre que la fonction $G^{-1}$ est aussi une fonction d'automate cellulaire
+	(définit la règle locale d'évolution en fonction de l'état des cellules appartenant à un voisinage \emph{borné}).
 \end{proof}
 
 \begin{coro}
@@ -371,12 +373,12 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 \begin{proof}
 	\begin{eqnarray*}
 		G \text{ injective} &\implies& G \text{ bijective} \reason{\ref{coro:inj-surj} }\\
-		&\implies& G \text{ reversible} \reason{\ref{prop:bij-rev} }
+		&\implies& G \text{ réversible} \reason{\ref{prop:bij-rev} }
 	\end{eqnarray*}
-	Si $q$ est l'état "quiescent" pour $G$, alors $q$ est aussi l'état "quiescent" de $G^{-1}$
-	(Si toutes les cellules du voisinage sont a $q$ alors $G^{-1}$ met la cellule a l'état $q$)
+	Si $q$ est l'état "quiescent" pour $G$, alors $q$ est aussi l'état "quiescent" de $G^{-1}$.
+	(Si toutes les cellules du voisinage sont à $q$, alors $G^{-1}$ met la cellule à l'état $q$.)
 
-	Donc si $c$ est une configuration finie alors $e = G^{-1}(c)$ (la configuration obtenue en applicant
+	Donc si $c$ est une configuration finie,  $e = G^{-1}(c)$ (la configuration obtenue en appliquant
 	l'automate inverse) est aussi finie, et alors $G(e) = c$ et $c$ a bien une anti-image finie.
 \end{proof}
 
@@ -389,7 +391,7 @@ TODO add graph
 \end{exemple}
 
 \begin{definition}
-	une configuration qui n'a pas d'anti-image est dire un ""Jardin d'Éden"" ("GOE", "JDE").
+	Une configuration qui n'a pas d'anti-image est dite un ""Jardin d'Éden"" ("GOE", "JDE").
 \end{definition}
 
 \begin{exercice}
@@ -397,7 +399,7 @@ TODO add graph
 \end{exercice}
 
 \begin{remarque}
-	Si un automate cellulaire n'est pas surjectif alors il existent des configurations qui n'ont pas d'anti-image dites "Jardins d'Éden".
+	Si un automate cellulaire n'est pas surjectif, alors il existe des configurations qui n'ont pas d'anti-image, dites "Jardins d'Éden".
 \end{remarque}
 
 \begin{definition}
@@ -405,23 +407,23 @@ TODO add graph
 \end{definition}
 
 \begin{prop}
-	Il existe un "JDE" \ssi il existe un "orphelin"
+	Il existe un "JDE" \ssi il existe un "orphelin".
 \end{prop}
 
 
 \begin{proofI}
 	\begin{itemize}
 		\item \bimpRL\\
-		      S'il existe un "orphelin" $D$ alors toute configuration qui inclut l'"orphelin" est un "JDE".
+		      S'il existe un "orphelin" $D$, alors toute configuration qui inclut l'"orphelin" est un "JDE".
 		\item \bimpLR\\
 		      Si un "JDE" existe, alors la fonction $G$ de l'automate n'est pas surjective, et donc $\restr G F$ n'est pas surjective,
-		      \cad, $\exists$ une configuration finie qui n'a pas d'anti-image, \ie un "orphelin"
+		      \cad, $\exists$ une configuration finie qui n'a pas d'anti-image, \ie un "orphelin".
 	\end{itemize}
 \end{proofI}
 
 \begin{definition}
-	Deux motifs finis $J_1$ et $J_2$ sont dits jumeaux, si en remplaçant $J_1$ par $J_2$ dans
-	n'importe quelle configuration qui contient $J_1$ on génère la meme configuration
+	Deux motifs finis $J_1$ et $J_2$ sont dits jumeaux si, en remplaçant $J_1$ par $J_2$ dans
+	n'importe quelle configuration qui contient $J_1$, on génère la même configuration.
 \end{definition}
 
 \begin{theorem}[du Jardin d'Éden \cite{mooreGOE, myhillGOE}]
@@ -434,18 +436,18 @@ TODO add graph
 	\begin{itemize}
 		\item \bimpLR\\
 		      Supposons que $G$ ne soit pas surjective, alors il existe un "JDE" et donc un "orphelin".
-		      A partir de l'existence de cet "orphelin" on doit montrer l'existence d'un couple de jumeaux.
+		      A partir de l'existence de cet "orphelin", on doit montrer l'existence d'un couple de jumeaux.
 		      Prenons comme exemple $W_{110}$. On a montré que \emph{01010} est un "orphelin". Soit $k$ un entier
 		      et considérons $C_k$ l'ensemble de toutes les configurations finies qui ont un support de taille
 		      $5k-2$, alors $\abs {C_k} = 2^{5k-2} - \frac {32^k} 4$
 
 		      Si $c$ est une configuration de $C_k$, alors son image $G(c)$ est une configuration avec un support de taille $5k$.
-		      Si on découpe ce support de taille $5k$ en $k$ segments de taille $5$, il y e au plus $31$ choix pour chaque bloc car
-		      \emph{01010} est interdit. Alors l'ensemble $G(C_k)$ a une taille d'au plus $31^k$ pour un $K$ suffisamment grand.
-		      Or $\frac {32^k} 4 > 31 ^ k$ pour un $k$ suffisamment grand. On a donc qu'il y aura plis de configurations
-		      dans $C_k$ que dans son image, donc il existent des configurations de $G_k$ qui ont la meme image (deux jumeaux).
+		      Si on découpe ce support de taille $5k$ en $k$ segments de taille $5$, il y a au plus $31$ choix pour chaque bloc car
+		      \emph{01010} est interdit. Alors l'ensemble $G(C_k)$ a une taille d'au plus $31^k$ pour un $k$ suffisamment grand.
+		      Or $\frac {32^k} 4 > 31 ^ k$ pour un $k$ suffisamment grand. On a donc qu'il y aura plus de configurations
+		      dans $C_k$ que dans son image, donc il existe des configurations de $G_k$ qui ont la même image (deux jumeaux).
 
-		      Cette preuve est incomplete, il faut la généraliser au cas de dimension $d > 1$.
+		      Cette preuve est incomplète, il faut la généraliser aux dimensions $d > 1$.
 
 
 		\item \bimpRL\\
@@ -454,7 +456,7 @@ TODO add graph
 		      Soit $n$ un entier tel que
 		      \begin{enumerate}
 			      \item $J_1$ et $J_2$ rentrent das un carré de taille $n$.
-			      \item Le voisinage de chaque cellule contient que des cellules à distance inférieure a $n$.
+			      \item Le voisinage de chaque cellule ne contient que des cellules à distance inférieure à $n$.
 		      \end{enumerate}
               TODO
 	\end{itemize}
