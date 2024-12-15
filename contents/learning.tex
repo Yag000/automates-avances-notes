@@ -36,27 +36,34 @@ Cet algorithme découle du travail de \cite{angluinLearning}.
 	\end{enumerate}
 \end{exercice}
 
-Le learner maintient une table $T$ avec:
-
+Pendant le processus, le "learner" maintient une ""table"", qui est un triplet $(S,E,T)$ où $S$ est un ensemble "clos par préfixes",
+$E$ est un ensemble "clos par suffixes", et $T$ une fonction $(S \cup S\alphabet) \times E \to \set{0,1}$. Une "table" peut être
+représentée par une matrice où:
 \begin{itemize}
-	\item Les colonnes de $T$ qui sont indexées par un ensemble $E$ de "mots" "clos par suffixes".
-	\item Les lignes sont indexées par un ensemble de "mots" $S \cup S\cdot \alphabet$, ou $S$ est
-	      un ensemble "clos par préfixes".
+	\item les colonnes sont indexées par l'ensemble $E$ de "mots" "clos par suffixes";
+	\item les lignes sont indexées par l'ensemble de "mots" $S \cup S\cdot \alphabet$;
+	\item la case de la ligne $s$ et de la colonne $e$ contient $T(s,e)$.
 \end{itemize}
 
 
 \begin{definition}
-	Si $s \in S \cup S\alphabet$, soit $n = \abs E$, on définit ""row""$(s) \in [0,1]^n$ la suite suivante :
-	$$ \row s = (T[s,e_1], \ldots, T[s, e_n])$$
+	Si $s \in S \cup S\alphabet$, soit $n = \abs E$, on définit
+
+	$$ \begin{array}{cccc}
+			\text{\intro{row}}: & S\cup S\alphabet & \to     & [0,1]^n                        \\
+			                    & s                & \mapsto & (T(s,e_1]), \ldots, T(s, e_n))
+		\end{array}$$
+
+
 \end{definition}
 
 \begin{definition}
-	Une table est \emph{""close""} si
-	$$ \forall t = sa \in S\alphabet, \exists s'\in S, \row {s'} = \row s$$
+	Une "table" est \emph{""close""} si
+	$$ \forall t = sa \in S\alphabet, \exists s'\in S, \row {s'} = \row t$$
 \end{definition}
 
 \begin{definition}
-	Une table est \emph{""cohérente""} si
+	Une "table" est \emph{""cohérente""} si
 	$$ \forall s_1, s_2 \in S, \row{s_1} = \row{s_2} \implies \forall a \in \alphabet, \row{s_1a} = \row{s_2a}$$
 \end{definition}
 
@@ -64,22 +71,23 @@ Le learner maintient une table $T$ avec:
 \begin{exemple} \label{ex:tables}
 	\ \newline
 	\begin{itemize}
-		\item La table suivante n'est pas "close" car $\nexists s \in S, \row s = \row {ab}$
+		\item La "table" suivante n'est pas "close" car $\nexists s \in S, \row s = \row {ab}$
 		      \begin{center}
-			      \begin{tabular}{c|c|c}
-				                 & $\motvide$ & a \\ \hline
-				      $\motvide$ & 0          & 1 \\
-				      a          & 1          & 1 \\
-				      b          & 0          & 0 \\ \hline
+			      \[
+				      \begin{tabular}{c|c|c}
+					                                           & \multicolumn{2}{c}{$E$}     \\ \cline{2-3}
+					                                           & $\motvide$              & a \\ \hline
+					      \multirow{3}{*}{$S$}                 & $\motvide$              & 0 \\
+					                                           & a                       & 1 \\
+					                                           & b                       & 0 \\ \hline
+					      \multirow{4}{*}{$S \cup S\alphabet$} & aa                      & 0 \\
+					                                           & ab                      & 1 \\
+					                                           & ba                      & 0 \\
+					                                           & bb                      & 1 \\
+				      \end{tabular}
+			      \]\end{center}
 
-				      aa         & 0          & 0 \\
-				      ab         & 1          & 0 \\
-				      bb         & 0          & 1 \\
-				      bb         & 1          & 1 \\
-			      \end{tabular}
-		      \end{center}
-
-		\item La table suivante est "close" et "cohérente"
+		\item La "table" suivante est "close" et "cohérente"
 		      \begin{center}
 			      \begin{tabular}{c|c|c}
 				                 & $\motvide$ & a \\ \hline
@@ -91,7 +99,7 @@ Le learner maintient une table $T$ avec:
 				      ab         & 0          & 0 \\
 			      \end{tabular}
 		      \end{center}
-		\item La table suivante n'es pas "cohérente" car $\row {\motvide} = \row a$ mais
+		\item La "table" suivante n'es pas "cohérente" car $\row {\motvide} = \row a$ mais
 		      $\row {\motvide a} = \row a \neq \row {aa}$
 
 		      \begin{center}
@@ -113,20 +121,22 @@ Le learner maintient une table $T$ avec:
 
 \subsection{L'algorithme}
 
-\begin{theorem}\label{thm:automata-tables}
-	À partir d'une table "close" et "cohérente", on peut construire un automate $A = (Q, I, F, \delta)$ où :
+\begin{construction}\label{thm:automata-tables}
+	À partir de chaque "table" $\Table$ "close" et "cohérente", on peut associer un "automate déterministe" $A = (Q, q_0, F, \delta)$ où :
 	$$
 		\begin{aligned}
 			Q                   = & \setdef{ \row{s}} {s \in S }  \\
-			I                   = & \set{ \row{\motvide} }        \\
+			q_0                 = & \set{ \row{\motvide} }        \\
 			F                   = & \setdef{ \row{s} }{T(s) = 1 } \\
-			\delta(\row{s}, a)  = & \row{sa}.
+			\delta(\row{s}, a)  = & \  \row{sa}.
 		\end{aligned}
 	$$
-\end{theorem}
+
+	On note cet automate $A\Table$.
+\end{construction}
 
 \begin{exemple}
-	Nous allons voir comment passer de l'une des tables de l'exemple \ref{ex:tables} vers son automate associé.\\
+	L'automate associé à la "table" close et cohérente de l'exemple \ref{ex:tables} est: \\
 	\begin{minipage}{0.5\textwidth}
 		\centering
 		\begin{tabular}{c|c|c}
@@ -161,78 +171,87 @@ Le learner maintient une table $T$ avec:
 	\end{minipage}
 \end{exemple}
 
-Initialement on propose Figure \ref{fig:algo-inL} ou Figure \ref{fig:algo-notinL}, selon si $\epsilon \in L$ ou non.
+\vspace{1cm}
 
-\begin{twoautomata}
-	\centering
-	\begin{automata}
-		\digraph[scale=0.5]{automateBase1}{
-			rankdir=LR;
 
-			node [shape=circle, style=filled, color=lightblue];
-			q0 [label=" "];
+L'algorithme suivant permet de retrouver le langage cherché.
 
-			start [shape=point];
-			start -> q0;
+\begin{algorithme}
+	Initialement on peut "conjecturer" l'un des automates des Figures \ref{fig:algo-inL} et \ref{fig:algo-notinL}, selon si $\epsilon \in L$ ou non.
 
-			q0 -> q0 [label="Σ"];
+	\begin{twoautomata}
+		\centering
+		\begin{automata}
+			\digraph[scale=0.5]{automateBase1}{
+				rankdir=LR;
 
-			q0 [shape=doublecircle];
-		}
-	\end{automata}
-	\caption{Automate pour $\motvide \in L$}\label{fig:algo-inL}
-\end{twoautomata}
-\begin{twoautomata}
-	\centering
-	\begin{automata}
-		\digraph[scale=0.5]{automateBase2}{
-			rankdir=LR;
+				node [shape=circle, style=filled, color=lightblue];
+				q0 [label=" "];
 
-			node [shape=circle, style=filled, color=lightblue];
-			q0 [label=" "];
+				start [shape=point];
+				start -> q0;
 
-			start [shape=point];
-			start -> q0;
+				q0 -> q0 [label="Σ"];
 
-			q0 -> q0 [label="Σ"];
-		}
-	\end{automata}
-	\caption{Automate pour $\motvide \notin L$}\label{fig:algo-notinL}
-\end{twoautomata}
+				q0 [shape=doublecircle];
+			}
+		\end{automata}
+		\caption{Automate pour $\motvide \in L$}\label{fig:algo-inL}
+	\end{twoautomata}
+	\begin{twoautomata}
+		\centering
+		\begin{automata}
+			\digraph[scale=0.5]{automateBase2}{
+				rankdir=LR;
 
-Tant que l'"oracle" donne un "contre-exemple"
-\begin{itemize}
-	\item $w$ = "contre-exemple".
-	\item $w$ et tous ses préfixes sont ajoutés à $S$.
-	\item Les nouvelles lignes sont remplies en posant des "membership queries".
-	\item Tant que $T$ n'est pas "cohérente" ou n'est pas close:
-	      \begin{itemize}
-		      \item Si $T$ n'est pas "cohérente" (\cad, $\exists s_1, s_2 \in S, \exists a \in \alphabet, \row{s_1} = \row{s_2} \et \row{s_1a} \neq \row{s_2a}$
-		            \cad $\exists e \in E, T (s_1ae) \neq T(s_2ae)$)
+				node [shape=circle, style=filled, color=lightblue];
+				q0 [label=" "];
 
-		            On ajoute $ae$ et tous ses suffixes à $E$.
-		      \item Si $T$ n'est pas "close" alors ($\exists t \in S \alphabet, \forall s \in S, \row t \neq \row s$)
+				start [shape=point];
+				start -> q0;
 
-		            Ajouter $t$ à $S$.
-	      \end{itemize}
-	\item On propose à l'"oracle" l'automate "conjecture" associé à $T$
-\end{itemize}
+				q0 -> q0 [label="Σ"];
+			}
+		\end{automata}
+		\caption{Automate pour $\motvide \notin L$}\label{fig:algo-notinL}
+	\end{twoautomata}
+
+	Tant que l'"oracle" donne un "contre-exemple"
+	\begin{itemize}
+		\item $w$ = "contre-exemple".
+		\item $w$ et tous ses préfixes sont ajoutés à $S$.
+		\item Les nouvelles lignes sont remplies en posant des "membership queries".
+		\item Tant que $T$ n'est pas "cohérente" ou n'est pas close:
+		      \begin{itemize}
+			      \item Si $T$ n'est pas "cohérente" (\ie, $\exists s_1, s_2 \in S, \exists a \in \alphabet, \row{s_1} = \row{s_2} \et \row{s_1a} \neq \row{s_2a}$
+			            \ie $\exists e \in E, T (s_1ae) \neq T(s_2ae)$)\\
+			            alors on ajoute $ae$ et tous ses suffixes à $E$.
+			      \item Si $T$ n'est pas "close" alors $\exists t \in S \alphabet, \forall s \in S, \row t \neq \row s$ et
+			            on ajoute $t$ à $S$.
+		      \end{itemize}
+		\item On propose à l'"oracle" l'automate "conjecture" associé à $T$
+	\end{itemize}
+\end{algorithme}
+
 
 \subsection{Propriétés des tables closes et cohérentes}
 
 \begin{notation}
-	On note $(S,E,T)$ une table, où $S$ est l'ensemble des lignes. $E$ l'ensemble des "mots" des colonnes et $T$ la fonction de vérité.
+	On note $\Table$ une "table", où $S$ est l'ensemble des lignes. $E$ l'ensemble des "mots" des colonnes et $T$ la fonction de vérité.
+	Parfois, par abus de notation, on dira que la table est $T$.
 \end{notation}
 
 \begin{definition}
-	Un automate $(Q, q_0, F, S)$ est ""en accord"" avec une fonction $T$, si
+	Un "automate déterministe" $(Q, q_0, F, S)$ est \textbf{\intro{en accord}} avec une "table" $\Table$, si
 	$$ \forall s \in S \cup S\alphabet, \forall e \in E, \delta(q_0,se) \in F \iff T(se) = 1$$
 \end{definition}
 
 \begin{theorem}
-	Si $A$ est l'automate issu d'une table $(S,E,T)$ alors $A$ est "en accord" avec $T$ et tout autre
+	Si $A\Table$ est l'automate issu d'une "table" $\Table$ alors $A$ est "en accord" avec $T$ et tout autre
 	automate "en accord" avec $T$ et non isomorphe à $A$ possède au moins un état de plus que $A$.
 \end{theorem}
+
+La preuve de ce théorème est un corollaire des trois lemmes suivants.
 
 \begin{lemma} \label{lem:learning-9}
 	Si $(S,E,T)$ est "close" et "cohérente" alors dans l'automate $A = \mathcal A (S,E,T)$
@@ -245,8 +264,8 @@ Tant que l'"oracle" donne un "contre-exemple"
 		\item Si $\len s = 0$, alors $s = \motvide$ et donc $\delta(q_0, \motvide) = \row \motvide$
 		      est vrai par construction de l'automate.
 		\item Supposons l'énoncé vrai pour tout "mot" appartenant à $S \cup S\alphabet$ de longueur inférieure ou égale a $n$ et
-		      soit $t$ un "mot" de longueur $n +1$, alors $ t  = s \cdot x,$ avec $s \in S$, car
-		      si $t \in S\alphabet$, $s \in S$ trivialement et si $t \in S$, comme $S$ est clos par préfixes, $s \in S$.
+		      soit $t$ un "mot" de $S \cup S\alphabet$ de longueur $n +1$, alors $ t  = s \cdot x,$ avec $s \in S$, car
+		      si $t \in S\alphabet$, $s \in S$ trivialement et si $t \in S$, comme $S$ est clos par préfixes, on a $s \in S$.
 
 		      \begin{eqnarray*}
 			      \delta(q_0, t) &=& \delta(\delta(q_0, s), x) \\
@@ -259,7 +278,7 @@ Tant que l'"oracle" donne un "contre-exemple"
 
 
 \begin{lemma}
-	Si $(S,E,T)$ est "close" et "cohérente" alors l'automate $A = \mathcal A (S,E,T)$
+	Si la "table" $(S,E,T)$ est "close" et "cohérente" alors l'automate $A = \mathcal A (S,E,T)$
 	est "en accord" avec la fonction $T$, \ie
 	$$\forall s \in S \cup S\alphabet, \forall e \in E, \delta(q_0,se) \in F \iff T(se) =1$$
 \end{lemma}
@@ -274,13 +293,13 @@ Tant que l'"oracle" donne un "contre-exemple"
 			      \item Si $s \in S$, alors par le lemme précédent,
 			            $\delta(q_0, s) = \row {s}$ et
 			            comme $\row {s} \in F \iff T(s) = 1$ par construction de l'automate on retrouve le résultat cherché.
-			      \item Si $s \in S\alphabet$, comme la table est "close", il existe $s' \in S$, \tq $\row {s'} = \row s$ qui vérifie
+			      \item Si $s \in S\alphabet$, comme la "table" est "close", il existe $s' \in S$, \tq $\row {s'} = \row s$ qui vérifie
 			            $\row {s'} \in F \iff T(s') = 1$ par construction de l'automate.
 
 		      \end{itemize}
 		\item Supposons l'énoncé vrai pour tout "mot" de $E$ de longueur inférieure ou égale a $n$. Soit $e \in E$ tel que $\len e = n + 1$,
 		      et on pose $e = x e'$, avec $x \in \alphabet$. Soit $s \in S \cup S\alphabet$, il existe
-		      $s'$ \tq $\row s = \row {s'}$ car la table est "close".
+		      $s' \in S$ \tq $\row s = \row {s'}$ car la "table" est "close".
 		      \begin{eqnarray*}
 			      \delta(q_0, se) &=& \delta(\delta(q_0,s),e) \\
 			      &=& \delta(\delta(q_0,s),xe') \\
@@ -288,18 +307,18 @@ Tant que l'"oracle" donne un "contre-exemple"
 			      &=& \delta(\row {s'},xe') \reason{car $\row s = \row {s'}$} \\
 			      &=& \delta(\delta (\row {s'}, x), e') \\
 			      &=& \delta(\row {s'x}, e') \reason {par définition de $\delta$}\\
-			      &=& \delta(\delta{q_0, s'x}, e') \\
+			      &=& \delta(\delta(q_0, s'x), e') \reason{par le lemme \ref{lem:learning-9}} \\
 			      &=& \delta(q_0, s'x e')
 		      \end{eqnarray*}
-		      Comme $\len {e'} = n$ on peut appliquer l'hypothèse d'induction et on a
+		      Comme $\len {e'} = n$ on peut appliquer l'hypothèse d'induction et on a :
 		      $$ \delta(q_0, se) = \delta(q_0, s'x e') \in F \iff T(s'x e') = 1$$
 
-		      Comme $\row s = \row {s'}$  et $e = xe'$ on a que $T(s'xe') = T(sxe') = T(se)$.
 	\end{itemize}
+	Puisque $\row s = \row {s'}$  et $e = xe'$ on a que $T(s'xe') = T(sxe') = T(se)$.
 \end{proof}
 
 \begin{lemma}
-	Si $(S,E,T)$ est "close" et "cohérente" alors si automate $A = \mathcal A (S,E,T)$
+	Soit $(S,E,T)$ une table "close" et "cohérente" alors si automate $A = \mathcal A (S,E,T)$
 	a $n$ états, tout automate $A'$ "en accord" avec $T$ et ayant au plus $n$ états est isomorphe à $A$.
 \end{lemma}
 
@@ -313,50 +332,52 @@ Tant que l'"oracle" donne un "contre-exemple"
 \subsection{Terminaison de l'algorithme}
 
 \begin{lemma}
-	Si $(S,E,T)$ est une table alors tout automate "en accord" avec $T$ possède au
-	moins autant d'états que le nombre de valeurs distinctes de l'ensemble $\setdef {\row s} {s \in S}$.
+	Si $(S,E,T)$ est une "table" alors tout automate "en accord" avec $T$ possède au
+	moins autant d'états que le nombre de valeurs distinctes de l'ensemble $R = \setdef {\row s} {s \in S}$.
 \end{lemma}
 
 \begin{proof}
-	Soit $A = (Q,q_0,F,\delta)$ un automate compatible avec $T$ et définissons
+	Soit $A = (Q,q_0,F,\delta)$ un automate "en accord" avec $T$ et définissons
 	$f: R \to Q$, $f(\row s) = \delta(q_0, s)$.
 
-	Soient $s_1 \et s_2$ \tq $\row {s_1} \neq \row{s_2}$, donc $\exists e \in E, T(s_1,e) \neq T(s_2,e)$.
-	Comme $A$ est "en accord" avec $T$, seulement l'un des deux "mots" est reconnu.
+	Soient $s_1 \et s_2$ \tq $\row {s_1} \neq \row{s_2}$, donc $\exists e \in E, T(s_1e) \neq T(s_2e)$.
+	Comme $A$ est "en accord" avec $T$, seulement l'un de deux "mots" est reconnu.
 
 	Sans perte de généralité, on suppose $s_1e$ reconnu et $s_2e$ pas reconnu, donc
-	$\delta (q_0, s_1, e) \in F$, alors que $\delta (q_0,s_2,e) \notin F$, cela implique que
+	$\delta (q_0, s_1e) \in F$, alors que $\delta (q_0,s_2e) \notin F$, cela implique que
 	$\delta (q_0,s_1) \neq \delta (q_0,s_2)$.
 
+
+	Pour deux rows distincts correspondent deux états distincts de $A$, et donc $A$ a au moins autant d'états que $\abs R$.
 \end{proof}
 
-Soit $n$ le nombre d'états de l'"automate minimal" reconnaissant le "langage" cherché.
+Soit $n$ le nombre d'états de l'"automate minimal" reconnaissant le "langage" inconnu $L$ cherché.
 
 \begin{remarque}
-	Le nombre d'états des différents automates "conjecture" ne peut qu'augmenter.
+	Le nombre d'états des différents automates "conjecture" présentées à l'"oracle" ne peut qu'augmenter.
 	\begin{itemize}
-		\item Si on ajoute un "mot" à $E$ parce que la table n'était pas "cohérente", le nombre de "rows" distincts augmente
+		\item si on ajoute un "mot" à $E$ parce que la "table" n'était pas "cohérente", le nombre de valeurs "rows" distincts augmente
 		      d'une unité.
-		\item Si on ajoute un "mot" à $S$ parce que la table n'est pas "close", le nombre de "rows" distincts augmente d'une unité.
+		\item si on ajoute un "mot" à $S$ parce que la "table" n'est pas "close", le nombre de valeurs de "rows" distincts augmente d'une unité.
 	\end{itemize}
-	On déduit qu'on ne peut pas trouver une table non "close" ou non "cohérente" plus de $n-1$ fois tout au long de l'algorithme.
+	On déduit qu'on peut rencontrer une "table" non "close" ou non "cohérente" au plus $n-1$ fois tout au long de l'algorithme.
 
 	En particulier, on déduit qu'après un nombre fini d'étapes de l'algorithme on arrive toujours à trouver
-	une table "close" et "cohérente" et à émettre une "conjecture".
+	une "table" "close" et "cohérente" et à émettre une "conjecture".
 \end{remarque}
 
 
 Combien de "conjectures" le "learner" émet-il avant de donner la bonne ?
 
-Soit $(S,E,T)$ une table "close" et "cohérente" et $A(S,E,T)$ l'automate associé.
+Soit $(S,E,T)$ une "table" "close" et "cohérente" et $A(S,E,T)$ l'automate associé.
 Supposons que $A$ soit une "conjecture" fausse, et donc l'"oracle" fournit un "contre-exemple" $t$.
 
-L'automate $S(S,E,T)$ et l'automate du langage cherché sont en désaccord sur le "mot" $t$, donc ces deux automates
+L'automate $A(S,E,T)$ et l'automate du langage cherché sont en désaccord sur le "mot" $t$, donc ces deux automates
 ne sont pas équivalents, et donc $A(S,E,T)$ a au moins un état de moins que l'automate cherché.
-Donc $A(S,E,T)$ a au plus $n-1$ états. On en déduit que le nombre de fausses "conjectures" émises pas le "learner" est $n-1$.
+Donc $A(S,E,T)$ a au plus $n-1$ états. On en déduit que le nombre de fausses "conjectures" émises pas le "learner" est au plus $n-1$.
 
-On en déduit que l'algorithme s'arrête toujours, au pire après avoir rendu la table "close" et
-"cohérente" $n-1$ et après avoir émis au plus $n-1$ fausses "conjectures".
+On en déduit que l'algorithme s'arrête toujours, au pire après avoir rendu $n-1$ "tables" "closes" et
+"cohérentes" et après avoir émis au plus $n-1$ fausses "conjectures".
 
 
 \subsection{Analyse de la complexité}
@@ -365,32 +386,36 @@ Elle dépend du nombre $n$ et de la longueur du plus long "contre-exemple" fourn
 
 
 \begin{itemize}
-	\item A chaque fois qu'on trouve une table non "cohérente", on ajoute un "mot" à $E$.
-	\item A chaque fois qu'on trouve une table non "close", on ajoute un "mot" à $S$.
-	\item A chaque fois qu'on émet une ""conjecture"" fausse, on ajoute au plus $m$ "mots" à $S$
+	\item A chaque fois qu'on trouve une "table" non "cohérente", on ajoute un "mot" à $E$.
+	\item A chaque fois qu'on trouve une "table" non "close", on ajoute un "mot" à $S$.
+	\item A chaque fois qu'on émet une ""conjecture"" fausse, on ajoute au plus $m$ "mots" à $S$ (le "contre-exemple" et ses préfixes)
 \end{itemize}
 
 On en déduit que $\abs E \leq n$.
 
-La longueur maximale des "mots" de $E$ augmente au plus d'une unité à chaque fois qu'on rend la table "cohérente"
-(on ajoute à $E$ un "mot" $xe$ avec $e \in E$). On déduit que la longueur maximale d'un "mot" de $E$ est toujours $<n$.
+La longueur maximale des "mots" de $E$ augmente au plus d'une unité à chaque fois qu'on rend la "table" "cohérente"
+(on ajoute à $E$ un "mot" $xe$ avec $e \in E$). On déduit que la longueur maximale d'un "mot" de $E$ est aussi $<n$.
 
 De même, on a que  $\abs S \leq n + m(n-1)$. %TODO: explanation of each number.
 
-La longueur maximale des "mots" de $s$ est inférieure à $m - n -1$.
+La longueur maximale des "mots" de $S$ est inférieure à $m - n -1$.
 
 
-On déduit que le cardinal maximal de $(S \cup S \Sigma) \times E$ (le nombre maximal de classes de la table) est : $(k+1)(n+m(n-1))n \in O(mn^2)$.
+On déduit que le cardinal maximal de $(S \cup S \Sigma) \times E$ (le nombre maximal de classes de la "table") est : $(k+1)(n+m(n-1))n \in O(mn^2)$.
 
 
 Considérons le coût de chaque type d'opérations :
 \begin{itemize}
-	\item Vérifier si une table est "close" et "cohérente" se fait en temps polynomial relativement à la taille de la table.
+	\item Vérifier si une "table" est "close" et "cohérente" se fait en temps polynomial relativement à la taille de la "table".
 	\item Ajouter un "mot" à $S$ ou à $E$ nécessite au plus $nm$ "membership queries".
-	\item Construire une ""conjecture"" à partir d'une table "cohérente" et "close" est faisable en temps polynomial relativement à
-	      la taille de la table.
+	\item Construire une ""conjecture"" à partir d'une "table" "cohérente" et "close" est faisable en temps polynomial relativement à
+	      la taille de la "table".
 	\item Un "contre-exemple" nécessite l'addition d'au plus $m$ "mots" à $S$ et cette opérations est effectuée au plus $n-1$ fois.
 \end{itemize}
+
+\vspace{0.5cm}
+
+On on déduit le théorème suivant :
 
 \begin{theorem}
 	L'algorithme produit toujours un automate isomorphe à l'"automate minimal" du language cherché, de plus, le temps de calcul peut être
