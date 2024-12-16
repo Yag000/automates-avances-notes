@@ -334,7 +334,7 @@ La preuve de ce théorème est un corollaire des trois lemmes suivants.
 \subsection{Terminaison de l'algorithme}
 
 \begin{lemma}
-	Si $(S,E,T)$ est une "table" alors tout automate "en accord" avec $T$ possède au
+	Si $(S,E,T)$ est une "table", alors tout automate "en accord" avec $T$ possède au
 	moins autant d'états que le nombre de valeurs distinctes de l'ensemble $R = \setdef {\row s} {s \in S}$.
 \end{lemma}
 
@@ -346,7 +346,7 @@ La preuve de ce théorème est un corollaire des trois lemmes suivants.
 	Comme $A$ est "en accord" avec $T$, seulement l'un de deux "mots" est reconnu.
 
 	Sans perte de généralité, on suppose $s_1e$ reconnu et $s_2e$ pas reconnu, donc
-	$\delta (q_0, s_1e) \in F$, alors que $\delta (q_0,s_2e) \notin F$, cela implique que
+	$\delta (q_0, s_1e) \in F$, alors que $\delta (q_0,s_2e) \notin F$. Cela implique que
 	$\delta (q_0,s_1) \neq \delta (q_0,s_2)$.
 
 
@@ -356,15 +356,15 @@ La preuve de ce théorème est un corollaire des trois lemmes suivants.
 Soit $n$ le nombre d'états de l'"automate minimal" reconnaissant le "langage" inconnu $L$ cherché.
 
 \begin{remarque}
-	Le nombre d'états des différents automates "conjecture" présentées à l'"oracle" ne peut qu'augmenter.
+	Le nombre d'états des différents automates "conjectures" présentés à l'"oracle" ne peut qu'augmenter.
 	\begin{itemize}
 		\item si on ajoute un "mot" à $E$ parce que la "table" n'était pas "cohérente", le nombre de valeurs "rows" distincts augmente
 		      d'une unité.
-		\item si on ajoute un "mot" à $S$ parce que la "table" n'est pas "close", le nombre de valeurs de "rows" distincts augmente d'une unité.
+		\item si on ajoute un "mot" à $S$ parce que la "table" n'était pas "close", le nombre de valeurs de "rows" distincts augmente d'une unité.
 	\end{itemize}
 	On déduit qu'on peut rencontrer une "table" non "close" ou non "cohérente" au plus $n-1$ fois tout au long de l'algorithme.
 
-	En particulier, on déduit qu'après un nombre fini d'étapes de l'algorithme on arrive toujours à trouver
+	En particulier, on déduit qu'après un nombre fini d'étapes de l'algorithme, on arrive toujours à trouver
 	une "table" "close" et "cohérente" et à émettre une "conjecture".
 \end{remarque}
 
@@ -372,7 +372,7 @@ Soit $n$ le nombre d'états de l'"automate minimal" reconnaissant le "langage" i
 Combien de "conjectures" le "learner" émet-il avant de donner la bonne ?
 
 Soit $(S,E,T)$ une "table" "close" et "cohérente" et $A(S,E,T)$ l'automate associé.
-Supposons que $A$ soit une "conjecture" fausse, et donc l'"oracle" fournit un "contre-exemple" $t$.
+Supposons que $A$ soit une "conjecture" fausse, et donc que l'"oracle" fournit un "contre-exemple" $t$.
 
 L'automate $A(S,E,T)$ et l'automate du langage cherché sont en désaccord sur le "mot" $t$, donc ces deux automates
 ne sont pas équivalents, et donc $A(S,E,T)$ a au moins un état de moins que l'automate cherché.
@@ -390,7 +390,7 @@ Elle dépend du nombre $n$ et de la longueur du plus long "contre-exemple" fourn
 \begin{itemize}
 	\item A chaque fois qu'on trouve une "table" non "cohérente", on ajoute un "mot" à $E$.
 	\item A chaque fois qu'on trouve une "table" non "close", on ajoute un "mot" à $S$.
-	\item A chaque fois qu'on émet une ""conjecture"" fausse, on ajoute au plus $m$ "mots" à $S$ (le "contre-exemple" et ses préfixes)
+	\item A chaque fois qu'on émet une ""conjecture"" fausse, on ajoute au plus $m$ "mots" à $S$ (le "contre-exemple" et ses préfixes).
 \end{itemize}
 
 On en déduit que $\abs E \leq n$.
