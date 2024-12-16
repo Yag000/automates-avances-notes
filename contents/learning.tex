@@ -265,7 +265,7 @@ La preuve de ce théorème est un corollaire des trois lemmes suivants.
 	\begin{itemize}
 		\item Si $\len s = 0$, alors $s = \motvide$ et donc $\delta(q_0, \motvide) = \row \motvide$
 		      est vrai par construction de l'automate.
-		\item Supposons l'énoncé vrai pour tout "mot" appartenant à $S \cup S\alphabet$ de longueur inférieure ou égale a $n$ et
+		\item Supposons l'énoncé vrai pour tout "mot" appartenant à $S \cup S\alphabet$ de longueur inférieure ou égale à $n$ et
 		      soit $t$ un "mot" de $S \cup S\alphabet$ de longueur $n +1$, alors $ t  = s \cdot x,$ avec $s \in S$, car
 		      si $t \in S\alphabet$, $s \in S$ trivialement et si $t \in S$, comme $S$ est clos par préfixes, on a $s \in S$.
 
@@ -280,7 +280,7 @@ La preuve de ce théorème est un corollaire des trois lemmes suivants.
 
 
 \begin{lemma}
-	Si la "table" $(S,E,T)$ est "close" et "cohérente" alors l'automate $A = \mathcal A (S,E,T)$
+	Si la "table" $(S,E,T)$ est "close" et "cohérente", alors l'automate $A = \mathcal A (S,E,T)$
 	est "en accord" avec la fonction $T$, \ie
 	$$\forall s \in S \cup S\alphabet, \forall e \in E, \delta(q_0,se) \in F \iff T(se) =1$$
 \end{lemma}
@@ -293,13 +293,13 @@ La preuve de ce théorème est un corollaire des trois lemmes suivants.
 		      Soit $s \in S \cup S \alphabet$, et donc $se = s$.
 		      \begin{itemize}
 			      \item Si $s \in S$, alors par le lemme précédent,
-			            $\delta(q_0, s) = \row {s}$ et
-			            comme $\row {s} \in F \iff T(s) = 1$ par construction de l'automate on retrouve le résultat cherché.
+			            $\delta(q_0, s) = \row {s}$, et comme $\row {s} \in F \iff T(s) = 1$ par construction de l'automate, on retrouve le résultat cherché.
 			      \item Si $s \in S\alphabet$, comme la "table" est "close", il existe $s' \in S$, \tq $\row {s'} = \row s$ qui vérifie
 			            $\row {s'} \in F \iff T(s') = 1$ par construction de l'automate.
 
 		      \end{itemize}
-		\item Supposons l'énoncé vrai pour tout "mot" de $E$ de longueur inférieure ou égale a $n$. Soit $e \in E$ tel que $\len e = n + 1$,
+		\item Supposons l'énoncé vrai pour tout "mot" de $E$ de longueur inférieure ou égale à $n$. 
+		Soit $e \in E$ tel que $\len e = n + 1$,
 		      et on pose $e = x e'$, avec $x \in \alphabet$. Soit $s \in S \cup S\alphabet$, il existe
 		      $s' \in S$ \tq $\row s = \row {s'}$ car la "table" est "close".
 		      \begin{eqnarray*}
@@ -316,11 +316,11 @@ La preuve de ce théorème est un corollaire des trois lemmes suivants.
 		      $$ \delta(q_0, se) = \delta(q_0, s'x e') \in F \iff T(s'x e') = 1$$
 
 	\end{itemize}
-	Puisque $\row s = \row {s'}$  et $e = xe'$ on a que $T(s'xe') = T(sxe') = T(se)$.
+	Puisque $\row s = \row {s'}$  et $e = xe'$, on a que $T(s'xe') = T(sxe') = T(se)$.
 \end{proof}
 
 \begin{lemma}
-	Soit $(S,E,T)$ une table "close" et "cohérente" alors si automate $A = \mathcal A (S,E,T)$
+	Soit $(S,E,T)$ une table "close" et "cohérente", alors si l'automate $A = \mathcal A (S,E,T)$
 	a $n$ états, tout automate $A'$ "en accord" avec $T$ et ayant au plus $n$ états est isomorphe à $A$.
 \end{lemma}
 
