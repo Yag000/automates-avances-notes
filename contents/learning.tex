@@ -177,7 +177,7 @@ représentée par une matrice où:
 L'algorithme suivant permet de retrouver le langage cherché.
 
 \begin{algorithme}
-	Initialement on peut "conjecturer" l'un des automates des Figures \ref{fig:algo-inL} et \ref{fig:algo-notinL}, selon si $\epsilon \in L$ ou non.
+	Initialement, on peut "conjecturer" l'un des automates des Figures \ref{fig:algo-inL} et \ref{fig:algo-notinL}, selon si $\epsilon \in L$ ou non.
 
 	\begin{twoautomata}
 		\centering
@@ -226,10 +226,10 @@ L'algorithme suivant permet de retrouver le langage cherché.
 			      \item Si $T$ n'est pas "cohérente" (\ie, $\exists s_1, s_2 \in S, \exists a \in \alphabet, \row{s_1} = \row{s_2} \et \row{s_1a} \neq \row{s_2a}$
 			            \ie $\exists e \in E, T (s_1ae) \neq T(s_2ae)$)\\
 			            alors on ajoute $ae$ et tous ses suffixes à $E$.
-			      \item Si $T$ n'est pas "close" alors $\exists t \in S \alphabet, \forall s \in S, \row t \neq \row s$ et
+			      \item Si $T$ n'est pas "close", alors $\exists t \in S \alphabet, \forall s \in S, \row t \neq \row s$ et
 			            on ajoute $t$ à $S$.
 		      \end{itemize}
-		\item On propose à l'"oracle" l'automate "conjecture" associé à $T$
+		\item On propose à l'"oracle" l'automate "conjecture" associé à $T$.
 	\end{itemize}
 \end{algorithme}
 
