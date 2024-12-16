@@ -50,7 +50,7 @@ représentée par une matrice où:
 	Si $s \in S \cup S\alphabet$, soit $n = \abs E$, on définit
 
 	$$ \begin{array}{cccc}
-			\text{\intro{row}}: & S\cup S\alphabet & \to     & [0,1]^n                        \\
+			\text{\intro{row}}: & S\cup S\alphabet & \to     & [0,1]^n                       \\
 			                    & s                & \mapsto & (T(s,e_1), \ldots, T(s, e_n))
 		\end{array}$$
 
@@ -73,19 +73,21 @@ représentée par une matrice où:
 	\begin{itemize}
 		\item La "table" suivante n'est pas "close" car $\nexists s \in S, \row {ab} = \row s$
 		      \begin{center}
-			      \[
-				      \begin{tabular}{c|c|c}
-					                                           & \multicolumn{2}{c}{$E$}     \\ \cline{2-3}
-					                                           & $\motvide$              & a \\ \hline
-					      \multirow{3}{*}{$S$}                 & $\motvide$              & 0 \\
-					                                           & a                       & 1 \\
-					                                           & b                       & 0 \\ \hline
-					      \multirow{4}{*}{$S\alphabet$} 	   & aa                      & 0 \\
-					                                           & ab                      & 1 \\
-					                                           & ba                      & 0 \\
-					                                           & bb                      & 1 \\
+			      $$
+				      \begin{tabular}{c|c|c|c}
+					       &            & \multicolumn{2}{c}{$E$}     \\ \cline{3-4}
+					       &            & $\motvide$              & a \\ \hline
+					      \multirow{3}{*}{$S$}
+					       & $\motvide$ & 0                       & 1 \\
+					       & a          & 1                       & 1 \\
+					       & b          & 0                       & 0 \\ \hline
+					      \multirow{3}{*}{$S\alphabet$}
+					       & aa         & 0                       & 0 \\
+					       & ab         & 1                       & 0 \\
+					       & bb         & 0                       & 1 \\ \hline
 				      \end{tabular}
-			      \]\end{center}
+			      $$
+		      \end{center}
 
 		\item La "table" suivante est "close" et "cohérente"
 		      \begin{center}
