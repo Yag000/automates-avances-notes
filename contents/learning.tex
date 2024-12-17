@@ -390,7 +390,7 @@ Elle dépend du nombre $n$ et de la longueur du plus long "contre-exemple" fourn
 \begin{itemize}
 	\item A chaque fois qu'on trouve une "table" non "cohérente", on ajoute un "mot" à $E$.
 	\item A chaque fois qu'on trouve une "table" non "close", on ajoute un "mot" à $S$.
-	\item A chaque fois qu'on émet une ""conjecture"" fausse, on ajoute au plus $m$ "mots" à $S$ (le "contre-exemple" et ses préfixes).
+	\item A chaque fois qu'on émet une "conjecture" fausse, on ajoute au plus $m$ "mots" à $S$ (le "contre-exemple" et ses préfixes).
 \end{itemize}
 
 On en déduit que $\abs E \leq n$.
@@ -410,7 +410,7 @@ Considérons le coût de chaque type d'opérations :
 \begin{itemize}
 	\item Vérifier si une "table" est "close" et "cohérente" se fait en temps polynomial relativement à la taille de la "table".
 	\item Ajouter un "mot" à $S$ ou à $E$ nécessite au plus $nm$ "membership queries".
-	\item Construire une ""conjecture"" à partir d'une "table" "cohérente" et "close" est faisable en temps polynomial relativement à
+	\item Construire une "conjecture" à partir d'une "table" "cohérente" et "close" est faisable en temps polynomial relativement à
 	      la taille de la "table".
 	\item Un "contre-exemple" nécessite l'addition d'au plus $m$ "mots" à $S$ et cette opérations est effectuée au plus $n-1$ fois.
 \end{itemize}

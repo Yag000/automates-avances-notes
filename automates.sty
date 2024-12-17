@@ -341,3 +341,9 @@
 
 \newcommand{\Table}[1][]{(S, E, T_{#1})}
 
+\newcommand{\cheminArrow}[1]{\kl[cheminB]{\xrightarrow{#1}}}
+\newcommand{\cheminArrowT}[1]{\kl[cheminB]{\xrightarrow[t]{#1}}}
+\newcommand{\chemin}[3]{#1 \cheminArrow {#3}{ } #2}
+\newcommand{\cheminT}[3]{#1 \cheminArrowT {#3} #2}
+
+\newcommand{\compl}[1]{\mathscr{#1}}

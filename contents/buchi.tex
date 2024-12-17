@@ -6,7 +6,7 @@
 	Soit $A$ un alphabet.
 
 	On note $\aomega$ comme l'ensemble des mots infinis sur $A$
-	(un mot infini est une fonction $: \N \to A$)
+	(un mot infini est une fonction $: \N \to A$).
 
 	On note $\ainf = A^* \cup \aomega$.
 
@@ -20,12 +20,12 @@
 
 \begin{definition}[Langages $\omega$-rationnels]
 	La classe des langages $\omega$-rationnels de $\ainf$ est la \emph{plus petite}
-	classe $R$ de sous-ensembles de $\ainf$ qui satisfait
+	classe $R$ de sous-ensembles de $\ainf$ qui satisfait :
 	\begin{enumerate}
-		\item $\emptyset \in R \et \forall a \in \Sigma, \set a \in R$
-		\item Close par union finie
-		\item $\forall X \in R \cap A^*, \forall Y \in R \cap \ainf, X \cdot Y \in R$ \label{omega-clot-fi}
-		\item $\forall X \in R \cap A^*, X^* \in R \et X^{\omega} \in R$\label{omega-clot-op}
+		\item $\emptyset \in R \et \forall a \in \Sigma, \set a \in R$;
+		\item Close par union finie;
+		\item $\forall X \in R \cap A^*, \forall Y \in R \cap \ainf, X \cdot Y \in R$; \label{omega-clot-fi}
+		\item $\forall X \in R \cap A^*, X^* \in R \et X^{\omega} \in R$.\label{omega-clot-op}
 	\end{enumerate}
 \end{definition}
 
@@ -34,42 +34,46 @@
 \end{remarque}
 
 \begin{exemple}
-	$A = \set {a,b}$
+	$A = \set {a,b}$.
 
-	$L = \setdef {w \in \aomega} {w \text{ a un nombre fini de } b}$
+	\begin{itemize}
+		\item $L = \setdef {w \in \aomega} {w \text{ a un nombre fini de } b}$, on peut le définir par l'expression
+		      $\omega$-rationnelle $(a + b)^* a^{\omega}$ ou $(a^*b)^* a^{\omega}$,
+		\item $L = \setdef {w \in \aomega} {w \text{ commence par } a \et \text{a un nombre infini de } b}$,
+		      avec l'expression : $a(a^*b)^{\omega}$.
+	\end{itemize}
 
-	On peut le définir par l'expression $\omega$-rationnelle $(a + b)^* a^{\omega}$ ou $(a^*b)^* a^{\omega}$
-
-
-	$L = \setdef {w \in \aomega} {w \text{ commence par } a \et \text{a un nombre infini de } b}$
-
-	Avec l'expression : $a(a^*b)^{\omega}$.
 \end{exemple}
 
 \begin{prop}[Caractérisation des langages $\omega$-rationnels]
 	Un langage $L \subseteq \ainf$ est $w$-rationnel \ssi $L$ est l'union finie de langages
-	de la forme $XY^{\omega}$ avec $X,Y \in R \cap A^*$ ($X,Y$ sont des langages rationnels classiques).
+	de la forme $XY^{\omega}$ avec $X,Y \in R \cap A^*$ ($X,Y$ sont des langages rationnels \quotes{classiques}).
 \end{prop}
 
 \begin{proofI}
+	Soit $\Delta$ la classe des langages obtenue comme union finie de langages de la forme $XY^{\omega}, X,Y \in Rat(A^*)$.
 	\begin{itemize}
 		\item \fbox{$\Delta \subseteq R$} \\
-		      Soit $\Delta$ la classe des langages obtenue comme union finie de langages de la forme $XY^{\omega}, X,Y \in Rat(A^*)$,
-		      alors par définition de $R$
+		      Par définition de $R$
 		      $$Y^{\omega} \in R \reason {par \ref{omega-clot-op}}$$
 		      et
 		      $$XY^{\omega} \in R \reason{par \ref{omega-clot-fi}}$$
 		      et puisque $R$ est fermé relativement à l'union finie, on a que tous les langages de $\Delta$ sont dans $R$,
-		      donc $\Delta \subseteq R$.
+		      on a $\Delta \subseteq R$.
 		\item \fbox{$R \subseteq \Delta$} \\
 
-		      Pour montrer l'inclusion inverse, on définit une classe $\mathcal{E}$.
+		      Pour montrer l'inclusion inverse, on définit une classe $\mathcal E$.
 		      Avec
-		      \begin{eqnarray*}
-			      L \in \mathcal{E} &\iff& L \cap A^* \in \text{Rat}(A^*) \\
-			      &\iff& L \cap \aomega \in \Delta
-		      \end{eqnarray*}
-		      et on montre que $R \subseteq \mathcal{E} \subseteq \Delta$.
+		      \begin{equation*}
+			      L \in \mathcal E \iff
+			      \left\{
+			      \begin{array}{c}
+				      L \cap A^* \in \text{Rat}(A^*) \\
+				      L \cap \aomega \in \Delta
+			      \end{array}
+			      \right.
+		      \end{equation*}
+		      et on montre que $R \subseteq \mathcal E \subseteq \Delta$.
 		      Il faut vérifier que
 		      \begin{enumerate}
 			      \item $\emptyset \in \mathcal{E}$
@@ -81,7 +85,7 @@
 		      \end{enumerate}
 		      La vérification de ces propriétés est laissée en exercice.
 
-		      Comme $R$ est définie comme la plus petite classe qui satisfait
+		      Puisque $R$ est définie comme la \underline{plus petite} classe qui satisfait
 		      les propriétés précédentes, on en déduit que $R \subseteq \mathcal{E}$.
 	\end{itemize}
 \end{proofI}
@@ -90,28 +94,31 @@
 \subsection{Automates de Büchi}
 
 \begin{definition}
-	Un automate de Büchi est un quadruplet $(Q,I,T,\delta)$, avec $\abs Q < \infty$, où
+	Un ""automate de Büchi"" est un quadruplet $(Q,I,T,\delta)$, avec $\abs Q < \infty$, où
 	$Q,I,T,\delta$ ont la même signification que pour les automates finis.
 \end{definition}
 
 \begin{definition}
 	Un chemin infini est une suite infinie $(q_i,a_i,q_{i+1})$ tel que $\forall i, (q_i,a_i,q_{i+1}) \in \delta$ et le mot
-	infini $a_0a_1\cdots$ est dit l'étiquette du chemin.
+	infini $a_0a_1\ldots$ est dit l'étiquette du chemin.
 \end{definition}
 
 
 \begin{definition}
-	Un chemin est réussi (ou acceptant) si $\exists q_0 \in I, \exists \text{ une suite infinie d'indices } q_{i_J} \in T$,
-	donc un chemin est réussi si et seulement s'il passe un nombre infini de fois par des états terminaux.
+	Un chemin $(q_0, a_0, q_1), (q_1, a_1, q_2), \ldots $ est ""réussi"" (ou acceptant) si $q_0 \in I$ et si $\exists \text{ une suite infinie d'indices } q_{i_J} \in T$.
+
+	Donc un chemin est "réussi" si et seulement s'il passe un nombre infini de fois par des états terminaux.
+
+	On note en particulier qu'il doit exister un état $t \in T$ par lequel le chemin passe un nombre infini de fois.
 \end{definition}
 
 \begin{definition}
-	Un mot $w \in \aomega$ est accepté par un automate de Büchi si et seulement s'il est l'étiquette d'un chemin réussi.
+	Un mot $w \in \aomega$ est accepté par un "automate de Büchi" si et seulement s'il est l'étiquette d'un chemin "réussi".
 \end{definition}
 
 
 \begin{definition}
-	Un langage de $\aomega$ est reconnaissable s'il existe un automate de Büchi qui accepte exactement les mots de $L$.
+	Un langage $L$ de $\aomega$ est reconnaissable s'il existe un "automate de Büchi" qui accepte exactement les mots de $L$.
 \end{definition}
 
 
@@ -141,7 +148,9 @@
 
 
 \begin{exercice}
-	Ecrire un automate de Büchi qui reconnait les mots infinis sur $\set {a,b}$ ayant un nombre fini de $b$. \\
+	Écrire un "automate de Büchi" qui reconnait les mots infinis sur $\set {a,b}$ ayant un nombre fini de $b$.
+
+	Trois automates possibles : \\
 	\begin{minipage}{0.3\textwidth}
 		\begin{automata}
 			\digraph[scale=0.50]{buchi2}{
@@ -210,19 +219,18 @@
 	et co-accessibles (à partir de n'importe quel état, on peut arriver à un état final).
 \end{definition}
 
-Les notions d'automate émondé, complet, déterministe se généralisent aux automates de Büchi.
+Les notions d'automate émondé, complet, déterministe se généralisent aux "automates de Büchi".
 
 
 Mais alors que les algorithmes pour rendre émondé ou complet un automate marchent aussi
-pour les automates de Büchi, il n'existe pas d'algorithme pour déterminiser un automate de Büchi.
+pour les "automates de Büchi", il n'existe pas d'algorithme pour "déterminiser" un "automate de Büchi".
 
-En fait, il existe des langages reconnaissables de $\aomega$ qui ne sont pas reconnus par un automate déterministe.
+En fait, il existe des langages reconnaissables de $\aomega$ qui ne sont pas reconnus par un "automate de Büchi" déterministe.
 
 
-
-La classe des langages reconnaissables par un automate de Büchi est fermée relativement à l'union finie
-et la méthode pour construire l'automate qui reconnait l'union est la même que pour les automates finis (on met ensemble
-les deux automates).
+La classe des langages reconnaissables par un "automate de Büchi" est fermée relativement à l'union finie
+et la méthode pour construire l'automate qui reconnait l'union est la même que pour les automates finis (on \quotes{met ensemble}
+les automates).
 
 On verra que cette classe est aussi fermée relativement au complémentaire et à l'intersection.
 
@@ -237,7 +245,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 \end{definition}
 
 \begin{theorem}[lien avec le théorème de Kleene]
-	$L \subseteq \aomega$ est $\omega$-rationnel si et seulement s'il est reconnu par un automate de Büchi.
+	$L \subseteq \aomega$ est $\omega$-rationnel si et seulement s'il est reconnu par un "automate de Büchi".
 \end{theorem}
 
 \begin{proofI}
@@ -249,17 +257,14 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 		      Soit $\La^*(A_{qq'})$ le langage reconnu par $A_{qq'}$ et $\La^+(A_{qq'}) = \La^*(A_{qq'}) \setminus \set {\motvide}$
 
-		      Alors $L = \bigcup_{(q,q') \in I \times T} \La^*(q,q')(\La^+(q',q'))^{\omega}$ :
+		      Alors $L = \bigcup_{(q,q') \in I \times T} \La^*(q,q')(\La^+(q',q'))^{\omega}$. Montrons cette égalité.
 
-		      \begin{itemize}
-			      \item \fbox{$\supseteq$} \\
-			            En effet, si $w \in \bigcup_{(q,q') \in I \times T} \La^*(q,q')(\La^+(q',q'))^{\omega}$, alors
-			            $$\exists i_0 \in I, \exists t_0 \in T, \text{ tels que } w \in \La^*(i_0,t_0)(\La^+(t_0,t_0))^{\omega}$$
-			            donc $w$ est l'étiquette d'un chemin qui passe un nombre infini de fois par l'état final $t_0$, et donc
-			            $w\in \La^w (A) = L$
-			      \item \fbox{$\subseteq$} \\
-			            Analogue à la contraposée.
-		      \end{itemize}
+		      \begin{eqnarray*}
+			      w \in \bigcup_{(q,q') \in I \times T} \La^*(q,q')(\La^+(q',q'))^{\omega} &\iff& \exists i_0 \in I, \exists t_0 \in T, \text{ tels que } w \in \La^*(i_0,t_0)(\La^+(t_0,t_0))^{\omega} \\
+			      &\iff& w \text{ est l'étiquette d'un chemin qui passe } \\
+			      & & \text{ un nombre infini de fois par l'état final } t_0 \\
+			      &\iff& w\in \La^w (A) = L
+		      \end{eqnarray*}
 
 		\item \bimpLR \\
 		      Au vu de la caractérisation et du fait que la classe Rec est fermée relativement à l'union finie, il suffit de \mq si
@@ -314,7 +319,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 			      }
 		      \end{automata}
 
-		      Supposons que $\motvide \notin X$.
+		      Supposons d'abord que $\motvide \notin X$.
 
 		      Alors on identifie les états $f_1,i_2$ et $f_2$ :
 
@@ -348,10 +353,9 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 			      }
 		      \end{automata}
 
-		      L'automate obtenu reconnait bien les mots $XY^{\omega}$ et il correspond à:
-
+		      L'automate obtenu reconnait bien les mots $XY^{\omega}$ et il es défini formellement comme suit :
 		      $$ A = ( Q_1 \cup Q_2 \setminus \set {i_2,f_2}, \set {i_1}, \set {f_1}, \delta_1 \cup \delta_2 \cup \eta_0 \cup \eta_1 \cup \eta_2)$$
-		      où
+		      où :
 		      \begin{eqnarray*}
 			      \eta_0 &=& \setdef {(f_1,a,f_1)} {(i_2,a,f_2) \in \delta_2} \\
 			      \eta_1 &=& \setdef {(f_1,a,q)} {(i_2,a,q) \in \delta_2} \\
@@ -359,7 +363,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 		      \end{eqnarray*}
 
 
-		      Si $\motvide \in L_1$, alors on rend $f_1$ initial.
+		      Dans le cas où $\motvide \in L_1$, alors on rend $f_1$ aussi initial.
 	\end{itemize}
 \end{proofI}
 
@@ -386,7 +390,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 		}
 	\end{automata}
 
-	On normalise l'automate :
+	On normalise l'automate en ajoutant un nouvel état initial $qnew$ avec les mêmes transitions sortantes que l'ancien état initial.
 
 	\begin{automata}
 		\digraph[scale=0.50]{buchi6}{
@@ -409,7 +413,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 		}
 	\end{automata}
 
-	On identifie les états $qnew$ et $f$ :
+	Ensuite on identifie les états $qnew$ et $f$ :
 
 	\begin{automata}
 		\digraph[scale=0.50]{buchi7}{
@@ -435,33 +439,34 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 
 \begin{definition}
-	Soit $L \subseteq \mots$ un langage de mots finis. On note
+	Soit $L \subseteq \mots$ un langage de mots finis. On note :
 	$$\larr L = \setdef {w \in \alphabet^ {\omega}} {w \text{ a une infinité de préfixes dans } L}$$
 \end{definition}
 
 
 \begin{exemple}
+	$ $ \par\nobreak\ignorespaces
 	\begin{enumerate}
-		\item $L = a^*b, \larr L = \emptyset$
-		\item $L = (ab)^*, \larr L = (ab)^{\omega}$
+		\item $L = a^*b, \larr L = \emptyset$ (aucun mot infini)
+		\item $L = (ab)^*, \larr L = (ab)^{\omega}$ (un seul mot)
 		\item $L = (a^*b)^+, \larr L =  (a^*b)^{\omega}$
 	\end{enumerate}
 \end{exemple}
 
 
 \begin{prop}[Admis]
-	Soit $A = (Q,I,T,\delta)$ un automate de Büchi déterministe, alors $\La^{\omega} (A) = \larr {\La^+ (A)}$
+	Soit $A = (Q,I,T,\delta)$ un "automate de Büchi" déterministe, alors $\La^{\omega} (A) = \larr {\La^+ (A)}$
 	où $\La^+ (A)$ est le langage des mots finis reconnus par $A$ comme un automate fini traditionnel.
 \end{prop}
 
 
 \begin{coro}
-	$X \subseteq \mots$ est reconnu par un automate de Büchi déterministe \ssi $\exists L \in \text{Rat}(\mots)$
+	$X \subseteq \mots$ est reconnu par un "automate de Büchi" déterministe \ssi $\exists L \in \text{Rat}(\mots)$
 	\tq $X = \larr L$.
 \end{coro}
 
 \begin{prop}
-	Le langage $X = (a+b)^*a^{\omega}$ ($ {\abs w}_b < \infty $) ne peut pas être reconnu par un automate de Büchi déterministe.
+	Le langage $X = (a+b)^*a^{\omega}$ ($ {\abs w}_b < \infty $) ne peut pas être reconnu par un "automate de Büchi" déterministe.
 \end{prop}
 
 \begin{proof}
@@ -484,7 +489,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 \subsection{Clôture sous intersection et complémentaire}
 
 \begin{prop}
-	La famille des langages reconnaissables par un automate de Büchi est fermée relativement à l'intersection.
+	La famille des langages reconnaissables par un "automate de Büchi" est fermée relativement à l'intersection.
 \end{prop}
 
 \begin{proof}
@@ -498,8 +503,8 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 	Alors l'automate $A = (Q,I,T,\delta)$ :
 	\begin{eqnarray*}
 		Q &=& Q_1 \times Q_2 \times \set{1,2}  \\
-		I &=& \setdef {i_1,i_2,1} {i_1 \in I_1,i_2 \in I_2 } \\
-		T &=&  \setdef {t,q,1} {t \in T_1, q \in Q} \\
+		I &=& \setdef {(i_1,i_2,1)} {i_1 \in I_1,i_2 \in I_2 } \\
+		T &=&  \setdef {(t,q,1)} {t \in T_1, q \in Q} \\
 		\delta ((q_1,q_2,x), a) &=&
 		\left\{
 		\begin{array}{cc}
@@ -563,7 +568,7 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 			      }
 		      \end{automata}
 
-		\item On cherche $L_3 = \setdef {u \in {\set {a,b}}^{\omega}} {{\abs u}_a = \infty \et {\abs u}_b = \infty} = L_1 \cap L_2$
+		\item On cherche $L_3 =  L_1 \cap L_2$
 
 		      \begin{automata}
 			      \digraph[scale=0.50]{buchi10}{
@@ -604,11 +609,36 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 	\end{itemize}
 \end{exemple}
 
+\begin{remarque}
+	Le "langage" $L_3 = \setdef {u \in {\set {a,b}}^{\omega}} {{\abs u}_a = \infty \et {\abs u}_b = \infty}$, \ie,
+	le "langage" de mots de ${\set {a,b}}^{\omega}$ avec un nombre infini de $a$ et de $b$, reconnu par l'automate suivant :
+
+	\begin{automata}
+		\digraph[scale=0.50]{buchi123}{
+			rankdir=LR;
+
+			node [shape=circle, style=filled, color=lightblue];
+
+			0 [label=" "];
+			1 [label=" "];
+
+			start [shape=point];
+			start -> 0;
+
+			0 -> 0 [label="b"];
+			0 -> 1 [label="a"];
+
+			1 -> 1 [label="a"];
+			1 -> 0 [label="b"];
+
+			1 [shape=doublecircle];
+		}
+	\end{automata}
+\end{remarque}
+
 \begin{notation}
 	Soit $w \in \mots$, on note $\inf (w) = \setdef {x \in \alphabet} {{\abs w}_x = \infty}$
 \end{notation}
-
-
 
 \begin{theorem}[Factorisation Ramseyenne]
 	Soit $f : \N \times \N \to C $, où $C$ est un ensemble fini, alors il existe une suite infinie d'entiers $E = i_0, i_1, \ldots, i_n, \ldots$
@@ -617,76 +647,98 @@ On verra que cette classe est aussi fermée relativement au complémentaire et �
 
 \begin{proof}
 	On construit une suite de sous-ensembles de $\N$, $T_0, T_1, \ldots$, de la maniere suivante :
-	$T_0 = \N$. Si on a déjà $T_i$, on construit $T_{i+1}$.
+	$T_0 = \N$. Si on a déjà $T_i$, on construit $T_{i+1}$ comme suit.
 
-	Comme les couleurs sont en nombre fini, il existe une couleur $c_0$ et une suite
+	Puisque les couleurs sont en nombre fini, il existe une couleur $c_0$ et une suite
 	$u_0, v_1, v_2, \ldots$ tel que $f(u_0, v_i) = c_0 \forall i \geq 1$ (il existe un nombre infini d'arcs sortant de $u_0$ de couleur $c_0$)
 	alors $T_{i+1} = \set {v_1, v_2, \ldots}$
 
 
-	Soit $u_i = \min (T_1)$. et considérons $u_0, u_1, \ldots$. Par construction $\forall i \in \N, \forall j \in \N, f(u_i, u_{i + j}) = c_i$
+	Soit $u_i = \min (T_1)$ et considérons $u_0, u_1, \ldots$. Par construction $\forall i \in \N, \forall j \in \N, f(u_i, u_{i + j}) = c_i$
 	puisque les couleurs sont en nombre fini, il doit exister une suite $i_0, i_1, \ldots$ telle que $f(u_{i_J}, u_{i_{J+1}}) = c_{i_0}$
 	et donc la suite $u_{i_0},u_{i_1}, \ldots$ est la suite cherchée.
 \end{proof}
 
 
-Soit $X$ un langage reconnaissable et $A = (Q,I,T,\delta)$ un automate de Büchi qui reconnait $X$.
-
-%TODO: Make pretty
-
-On définit une relation sur $\mots$:
-\begin{eqnarray*}
-	w \sim w' \iff &\forall p,q \in Q, \exists \text{un chemin de $p$ à $q$ étiqueté par } w \\
-	&\et \exists \text{ un chemin de $p$ à $q$ d'étiquette $w$ qui passe par un état terminal}
-\end{eqnarray*}
+\begin{notation}
+	Soit $A = \AFN$ un automate, alors pour un d'états $p,q \in Q$ et un mot $w \in \mots$, alors
+	on \intro[cheminB]{note} $\chemin p q w$ s'il existe un chemin de $p$ à $q$ avec $w$ comme étiquette et on note
+	$\cheminT p q w$ si le chemin passe par au moins un état terminal.
+\end{notation}
 
 
-\begin{itemize}
-	\item $\sim$ est une relation d'équivalence : trivial
-	\item $\sim$ est une relation d'équivalence d'index fini, son nombre de classes ne peut pas dépasser $3^{{\abs Q}^2}$
-	      car chacune des ${\abs Q}^2$ coupes d'états distingue 3 types de mots :
-	      \begin{itemize}
-		      \item les mots qui ne sont pas l'étiquette d'un chemin de $p$ à $q$,
-		      \item les mots qui sont l'étiquette d'un chemin $s$ de $p$ à $q$ dont aucun ne passe par un état terminal,
-		      \item les mots qui sont l'étiquette d'un chemin $s$ de $p$ à $q$ dont au moins 1 passe par un état terminal
-	      \end{itemize}
-	\item $\sim$ est une congruence.
+\begin{definition}
+	Soit $X$ un langage reconnaissable et $A = (Q,I,T,\delta)$ un "automate de Büchi" qui reconnait $X$.
 
-	      Si $w \sim w'$ et $u,v \in \mots$ alors $uwv \sim uw'v$
+	On définit une relation sur $\mots$:
+	\begin{eqnarray*}
+		w \sim w' \iff &\forall p,q \in Q, \chemin p q w \iff \chemin p q {w'} \\
+		&\et \cheminT p q w \iff \cheminT p q {w'}
+	\end{eqnarray*}
+\end{definition}
 
-	      TODO
-\end{itemize}
+\begin{prop}
+	\begin{enumerate}
+		\item La relation $\sim$ est une relation d'équivalence.
+		\item La relation $\sim$ est une relation d'équivalence d'index fini, son nombre de classes ne peut pas dépasser $3^{{\abs Q}^2}$.
+		\item La relation $\sim$ est une congruence.
+	\end{enumerate}
+\end{prop}
 
-Alors $\mots / \sim$ est un monoïde fini.
+\begin{proofI}
+	\begin{enumerate}
+		\item  trivial
+		\item Chacune des ${\abs Q}^2$ coupes d'états distingue 3 types de mots :
+		      \begin{itemize}
+			      \item les mots qui ne sont pas l'étiquette d'un chemin de $p$ à $q$,
+			      \item les mots qui sont l'étiquette d'un chemin $s$ de $p$ à $q$ qui ne passe par aucun état terminal,
+			      \item les mots qui sont l'étiquette d'un chemin $s$ de $p$ à $q$ qui passe par au moins 1 un état terminal.
+		      \end{itemize}
+		\item $\sim$ est une congruence.
 
-Et donc $\forall w \in \mots, [w]$ est un langage rationnel, en effet, $[x]$ est l'image inverse d'un singleton de $\mots / \sim$
-par le morphisme de projection $\phi : \mots \to \mots / \sim$ tel que $\forall x \in \mots,\ f (x) = [x] $.
+		      Si $w \sim w'$ et $u,v \in \mots$ alors $uwv \sim uw'v$
 
-\vspace{1cm}
+		      TODO
+	\end{enumerate}
+\end{proofI}
+
+\begin{remarque}
+	$\mots / \sim$ est un monoïde fini.
+
+	Et donc $\forall w \in \mots, [w]$ est un langage rationnel, en effet, $[w]$ est l'image inverse d'un singleton de $\mots / \sim$
+	par le morphisme de projection $\phi : \mots \to \mots / \sim$ tel que $\forall w \in \mots,\ f (w) = [w] $. Un singleton est rationnel et
+	l'image inverse d'un rationnel par un morphisme est aussi un rationnel.
+\end{remarque}
+
 
 On considère la famille de langages de $\Sigma^{\omega}$ de la forme $[u][v]^{\omega}$ où $[u] \et [v]$ sont des classes d'équivalence de $\sim$.
 
-On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\omega}$ plus fine que la partition $<X,\mathcal{C}(X)>$.
+On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\omega}$ plus fine que la partition $<X,\compl{C}(X)>$,
+donc que $X$ et $\compl C (X)$ sont l'union finie d'ensembles de la forme $[u][v]^{\omega}$.
 
 \begin{prop}\label{prop:buchi1}
-	Soit $Y = [u][v]^{\omega}$ pour un choix de $u \et v$, alors $Y \cap X = \emptyset$ ou $Y \subseteq X$.
+	Soit $Y = [u][v]^{\omega}$ pour un choix quelconque de $u \et v$, alors $Y \cap X = \emptyset$ ou $Y \subseteq X$.
 \end{prop}
 
 
 \begin{proof}
-	Supposons $Y \cap X \neq \emptyset$ et soit $x \in Y \cap X$, alors $x$ est l'étiquette d'un chemin réussi de $A$
+	Supposons $Y \cap X \neq \emptyset$ et soit $x \in Y \cap X$, alors $x$ est l'étiquette d'un chemin "réussi" de $A$
 	de la forme
-	$$q_0 \to^{u_0} q_1 \to^{v_1} q_2 \to^{v_0} q_3 \ldots$$
-	avec x = [u][v] et $u_0 = [u]$ et $\forall i, v_i = [v]$.
+	$$q_0 \cheminArrow {u_0} q_1 \cheminArrow {v_1} q_2 \cheminArrow {v_2} q_3 \ldots$$
+	avec $u_0 \in [u]$ et $\forall i, v_i \in [v]$, de plus,
+	une infinité de chemins $\chemin {q_i} {q_{i_1}} {v_i}$ passent par au moins un état terminal.
 
-	Soit $y \in Y = [u][v]$. On peut donc écrire $y$ comme :
+	Soit $y \in Y = [u][v]^{\omega}$. On peut donc écrire $y$ comme :
 	$$ y = u_0'v_1'v_2'\ldots$$
 	avec $u_0' = [u]$ et $\forall i, v_i' = [v]$.
 
-	Mais alors $u \sim u_0'$ et $\forall i, v_i \sim v_i'$ et donc
+	Mais alors $u_0 \sim u_0'$ et $\forall i, v_i \sim v_i'$ et donc
 
-	$$q_0 \to^{u_0'} q_1 \to^{v_1'} q_2 \to^{v_0'} q_3 \ldots$$
-	et donc $y$ est l'étiquette d'un chemin réussi de $A$, donc $A$ reconnait $y$, donc $y \in X$, donc $Y \subseteq X$.
+	$$q_0 \cheminArrow {u_0'} q_1 \cheminArrow {v_1'} q_2 \cheminArrow {v_2'} q_3 \ldots$$
+	avec une infinité de chemins $\chemin {q_i} {q_{i_1}} {v'_i}$ passent par au moins un état terminal grâce à l'équivalence
+	$v_i \sim v_i'$.
+
+	Ainsi $y$ est aussi l'étiquette d'un chemin "réussi" de $A$, \cad $A$ reconnait $y$, donc $y \in X$, donc $Y \subseteq X$.
 \end{proof}
 
 
@@ -694,7 +746,6 @@ On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\
 \begin{prop}\label{prop:buchi2}
 	$\forall x \in \Sigma^{\omega}, \exists u,v \in \Sigma^*, x \in [u][v]^{\omega}$.
 \end{prop}
-
 
 \begin{proof}
 	Écrivons $x = a_0a_1 \ldots a_n \ldots$ où $a_i \in \Sigma$.
@@ -716,23 +767,23 @@ On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\
 
 \begin{theorem}
 	$\forall X$ $\omega$-rationnel, on a
-	$$ \mathcal{C}(X) = \bigcup_{(u,v) \mid [u][v]^{\omega} \cap X = \emptyset} [u][v]^{\omega}$$
+	$$ \compl C(X) = \bigcup_{ \substack{ (u,v) \mid \\ [u][v]^{\omega} \cap X = \emptyset} } [u][v]^{\omega}$$
 \end{theorem}
 
 \begin{proofI}
 	\begin{itemize}
 		\item \fbox{$\supseteq$} \\
-		      Évidente car on fait une union d'ensembles qui sont tous contenus dans $\mathcal C (X)$.
+		      Évidente car on fait une union d'ensembles qui sont tous contenus dans $\compl C (X)$.
 		\item \fbox{$\subseteq$} \\
-		      Soit $y \in \mathcal C (X)$.
-		      $$\exists u,v, y \in [u][v]^{\omega} \reason{Propositon \ref{prop:buchi2}}$$
-		      alors $[u][v]^{\omega} \subseteq \mathcal C (X)$ (Proposition \ref{prop:buchi1})
-		      \cad $[u][v]^{\omega} \cap X = \emptyset$ et donc $y$ est bien dans l'union.
+		      Soit $y \in \compl C (X)$.
+		      $$\exists u,v,\text{ tels que } y \in [u][v]^{\omega} \reason{Propositon \ref{prop:buchi2}}$$
+		      alors $[u][v]^{\omega} \cap \compl C (X) \neq \emptyset$ et donc par la  Proposition \ref{prop:buchi1}
+		      on a $[u][v]^{\omega} \cap X = \emptyset$ et donc $y$ est bien dans l'un des ensembles de l'union.
 	\end{itemize}
 \end{proofI}
 
 \begin{coro}
-	La classe des langages reconnaissables par un automate de Büchi est fermée relativement au passage au complémentaire.
+	La classe des langages reconnaissables par un "automate de Büchi" est fermée relativement au passage au complémentaire.
 \end{coro}
 
 
@@ -743,7 +794,36 @@ On va \mq les langages $[u][v]^{\omega}$ constituent une partition de $\Sigma^{\
 	de $Q$ : $\mathcal T \subseteq \parts Q$.
 
 	Soit $w \in \Sigma^{\omega}$, $w$ est accepté par $A$ si $w$ est l'étiquette d'un chemin $\gamma$ \tq $\inf ({\gamma}) \in \mathcal T$ où
-	$\inf ({\gamma}()$ est l'ensemble d'états de $Q$ par qui $\gamma$ passe infiniment souvent.
+	$\inf ({\gamma})$ est l'ensemble d'états de $Q$ par qui $\gamma$ passe infiniment souvent.
 
 	%TODO: exemple
 \end{definition}
+
+
+\begin{exemple}
+	L'automate suivant
+
+	\begin{automata}
+		\digraph[scale=0.75]{muller1}{
+			rankdir=LR;
+
+			node [shape=circle, style=filled, color=lightblue];
+
+			0 [label="1"];
+			1 [label="2"];
+
+			start [shape=point];
+			start -> 0;
+
+			0 -> 0 [label="b"];
+			0 -> 1 [label="a"];
+
+			1 -> 1 [label="a"];
+			1 -> 0 [label="b"];
+
+		}
+	\end{automata}
+
+	avec la table $\mathcal T = \set {\set 2}$ est un automate de Muller déterministe qui reconnait les mots avec un nombre
+	fini de $b$ (ceci n'est pas possible avec un automate déterministe de Büchi).
+\end{exemple}
