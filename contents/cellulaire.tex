@@ -3,9 +3,9 @@
 \begin{definition}
 	Un automate cellulaire est défini par :
 	\begin{itemize}
-		\item L'entier positif $d$ représentant la dimension de l'espace $(\Z^d)$
+		\item Un entier positif $d$ représentant la dimension de l'espace $(\Z^d)$
 		\item Un ensemble fini $S$ d'états
-		\item Un ""voisinage"", \ie un ensemble de vecteurs de $\Z^d (\vec{v_1},  \vec{v_1}, \ldots ,\vec{v_m})$
+		\item Un ""voisinage"", \ie un ensemble $(\vec{v_1},  \vec{v_1}, \ldots ,\vec{v_m})$ de vecteurs de $\Z^d$
 		      qui représente la position relative des voisins (relative à la position de la cellule). Les voisins de la
 		      cellule $\vec r$ sont $\vec r + \vec {v_1},  \ldots , \vec r + \vec {v_m}$.
 		\item Une fonction $f : S ^ m \to S$ de transition locale qui définit l'état d'une cellule à l'instant $t + 1$
@@ -13,16 +13,19 @@
 	\end{itemize}
 \end{definition}
 
-Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'espace.
+Les automates cellulaires sont synchrones, et homogènes, dans le temps et dans l'espace, \ie,
+ils appliquent la règle simultanément a toutes les cellules,
+la règle locale de transition ne change pas avec le temps et
+ils appliquent la meme règle a toutes les cellules.
 
 \begin{definition}
 	Une configuration est une fonction $\Z ^ d \to S$ qui décrit l'état courant de chaque cellule.
 
 	Si $C$ est l'ensemble des configurations, alors un automate cellulaire définit une fonction $G: C \to C$ où si $c \in C$, alors
-	$G(x) = c'$ est la configuration obtenue de $c$ en appliquant la règle $f$ à toutes les cellules.
+	$G(c) = c'$ est la configuration obtenue de $c$ en appliquant la règle $f$ à toutes les cellules.
 
 	En général, on itère la fonction $G$ et pour une configuration $c$ on s'intéresse à la suite :
-	$$ G^0 (c) = c, G^1 (c), G^2 (c), \text{ où } G^i (c) = G ( G^{i - 1 }(c))$$
+	$$ G^0 (c) = c, G^1 (c), G^2 (c), \ldots \text{ où } G^i (c) = G ( G^{i - 1 }(c))$$
 \end{definition}
 
 \begin{definition}
@@ -32,7 +35,7 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 
 \begin{definition}
 	Une configuration $c$ est dite périodique (dans le temps), ou oscillateur, si $\exists k$ \tq $G^k(c) = c$. Le plus petit
-	petit $k$ \tq $G^k(c) = c$ est dite la période d'oscillation.
+	entier $k$ \tq $G^k(c) = c$ est dit la période d'oscillation.
 \end{definition}
 
 \begin{definition}
@@ -41,7 +44,8 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 
 
 \begin{definition}
-	Une configuration est dite ultimement périodique si $\exists k, \exists l>0$ \tq $ G^{k+l}(c) =  G^{k}(c)$
+	Une configuration est dite ultimement périodique si $\exists k, \exists l>0$ \tq $ G^{k+l}(c) =  G^{k}(c)$,
+	\ie à partir de la $k$-ème itération on rentre dans un cycle de longueur $l$.
 \end{definition}
 
 
@@ -69,22 +73,20 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 \begin{exemple}
 	Pour $d = 2$, Game of Life de Conway \cite{conwayGOL} est défini par :
 	\begin{itemize}
-		\item $S = \set {0,1}$
-		\item $V = ((0,1), (1,0), (0,-1), (-1,0), (1,1), (1,-1), (-1,1), (-1,-1))$
+		\item $S = \set {0,1}$. L'état 0 correspond à l'état d'une cellule \quotes {morte} et 1 à celui d'une cellule \quotes{vivante}.
+		\item $V = ((0,1), (1,0), (0,-1), (-1,0), (1,1), (1,-1), (-1,1), (-1,-1))$, dit le voisinage de Muller de rayon 1.
 		\item Fonction de transition :
 		      \begin{itemize}
-			      \item Une cellule vivante reste vivante \ssi elle a 2 ou 3 voisins vivant.
-			      \item Une cellule morte devient vivante \ssi elle a 3 voisins vivants.
+			      \item une cellule vivante reste vivante \ssi elle a 2 ou 3 voisins vivants;
+			      \item une cellule morte devient vivante \ssi elle a 3 voisins vivants.
 		      \end{itemize}
 	\end{itemize}
-
 
 	Une implémentation sur navigateur est disponible sur: \url{https://conwaylife.com/}.
 \end{exemple}
 
 \begin{definition}
-
-	On apelle automates cellulaires élémentaires les automates cellulaires qui respectent :
+	On appelle automates cellulaires élémentaires les automates cellulaires qui respectent :
 	\begin{itemize}
 		\item $d = 1$
 		\item $S = \set{0,1}$
@@ -98,7 +100,7 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 	Wolfgram a introduit une numérotation \cite{wolfgramClass} pour les automates cellulaires élémentaires où chaque automate
 	est associé à un entier entre 0 et 255.
 
-	Comme on peut définir l'automate juste en étudiant son comportement sur trois cellules voisines, il suffit d'associer une
+	Puisque on peut définir l'automate juste en étudiant son comportement sur trois cellules voisines, il suffit d'associer une
 	étiquette à ce comportement pour caractériser tout l'automate cellulaire. Ainsi, on commence par trier
 	les 8 configurations possibles pour 3 cellules voisines ainsi :
 
@@ -148,7 +150,7 @@ Les automates cellulaires sont synchrones et homogènes dans le temps et dans l'
 	Ainsi cet automate est numéroté par $01011010_2 = 90_{10}$.
 \end{notation}
 
-\subsection{Configurations finies et configuérations périodiques}
+\subsection{Configurations finies et configurations périodiques}
 
 \begin{definition}
 	Soit $s \in S$ un état, on appelle $s$-support l'ensemble des cellules qui ont

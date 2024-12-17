@@ -789,14 +789,15 @@ donc que $X$ et $\compl C (X)$ sont l'union finie d'ensembles de la forme $[u][v
 
 \subsection{Automates de Muller}
 
+Pour résoudre le problème de l'absence d'un algorithme de détermination des "automates de Büchi" on introduit des
+généralisations comme les automates de Muller.
+
 \begin{definition}
 	Un automate de Muller est un quadruplet $(Q,I, \mathcal T, \sigma)$ où $\mathcal T$ (la table de l'automate) est un ensemble de sous-ensembles
 	de $Q$ : $\mathcal T \subseteq \parts Q$.
 
 	Soit $w \in \Sigma^{\omega}$, $w$ est accepté par $A$ si $w$ est l'étiquette d'un chemin $\gamma$ \tq $\inf ({\gamma}) \in \mathcal T$ où
 	$\inf ({\gamma})$ est l'ensemble d'états de $Q$ par qui $\gamma$ passe infiniment souvent.
-
-	%TODO: exemple
 \end{definition}
 
 
