@@ -102,9 +102,10 @@
 
 
 \begin{definition}[chemin]
-	Soit $A = \AFD$ un "AFD", et $p,q \in Q$, un ""chemin"" $p \to q$ est une suite
-	$(q_1, \ldots, q_n)\in Q^n,(a_1, \ldots, a_n)\in \alphabet^n$ telle que $q_1 = p$ et $q_n = q$ et
-	$\forall i \in \enum 1 {n-1}, \delta(q_i, a_i) = q_{i+1}$.
+	Soit $A = \AFD$ un "AFD", et $p,q \in Q$, un ""chemin"" $p \cheminD q$ est une suite
+	$(p, a_0, q_1), (q_1, a_1, q_2), \ldots, (q_{n-1}, a_{n-1}, q)  \in Q^n \times \alphabet^n \times Q^n$
+	telle que
+	$\forall i \in \enum 1 {n-2}, \delta(q_i, a_i) = q_{i+1}$ et $\delta(p, a_0) = q_1$ et $\delta(q_{n-1}, a_{n-1}) = q$.
 \end{definition}
 
 \begin{definition}

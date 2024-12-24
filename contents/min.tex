@@ -12,12 +12,12 @@
 	\end{enumerate}
 
 	% https://tex.stackexchange.com/questions/218274/how-can-i-draw-commutative-diagrams-in-latex
-	\[
+	$$
 		\begin{tikzcd}
 			Q \arrow{r}{\delta_a} \arrow[swap]{d}{\phi} & Q \arrow{d}{\phi} \\
 			Q' \arrow{r}{\delta_a} & Q'
 		\end{tikzcd}
-	\]
+	$$
 
 \end{definition}
 
@@ -245,7 +245,7 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 	Pour cela, il faut \mq si $u$ et $v$ sont deux "mots" quelconques \tq $\quot u M = \quot v M$, alors $F \cdot u =  F \cdot v$ dans $A^{\sim}$.
 
-	Soit $p$ un état de $F \cdot u$. Puisque $A$ est "accesible", il existe un "chemin" de $q_0 \to p$ dans $A$, et donc il existe un "chemin" $p \to q_0$ dans $\mirr(A)$.
+	Soit $p$ un état de $F \cdot u$. Puisque $A$ est "accesible", il existe un "chemin" de $q_0 \cheminD p$ dans $A$, et donc il existe un "chemin" $p \cheminD q_0$ dans $\mirr(A)$.
 	Soit $w$ l'étiquette de ce "chemin", alors le "mot" $uw$ est l'étiquette d'un "chemin" réussi de $\mirr (A)$. En conséquence, $uw \in M$.
 
 	Mais $uw\in M \iff w \in \quot u M \iff w\in \quot v M \iff vw \in M$.
@@ -324,7 +324,7 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 	On en déduit que
 	\begin{equation}\label{eq:congnot}
-        q \ \not{\congN} \ q' \iff \exists w, \deltaS q w \in F \et \deltaS {q'} w \notin F
+		q \ \not{\congN} \ q' \iff \exists w, \deltaS q w \in F \et \deltaS {q'} w \notin F
 	\end{equation}
 	où $\deltaS q w \notin F$ et $\deltaS{q'} w \in F$ sont deux états non équivalents, dits \emph{séparables}.
 \end{rappel}
