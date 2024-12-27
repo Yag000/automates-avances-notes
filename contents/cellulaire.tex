@@ -165,25 +165,30 @@ Ainsi cet automate est numéroté par $01011010_2 = 90_{10}$. C'est l'automate �
 \end{definition}
 
 \begin{notation}
-	Souvent, on impose qu'un état $q_0$ soit un état ""quiescent"" (généralement, c'est l'état 0). Un état quiescent est aussi stable par $f$, \ie $f(\underbrace{q_0,\ldots, q_0}_m) = q_0$.
+	Souvent, on impose qu'un état $q_0$ soit un état ""quiescent"" (généralement, c'est l'état 0). Un état quiescent est aussi stable par
+	$f$, \ie $f(\underbrace{q_0,\ldots, q_0}_m) = q_0$.
 \end{notation}
 
 \begin{definition}
 	Si $q_0$ est un état quiescent on appelle configurations finies (ou plus précisément $q_0$-finies) les configurations ayant un $q_0$-support fini.
 \end{definition}
 
-Puisque un état quiescent est par stable par définition, il en suit que si $c$ est une configuration finie alors $G(c)$ l'est aussi. Si donc $F \subset C$ dénote l'ensemble de toutes les configurations finies, la restriction de $G$ à $F$, notée $G_F$, est une fonction de $F$ à $F$.
+Puisque un état quiescent est par stable par définition, il en suit que si $c$ est une configuration finie alors $G(c)$ l'est aussi. Si donc
+$F \subset C$ dénote l'ensemble de toutes les configurations finies, la restriction de $G$ à $F$, notée $G_F$, est une fonction de $F$ à $F$.
 
 \begin{definition}
-	Soit $\vec v$ un vecteur de $\Z^d$, la translation $\tau_{\vec v}$ est une fonction d'automate cellulaire où le "voisinage" contient seulement le vecteur $-\vec v$ et la fonction de transition locale  $f$ est l'identité,
+	Soit $\vec v$ un vecteur de $\Z^d$, la translation $\tau_{\vec v}$ est une fonction d'automate cellulaire où le "voisinage" contient seulement
+	le vecteur $-\vec v$ et la fonction de transition locale  $f$ est l'identité,
 	autrement dit, la valeur d'une cellule $\vec r$ à l'instant $t+1$ est simplement la valeur de la cellule $\vec r - \vec v$ à l'instant $t$.
 \end{definition}
 
 \begin{definition}
-	On note $\vec \sigma_i = (0,\ldots,0, 1, 0, \ldots, 0)$  le vecteur unitaire qui a la $i$-ème composante égale à 1 et toutes les autres égales à 0. Les translation   $\tau_{\vec \sigma_i}$ (pour $i$ dans $\{1, \ldots, d\}$) sont nommées shifts élémentaires.
+	On note $\vec \sigma_i = (0,\ldots,0, 1, 0, \ldots, 0)$  le vecteur unitaire qui a la $i$-ème composante égale à 1 et toutes les autres égales
+	à 0. Les translation   $\tau_{\vec \sigma_i}$ (pour $i$ dans $\{1, \ldots, d\}$) sont nommées shifts élémentaires.
 \end{definition}
 
-Puisque tout vecteur $\vec v$ est une combination linéaire des vecteurs $\vec \sigma_1, \vec \sigma_2, \ldots, \vec \sigma_d$, il en suit que toute translation peut être exprimée comme une combinaison linaires de shifts élémentaires.
+Puisque tout vecteur $\vec v$ est une combination linéaire des vecteurs $\vec \sigma_1, \vec \sigma_2, \ldots, \vec \sigma_d$, il en suit que
+toute translation peut être exprimée comme une combinaison linaires de shifts élémentaires.
 
 \begin{definition}
 	Si $\vec v$ est un vecteur, on dit qu'une configuration $c$ est $\vec v$-périodique si  $c(\vec n) = c (\vec n + \vec v)$ pour tout $\vec n \in \Z ^d$.
@@ -212,7 +217,9 @@ est aussi totalement périodique.
 Donc si $P$ représente l'ensemble de toutes les configurations (totalement) périodiques, alors la restriction de $G$ à $P$,  notée $G_P$, est une fonction de $P$ à $P$.
 %\end{remarque}
 
-Les configurations finies ainsi que les configurations (totalement) périodiques sont importantes parce que elles sont les seules sur lesquelles on peut tester le comportement d'un automate cellulaire. De plus, comme on le verra dans la suite,  les deux fonctions $G_F$ et $G_P$ donnent des renseignements sur la surjectivité et l'injectivité de $G$.
+Les configurations finies ainsi que les configurations (totalement) périodiques sont importantes parce que elles sont les seules sur
+lesquelles on peut tester le comportement d'un automate cellulaire. De plus, comme on le verra dans la suite,  les deux fonctions $G_F$
+et $G_P$ donnent des renseignements sur la surjectivité et l'injectivité de $G$.
 
 
 
@@ -247,12 +254,14 @@ Les configurations finies ainsi que les configurations (totalement) périodiques
 
 \begin{prop}\label{prop:dense} (Les configurations finies et totalement périodiques sont denses.)
 
-	Pour toute configuration $c \in S^{\Z^d}$, il existe une suite $c_1,c_2, \ldots$ de configurations finies et une suite  $p_1,p_2, \ldots$ de configurations (totalement) périodiques telles que :
+	Pour toute configuration $c \in S^{\Z^d}$, il existe une suite $c_1,c_2, \ldots$ de configurations finies et une suite  $p_1,p_2, \ldots$
+	de configurations (totalement) périodiques telles que :
 	$$ \lim_{i \to \infty} c_i = c \et \lim_{i \to \infty} p_i = c $$
 \end{prop}
 
 \begin{proof}
-	Soit $c$ une configuration quelconque. Soit $\vec {r_0}, \vec {r_1},\ldots$ un dénombrement des cellules de $\Z^d$ (\cad une fonction qui attribue un numéro ordinal à chaque $d$-uplet de  $\Z^d$, ceci est possible car  $\Z^d$ est dénombrable)  et pour tout $i \in \N$,
+	Soit $c$ une configuration quelconque. Soit $\vec {r_0}, \vec {r_1},\ldots$ un dénombrement des cellules de $\Z^d$ (\cad une fonction
+	qui attribue un numéro ordinal à chaque $d$-uplet de  $\Z^d$, ceci est possible car  $\Z^d$ est dénombrable)  et pour tout $i \in \N$,
 	soit $c_i$ la configuration définie par :
 
 	$$ c_i(r_j) = \left\{ \begin{array}{ll}
@@ -397,7 +406,8 @@ Les configurations finies ainsi que les configurations (totalement) périodiques
 \end{proof}
 
 TODO add graph
-RM: peut-être mettre le graphe à la fin en sorte de récapitulatif. En particulier l'implication due au  théorème du jardin d'Eden (GF inj ssi  G surj), n'est pas encore démontrée à ce point.
+RM: peut-être mettre le graphe à la fin en sorte de récapitulatif. En particulier l'implication due au  théorème du jardin
+d'Eden (GF inj ssi  G surj), n'est pas encore démontrée à ce point.
 
 
 \subsubsection{Surjectivité et équilibre}
@@ -415,7 +425,8 @@ RM: peut-être mettre le graphe à la fin en sorte de récapitulatif. En particu
 
 
 \begin{definition}
-	On appelle motif tout ensemble fini $D$ de cellules ainsi que la description des états des cellules de $D$. Formellement, un motif est un couple $(D, \varphi)$ où $D$ est un ensemble fini de cellules (dit le domaine du motif) et $\varphi$ une fonction $D \to S$.
+	On appelle motif tout ensemble fini $D$ de cellules ainsi que la description des états des cellules de $D$. Formellement, un motif est un
+	couple $(D, \varphi)$ où $D$ est un ensemble fini de cellules (dit le domaine du motif) et $\varphi$ une fonction $D \to S$.
 \end{definition}
 
 
@@ -425,15 +436,20 @@ RM: peut-être mettre le graphe à la fin en sorte de récapitulatif. En particu
 
 
 \begin{exercice}
-	Montrer que toute configuration contenant le motif $01010$ est un Jardin d'Éden pour $W_{110}$ (le motif 01010 est un orphelin).
+	Montrer que toute configuration contenant le motif $01010$ est un "Jardin d'Éden" pour $W_{110}$ (le motif 01010 est un orphelin).
 \end{exercice}
 
-Dans le cas de $W_{110}$, on a vu que la non-surjectivité et due au fait que la distribution des images des huit contextes n'est pas équilibrée (il y a cinq contextes ayant comme image $1$ mais seulement trois ayant comme image $0$). Ceci est vrai en général, en effet, d'après la proposition suivante,  l'équilibre de la distribution est une condition nécessaire (mais pas suffisante) pour la surjectivité,
+Dans le cas de $W_{110}$, on a vu que la non-surjectivité et due au fait que la distribution des images des huit contextes n'est pas équilibrée
+(il y a cinq contextes ayant comme image $1$ mais seulement trois ayant comme image $0$). Ceci est vrai en général, en effet, d'après la proposition
+suivante,  l'équilibre de la distribution est une condition nécessaire (mais pas suffisante) pour la surjectivité,
 \begin{prop}
-	Si un automate cellulaire est surjectif alors pour tout état $q \in S$ on a : $\abs {f^{-1}(q)}=\abs S ^{n-1}$ où $S$ est l'ensemble de ses états et $n$ est la taille du voisinage. En d'autres termes, les images par $f$ des $\abs S ^{n}$ possibles contextes sont distribuées de façon équilibrée sur le $\abs S$ états.
+	Si un automate cellulaire est surjectif alors pour tout état $q \in S$ on a : $\abs {f^{-1}(q)}=\abs S ^{n-1}$ où $S$ est l'ensemble de ses états et
+	$n$ est la taille du voisinage. En d'autres termes, les images par $f$ des $\abs S ^{n}$ possibles contextes sont distribuées de façon équilibrée sur
+	le $\abs S$ états.
 \end{prop}
 
-Il existe des automates cellulaires (même élémentaires) qui ont une distribution équilibrées $\abs {f^{-1}(0)}=\abs {f^{-1}(1)}=2^{3-1}= 4$ mais qui ne sont pas surjectifs, par exemple parce qu'ils n'ont pas une distribution équilibrée pour les quatre  patterns de longueur 2 (00, 01, 10, 11).
+Il existe des automates cellulaires (même élémentaires) qui ont une distribution équilibrées $\abs {f^{-1}(0)}=\abs {f^{-1}(1)}=2^{3-1}= 4$ mais qui ne
+sont pas surjectifs, par exemple parce qu'ils n'ont pas une distribution équilibrée pour les quatre  patterns de longueur 2 (00, 01, 10, 11).
 
 
 \begin{prop}
@@ -529,7 +545,7 @@ Il existe des automates cellulaires (même élémentaires) qui ont une distribut
 		      $$\lim\limits_{m \rightarrow +\infty} \frac{k^{m \times m }}{(k-1)^{(m + 2) \times (m + 2)}}=
 			      \lim\limits_{m \rightarrow +\infty} \frac{(e^{\log k})^{m \times m }}{(e^{\log (k-1)})^{(m + 2) \times (m + 2)}}=
 			      \lim\limits_{m \rightarrow +\infty} e^{m^2\log k - (m+2)^2\log (k-1)} $$
-		      Il suffit donc d'étudier la limite d'un polynome de degré 2:
+		      Il suffit donc d'étudier la limite d'un polynôme de degré 2:
 		      $ \lim\limits_{m \rightarrow +\infty} m^2\log k - (m+2)^2\log (k-1)$,  et ce n'est pas difficile de conclure que cette
 		      limite est $+\infty$ (le coefficient du terme de degré 2 est positif).
 
