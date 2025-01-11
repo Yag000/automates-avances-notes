@@ -351,6 +351,13 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 
 	Par induction on a que $\forall i \geq m^{k+il} = m^{k} \implies \forall i \geq 1, j \geq 1, m^{k+il+ j} = m^{k +j}$
 
+	Soit $j = kl - k$ et $i =k$, alors on obtient
+	\begin{eqnarray*}
+		m^{k+kl+kl=k} = m ^{k + kl -k} &\implies& m^{2kl} = m^{kl} \\
+		&\iff& m^{kl}  m^{kl} = m^{kl} \\
+		&\iff& m^{kl} \text{es un idempotent}
+	\end{eqnarray*}
+
 	Donc $\exists x \in \N, \, m^{n!} = m^{klx} = (m^{kl})^x = m^{kl} \implies m^{n!}$ est idempotent.
 \end{proof}
 
