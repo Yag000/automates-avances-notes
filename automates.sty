@@ -297,15 +297,14 @@
 
 % TODO: change to geq
 \newcommand{\geqr}{\kl[Rprefixe]{>_R}\, }
-\newcommand{\geql}{\kl[Lsufix]{>_L} \, }
+\newcommand{\geql}{\kl[Lsuffix]{>_L} \, }
 \newcommand{\geqj}{\kl[Jinfix]>{_J}\, }
 
 
-\newcommand{\class}[2]{\kl[class#2]\left[#1\right]_{#2}}
-\newcommand{\classr}[1]{\class {#1} R}
-\newcommand{\classl}[1]{\class {#1} L}
-\newcommand{\classj}[1]{\class {#1} J}
-\newcommand{\classh}[1]{\class {#1} H}
+\newcommand{\classr}[1]{\kl[classR]{[} #1 \kl[classR]{]_R}}
+\newcommand{\classl}[1]{\kl[classL]{[} #1 \kl[classL]{]_L}}
+\newcommand{\classj}[1]{\kl[classJ]{[} #1 \kl[classJ]{]_J}}
+\newcommand{\classh}[1]{\kl[classH]{[} #1 \kl[classH]{]_H}}
 
 
 \newcommand{\Hc}{\mathbb{H}}

@@ -376,7 +376,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 	Soit $(M,\cdot , 1_M)$ un monoïde. On défini les relations suivantes.
 
 	\begin{itemize}
-		\item \emph{prefixe, ou $\geqr$, ou R-préordre}: On dit que $m$ est un préfixe de $n$ \ssi $\exists x \in M, \ n = mx$.
+		\item \emph{prefixe, ou $\geqr$, ou ""R-préordre""}: On dit que $m$ est un préfixe de $n$ \ssi $\exists x \in M, \ n = mx$.
 		      On le note $m \geqr n$..
 
 		      Un ensemble de la forme $y \cdot M = \setdef {y \cdot z} {z \in M}$ pour $y \in M$ est appelé un idéal à droite de $M$.
@@ -384,13 +384,13 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      $m$ est un préfixe de $n$ ssi $m \cdot M \supseteq n \cdot M$ (à vérifier en exercice).
 
 
-		\item \emph{suffixe, ou $\geql$, ou L-préordre}: On dit que $m$ est un suffixe de $n$ ssi $\exists y \in M, \ n = ym$.
+		\item \emph{suffixe, ou $\geql$, ou ""L-préordre""}: On dit que $m$ est un suffixe de $n$ ssi $\exists y \in M, \ n = ym$.
 		      On le note $m \geql n$.
 
 		      TODO: exercice (same as before)
 
 
-		\item \emph{infixe, ou $\geqj$, ou J-préordre}: On dit que $m$ est un infixe de $n$ ssi $\exists x,y \in M, \ n = xmy$.
+		\item \emph{infixe, ou $\geqj$, ou ""J-préordre""}: On dit que $m$ est un infixe de $n$ ssi $\exists x,y \in M, \ n = xmy$.
 		      On le note $m \geqj n$.
 
 		      TODO: exercice (same as before)
@@ -428,7 +428,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 \begin{proof}
 	Soit $m \in M$ et soit $x \in \classr m$, alors $x R m$ et donc
 	$ x \geqr m$ et donc $\exists y $ tel que $m = xy$ et donc $m = 1xy$ et ainsi
-	$x \geqj m$ et donc $x \in \classj m$.
+	$x \geqj m$ et donc $x \in \classj m$.1
 \end{proof}
 
 \begin{lemma}[Eggbox lemma]
@@ -446,9 +446,27 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      $$m \geqr n  \implies \exists x \in M, \ n = mx$$
 		      $$m J n  \implies \exists y,z \in M, \ m = ynz$$
 		      % TODO: make proper {
-		      Tout ça implique $m = ymxz$
+		      Tout cela implique $m = ymxz$
 
-		      TODO
+		      \begin{eqnarray*}
+			      m = ymxz &\implies& m = y(ym xz)xz\\
+			      &\implies& m = y^2m (xz)^2
+		      \end{eqnarray*}
+
+
+		      Par induction on peut montrer que $\forall i \geq 1, m y^i m (xz)^i$.
+		      Soit $i \geq 1$ tel que $(xz)^i$ est idempotent, alors
+		      \begin{eqnarray*}
+			      m &=& y^i m (xz)^i \\
+			      &=& y^i m (xz)^i (xz)^i \\
+			      &=&  m (xz)^i \\
+			      &=&  m x (xz)^{i-1} z \reason {pour $i > 0$} \\
+			      &=&  n (xz)^{i-1} z
+		      \end{eqnarray*}
+
+		      Donc $m = n (xz)^{i-1} z \implies$ $n$ est un préfixe de $m$ $\implies n \geqr m$.
+
+		      On a alors que $m R n$.
 
 		\item Exercice
 	\end{enumerate}
@@ -456,7 +474,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 
 
 \begin{definition}
-	On dit $m H n$ ssi $m R n $ et $m L n$. On a $H = R \cap L$.
+    On dit $m \intro[$H$-classe]{H} n$ ssi $m R n $ et $m L n$. On a $H = R \cap L$.
 \end{definition}
 
 \begin{exercice}
