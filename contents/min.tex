@@ -222,8 +222,8 @@ Nous allons voir trois algorithmes de minimisation différents:
 
 
 \begin{definition}
-	Soit $A = \AFN$ un "automate déterministe", son ""automate miroir"" est l'automate $A' = \antuple{Q, F, \set {q_0}, \delta'}$ avec
-	$\delta'$ définie enivrement par:
+	Soit $A = \AFD$ un "automate déterministe", son ""automate miroir"" est l'automate $A' = \antuple{Q, F, \set {q_0}, \delta'}$ avec
+	$\delta'$ définie par:
 	$$\forall q,q' \in Q, a \in \alphabet, \ \delta(q,a) = q' \iff q \in \delta'(q',a)$$
 \end{definition}
 
