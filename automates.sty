@@ -296,15 +296,16 @@
 \newcommand{\enum}[2]{\set{#1,\ldots,#2}}
 
 % TODO: change to geq
-\newcommand{\geqr}{>_R}
-\newcommand{\geql}{>_L}
-\newcommand{\geqj}{>_J}
+\newcommand{\geqr}{\kl[Rprefixe]{>_R}\, }
+\newcommand{\geql}{\kl[Lsufix]{>_L} \, }
+\newcommand{\geqj}{\kl[Jinfix]>{_J}\, }
 
 
-\newcommand{\classr}[1]{\left[#1\right]_R}
-\newcommand{\classl}[1]{\left[#1\right]_L}
-\newcommand{\classj}[1]{\left[#1\right]_J}
-\newcommand{\classh}[1]{\left[#1\right]_H}
+\newcommand{\class}[2]{\kl[class#2]\left[#1\right]_{#2}}
+\newcommand{\classr}[1]{\class {#1} R}
+\newcommand{\classl}[1]{\class {#1} L}
+\newcommand{\classj}[1]{\class {#1} J}
+\newcommand{\classh}[1]{\class {#1} H}
 
 
 \newcommand{\Hc}{\mathbb{H}}

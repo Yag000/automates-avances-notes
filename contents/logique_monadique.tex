@@ -360,13 +360,13 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 \end{definition}
 
 \begin{lemma}\label{lem:puiss-idemp}
-	Une puissance idempotente de $m\ in M$ es unique, dans le sense suivant. Si $m^i$ et $m^j$ sont des idempotents, alors $m^i = m^j$.
+	Une puissance idempotente de $m \in M$ est unique, dans le sens suivant : si $m^i$ et $m^j$ sont des idempotents, alors $m^i = m^j$.
 \end{lemma}
 
 \begin{proof}
 	$m^i$ idempotent $\implies (m^i)^j = m^i$, voire \ref{ex:puiss-idemp}.
 
-	Pareil pour $m^j$ idempotent $\implies (m^j)^i = m^j$
+	Pareil pour $m^j$ idempotent $\implies (m^j)^i = m^j$.
 	Donc $m^i = m^{ij} = m^{ji} = m^{j}$
 \end{proof}
 
@@ -376,22 +376,22 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 	Soit $(M,\cdot , 1_M)$ un monoïde. On défini les relations suivantes.
 
 	\begin{itemize}
-		\item \emph{prefixe, ou $\geqr$, ou R-préordre}: On dit que $m$ est un prefixe de $n$ \ssi $\exists x \in M, \ n = mx$
-		      On va noter cela par $m \geqr n$.
+		\item \emph{prefixe, ou $\geqr$, ou R-préordre}: On dit que $m$ est un préfixe de $n$ \ssi $\exists x \in M, \ n = mx$.
+		      On le note $m \geqr n$..
 
 		      Un ensemble de la forme $y \cdot M = \setdef {y \cdot z} {z \in M}$ pour $y \in M$ est appelé un idéal à droite de $M$.
 
-		      $m$ est un préfixe de $n$ ssi $m \cdot M \supseteq n \cdot M$ (à vérifier en exercice)
+		      $m$ est un préfixe de $n$ ssi $m \cdot M \supseteq n \cdot M$ (à vérifier en exercice).
 
 
-		\item \emph{suffixe, ou $\geql$, ou L-préordre}: On dit que $m$ est un suffixe de $n$ ssi $\exists y \in M, \ n = ym$
-		      On va noter cela par $m \geql n$.
+		\item \emph{suffixe, ou $\geql$, ou L-préordre}: On dit que $m$ est un suffixe de $n$ ssi $\exists y \in M, \ n = ym$.
+		      On le note $m \geql n$.
 
 		      TODO: exercice (same as before)
 
 
-		\item \emph{infixe, ou $\geqj$, ou J-préordre}: On dit que $m$ est un infixe de $n$ ssi $\exists x,y \in M, \ n = xmy$
-		      On va noter cela par $m \geqj n$.
+		\item \emph{infixe, ou $\geqj$, ou J-préordre}: On dit que $m$ est un infixe de $n$ ssi $\exists x,y \in M, \ n = xmy$.
+		      On le note $m \geqj n$.
 
 		      TODO: exercice (same as before)
 	\end{itemize}
@@ -404,17 +404,17 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 \begin{notation}
 	On défini les relations d'équivalence associées à ces préordres L
 	\begin{itemize}
-		\item $m R n$ ssi $m \geqr n \et n \geqr m$ (On dit $m$ est $R$-équivalent  $n$)
+		\item $m R n$ ssi $m \geqr n \et n \geqr m$ (On dit $m$ est ""$R$-équivalent""  $n$)
 
 		      On note par $\classr m$ la $R$-classe d'équivalence de $m$, \ie, $\classr m =
 			      \setdef {n \in M} {m R n}$
 
-		\item $m L n$ ssi $m \geql n \et n \geql m$ (On dit $m$ est $L$-équivalent  $n$)
+		\item $m L n$ ssi $m \geql n \et n \geql m$ (On dit $m$ est ""$L$-équivalent""  $n$)
 
 		      On note par $\classl m$ la $L$-classe d'équivalence de $m$, \ie, $\classl m =
 			      \setdef {n \in M} {m L n}$
 
-		\item $m J n$ ssi $m \geqj n \et n \geqj m$ (On dit $m$ est $J$-équivalent  $n$)
+		\item $m J n$ ssi $m \geqj n \et n \geqj m$ (On dit $m$ est ""$J$-équivalent""  $n$)
 
 		      On note par $\classj m$ la $J$-classe d'équivalence de $m$, \ie, $\classj m =
 			      \setdef {n \in M} {m J n}$
@@ -426,7 +426,9 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 \end{exercice}
 
 \begin{proof}
-	TODO
+	Soit $m \in M$ et soit $x \in \classr m$, alors $x R m$ et donc
+	$ x \geqr m$ et donc $\exists y $ tel que $m = xy$ et donc $m = 1xy$ et ainsi
+	$x \geqj m$ et donc $x \in \classj m$.
 \end{proof}
 
 \begin{lemma}[Eggbox lemma]
