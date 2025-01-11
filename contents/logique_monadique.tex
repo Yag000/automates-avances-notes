@@ -19,7 +19,7 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 
 
 %TODO: Comment and add line breaks
-\begin{exemple}
+\begin{exemple} \label{example:phi3}
 
 	\begin{eqnarray*}
 		\phi_3 &=& \exists X ( \forall x (\forall z (z \geq x) \ra X(x)) \\
@@ -40,46 +40,46 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 
 \subsection{Syntaxe}
 
-\begin{definition} [La logique du premier ordre]
+\begin{definition} [La ""logique du premier ordre""]
 	\ \newline
 	\begin{itemize}
 		\item $\Vi$ un ensemble de variables : $\set {x,y,z,x_1,y_1,z_1, \ldots}$
-		\item \underline{Prédicats numériques} :  $\PP = \set {R_i^j, i > 0, j \geq o}$
-		\item \underline{Formules atomiques} :
+		\item \underline{""Prédicats numériques""} :  $\PP = \set {R_i^j, i > 0, j \geq o}$
+		\item \underline{""Formules atomiques""} :
 		      \begin{syntaxdef}
 			      \syntaxHeader {\alpha} {Q_a x} {Lettre $a$ en position $x$}
-			      \syntax {R_i^j(x_1, \ldots, x_j)} {Prédicats numériques}
+			      \syntax {R_i^j(x_1, \ldots, x_j)} {"Prédicats numériques"}
 		      \end{syntaxdef}
-		\item \underline{Formules du premier ordre} :
+		\item \underline{""Formules du premier ordre""} :
 		      \begin{syntaxdef}
-			      \syntaxHeader {\phi} {\alpha} {Formules atomiques}
+			      \syntaxHeader {\phi} {\alpha} {""Formules atomiques""}
 			      \syntax {\phi \land \phi} {Conjonction}
 			      \syntax {\lnot \phi} {Négation}
-			      \syntax {\exists x \phi} {Quantificateur existentiel}
+			      \syntax {\exists x \phi} {""Quantificateur existentiel""}
 		      \end{syntaxdef}
 	\end{itemize}
 \end{definition}
 
 
-\begin{definition} [La logique du second ordre]
-	C'est une extension de la logique du premier ordre :
+\begin{definition} [La ""logique du second ordre""]
+	C'est une extension de la "logique du premier ordre" :
 	\begin{itemize}
-		\item un ensemble de variables du second ordre : $X,Y,Z,X_1,Y_1,Z_1 \ldots$
+		\item un ensemble de ""variables du second ordre"" : $X,Y,Z,X_1,Y_1,Z_1 \ldots$
 		\item \underline{Formules atomiques} :
 		      \begin{syntaxdef}
 			      \syntaxExtension{\alpha}
 			      \syntax {X(x)} {Appartenance à $X$}
 		      \end{syntaxdef}
-		\item \underline{Formules du second ordre} :
+		\item \underline{""Formules du second ordre""} :
 		      \begin{syntaxdef}
 			      \syntaxExtension{\phi}
-			      \syntax {\exists X \phi} {Quantificateur existentiel sur des ensembles}
+			      \syntax {\exists X \phi} {""Quantificateur existentiel sur des ensembles""}
 		      \end{syntaxdef}
 	\end{itemize}
 \end{definition}
 
 
-\begin{notation}[Quantificateur universel]
+\begin{notation}[""Quantificateur universel""]
 	On note $\forall x \phi$ la formule $\lnot \exists x (\lnot \phi)$. Cette notation s'étend aussi
 	à la logique du second ordre.
 \end{notation}
@@ -88,15 +88,14 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 
 \subsubsection{Sémantique de la logique monadique du premier ordre}
 
-Pour $n \in \N$ la longueur d'un mot, $x$ est interpreté comme un élément de $\set {1, \ldots, n}$
+Pour $n \in \N$ la longueur d'un mot, $x$ est interpreté comme un élément de $\set {1, \ldots, n}$.
 
-$$ \interpret {R_i^j}_n \subseteq \set {1, \ldots, n}^j$$
-est une interpretation de chaque prédicat $R_i^j$ pour tout $n \geq 1$.
+$ \interpret {R_i^j}_n \subseteq \set {1, \ldots, n}^j$ est une ""interpretation"" de chaque prédicat $R_i^j$ pour tout $n \geq 1$.
 $$ \interpret {<}_n \subseteq \set {1, \ldots, n} \times \set {1, \ldots, n} = \setdef {(i,j)} {i<j}$$
 
 
 \begin{definition}
-	Une $\V$-structure, pour $\V \subseteq \Vi$ est un mot de la forme $(a_1, U_1) \ldots (a_n, U_n)$ où $a_1, \ldots, a_n \in \alphabet$ et
+	Une $\V$-structure, pour $\V \subseteq \Vi$ est un mot de la forme $(a_1, U_1), \ldots, (a_n, U_n)$ où $a_1, \ldots, a_n \in \alphabet$ et
 	$U_1, \ldots, U_n \subseteq \Vi$ tels que
 
 	\begin{enumerate}
@@ -133,13 +132,17 @@ Pour une interprétation $\interpret {R_i^j}_{{i,j}}$ de prédicats numériques,
 \begin{exemple}
 	$$abc \models_? \exists x \exists y (x < y)$$
 
-	$(a, \set x)(b, \emptyset)(c, \emptyset) \models_? \exists y (x \leq y)$ est une $\set x $-structure
+	$V_1 = (a, \set x)(b, \emptyset)(c, \emptyset) $ est une $\set x $-structure et on se demande si
+	$V_1 \models_? \exists y (x \leq y)$.
 
-	$(a, \set x)(b, \set y)(c, \emptyset) \models_? (x < y) \iff (1,2) \in \interpret {<}_3 \iff 1 < 2$
+	On prend maintenant $V_2 = (a, \set x)(b, \set y)(c, \emptyset)$ et :
 
-	Version 2
+	\begin{eqnarray*}
+		V_2 \models_? (x < y) &\iff& (1,2) \in \interpret {<}_3\\
+		&\iff& 1 < 2
+	\end{eqnarray*}
 
-	%TODO: petit dessin Photo
+	Et donc $abc \models \exists x \exists y (x < y)$
 \end{exemple}
 
 
@@ -150,7 +153,19 @@ Soit $\phi$ et $\psi$ deux formules, $\phi \iff \psi$ \ssi $\La_{\phi} = \La_{\p
 \end{abbreviation}
 
 \begin{exemple}
-	TODO: add it (important)
+	\begin{eqnarray*}
+		abc  &\models&\exists x \exists y (\forall z (z \geq x) \land Q_a x \land \forall z (z \leq y) \land Q_b y)\\
+		(a, \set x), (c, \emptyset), (b, \emptyset)  &\models &\exists y (\forall z (z \geq x) \land Q_a x \land \forall z (z \leq y) \land Q_b y)\\
+		a, \set x), (c, \emptyset), (b, \set y) & \models& (\forall z (z \geq x) \land Q_a x \land \forall z (z \leq y) \land Q_b y)\\
+		(a, \set x), (c, \emptyset), (b, \set y)  &\models& (\lnot \exists z (z < x) \land Q_a x \land \lnot \exists z (z > y) \land Q_b y)\\
+	\end{eqnarray*}
+	\begin{itemize}
+		\item $(a, \set x), (c, \emptyset), (b, \set y)  \models \lnot \exists z (z < x) \Leftarrow  (a, \set x), (c, \emptyset), (b, \set y)  \not\models \exists z (z < x) $
+		\item $(a, \set x), (c, \emptyset), (b, \set y)  \models Q_a x \Leftarrow  (a, \set x) $
+		\item $(a, \set x), (c, \emptyset), (b, \set y)  \models  \lnot \exists z (z > y) \Leftarrow  (a, \set x), (c, \emptyset), (b, \set y)  \not\models \exists z (z > y) $
+		\item $(a, \set x), (c, \emptyset), (b, \set y)  \models  Q_b y \Leftarrow  (b, \set y)$
+	\end{itemize}
+
 \end{exemple}
 
 
@@ -164,11 +179,11 @@ $V_2$ les variables du second ordre
 
 \begin{definition}
 	Une $(\V_1,\V_2)$-structure est un mot sur $\alphabet \times 2^{\V_1} \times  2^{\V_2}$, \cad un mot de la forme
-	$(a_1,U_1,U_1) \ldots (a_n,U_n,V_n)$ où
+	$(a_1,U_1,U_1), \ldots, (a_n,U_n,V_n)$ où
 	\begin{itemize}
 		\item Les $U_i$ sont des ensembles de variables du premier ordre.
 		\item Les $V_i$ sont des ensembles de variables du second ordre.
-		\item $(a_1,U_1) \ldots (a_n,U_n)$ est une $\V_1$-structure.
+		\item $(a_1,U_1), \ldots, (a_n,U_n)$ est une $\V_1$-structure.
 	\end{itemize}
 \end{definition}
 
