@@ -279,7 +279,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      On suppose que $L$ est défini par une formule de $MSO[<]$.
 		      La preuve est par induction sur la structure de la formule.
 
-		      $L \subseteq (\alphabet \times 2^{\V_1} \times 2 ^ {\V_2})$.
+		      $L \subseteq (\alphabet \times 2^{\V_1} \times 2 ^ {\V_2})^*$.
 
 		      %TODO: Rappel ?
 		      $\La$ est l'ensemble de toutes les $(\V_1, \V_2)$-structures, pour $\V_1$ en ensemble de variables du premier
@@ -317,7 +317,8 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 
 		      $A'$ est un automate sur l'alphabet $\alphabet \times 2^{\V_1\setminus \set x} \times 2 ^ {\V_2}$.
 
-		      %TODO: add final step
+		      $(a_1, S_1, T_1), \ldots, (a_n, S_n, T_n) \in (\alphabet \times 2^{\V_1\setminus \set x} \times 2 ^ {\V_2})^*$ est accepté par $A'$
+		      \ssi $\exists i \in \enum 1 n$ \tq le mot $w^* = (a_1, S_1, T_1), \ldots,  (a_i, S_i \cup  \set X, T_i),\ldots,(a_n, S_n, T_n)$ est accepté par $A$.
 	\end{itemize}
 \end{proofI}
 
