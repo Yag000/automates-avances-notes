@@ -454,12 +454,16 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      \end{eqnarray*}
 
 
-		      Par induction on peut montrer que $\forall i \geq 1, m y^i m (xz)^i$.
+		      Par induction on peut montrer que
+		      \begin{equation} \label{eq:eggbox}
+			      \forall i \geq 1, m y^i m (xz)^i
+		      \end{equation}
+
 		      Soit $i \geq 1$ tel que $(xz)^i$ est idempotent, alors
 		      \begin{eqnarray*}
-			      m &=& y^i m (xz)^i \\
-			      &=& y^i m (xz)^i (xz)^i \\
-			      &=&  m (xz)^i \\
+			      m &=& y^i m (xz)^i \reason{\ref{eq:eggbox}}\\
+			      &=& y^i m (xz)^i (xz)^i \reason{$(xz)^i$ idempotent}\\
+			      &=&  m (xz)^i \reason{\ref{eq:eggbox}}\\
 			      &=&  m x (xz)^{i-1} z \reason {pour $i > 0$} \\
 			      &=&  n (xz)^{i-1} z
 		      \end{eqnarray*}
@@ -467,37 +471,34 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      Donc $m = n (xz)^{i-1} z \implies$ $n$ est un préfixe de $m$ $\implies n \geqr m$.
 
 		      On a alors que $m R n$.
-
 		\item Exercice
 	\end{enumerate}
 \end{proofI}
 
 
 \begin{definition}
-    On dit $m \intro[$H$-classe]{H} n$ ssi $m R n $ et $m L n$. On a $H = R \cap L$.
+	On dit $m \intro[$H$-classe]{H} n$ ssi $m R n $ et $m L n$. On a $H = R \cap L$.
 \end{definition}
 
 \begin{exercice}
-	L'intersection d'une $R$-classe avec une $L$ classe d'équivalence est soit vide soit une $H$-classe d'équivalence.
+	L'intersection d'une "$R$-classe" avec une "$L$-classe" d'équivalence est soit vide soit une "$H$-classe" d'équivalence.
 \end{exercice}
 
 \begin{proof}
-	Début de preuve:
-	Si $\classr m \cap \classl n \neq \emptyset$, sot $s \in \classr m \cap \classl n$. On va montrer que
-	$\classr m \cap \classl n = \classh s$
+	Si $\classr m \cap \classl n \neq \emptyset$, alors l'énoncé est vrai.
+
+	Soit $s \in \classr m \cap \classl n$. On va montrer que $\classr m \cap \classl n = \classh s$
 
 	\begin{itemize}
-		\item
-		      Soit $s' \in \classr m \cap \classl n$. On sait $s' R s$ car $s' \in \classr m$ donc $s' R m R s$.
-		      Pareil, $s' L s$ car  $s' L b L s$.
+		\item Soit $s' \in \classr m \cap \classl n$. On sait $s' R s$ car $s' \in \classr m$ donc $s' R m R s$.
+		      Pareil, $s' L s$ car  $s' L n L s$.
 		      Et donc $s' H s$. Et donc $\classr m \cap \classl n \subseteq \classh s$
 
-		\item
-		      \begin{eqnarray}
-			      s' \in \classh S &\implies& s R s' \et s L s'\\
+		\item \begin{eqnarray*}
+			      s' \in \classh s &\implies& s R s' \et s L s'\\
 			      &\implies& s' R m \et s' L n\\
 			      &\implies& s' \in \classr m \cap \classl n
-		      \end{eqnarray}
+		      \end{eqnarray*}
 
 	\end{itemize}
 \end{proof}
@@ -505,22 +506,28 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 \begin{lemma}
 	Soit $\Hc$ une $H$-classe incluse dans une $J$-classe $\Jc$. Alors, soit
 	\begin{enumerate}
-		\item $\forall m,n \in \Hc, mn \notin \Jc$
+		\item $\forall m,n \in \Hc, mn \notin \Jc$ \label{lem:not-group}
 		\item $\Hc$ est un groupe (Attention !! L'élément neutre de $\Hc$ n'est pas forcément $1_M$)
 	\end{enumerate}
 \end{lemma}
 
 \begin{proof}
-	TODO
 
+	Supposons que $\exists m_0, n_0 \in \Hc$ tels que $m_0,n_0 \in \Jc$. On suppose donc la négation de \ref{lem:not-group}.
+	Montrons que $\Hc$ est un groupe:
 	\begin{itemize}
-		\item Etape 2.
+		\item Étape 1: Soit $m,n \in \Hc$, montrons que $mn \in \Jc$.
+
+		\item Étape 2: Soit $m,n \in \Hc$, montrons que $mn \in \Hc$.
 
 		      \begin{exercice}
 			      Montrer que $mn L n$.
 		      \end{exercice}
-		\item Étape 3: Soit $m \in \Hc$. Par \ref{lem:puiss-idemp}, il existe $i > 1$ tel que $m^i$ est idempotent.
-		      Par l''etape 3, on sait que $m^i \in \Hc$, donc on peut conclure que $\Hc$ contient un élément idempotent, notons le par
+
+		      Et donc $mn \in \Hc$
+		\item Étape 3: Soit $m \in \Hc$ on va montrer que $\Hc$ a un élément neutre et que ses éléments ont une inverse.
+		      Par \ref{lem:puiss-idemp}, il existe $i > 1$ tel que $m^i$ est idempotent.
+		      Par l'étape 2, on sait que $m^i \in \Hc$, donc on peut conclure que $\Hc$ contient un élément idempotent, notons le par
 		      $e$. On va montrer que $e$ est l'élément neutre de $\Hc$, \cad, $\forall m \in \Hc, \ m\cdot e m  e \cdot m = m$.
 
 		      Soit $n \in \Hc$, donc $n L e \implies \exists x, \ n = x\cdot e
