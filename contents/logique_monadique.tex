@@ -244,7 +244,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      \end{enumerate}
 
 		      Supposons que $w = \decomp a n$ est accepté par $A$. On construit les ensembles $(X_i)_{i \in \enum 0 {k-1}}$
-		      tel que $i \in X_j$ ssi après avoid lu les premiers $i-1$ lettres de $w$ on arrive a l'état $q_j$
+		      tel que $i \in X_j$ ssi après avoir lu les premiers $i-1$ lettres de $w$ on arrive a l'état $q_j$
 		      %TODO: Diagram ? 
 
 		      Les ensembles $X_0, \ldots, X_{k-1}$ satisfait les 5 propriétés.
@@ -258,13 +258,13 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 			            premieres $j$ lettres on arrive dans l'état $\delta (q_i, a)$. Si après les premières $j$ lettres on arrive dans l'état $q_l$, alors
 			            $\delta (q_i, a) = q_l$.
 			      \item $w$ est accepté par $A$. Donc si $\abs w \in X_j$ alors après avoir lu les premieres $\abs w - 1$ lettres on arrive dans $q_j$.
-			            Si $a$ est la dernière lettre de $w$, alors $\delta (q_j,a)$ est un tat acceptant car $w$ est accepté.
+			            Si $a$ est la dernière lettre de $w$, alors $\delta (q_j,a)$ est un état acceptant car $w$ est accepté.
 		      \end{enumerate}
 		      On construit la formule
 		      $$ \phi = \exists X_0 \ldots \exists X_{k-1} (\phi_1 \land \ldots \land \phi_5)$$
 		      où
 		      \begin{itemize}
-			      \item $\phi_1 = \forall x (X_0(x) \lor \ldots \lor X_{k-1}) = \forall x \bigvee_{i=1}^{k-1} X_i(x)$
+			      \item $\phi_1 = \forall x (X_0(x) \lor \ldots \lor X_{k-1}(x)) = \forall x \bigvee_{i=1}^{k-1} X_i(x)$
 			      \item $\phi_2 = \forall x \bigwedge_{0\leq i < j \leq k-1}\lnot (X_i(x) \land X_j(x))$
 			      \item $\phi_3 = \exists x \left((\forall y, x \leq y) \land X_0(x) \right)$
 			      \item $\phi_4 = \forall x \left( \forall y (y = x + 1)  \ra \bigwedge_{0\leq i < l < k} ( (X_i (x) \land X_l(y) )\ra \bigvee_{S_l} Q_a(x))\right)$\\
