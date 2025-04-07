@@ -41,88 +41,12 @@
 
 \setlist[itemize,2]{label={$\bullet$}}
 
-\usepackage{automates}
-
 \knowledgeconfigure{label scope=false, notion, quotation, protect quotation={tikzcd, automata}}
 
-\knowledgenewrobustcmd \congN {\cmdkl {\cong}}
-
-\knowledge{relation d'équivalence}{url={https://fr.wikipedia.org/wiki/Relation_d\%27\%C3\%A9quivalence}}
-    
-
-\knowledge{alphabet}{notion}
-\knowledge{mot}[mots]{notion}
-\knowledge{concaténation}{notion}
-\knowledge{langage}[langages]{notion}
+\input{macros}
 
 
-\knowledge{expressions rationnelles}[expression rationnelle|ERat]{notion}
-\knowledge{rationnel}[langage rationnel|régulier|langage régulier]{notion}
-\knowledge{automate fini déterministe}[automate déterministe|AFD]{notion}
-\knowledge{automate fini non déterministe}[automate non déterministe|AFN]{notion}
-\knowledge{langage reconnu}[langage accepté]{notion}
-\knowledge{déterminisation}[Déterminisation|determinisé|déterminisant|det|déterministe|déterminise|déterminiser]{notion}
-\knowledge{accesible}{notion}
-\knowledge{chemin}{notion}
-
-
-\knowledge{morphisme d'automates}{notion}
-\knowledge{quotient}[quotients]{notion}
-\knowledge{automate des quotients}[automate des résiduels]{notion}
-\knowledge{automate minimal}[automate déterministe minimal|minimal]{notion}
-\knowledge{automate miroir}[mirr]{notion}
-\knowledge{reach}{notion}
-\knowledge{congruence}{notion}
-\knowledge{Congruence de Nérode}[congruence de Nérode]{notion}
-
-
-\knowledge{logique du premier ordre}{notion}
-\knowledge{Prédicats numériques}{notion}
-\knowledge{Formules atomiques}{notion}
-\knowledge{Formules du premier ordre}{notion}
-\knowledge{Quantificateur existentiel}{notion}
-\knowledge{logique du second ordre}{notion}
-\knowledge{variables du second ordre}{notion}
-\knowledge{Formules du second ordre}{notion}
-\knowledge{Quantificateur existentiel sur des ensembles}{notion}
-\knowledge{Quantificateur universel}{notion}
-\knowledge{interpretation}[interpret]{notion}
-
-\knowledge{R-préordre}[Rprefixe]{notion}
-\knowledge{L-préordre}[Lsuffix]{notion}
-\knowledge{J-préordre}[Jinfix]{notion}
-\knowledge{$R$-équivalent}[classR|$R$-classe]{notion}
-\knowledge{$L$-équivalent}[classL|$L$-classe]{notion}
-\knowledge{$J$-équivalent}[classJ|$J$-classe]{notion}
-\knowledge{$H$-classe}[classH]{notion}
-
-
-\knowledge{learner}[étudiant]{notion}
-\knowledge{oracle}[teacher]{notion}
-\knowledge{membership queries}{notion}
-\knowledge{conjectures}[conjecture|conjecturer]{notion}
-\knowledge{contre-exemple}{notion}
-\knowledge{clos par préfixes}[clos par suffixes]{notion}
-\knowledge{table}[tables]{notion}
-\knowledge{row}[rows]{notion}
-\knowledge{close}[closes]{notion}
-\knowledge{cohérente}[cohérentes]{notion}
-\knowledge{en accord}{notion}
-
-
-\knowledge{bord}[bords]{notion}
-
-
-\knowledge{automate de Büchi}[automates de Büchi]{notion}
-\knowledge{réussi}{notion}
-\knowledge{cheminB}{notion}
-
-
-\knowledge{voisinage}[voisinages]{notion}
-\knowledge{quiescent}{notion}
-\knowledge{Jardin d'Éden}[GOE | JDE | Jardins d'Éden]{notion}
-\knowledge{orphelin}{notion}
-
+\input{automates.kl}
 
 \begin{document}
 
