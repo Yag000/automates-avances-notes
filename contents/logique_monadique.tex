@@ -1,7 +1,7 @@
 \section{Logique monadique du second ordre (MSO)}
 
 Est-ce qu'il existe $w \in \mots$ \tq $w \, \models \, \exists x \exists y (x < y)$ soit vraie ?
-($x,y$ sont interpretés comme des positions dans le mot $w$.)
+($x,y$ sont interprétés comme des positions dans le mot $w$.)
 Par exemple, $a \, \nvDash \, \exists x \exists y (x < y)$
 Ici, cette proposition est satisfaite par $w \in \mots$ \ssi $\abs w \geq 2$.
 
@@ -12,7 +12,7 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 \begin{exemple}
 	$\Sigma = \set{a,b}$
 	$\phi_2 = \exists x \exists y (\forall z (z \geq x) \land Q_a x \land \forall z (z \leq y) \land Q_b y)$
-	où $\leq, \geq$ sont interpretés comme les relations habituelles sur $\N$.
+	où $\leq, \geq$ sont interprétés comme les relations habituelles sur $\N$.
 	$Q_a x$ signifie qu'en position $x$, on retrouve la lettre $a$.
 	$\La_{\phi_2} = \setdef {w \in \kleene{\set {a,b}}} {w \models \phi_2} = a(a+b)^*b$
 \end{exemple}
@@ -41,6 +41,7 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 \subsection{Syntaxe}
 
 \begin{definition} [La ""logique du premier ordre""]
+	\AP
 	\ \newline
 	\begin{itemize}
 		\item $\Vi$ un ensemble de variables : $\set {x,y,z,x_1,y_1,z_1, \ldots}$
@@ -62,6 +63,7 @@ Pour une proposition $\phi$, on a un langage $\La_\phi = \setdef {w \in \mots} {
 
 
 \begin{definition} [La ""logique du second ordre""]
+	\AP
 	C'est une extension de la "logique du premier ordre" :
 	\begin{itemize}
 		\item un ensemble de ""variables du second ordre"" : $X,Y,Z,X_1,Y_1,Z_1 \ldots$
@@ -189,8 +191,8 @@ $V_2$ les variables du second ordre
 
 \begin{definition}
 	On définit la relation de satisfaction $w \models \phi$ où $w$ est une $(\V_1, \V_2)-structure$ et $\phi$ une formule de
-	MSO avec les mêmes contraintes sur les variables que pour la logique du premier ordre 
-    \todo{Add reference}
+	MSO avec les mêmes contraintes sur les variables que pour la logique du premier ordre
+	\todo{Add reference}
 	plus $w \models X(x)$ et $w \models \exists X \phi$
 \end{definition}
 
@@ -203,7 +205,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 
 
 \begin{exemple}
-    \todo{~}
+	\todo{~}
 \end{exemple}
 
 
@@ -246,7 +248,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 
 		      Supposons que $w = \decomp a n$ est accepté par $A$. On construit les ensembles $(X_i)_{i \in \enum 0 {k-1}}$
 		      tel que $i \in X_j$ ssi après avoir lu les premiers $i-1$ lettres de $w$ on arrive a l'état $q_j$
-              \todo{Diagram ?}
+		      \todo{Diagram ?}
 
 		      Les ensembles $X_0, \ldots, X_{k-1}$ satisfait les 5 propriétés.
 		      \begin{enumerate}
@@ -282,7 +284,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 
 		      $L \subseteq (\alphabet \times 2^{\V_1} \times 2 ^ {\V_2})^*$.
 
-              \todo{Rappel ?}
+		      \todo{Rappel ?}
 		      $\La$ est l'ensemble de toutes les $(\V_1, \V_2)$-structures, pour $\V_1$ en ensemble de variables du premier
 		      ordre et $\V_2$ un ensemble de variables du second ordre.
 
@@ -314,7 +316,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 			      &\cup& \setdef {((q,0),(a,S\setminus \set x,T),(q',1))} { x \in S, (q,(a,S,T),q')\in \delta}
 		      \end{eqnarray*}
 
-              \todo{diagram ???}
+		      \todo{diagram ???}
 
 		      $A'$ est un automate sur l'alphabet $\alphabet \times 2^{\V_1\setminus \set x} \times 2 ^ {\V_2}$.
 
@@ -395,13 +397,13 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		\item \emph{suffixe, ou $\geql$, ou ""L-préordre""}: On dit que $m$ est un suffixe de $n$ ssi $\exists y \in M, \ n = ym$.
 		      On le note $m \geql n$.
 
-              \todo{exercice (same as before)}
+		      \todo{exercice (same as before)}
 
 
 		\item \emph{infixe, ou $\geqj$, ou ""J-préordre""}: On dit que $m$ est un infixe de $n$ ssi $\exists x,y \in M, \ n = xmy$.
 		      On le note $m \geqj n$.
 
-              \todo{exercice (same as before)}
+		      \todo{exercice (same as before)}
 	\end{itemize}
 \end{definition}
 
@@ -453,7 +455,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		\item Soit $m,n \in M$ tels que $m \geqr n \et m J n$ alors
 		      $$m \geqr n  \implies \exists x \in M, \ n = mx$$
 		      $$m J n  \implies \exists y,z \in M, \ m = ynz$$
-              \todo{make proper}
+		      \todo{make proper}
 		      Tout cela implique $m = ymxz$
 
 		      \begin{eqnarray*}
@@ -547,7 +549,7 @@ L'induction est la même que pour le premier ordre, avec ces cas en plus :
 		      Il reste à montrer que chaque élément possède un inverse : $\forall n \in \Hc, \exists n' \in \Hc$ tel que $n n' = e = n'n$
 
 		      On observe que $\Hc$ contient un unique idempotent. Soit $e'$ un autre idempotent, par le même argument
-              que ci-dessus, $e'$ est un élément neutre donc : \todo{...} $e = 'e$
+		      que ci-dessus, $e'$ est un élément neutre donc : \todo{...} $e = 'e$
 
 		      Soit $n \in \Hc$. Par le lemme \ref{lem:puiss-idemp}, il existe $j \geq 1$ tel que $n^j$ est idempotent, mais $n^j \in \Hc$ donc $n^j = e$. Et ainsi,
 		      $n^{j-1}$ est l'inverse de $n$.

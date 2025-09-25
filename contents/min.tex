@@ -114,7 +114,7 @@
 
 \begin{lemma}\label{lem:reach}
 	Soit $L \subseteq \mots$ un "langage régulier". Soit $A_L$ l'"automate des quotients" de $L$ et soit $B$ un autre automate acceptant $L$.
-	Soit $\reach B$ un sous-automate accessible de $B$. Alors on a un morphisme surjectif (un quotient) d'automates $\reach B \twoheadrightarrow A_L$.
+	Soit $\intro*\reach B$ un sous-automate accessible de $B$. Alors on a un morphisme surjectif (un quotient) d'automates $\reach B \twoheadrightarrow A_L$.
 
 	\begin{tikzcd}[row sep=large]
 		&\reach B \arrow[dr, hook] \arrow[dl, twoheadrightarrow] \\
@@ -131,7 +131,7 @@
 
 
 \begin{exercice}
-	On définit $\phi : \text{\intro{reach}} (B) \to A$.
+	On définit $\phi : \reach{B} \to A$.
 
 	Si $t \in F', \exists w \in \mots$ \tq $ t = \deltaS {t_0} w$
 	On définit $\phi (t) = \quot w L$

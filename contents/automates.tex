@@ -4,6 +4,7 @@
 \subsection{Automates finis déterministes}
 
 \begin{definition}[automate fini déterministe]
+	\AP
 	Soit $\alphabet$ un "alphabet", un ""automate fini déterministe"" ("AFD") est un tuple $\AFD$ où
 	\begin{itemize}
 		\item $Q$ est un ensemble fini d'états
@@ -15,7 +16,6 @@
 
 
 \begin{exemple} Un "automate fini déterministe" :
-
 	\vspace{0.5cm}
 	\begin{minipage}{0.5\textwidth}
 		\begin{itemize}
@@ -59,6 +59,7 @@
 \end{exemple}
 
 \begin{definition}[lecture d'un mot par un AFD]
+	\AP
 	Soit $A = \AFD$ un "AFD" qui a pour "alphabet" $\alphabet$. On définit la fonction $\kleene \delta$ par induction sur la longueur du "mot" $w$ :
 	$$ \begin{array}{rcl}
 			\kleene \delta : Q \times \mots & \to     & Q                               \\
@@ -69,6 +70,7 @@
 \end{definition}
 
 \begin{definition}[langage reconnu par un AFD]
+	\AP
 	Le ""langage reconnu"" / accepté par un "AFD" $A = \AFD$ est le "langage"
 	$$ \lang A = \setdef w {w \in \mots, \kleene \delta(q_0, w) \in F} $$
 \end{definition}
@@ -102,6 +104,7 @@
 
 
 \begin{definition}[chemin]
+	\AP
 	Soit $A = \AFD$ un "AFD", et $p,q \in Q$, un ""chemin"" $p \cheminD q$ est une suite
 	$(p, a_0, q_1), (q_1, a_1, q_2), \ldots, (q_{n-1}, a_{n-1}, q)  \in Q^n \times \alphabet^n \times Q^n$
 	telle que
@@ -109,6 +112,7 @@
 \end{definition}
 
 \begin{definition}
+	\AP
 	Un automate $A = \AFD$ est ""accesible"" si, pour tout état de l'automate, il existe un "chemin" partant de
 	$q_0$ qui mène a lui.
 \end{definition}
@@ -120,6 +124,7 @@ Dans cette partie, on traite en meme temps les cas avec et sans $\motvide$-trans
 definition d'un "automate fini non déterministe".
 
 \begin{definition}[automate fini non déterministe \darkgreen{+ $\motvide$-transitions}]
+	\AP
 	Soit $\alphabet$ un alphabet, un ""automate fini non déterministe"" ("AFN") est un tuple $\AFN$ où
 	\begin{itemize}
 		\item $Q$ est un ensemble fini d'états
@@ -178,7 +183,6 @@ definition d'un "automate fini non déterministe".
 \end{definition}
 
 \subsection{Déterminisation d'un AFN}
-
 Soit $A = \AFN$ un AFN, on considère l'"AFD" $A' = \antuple{\parts Q, I, F', \delta'}$ où
 \begin{itemize}
 	\item $F' = \setdef {q \in \parts Q} {q \cap F \neq \emptyset}$
@@ -191,6 +195,7 @@ Soit $A = \AFN$ un AFN, on considère l'"AFD" $A' = \antuple{\parts Q, I, F', \d
 
 \vspace{0.25cm}
 
+\AP
 Ce processus est appelé ""déterminisation"" d'un "AFN" et nous permet de transformer un "AFN" en un "AFD" équivalent.
 
 \begin{exemple}
@@ -263,7 +268,7 @@ Ce processus est appelé ""déterminisation"" d'un "AFN" et nous permet de trans
 
 \begin{proof}
 	Nous allons construire un tel automate par induction sur la structure de $r$ cependant la preuve du fait que cet
-	utomate reconnaît le langage associé à $r$ est omise. Cette construction est appelée \textbf{construction de Thompson}.
+	automate reconnaît le langage associé à $r$ est omise. Cette construction est appelée \textbf{construction de Thompson}.
 
 	\begin{twoautomata}
 		\digraph[scale=0.5]{thompson1}{
