@@ -1,11 +1,12 @@
 \section{Apprentissage de langages rationnels par queries et contrexemples}
-
+\AP
 Nous allons étudier un algorithme qui permet de \quotes{deviner} un automate reconnaissant un "langage" rationnel inconnu $L$,
 en suivant un algorithme à complexité polynomiale \quotes{raisonnable}.
 L'idée est que le ""learner"" (ou "étudiant"), une entité dont l'objectif est de retrouver le langage, pose des
 questions à un ""oracle"" (ou "teacher") qui connait le langage cherché.
 
 Les questions sont de deux types :
+\AP
 \begin{itemize}
 	\item Les ""membership queries"" : est-ce qu'un "mot" $w$ donné appartient au langage $L$ ?
 	\item Les ""conjectures"" : on présente un automate "conjecture". Si cet automate reconnaît $L$, alors
@@ -16,11 +17,11 @@ Les questions sont de deux types :
 
 Cet algorithme découle du travail de \cite{angluinLearning}.
 
-
 \subsection{Définitions}
 
 
 \begin{definition}[Clôture par préfixes / (\blue{suffixes})]
+	\AP
 	Un ensemble $S$ est ""clos par préfixes"" (\blue{suffixes}), si
 	$$\forall w \in S, \text{ tout préfixe (\blue{suffixe}) de $w$ est dans } S.$$
 \end{definition}
@@ -36,6 +37,7 @@ Cet algorithme découle du travail de \cite{angluinLearning}.
 	\end{enumerate}
 \end{exercice}
 
+\AP
 Pendant le processus, le "learner" maintient une ""table"", qui est un triplet $(S,E,T)$ où $S$ est un ensemble "clos par préfixes",
 $E$ est un ensemble "clos par suffixes", et $T$ une fonction $(S \cup S\alphabet) \times E \to \set{0,1}$. Une "table" peut être
 représentée par une matrice où:
@@ -58,11 +60,13 @@ représentée par une matrice où:
 \end{definition}
 
 \begin{definition}
+	\AP
 	Une "table" est \emph{""close""} si
 	$$ \forall t = sa \in S\alphabet, \exists s'\in S, \row t = \row {s'}$$
 \end{definition}
 
 \begin{definition}
+	\AP
 	Une "table" est \emph{""cohérente""} si
 	$$ \forall s_1, s_2 \in S, \row{s_1} = \row{s_2} \implies \forall a \in \alphabet, \row{s_1a} = \row{s_2a}$$
 \end{definition}
@@ -244,6 +248,7 @@ L'algorithme suivant permet de retrouver le langage cherché.
 \end{notation}
 
 \begin{definition}
+	\AP
 	Un "automate déterministe" $(Q, q_0, F, S)$ est ""en accord"" avec une "table" $\Table$ si
 	$$ \forall s \in S \cup S\alphabet, \forall e \in E, \delta(q_0,se) \in F \iff T(se) = 1$$
 \end{definition}
@@ -292,7 +297,7 @@ La preuve de ce théorème est un corollaire des trois lemmes suivants.
 		\item Si $\len e = 0$, alors $e = \motvide$.
 		      Soit $s \in S \cup S \alphabet$, et donc $se = s$.
 		      \begin{itemize}
-			      \item Si $s \in S$, alors par le lemme précédent,
+			      \item Si $s \in S$, alors par le lemme précédent (\ref{lem:learning-9}),
 			            $\delta(q_0, s) = \row {s}$, et comme $\row {s} \in F \iff T(s) = 1$ par construction de l'automate, on retrouve le résultat cherché.
 			      \item Si $s \in S\alphabet$, comme la "table" est "close", il existe $s' \in S$, \tq $\row {s'} = \row s$ qui vérifie
 			            $\row {s'} \in F \iff T(s') = 1$ par construction de l'automate.
